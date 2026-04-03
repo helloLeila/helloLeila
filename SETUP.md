@@ -6,7 +6,49 @@
 - `index.html`, `styles.css`, `script.js`: GitHub Pages homepage with the 3D-style treatment.
 - `assets/orbit-banner.svg`: animated banner for the README hero.
 - `assets/previews/homepage-preview.png`: browser screenshot preview for GitHub display.
+- `preview-local.sh`: start a local preview server for the interactive homepage.
 - `capture-preview.sh`: regenerate the preview screenshot locally.
+
+## Local preview
+
+Interactive homepage preview:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
+./preview-local.sh
+```
+
+Then open this URL in your browser:
+
+```bash
+http://127.0.0.1:8000/index.html
+```
+
+If you want the script to open the browser automatically on macOS:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
+./preview-local.sh --open
+```
+
+If port `8000` is occupied, choose another one:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
+PORT=8010 ./preview-local.sh --open
+```
+
+To stop the local preview server:
+
+```bash
+Ctrl+C
+```
+
+README local file preview:
+
+```bash
+open '/Users/leila/Documents/Playground 3/github-profile-home/README.md'
+```
 
 ## Publish flow
 
@@ -24,6 +66,7 @@
 Run this from the repo root:
 
 ```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
 ./capture-preview.sh
 ```
 

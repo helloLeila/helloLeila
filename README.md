@@ -6,36 +6,27 @@ Optional edits before publishing:
 -->
 
 <p align="center">
-  <img src="./assets/orbit-banner.svg" alt="Leila profile banner" width="100%" />
+  <img src="./assets/orbit-banner.svg" alt="Leila profile banner" width="100%" height="200" />
 </p>
 
 <h1 align="center">Leila builds agent-native products, visual frontends, and AI workflow systems.</h1>
 
-<p align="center">
-  <strong>Frontend Engineering</strong> / <strong>Agent UX</strong> / <strong>Automation Systems</strong>
-</p>
 
 <p align="center">
-  <a href="https://helloleila.github.io/">Open the 3D mission deck</a>
-  ·
-  <a href="#skill-map">Skill Map</a>
-  ·
-  <!-- <a href="#featured-work">Featured Work</a> -->
-  ·
-  <a href="#connect">Connect</a>
-</p>
-
-<p align="center">
-  build polished frontend systems, agent-ready interaction flows, and engineering foundations that stay reliable under real product constraints.
+  EN: Frontend systems, agent-ready flows, and reliable engineering foundations.
   <br />
-  打磨前端系统、智能体交互流程，以及能在真实业务约束下稳定落地的工程基础设施。
+  中文：专注于前端系统、智能体交互流程与稳定工程基础设施。
 </p>
 
 ## Skill Map / 技能地图
 
 <a id="skill-map"></a>
 
-<p>Only technical tags are shown here. Every linked tag jumps to the official docs or product site.</p>
+<p>
+  EN: Only technical tags are shown here. Every linked tag jumps to the official docs or product site.
+  <br />
+  中文：这里只展示技术类标签。每个可点击标签都会跳转到对应技术的官网或官方文档。
+</p>
 
 ### Frontend
 
@@ -62,12 +53,6 @@ Optional edits before publishing:
   <a href="https://nginx.org/"><kbd>🛡️ Nginx</kbd></a>
 </p>
 
-### General
-
-<p>
-  <a href="https://docs.moonbitlang.com/zh-cn/latest/pilot/moonbit-pilot/getting-started.html"><kbd>🛠️ Moonbit</kbd></a>
-</p>
-
 ### Engineering
 
 <p>
@@ -91,6 +76,6 @@ Optional edits before publishing:
 
 ## Connect / 联系方式
 
-- Mission Deck: [3D homepage](https://github.com/helloLeila)
+- Mission Deck: [3D homepage](https://helloleila.github.io/)
 - Profile README: [this file](./README.md)
-
+- Local preview guide: [SETUP.md](./SETUP.md)
