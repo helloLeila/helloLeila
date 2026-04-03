@@ -1,4 +1,3 @@
-const scene = document.getElementById("scene");
 const canvas = document.getElementById("starfield");
 const ctx = canvas.getContext("2d");
 
@@ -57,20 +56,6 @@ function drawStars() {
   requestAnimationFrame(drawStars);
 }
 
-function handlePointer(event) {
-  const rect = scene.getBoundingClientRect();
-  const x = (event.clientX - rect.left) / rect.width - 0.5;
-  const y = (event.clientY - rect.top) / rect.height - 0.5;
-  const rotateY = x * 18;
-  const rotateX = y * -16;
-
-  scene.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-}
-
-function resetScene() {
-  scene.style.transform = "rotateX(0deg) rotateY(0deg)";
-}
-
 resizeCanvas();
 seedStars();
 drawStars();
@@ -79,6 +64,3 @@ window.addEventListener("resize", () => {
   resizeCanvas();
   seedStars();
 });
-
-scene.addEventListener("pointermove", handlePointer);
-scene.addEventListener("pointerleave", resetScene);

@@ -9,44 +9,74 @@ Optional edits before publishing:
   <img src="./assets/orbit-banner.svg" alt="Leila profile banner" width="100%" />
 </p>
 
-<p align="center">
-  <img src="./assets/previews/homepage-preview.png" alt="Light tech GitHub homepage preview" width="100%" />
-</p>
-
 <h1 align="center">Leila builds agent-native products, visual frontends, and AI workflow systems.</h1>
 
 <p align="center">
-  <strong>AI Agent Engineering</strong> / <strong>Frontend Systems</strong> / <strong>Automation Design</strong>
+  <strong>Frontend Engineering</strong> / <strong>Agent UX</strong> / <strong>Automation Systems</strong>
 </p>
 
 <p align="center">
   <a href="https://helloleila.github.io/">Open the 3D mission deck</a>
   ·
-  <a href="#featured-work">View featured work</a>
+  <a href="#skill-map">Skill Map</a>
+  ·
+  <a href="#featured-work">Featured Work</a>
   ·
   <a href="#connect">Connect</a>
 </p>
 
-## Signal
+<p align="center">
+  EN: I build polished frontend systems, agent-ready interaction flows, and engineering foundations that stay reliable under real product constraints.
+  <br />
+  中文：我专注于打磨前端系统、智能体交互流程，以及能在真实业务约束下稳定落地的工程基础设施。
+</p>
 
-I like interfaces that feel alive, workflows that remove friction, and AI systems that behave like real tools instead of demos. Most of what I build sits at the intersection of product taste, automation, and engineering systems.
+## Skill Map / 技能地图
 
-## Build Lanes
+<a id="skill-map"></a>
 
-| Lane | What I actually use |
-| --- | --- |
-| Agent Systems | `OpenAI API` `tool orchestration` `prompt design` `eval loops` `workflow automation` |
-| Frontend Craft | `TypeScript` `JavaScript` `React` `Vite` `HTML/CSS` `motion systems` |
-| Product Infrastructure | `Python` `Node.js` `GitHub Actions` `Notion MCP` `CLI tooling` |
-| Research Ops | `AI source tracking` `knowledge capture` `structured notes` `content systems` |
+<p>Only technical tags are shown here. Every linked tag jumps to the official docs or product site.</p>
 
-## Current Focus
+### Frontend
 
-- Designing agent-first product flows that feel understandable, not magical.
-- Turning messy information streams into structured, reusable research assets.
-- Building GitHub-ready showcases that look more like product posters than plain READMEs.
+<p>
+  <a href="https://react.dev/"><kbd>⚛️ React 18</kbd></a>
+  <a href="https://vuejs.org/"><kbd>💚 Vue 3</kbd></a>
+  <a href="https://www.typescriptlang.org/"><kbd>🔷 TypeScript</kbd></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><kbd>🟨 JavaScript ES6+</kbd></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><kbd>🧱 HTML5</kbd></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><kbd>🎨 CSS3</kbd></a>
+  <a href="https://echarts.apache.org/"><kbd>📊 ECharts</kbd></a>
+  <a href="https://ant.design/"><kbd>🧩 Ant Design</kbd></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design"><kbd>📱 Responsive Design</kbd></a>
+  <a href="https://sass-lang.com/"><kbd>💠 Sass</kbd></a>
+  <a href="https://lesscss.org/"><kbd>🔹 Less</kbd></a>
+</p>
 
-## Featured Work
+### Backend
+
+<p>
+  <a href="https://www.java.com/"><kbd>☕ Java</kbd></a>
+  <a href="https://www.mysql.com/"><kbd>🗄️ MySQL</kbd></a>
+  <a href="https://www.tencentcloud.com/products/cos"><kbd>☁️ Tencent COS</kbd></a>
+  <a href="https://www.docker.com/"><kbd>🐳 Docker</kbd></a>
+  <a href="https://nginx.org/"><kbd>🛡️ Nginx</kbd></a>
+</p>
+
+### Engineering
+
+<p>
+  <a href="https://v3.umijs.org/"><kbd>🛠️ Umi 3</kbd></a>
+  <a href="https://reactrouter.com/"><kbd>🧭 React Router 6</kbd></a>
+  <a href="https://redux-toolkit.js.org/"><kbd>🧰 Redux Toolkit</kbd></a>
+  <a href="https://dvajs.com/"><kbd>🌀 Dva</kbd></a>
+  <a href="https://vite.dev/"><kbd>⚡ Vite</kbd></a>
+  <a href="https://webpack.js.org/"><kbd>📦 Webpack</kbd></a>
+  <a href="https://git-scm.com/"><kbd>🌿 Git</kbd></a>
+  <a href="https://qiankun.umijs.org/"><kbd>🧬 qiankun</kbd></a>
+</p>
+
+## Featured Work / 代表项目
 
 <a id="featured-work"></a>
 
@@ -54,31 +84,8 @@ I like interfaces that feel alive, workflows that remove friction, and AI system
 - Realtime QA Demo: a fast surface for testing flows and tightening product feedback loops.
 - AI Signal Directory: a curated AI source map converted into GitHub-friendly, clickable follow lists.
 
-## Skill Constellation
-
-`AI Agents` `Prompt Engineering` `Automation` `TypeScript` `Python` `React`
-`Notion Workflows` `GitHub Pages` `Data Visualization` `UX Prototyping`
-`Research Systems` `CLI Design` `Docs Systems` `Creative Frontend`
-
-## Now Shipping
-
-```text
-Mode: BUILD
-Location: Asia / Remote
-Focus: agent UX / visual frontends / information systems
-Status: open to sharp product experiments and unusual tooling ideas
-```
-
-## Connect
+## Connect / 联系方式
 
 - Mission Deck: [3D homepage](https://helloleila.github.io/)
 - Profile README: [this file](./README.md)
 - Contact slot: add your email / Telegram / X link here whenever you want
-
-The interactive version of this profile lives in this repo's `index.html`, designed for GitHub Pages.
-
-To refresh the static preview screenshot locally, run:
-
-```bash
-./capture-preview.sh
-```
