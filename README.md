@@ -20,15 +20,15 @@ Optional edits before publishing:
   ·
   <a href="#skill-map">Skill Map</a>
   ·
-  <a href="#featured-work">Featured Work</a>
+  <!-- <a href="#featured-work">Featured Work</a> -->
   ·
   <a href="#connect">Connect</a>
 </p>
 
 <p align="center">
-  EN: I build polished frontend systems, agent-ready interaction flows, and engineering foundations that stay reliable under real product constraints.
+  build polished frontend systems, agent-ready interaction flows, and engineering foundations that stay reliable under real product constraints.
   <br />
-  中文：我专注于打磨前端系统、智能体交互流程，以及能在真实业务约束下稳定落地的工程基础设施。
+  打磨前端系统、智能体交互流程，以及能在真实业务约束下稳定落地的工程基础设施。
 </p>
 
 ## Skill Map / 技能地图
@@ -48,7 +48,6 @@ Optional edits before publishing:
   <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><kbd>🎨 CSS3</kbd></a>
   <a href="https://echarts.apache.org/"><kbd>📊 ECharts</kbd></a>
   <a href="https://ant.design/"><kbd>🧩 Ant Design</kbd></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design"><kbd>📱 Responsive Design</kbd></a>
   <a href="https://sass-lang.com/"><kbd>💠 Sass</kbd></a>
   <a href="https://lesscss.org/"><kbd>🔹 Less</kbd></a>
 </p>
@@ -61,6 +60,12 @@ Optional edits before publishing:
   <a href="https://www.tencentcloud.com/products/cos"><kbd>☁️ Tencent COS</kbd></a>
   <a href="https://www.docker.com/"><kbd>🐳 Docker</kbd></a>
   <a href="https://nginx.org/"><kbd>🛡️ Nginx</kbd></a>
+</p>
+
+### General
+
+<p>
+  <a href="https://docs.moonbitlang.com/zh-cn/latest/pilot/moonbit-pilot/getting-started.html"><kbd>🛠️ Moonbit</kbd></a>
 </p>
 
 ### Engineering
@@ -76,16 +81,16 @@ Optional edits before publishing:
   <a href="https://qiankun.umijs.org/"><kbd>🧬 qiankun</kbd></a>
 </p>
 
-## Featured Work / 代表项目
+<!-- ## Featured Work / 代表项目
 
 <a id="featured-work"></a>
 
 - Moonforge Gate: agent workflow infrastructure with stronger execution boundaries and repo automation.
 - Realtime QA Demo: a fast surface for testing flows and tightening product feedback loops.
-- AI Signal Directory: a curated AI source map converted into GitHub-friendly, clickable follow lists.
+- AI Signal Directory: a curated AI source map converted into GitHub-friendly, clickable follow lists. -->
 
 ## Connect / 联系方式
 
-- Mission Deck: [3D homepage](https://helloleila.github.io/)
+- Mission Deck: [3D homepage](https://github.com/helloLeila)
 - Profile README: [this file](./README.md)
-- Contact slot: add your email / Telegram / X link here whenever you want
+
