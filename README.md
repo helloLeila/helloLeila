@@ -14,7 +14,7 @@ Optional edits before publishing:
   <br />
   EN: React/Vue frontends, AI workflow interaction, and reliable engineering foundations.
   <br />
-  中文：前端系统、智能体交互流程与稳定工程基础设施。
+  前端系统、智能体交互流程与稳定工程基础设施。
 </p>
 
 <p align="center">
