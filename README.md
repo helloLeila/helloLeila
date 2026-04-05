@@ -30,11 +30,7 @@ Optional edits before publishing:
 
 <a id="skill-map"></a>
 
-<p>
-  EN: Technical tags first. Every linked tag jumps to the official docs or product site.
-  <br />
-  中文：技能优先展示。每个可点击标签都会跳转到对应技术的官网或官方文档。
-</p>
+
 
 ### Frontend
 
