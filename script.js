@@ -12,6 +12,7 @@ const stagePanel = document.getElementById("stagePanel");
 const stageStatus = document.querySelector(".stage-status");
 const focusBadge = document.getElementById("focusBadge");
 const focusTitle = document.getElementById("focusTitle");
+const focusTitleZh = document.getElementById("focusTitleZh");
 const focusCopyEn = document.getElementById("focusCopyEn");
 const focusCopyZh = document.getElementById("focusCopyZh");
 const focusPoints = document.getElementById("focusPoints");
@@ -52,6 +53,7 @@ const focusMap = {
   react: {
     badge: "Frontend Anchor",
     title: "React 18",
+    titleZh: "前端界面与组件系统",
     copyEn:
       "For interfaces that need composable screens, reusable state boundaries, and product motion that stays clear instead of noisy.",
     copyZh:
@@ -104,6 +106,7 @@ const focusMap = {
   ts: {
     badge: "Typed UI",
     title: "TypeScript",
+    titleZh: "类型安全与长期维护",
     copyEn:
       "I use it to keep complex product surfaces understandable, safer to extend, and easier to refactor under real delivery pressure.",
     copyZh:
@@ -156,6 +159,7 @@ const focusMap = {
   echarts: {
     badge: "Visual Data",
     title: "ECharts",
+    titleZh: "可读性优先的数据表达",
     copyEn:
       "Useful when dashboards need actual readability, not just more charts. I care about hierarchy, motion rhythm, and information density.",
     copyZh:
@@ -208,6 +212,7 @@ const focusMap = {
   java: {
     badge: "Backend Logic",
     title: "Java",
+    titleZh: "稳定分层的服务逻辑",
     copyEn:
       "For service-side logic that needs stable structure, clear layering, and reliable support behind frontend-heavy products.",
     copyZh:
@@ -260,6 +265,7 @@ const focusMap = {
   docker: {
     badge: "Ship Surface",
     title: "Docker",
+    titleZh: "可复现的交付环境",
     copyEn:
       "I use it where product handoff needs cleaner environments, repeatable local setup, and less friction between build and deployment.",
     copyZh:
@@ -312,6 +318,7 @@ const focusMap = {
   qiankun: {
     badge: "Micro Frontend",
     title: "qiankun",
+    titleZh: "可扩展的微前端边界",
     copyEn:
       "Useful when a frontend system needs multiple sub-apps, independent iteration, and a more deliberate integration boundary.",
     copyZh:
@@ -482,6 +489,7 @@ function drawStars() {
 function populateFocus(data) {
   focusBadge.textContent = data.badge;
   renderFocusTitle(data.title);
+  focusTitleZh.textContent = data.titleZh;
   focusCopyEn.textContent = data.copyEn;
   focusCopyZh.textContent = data.copyZh;
   focusStatus.textContent = data.status;

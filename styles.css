@@ -114,7 +114,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px clamp(20px, 4vw, 56px);
+  padding: 20px clamp(16px, 2vw, 28px);
 }
 
 .brand {
@@ -174,22 +174,22 @@ main {
 }
 
 main {
-  padding: 0 clamp(20px, 4vw, 56px) 96px;
+  padding: 0 clamp(14px, 1.8vw, 26px) 72px;
 }
 
 .hero {
-  padding-top: clamp(14px, 3vw, 34px);
+  padding-top: clamp(6px, 2vw, 18px);
 }
 
 .hero-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: center;
+  grid-template-columns: minmax(0, 0.96fr) minmax(460px, 1.04fr);
+  gap: clamp(16px, 2vw, 28px);
+  align-items: start;
 }
 
 .hero-copy {
-  max-width: 640px;
+  max-width: 100%;
 }
 
 .eyebrow {
@@ -201,13 +201,13 @@ main {
 
 .hero h1 {
   margin: 0;
-  max-width: 9.2ch;
-  font-size: clamp(3rem, 6vw, 6.3rem);
-  line-height: 0.96;
+  max-width: 7.6ch;
+  font-size: clamp(2.4rem, 4.8vw, 4.8rem);
+  line-height: 0.94;
   letter-spacing: -0.05em;
 }
 
-.hero h1 span {
+.hero-highlight {
   display: block;
   background: linear-gradient(135deg, var(--accent-2), var(--accent), var(--accent-3));
   -webkit-background-clip: text;
@@ -215,25 +215,24 @@ main {
   color: transparent;
 }
 
+.hero-title-zh {
+  margin: 8px 0 0;
+  font-size: clamp(1.12rem, 1.5vw, 1.48rem);
+  color: rgba(16, 33, 63, 0.82);
+  letter-spacing: -0.02em;
+}
+
 .lede {
   margin: 0;
-  max-width: 44rem;
-  font-size: clamp(1rem, 1.45vw, 1.14rem);
-  line-height: 1.72;
+  max-width: 38rem;
+  font-size: clamp(0.94rem, 1.18vw, 1.02rem);
+  line-height: 1.58;
 }
 
 .lede-bilingual {
   display: grid;
-  gap: 12px;
-  margin-top: 22px;
-}
-
-.cta-row,
-.contact-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 30px;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 .button {
@@ -263,9 +262,15 @@ main {
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 18px;
-  margin-top: 22px;
-  font-size: 0.82rem;
+  gap: 8px 14px;
+  margin-top: 14px;
+  font-size: 0.74rem;
+}
+
+.hero-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
 }
 
 .hero-copy > * {
@@ -275,20 +280,20 @@ main {
 .focus-nav {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 28px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .focus-node {
   position: relative;
   display: grid;
-  gap: 7px;
-  min-height: 84px;
-  padding: 16px 16px 15px;
-  border: 1px solid rgba(62, 111, 255, 0.12);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 14px 30px rgba(77, 98, 160, 0.08);
+  gap: 6px;
+  min-height: 66px;
+  padding: 12px 13px 11px;
+  border: 1px solid rgba(62, 111, 255, 0.11);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 10px 24px rgba(77, 98, 160, 0.06);
   text-align: left;
   color: var(--text);
   transition:
@@ -338,7 +343,7 @@ main {
 }
 
 .focus-node strong {
-  font-size: 1rem;
+  font-size: 0.92rem;
   line-height: 1.2;
 }
 
@@ -347,10 +352,10 @@ main {
   --focus-b: rgba(18, 191, 168, 0.18);
   --focus-c: rgba(255, 138, 76, 0.16);
   position: relative;
-  min-height: 540px;
-  padding: 26px 26px 30px;
+  min-height: 428px;
+  padding: 20px 18px 22px;
   border: 1px solid rgba(62, 111, 255, 0.16);
-  border-radius: 34px;
+  border-radius: 28px;
   background:
     radial-gradient(circle at 14% 16%, var(--focus-b), transparent 30%),
     radial-gradient(circle at 82% 18%, var(--focus-a), transparent 34%),
@@ -445,20 +450,21 @@ main {
 }
 
 .stage-panel {
-  max-width: 388px;
-  margin-top: 70px;
+  max-width: 368px;
+  margin-top: 42px;
   will-change: transform, opacity;
 }
 
 .stage-panel h2 {
   margin: 0;
-  font-size: clamp(2.6rem, 4vw, 4.1rem);
+  font-size: clamp(2rem, 3vw, 3rem);
   line-height: 0.94;
   letter-spacing: -0.05em;
 }
 
 #focusTitle {
-  max-width: 10ch;
+  max-width: 9ch;
+  will-change: transform, opacity, filter;
 }
 
 .title-word,
@@ -472,30 +478,39 @@ main {
 }
 
 .title-gap {
-  width: 0.24em;
+  width: 0.16em;
 }
 
 .title-char {
+  margin-right: -0.012em;
   will-change: transform, opacity, filter;
 }
 
+.focus-title-zh {
+  margin: 8px 0 0;
+  font-size: 0.98rem;
+  color: rgba(16, 33, 63, 0.74);
+  line-height: 1.4;
+}
+
 .panel-copy {
-  margin: 14px 0 0;
-  max-width: 31rem;
-  line-height: 1.72;
+  margin: 10px 0 0;
+  max-width: 28rem;
+  line-height: 1.58;
+  font-size: 0.92rem;
 }
 
 .panel-copy-zh {
-  margin-top: 10px;
+  margin-top: 7px;
 }
 
 .focus-points {
   display: grid;
-  gap: 10px;
-  margin: 18px 0 0;
+  gap: 7px;
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
-  font-size: 0.96rem;
+  font-size: 0.84rem;
 }
 
 .focus-points li {
@@ -516,17 +531,17 @@ main {
 
 .stage-status {
   position: absolute;
-  left: 26px;
-  bottom: 24px;
+  left: 20px;
+  bottom: 18px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-height: 40px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(62, 111, 255, 0.12);
-  font-size: 0.73rem;
+  font-size: 0.68rem;
   letter-spacing: 0.04em;
   will-change: transform, opacity;
 }
@@ -547,25 +562,25 @@ main {
 }
 
 .float-a {
-  top: 86px;
-  right: 148px;
+  top: 64px;
+  right: 116px;
 }
 
 .float-b {
-  top: 166px;
-  right: 34px;
+  top: 126px;
+  right: 24px;
 }
 
 .float-c {
-  top: 260px;
-  left: 52%;
+  top: 196px;
+  left: 50%;
 }
 
 .stack-card {
   position: absolute;
-  width: 220px;
-  padding: 16px 18px 18px;
-  border-radius: 26px;
+  width: 180px;
+  padding: 13px 15px 15px;
+  border-radius: 20px;
   border: 1px solid rgba(62, 111, 255, 0.14);
   background: rgba(255, 255, 255, 0.82);
   box-shadow: 0 18px 36px rgba(68, 92, 156, 0.12);
@@ -578,16 +593,16 @@ main {
 
 .stack-card strong {
   display: block;
-  margin-top: 8px;
-  font-size: 1.08rem;
+  margin-top: 6px;
+  font-size: 0.96rem;
   line-height: 1.14;
 }
 
 .stack-card small {
   display: block;
-  margin-top: 8px;
-  line-height: 1.55;
-  font-size: 0.85rem;
+  margin-top: 6px;
+  line-height: 1.42;
+  font-size: 0.76rem;
 }
 
 .stack-kicker {
@@ -598,20 +613,20 @@ main {
 }
 
 .stack-card-a {
-  right: 46px;
-  bottom: 162px;
+  right: 34px;
+  bottom: 124px;
   transform: rotate(-8deg);
 }
 
 .stack-card-b {
-  right: 118px;
-  bottom: 96px;
+  right: 92px;
+  bottom: 74px;
   transform: rotate(6deg);
 }
 
 .stack-card-c {
-  right: 36px;
-  bottom: 30px;
+  right: 26px;
+  bottom: 16px;
   transform: rotate(-2deg);
 }
 
@@ -619,7 +634,7 @@ main {
 .work,
 .now,
 .contact {
-  margin-top: clamp(88px, 12vw, 140px);
+  margin-top: clamp(54px, 8vw, 88px);
 }
 
 .band-intro {
@@ -632,7 +647,7 @@ main {
 .contact h2 {
   margin: 0;
   max-width: 16ch;
-  font-size: clamp(2rem, 4vw, 4.4rem);
+  font-size: clamp(1.56rem, 3vw, 3rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
 }
@@ -641,6 +656,12 @@ main {
   margin: 0;
   max-width: 42rem;
   line-height: 1.7;
+}
+
+.section-subline {
+  margin: 0;
+  color: rgba(16, 33, 63, 0.8);
+  line-height: 1.6;
 }
 
 .skill-grid {
@@ -719,7 +740,7 @@ main {
 .project-copy p {
   margin: 8px 0 0;
   max-width: 42rem;
-  line-height: 1.8;
+  line-height: 1.72;
 }
 
 .project-tag {
@@ -774,7 +795,7 @@ main {
   }
 
   .mission-stage {
-    min-height: 500px;
+    min-height: 388px;
   }
 }
 
@@ -815,6 +836,10 @@ main {
     font-size: clamp(2.6rem, 13vw, 4.6rem);
   }
 
+  .hero-title-zh {
+    font-size: 1.06rem;
+  }
+
   .hero-meta {
     gap: 8px 12px;
   }
@@ -825,8 +850,8 @@ main {
   }
 
   .mission-stage {
-    min-height: 620px;
-    padding: 20px 18px 24px;
+    min-height: 560px;
+    padding: 18px 16px 20px;
   }
 
   .stage-topline {
@@ -864,7 +889,7 @@ main {
   }
 
   .stack-card {
-    width: calc(100% - 44px);
+    width: calc(100% - 36px);
   }
 
   .stack-card-a {

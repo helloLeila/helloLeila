@@ -61,6 +61,24 @@ open '/Users/leila/Documents/Playground 3/github-profile-home/README.md'
 4. Commit and push.
 5. In repository settings, enable GitHub Pages from the root branch.
 
+## Why local preview and GitHub look different
+
+- `index.html` is the interactive page used by local preview and GitHub Pages.
+- `README.md` is the static page shown on your GitHub profile repository homepage.
+- GitHub profile README does not run custom JavaScript, so animation, panel switching, and pointer effects only exist in `index.html`.
+- To keep them visually aligned:
+  - keep `README.md` compact and skill-first
+  - keep `index.html` as the motion-rich version for local preview and Pages
+
+If you changed files locally but GitHub still looks old, you usually only need to push again:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
+git add README.md index.html styles.css script.js assets/previews/homepage-preview.png
+git commit -m "refactor: align README and interactive homepage"
+git push origin main
+```
+
 ## Refresh the screenshot preview
 
 Run this from the repo root:

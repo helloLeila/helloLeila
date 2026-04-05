@@ -6,16 +6,24 @@ Optional edits before publishing:
 -->
 
 <p align="center">
-  <img src="./assets/orbit-banner.svg" alt="Leila profile banner" width="100%" height="200" />
+  <img src="./assets/orbit-banner.svg" alt="Leila profile banner" width="100%" height="112" />
 </p>
 
-<h1 align="center">Leila builds agent-native products, visual frontends, and AI workflow systems.</h1>
-
+<p align="center">
+  <strong>Frontend systems · Agent-ready flows · Stable engineering delivery</strong>
+  <br />
+  EN: React/Vue frontends, AI workflow interaction, and reliable engineering foundations.
+  <br />
+  中文：前端系统、智能体交互流程与稳定工程基础设施。
+</p>
 
 <p align="center">
-  EN: Frontend systems, agent-ready flows, and reliable engineering foundations.
-  <br />
-  中文：专注于前端系统、智能体交互流程与稳定工程基础设施。
+  <a href="https://react.dev/"><kbd>⚛️ React 18</kbd></a>
+  <a href="https://www.typescriptlang.org/"><kbd>🔷 TypeScript</kbd></a>
+  <a href="https://echarts.apache.org/"><kbd>📊 ECharts</kbd></a>
+  <a href="https://www.java.com/"><kbd>☕ Java</kbd></a>
+  <a href="https://www.docker.com/"><kbd>🐳 Docker</kbd></a>
+  <a href="https://qiankun.umijs.org/"><kbd>🧬 qiankun</kbd></a>
 </p>
 
 ## Skill Map / 技能地图
@@ -23,9 +31,9 @@ Optional edits before publishing:
 <a id="skill-map"></a>
 
 <p>
-  EN: Only technical tags are shown here. Every linked tag jumps to the official docs or product site.
+  EN: Technical tags first. Every linked tag jumps to the official docs or product site.
   <br />
-  中文：这里只展示技术类标签。每个可点击标签都会跳转到对应技术的官网或官方文档。
+  中文：技能优先展示。每个可点击标签都会跳转到对应技术的官网或官方文档。
 </p>
 
 ### Frontend
