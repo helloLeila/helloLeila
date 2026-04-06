@@ -12,7 +12,7 @@ Optional edits before publishing:
 <p align="center">
   <strong>Frontend systems · Agent-ready flows · Stable engineering delivery</strong>
   <br />
-  EN: React/Vue frontends, AI workflow interaction, and reliable engineering foundations.
+  React/Vue frontends, AI workflow interaction, and reliable engineering foundations.
   <br />
   前端系统、智能体交互流程与稳定工程基础设施。
 </p>
