@@ -1,179 +1,183 @@
-# Control Deck Homepage Design
+# Control Deck 首页规格
 
-## Summary
+## 概述
 
-Rebuild the GitHub Pages homepage as a single-stage interactive showcase for `engineering + academic` positioning.
+将 GitHub Pages 首页重建为一个以 `工程 + 学术` 为核心定位的单主舞台交互页。
 
-The page should feel light, deliberate, and technical rather than dark or cyberpunk. It should borrow the interaction rhythm of Tongyi Wan's button behavior and stage transitions, while keeping the visual language aligned with a personal portfolio that can be shown publicly.
+页面整体应当保持浅色、克制、技术感明确，不走黑灰赛博风。交互节奏参考通义 Wan 的按钮反馈与舞台切换方式，但视觉语言仍然服务于个人主页展示，而不是复制 Wan 的产品外观。
 
-This redesign replaces the current broken state where `index.html` belongs to an older layout generation and no longer matches `styles.css` and `script.js`.
+本次改版的直接目标，是替换当前已经失配的本地页结构：`index.html` 属于旧版本布局，而 `styles.css` 与 `script.js` 已经演化到后续版本，三者不再匹配，所以才会出现样式错乱和交互失效。
 
-## Goals
+## 目标
 
-- Restore structural consistency across `index.html`, `styles.css`, and `script.js`
-- Make the first viewport interaction-led instead of copy-led
-- Present a bilingual identity throughout the page without explicit `EN` / `中文` prefixes
-- Emphasize four capability themes instead of isolated technologies
-- Keep tag-style skill mapping, but integrate it into the stage experience
-- Make button speed, hover, and active transitions feel noticeably smoother and more intentional
+- 恢复 `index.html`、`styles.css`、`script.js` 三者的一致性
+- 让首屏从“文案展示页”变成“交互驱动页”
+- 全页使用双语表达，但不显式写 `EN:`、`中文:` 这类前缀
+- 用 `4` 个能力主题组织舞台，而不是堆单个技术名
+- 保留标签式技能地图，但让它成为整体体验的一部分
+- 让按钮的速度、hover、按下和激活反馈明显更顺滑、更有质感
 
-## Non-Goals
+## 非目标
 
-- Do not recreate Wan's exact visual design
-- Do not introduce a black, gray, or heavy neon theme
-- Do not build parallel entry channels or split the homepage into engineering vs academic tabs
-- Do not turn the page into a metrics dashboard or contribution showcase
+- 不复刻 Wan 的原始视觉稿
+- 不引入黑色、深灰、重霓虹风格
+- 不做并列入口，也不拆成“工程页 / 学术页”两个频道
+- 不做提交量、奖杯、贡献图这类展示型组件
 
-## Experience Thesis
+## 体验主张
 
-The first screen should behave like a control deck:
+首屏应当像一个控制甲板：
 
-- one dominant stage
-- one row of primary theme controls
-- a compact bilingual narrative
-- a responsive motion system where the entire stage changes when a theme changes
+- 只有一个主舞台
+- 一排核心主题按钮
+- 一段紧凑的双语定位文案
+- 一个会随着主题切换而整体变化的交互舞台
 
-The experience should feel like selecting a research-and-engineering mode rather than opening a static card.
+用户感受到的不是“打开了一个静态介绍卡片”，而是“切换了不同的研究与工程工作模式”。
 
-## Visual Thesis
+## 视觉主张
 
-- light atmospheric gradients
-- translucent technical surfaces
-- sharp typography
-- restrained glass and blur treatment
-- soft blue / mint / apricot accents
-- subtle depth and field motion
+- 浅色氛围渐变
+- 半透明技术面板
+- 干净锐利的排版
+- 克制的玻璃和模糊层次
+- 蓝色 / 薄荷 / 杏橙作为点缀色
+- 有轻微深度感和场域流动感
 
-The page should read as `engineering precision + academic clarity`, not marketing gloss.
+整页需要传达的是：
 
-## Content Structure
+`工程上的精确性 + 学术上的清晰度`
 
-### 1. Header
+而不是营销感、装饰感或者“炫酷模板感”。
 
-- compact brand block with name and short descriptor
-- minimal navigation links for `Work`, `Skills`, `Research`
-- no oversized hero navigation or secondary CTA cluster
+## 内容结构
 
-### 2. Hero Stage
+### 1. 顶部区
 
-The first viewport contains:
+- 紧凑品牌信息：名字 + 一行短定位
+- 极简导航，只保留 `Work`、`Skills`、`Research` 这一类必要入口
+- 不做多余的首屏按钮堆叠
 
-- one bilingual headline
-- one compact bilingual support paragraph
-- one row of 4 theme buttons
-- one active stage panel with layered content
-- a small set of floating tags tied to the active theme
+### 2. 首屏主舞台
 
-The first viewport must fit without feeling empty or forcing the user to scroll before seeing the interactive core.
+第一屏必须包含：
 
-### 3. Theme Controls
+- 一组双语主标题
+- 一段双语补充说明
+- 一排 `4` 个主题控制按钮
+- 一个正在激活的舞台面板
+- 少量与当前主题关联的浮动标签
 
-The four stage themes are:
+第一屏必须在桌面端一眼看到核心交互内容，不能出现大面积空白，也不能逼用户先向下滚动才能理解页面重点。
+
+### 3. 主题控制
+
+四个主题固定为：
 
 1. `Full-stack Engineering / 全栈工程`
 2. `Frontend Systems / 前端系统`
 3. `Data Visualization / 数据可视化`
 4. `Academic Research / 学术研究`
 
-These are primary navigation controls inside the hero, not separate sections competing for attention.
+这四个主题属于首屏主舞台的一级控制项，不再另起一套并列栏目。
 
-### 4. Lower Sections
+### 4. 首屏以下内容
 
-Below the stage:
+舞台下方保留支持性内容：
 
-- a compact skill map in linked tag form
-- a short engineering section
-- a short academic section
-- a compact contact / links section
+- 一段紧凑的技能标签地图
+- 一段工程相关内容
+- 一段学术相关内容
+- 一段联系方式 / 外部链接
 
-These sections should support the hero instead of replacing it.
+这些内容的职责是补充首屏，而不是抢走首屏主舞台的注意力。
 
-## Interaction Model
+## 交互模型
 
-### Primary Interaction
+### 主交互
 
-When a user clicks a theme button:
+当用户点击任一主题按钮时，页面应当同步发生这些变化：
 
-- the active button updates immediately
-- the stage headline changes
-- bilingual supporting copy changes
-- background glow and field gradients shift
-- floating tags reposition and relabel
-- stacked glass cards retitle and reflow
-- stage accent colors update
-- a short sweep / flash transition runs across the active panel
+- 当前激活按钮立即切换
+- 舞台主标题切换
+- 双语说明切换
+- 背景光场和渐变偏移切换
+- 浮动标签重新命名并重新排布
+- 层叠玻璃卡片重新排布并更新文案
+- 舞台主色同步变化
+- 面板上出现一次短促的扫光 / 闪动过渡
 
-The stage must feel like one connected system responding to a control input.
+目标是让用户感觉整块舞台在响应一次输入，而不是只有一个文案区域在换字。
 
-### Button Behavior
+### 按钮行为
 
-Button behavior should reference Wan's interaction tempo:
+按钮交互参考 Wan 的节奏，但要更贴合个人主页语境：
 
-- fast hover response
-- slight magnetic pull toward pointer center
-- crisp press-down state
-- spring-like release
-- clear active state with highlight and border energy
+- hover 响应要快
+- 鼠标靠近时有轻微磁吸位移
+- 按下时有清晰的压感
+- 松开时有一点弹性回弹
+- 激活态要有明确的高亮、边框能量感和层次变化
 
-Buttons should look technical and premium, not like default pills.
+按钮要有技术感和精致度，不能像默认圆角 pill。
 
-### Motion System
+### 动效系统
 
-The motion stack should include:
+动效至少包含以下层次：
 
-- ambient background drift
-- a hero entrance sequence
-- theme-switch panel sweep
-- floating tag repositioning
-- layered card transform updates
-- subtle pointer parallax for stage depth
+- 背景缓慢漂移
+- 首屏入场节奏
+- 主题切换时的面板扫光
+- 浮动标签的位置过渡
+- 层叠卡片的 transform 更新
+- 跟随鼠标的轻微景深 / 视差
 
-Motion must stay smooth and readable on laptop screens. Decorative motion that does not support hierarchy should be removed.
+动效必须顺滑、可读、可控，不能为了“炫技”而把页面变成噪音。
 
-## Content Rules
+## 文案规则
 
-### Bilingual Rule
+### 双语规则
 
-All meaningful user-facing copy on the interactive page should be bilingual, but not labeled as separate language sections.
+交互页中所有真正面向用户的核心文案都使用双语，但不写语言前缀。
 
-Use patterns like:
+采用这种形式：
 
-- English line first
-- Chinese line second
+- 第一行英文
+- 第二行中文
 
-Avoid prefixes such as:
+避免：
 
 - `EN:`
 - `中文:`
 
-### Theme Copy Rule
+### 主题文案规则
 
-Each theme needs:
+每个主题都需要有：
 
-- one English title
-- one Chinese title
-- one English summary line
-- one Chinese summary line
-- three concise supporting points
-- three floating tags
-- three stack card items
+- 一个英文标题
+- 一个中文标题
+- 一句英文说明
+- 一句中文说明
+- 三条简洁支撑点
+- 三个浮动标签
+- 三张层叠卡片文案
 
-Copy must sound concrete and technical, not motivational.
+所有文案都要偏技术表达、工程表达、研究表达，不写空泛口号。
 
-### Engineering + Academic Balance
+### 工程与学术平衡
 
-The four themes should collectively express both sides:
+四个主题加在一起，必须能同时表达这两侧能力：
 
-- engineering delivery, architecture, systems thinking
-- academic rigor, research framing, analysis, and method
+- 工程落地、系统组织、架构理解、交付能力
+- 学术方法、研究意识、分析框架、问题建模
 
-The page should not feel like two disconnected resumes glued together.
+页面不能给人一种“两份履历硬拼在一起”的感觉。
 
-## Technical Design
+## 技术设计
 
 ### HTML
 
-Replace the current broken homepage markup with a fresh structure built around:
+使用新的页面结构重建首页，围绕以下语义区域组织：
 
 - `header`
 - `main`
@@ -184,79 +188,79 @@ Replace the current broken homepage markup with a fresh structure built around:
 - `section.research`
 - `footer`
 
-The stage must expose stable hooks for animation and data-driven updates.
+舞台部分必须为脚本提供稳定的 DOM 钩子，方便后续统一驱动动画与内容切换。
 
 ### CSS
 
-Rebuild the stylesheet so it matches the new DOM exactly.
+样式表应当基于新 DOM 重写，职责包括：
 
-Key CSS responsibilities:
+- 浅色背景系统
+- 舞台布局与响应式行为
+- 按钮 hover / active / pressed 状态
+- 分层面板与玻璃质感
+- 浮动标签与层卡的位移、旋转、透明度表现
+- 兼容 reduced motion 的过渡处理
 
-- light background system
-- stage layout and responsive behavior
-- button hover / active / press styling
-- layered panel surfaces
-- floating tags and stack card transforms
-- motion-safe transitions
-
-Do not try to preserve obsolete selectors from the old layout.
+不要尝试兼容旧版本已经废弃的选择器结构。
 
 ### JavaScript
 
-The script should:
+脚本的职责包括：
 
-- initialize particle / field background safely
-- define the 4 theme data objects
-- update stage content on click
-- animate button and panel transitions
-- animate floating tags and layered cards
-- apply pointer-reactive stage depth
+- 安全初始化背景粒子 / 场域效果
+- 定义四个主题的数据源
+- 处理主题按钮切换
+- 驱动按钮与面板的过渡动画
+- 驱动浮动标签和层卡的重排
+- 处理鼠标驱动的轻微景深效果
 
-Use one coherent source of truth for theme content instead of scattering copy across the DOM.
+整页只保留一套清晰的数据源，不再把文案和布局状态零散写在各个 DOM 节点里。
 
-## Responsive Behavior
+## 响应式行为
 
-### Desktop
+### 桌面端
 
-- stage uses a two-area composition: content column + active visual panel
-- buttons remain in a horizontal control row
-- layered cards can overlap with controlled depth
+- 舞台采用“双区域”构图：左侧内容，右侧激活面板
+- 按钮保持横向排列
+- 层叠卡片允许轻微重叠，体现深度感
 
-### Tablet / Small Laptop
+### 平板 / 小尺寸笔记本
 
-- maintain the same structure with reduced spacing
-- keep buttons horizontal if possible
-- collapse visual depth slightly to preserve readability
+- 保持同一结构
+- 缩小间距和视觉深度
+- 尽量保留横向按钮布局
 
-### Mobile
+### 手机端
 
-- stack content vertically
-- keep the same theme-switch interaction
-- remove non-essential motion intensity
-- avoid horizontal overflow entirely
+- 改为纵向堆叠
+- 保留同样的主题切换能力
+- 降低非必要动效强度
+- 严格避免横向溢出
 
-## Error Handling
+## 降级与容错
 
-- If JavaScript fails, the page should still show the default theme in a readable static state
-- If fonts fail to load, layout should remain stable with fallback fonts
-- If reduced motion is enabled, theme changes should use simpler fades and position updates
+- 如果 JavaScript 失效，页面至少能以默认主题静态展示
+- 如果字体加载失败，页面结构仍要稳定
+- 如果用户启用了 reduced motion，切换时只保留更轻量的透明度和位置过渡
 
-## Verification Plan
+## 验收标准
 
-Implementation is complete only when:
+只有在以下条件全部满足时，这次改版才算完成：
 
-1. `index.html`, `styles.css`, and `script.js` are structurally aligned again
-2. the first viewport shows the interactive stage immediately
-3. each of the 4 theme buttons visibly changes the whole stage
-4. the copy is bilingual and consistent
-5. local preview and the generated screenshot reflect the same layout
-6. no obvious overflow or broken layout appears at common desktop widths
+1. `index.html`、`styles.css`、`script.js` 再次结构一致
+2. 首屏一打开就能看到主舞台与核心交互
+3. `4` 个主题按钮都能明显触发整块舞台联动变化
+4. 页面文案完整使用双语表达且风格统一
+5. 本地预览与重新生成的截图预览能够反映同一套布局
+6. 常见桌面宽度下没有明显错位、溢出或空白失衡问题
 
-## Tradeoff Decision
+## 方案取舍
 
-We are choosing `Control Deck` over:
+本次选择 `Control Deck` 方案，而不选：
 
-- a poster-only hero, because it would underdeliver on the requested interaction depth
-- a dense research console, because it would sacrifice clarity and immediacy
+- 海报型首屏，因为交互深度不够
+- 控制台型研究页，因为会牺牲轻盈感和第一屏的清晰度
 
-This design intentionally prioritizes a stronger interactive first impression while still leaving room for engineering and academic substance below the fold.
+这个方案的核心取舍是：
+
+优先保证“第一眼的交互质量”和“工程 + 学术的统一表达”，再把其余信息压到首屏以下，而不是继续把页面做成一张只有文案的静态海报。
