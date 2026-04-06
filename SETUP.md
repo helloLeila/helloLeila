@@ -61,6 +61,11 @@ open '/Users/leila/Documents/Playground 3/github-profile-home/README.md'
    - the contact slot if you want email / Telegram / X links
 4. Commit and push.
 5. In repository settings, enable GitHub Pages from the root branch.
+6. Your Pages URL for this repo should be:
+
+```bash
+https://helloleila.github.io/helloLeila/
+```
 
 ## Why local preview and GitHub look different
 
@@ -78,6 +83,31 @@ cd '/Users/leila/Documents/Playground 3/github-profile-home'
 git add README.md index.html styles.css script.js assets/previews/homepage-preview.png
 git commit -m "refactor: align README and interactive homepage"
 git push origin main
+```
+
+If `Mission Deck` opens a `404` page after upload, check this first:
+
+1. GitHub repo `Settings`
+2. `Pages`
+3. `Deploy from a branch`
+4. Branch: `main`
+5. Folder: `/ (root)`
+6. Wait 1-2 minutes for deployment
+
+Important:
+
+- Your current repo is `helloLeila/helloLeila`
+- That means it is a project Pages site, not a user-site repo
+- So the correct URL is:
+
+```bash
+https://helloleila.github.io/helloLeila/
+```
+
+- `https://helloleila.github.io/` only works as the root site if you create a separate repo named exactly:
+
+```bash
+helloLeila.github.io
 ```
 
 ## Refresh the screenshot preview

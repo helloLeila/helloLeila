@@ -1,16 +1,16 @@
-<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1920" height="640" viewBox="0 0 1920 640" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="102" y1="62" x2="1120" y2="590" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="102" y1="62" x2="1710" y2="590" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFF7EC"/>
       <stop offset="0.5" stop-color="#F2FBFF"/>
       <stop offset="1" stop-color="#FFF0E0"/>
     </linearGradient>
-    <linearGradient id="beam" x1="912" y1="130" x2="432" y2="480" gradientUnits="userSpaceOnUse">
+    <linearGradient id="beam" x1="1390" y1="130" x2="980" y2="490" gradientUnits="userSpaceOnUse">
       <stop stop-color="#12BFA8"/>
       <stop offset="0.5" stop-color="#3E6FFF"/>
       <stop offset="1" stop-color="#FF8A4C"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(892 216) rotate(133.79) scale(292.924 234.573)">
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1364 216) rotate(133.79) scale(348 248)">
       <stop stop-color="#12BFA8" stop-opacity="0.28"/>
       <stop offset="1" stop-color="#12BFA8" stop-opacity="0"/>
     </radialGradient>
@@ -19,36 +19,38 @@
     </filter>
   </defs>
 
-  <rect width="1280" height="640" rx="34" fill="url(#bg)"/>
+  <rect width="1920" height="640" rx="34" fill="url(#bg)"/>
 
   <g opacity="0.12">
-    <path d="M0 130H1280" stroke="#3E6FFF"/>
-    <path d="M0 230H1280" stroke="#3E6FFF"/>
-    <path d="M0 330H1280" stroke="#3E6FFF"/>
-    <path d="M0 430H1280" stroke="#3E6FFF"/>
-    <path d="M0 530H1280" stroke="#3E6FFF"/>
-    <path d="M180 0V640" stroke="#3E6FFF"/>
-    <path d="M360 0V640" stroke="#3E6FFF"/>
-    <path d="M540 0V640" stroke="#3E6FFF"/>
-    <path d="M720 0V640" stroke="#3E6FFF"/>
-    <path d="M900 0V640" stroke="#3E6FFF"/>
-    <path d="M1080 0V640" stroke="#3E6FFF"/>
+    <path d="M0 130H1920" stroke="#3E6FFF"/>
+    <path d="M0 230H1920" stroke="#3E6FFF"/>
+    <path d="M0 330H1920" stroke="#3E6FFF"/>
+    <path d="M0 430H1920" stroke="#3E6FFF"/>
+    <path d="M0 530H1920" stroke="#3E6FFF"/>
+    <path d="M210 0V640" stroke="#3E6FFF"/>
+    <path d="M420 0V640" stroke="#3E6FFF"/>
+    <path d="M630 0V640" stroke="#3E6FFF"/>
+    <path d="M840 0V640" stroke="#3E6FFF"/>
+    <path d="M1050 0V640" stroke="#3E6FFF"/>
+    <path d="M1260 0V640" stroke="#3E6FFF"/>
+    <path d="M1470 0V640" stroke="#3E6FFF"/>
+    <path d="M1680 0V640" stroke="#3E6FFF"/>
   </g>
 
-  <ellipse cx="894" cy="212" rx="222" ry="160" fill="url(#glow)" filter="url(#blur)"/>
+  <ellipse cx="1360" cy="212" rx="260" ry="172" fill="url(#glow)" filter="url(#blur)"/>
 
   <g opacity="0.9">
-    <path d="M780 178C844 144 948 145 1012 178C1076 211 1076 265 1012 298C948 331 844 332 780 298C716 265 716 211 780 178Z" stroke="#12BFA8" stroke-opacity="0.52"/>
-    <path d="M780 178C844 144 948 145 1012 178C1076 211 1076 265 1012 298C948 331 844 332 780 298C716 265 716 211 780 178Z" stroke="url(#beam)" stroke-opacity="0.2" stroke-width="3"/>
-    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 894 238" to="360 894 238" dur="18s" repeatCount="indefinite"/>
+    <path d="M1244 178C1318 144 1436 145 1510 178C1584 211 1584 265 1510 298C1436 331 1318 332 1244 298C1170 265 1170 211 1244 178Z" stroke="#12BFA8" stroke-opacity="0.52"/>
+    <path d="M1244 178C1318 144 1436 145 1510 178C1584 211 1584 265 1510 298C1436 331 1318 332 1244 298C1170 265 1170 211 1244 178Z" stroke="url(#beam)" stroke-opacity="0.2" stroke-width="3"/>
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 1376 238" to="360 1376 238" dur="18s" repeatCount="indefinite"/>
   </g>
 
   <g opacity="0.75">
-    <path d="M812 130C865 98 951 98 1004 130C1057 161 1057 212 1004 244C951 276 865 276 812 244C759 212 759 161 812 130Z" stroke="#3E6FFF" stroke-opacity="0.42"/>
-    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="360 908 186" to="0 908 186" dur="22s" repeatCount="indefinite"/>
+    <path d="M1278 130C1338 98 1434 98 1494 130C1554 161 1554 212 1494 244C1434 276 1338 276 1278 244C1218 212 1218 161 1278 130Z" stroke="#3E6FFF" stroke-opacity="0.42"/>
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="360 1386 186" to="0 1386 186" dur="22s" repeatCount="indefinite"/>
   </g>
 
-  <g transform="translate(804 120)">
+  <g transform="translate(1284 120)">
     <path d="M0 80L146 0L286 80L140 160L0 80Z" fill="#FFFFFF" fill-opacity="0.04"/>
     <path d="M0 80L146 0L286 80L140 160L0 80Z" fill="#FFFFFF" fill-opacity="0.84" stroke="#12BFA8" stroke-opacity="0.35"/>
     <path d="M0 80V240L140 320V160L0 80Z" fill="#E9F5FF" fill-opacity="0.92" stroke="#3E6FFF" stroke-opacity="0.25"/>
@@ -59,10 +61,10 @@
     <text x="142" y="104" text-anchor="middle" fill="#12BFA8" font-size="17" font-family="JetBrains Mono, monospace" letter-spacing="3.6">MISSION CONTROL</text>
     <text x="142" y="168" text-anchor="middle" fill="#10213F" font-size="48" font-family="Space Grotesk, Arial" font-weight="700">LEILA</text>
     <text x="142" y="210" text-anchor="middle" fill="#48617E" font-size="18" font-family="JetBrains Mono, monospace">AI AGENTS / FRONTEND / SYSTEMS</text>
-    <animateTransform attributeName="transform" attributeType="XML" type="translate" values="804 120;804 108;804 120" dur="7.8s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" attributeType="XML" type="translate" values="1284 120;1284 108;1284 120" dur="7.8s" repeatCount="indefinite"/>
   </g>
 
-  <g transform="translate(94 118)">
+  <g transform="translate(112 118)">
     <text x="0" y="0" fill="#12BFA8" font-size="16" font-family="JetBrains Mono, monospace" letter-spacing="4">GITHUB PROFILE</text>
     <text x="0" y="122" fill="#10213F" font-size="106" font-family="Space Grotesk, Arial" font-weight="700">Build things that</text>
     <text x="0" y="236" fill="#10213F" font-size="106" font-family="Space Grotesk, Arial" font-weight="700">feel operational</text>
@@ -72,47 +74,47 @@
   </g>
 
   <g font-family="JetBrains Mono, monospace" font-size="18">
-    <g transform="translate(114 446)">
+    <g transform="translate(112 446)">
       <rect width="168" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#12BFA8" stroke-opacity="0.32"/>
       <text x="84" y="27" text-anchor="middle" fill="#10213F">TypeScript</text>
     </g>
-    <g transform="translate(300 446)">
+    <g transform="translate(298 446)">
       <rect width="134" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#3E6FFF" stroke-opacity="0.32"/>
-      <text x="67" y="27" text-anchor="middle" fill="#10213F">Python</text>
+      <text x="67" y="27" text-anchor="middle" fill="#10213F">Java</text>
     </g>
-    <g transform="translate(450 446)">
+    <g transform="translate(446 446)">
       <rect width="126" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#FF8A4C" stroke-opacity="0.32"/>
       <text x="63" y="27" text-anchor="middle" fill="#10213F">React</text>
     </g>
-    <g transform="translate(590 446)">
+    <g transform="translate(586 446)">
       <rect width="164" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#12BFA8" stroke-opacity="0.32"/>
-      <text x="82" y="27" text-anchor="middle" fill="#10213F">OpenAI API</text>
+      <text x="82" y="27" text-anchor="middle" fill="#10213F">Docker</text>
     </g>
-    <g transform="translate(114 504)">
+    <g transform="translate(112 504)">
       <rect width="170" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#3E6FFF" stroke-opacity="0.32"/>
-      <text x="85" y="27" text-anchor="middle" fill="#10213F">Automation</text>
+      <text x="85" y="27" text-anchor="middle" fill="#10213F">Vue 3</text>
     </g>
-    <g transform="translate(302 504)">
+    <g transform="translate(300 504)">
       <rect width="170" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#12BFA8" stroke-opacity="0.32"/>
-      <text x="85" y="27" text-anchor="middle" fill="#10213F">Notion MCP</text>
+      <text x="85" y="27" text-anchor="middle" fill="#10213F">ECharts</text>
     </g>
-    <g transform="translate(490 504)">
+    <g transform="translate(488 504)">
       <rect width="188" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#3E6FFF" stroke-opacity="0.32"/>
-      <text x="94" y="27" text-anchor="middle" fill="#10213F">Prompt Design</text>
+      <text x="94" y="27" text-anchor="middle" fill="#10213F">qiankun</text>
     </g>
   </g>
 
   <g opacity="0.9">
-    <circle cx="1080" cy="94" r="3" fill="#10213F">
+    <circle cx="1604" cy="94" r="3" fill="#10213F">
       <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="1186" cy="190" r="2" fill="#12BFA8">
+    <circle cx="1738" cy="190" r="2" fill="#12BFA8">
       <animate attributeName="opacity" values="0.1;1;0.1" dur="4.2s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="1022" cy="404" r="2.8" fill="#3E6FFF">
+    <circle cx="1512" cy="404" r="2.8" fill="#3E6FFF">
       <animate attributeName="opacity" values="0.2;1;0.2" dur="2.7s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="1142" cy="500" r="2.3" fill="#FF8A4C">
+    <circle cx="1716" cy="500" r="2.3" fill="#FF8A4C">
       <animate attributeName="opacity" values="0.2;1;0.2" dur="3.4s" repeatCount="indefinite"/>
     </circle>
   </g>
