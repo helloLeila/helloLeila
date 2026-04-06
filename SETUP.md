@@ -8,6 +8,7 @@
 - `assets/previews/homepage-preview.png`: browser screenshot preview for GitHub display.
 - `preview-local.sh`: start a local preview server for the interactive homepage.
 - `capture-preview.sh`: regenerate the preview screenshot locally.
+- `check-github.sh`: diagnose GitHub pull/push issues such as DNS, proxy, or fetch failures.
 
 ## Local preview
 
@@ -89,6 +90,31 @@ cd '/Users/leila/Documents/Playground 3/github-profile-home'
 ```
 
 This starts a temporary local server, opens the page in headless Chrome, and rewrites `assets/previews/homepage-preview.png`.
+
+## Diagnose GitHub pull/push issues
+
+If `git pull` or `git push` suddenly fails, run:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
+./check-github.sh
+```
+
+This script checks:
+
+- current repo and branch tracking
+- DNS resolution for `github.com`
+- basic HTTP access to GitHub
+- proxy environment variables
+- git-specific proxy config
+- `git fetch --dry-run origin`
+
+If the checks all pass, retry:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
+git pull --ff-only
+```
 
 ## Important constraint
 

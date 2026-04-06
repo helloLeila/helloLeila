@@ -19,9 +19,6 @@
   <body>
     <canvas id="starfield" aria-hidden="true"></canvas>
     <div class="noise" aria-hidden="true"></div>
-    <div class="orb orb-a" aria-hidden="true"></div>
-    <div class="orb orb-b" aria-hidden="true"></div>
-    <div class="orb orb-c" aria-hidden="true"></div>
 
     <header class="topbar" id="top">
       <div class="brand">
@@ -34,174 +31,99 @@
       <nav class="nav">
         <a href="#work">Work</a>
         <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <!-- <a href="#contact">Contact</a> -->
       </nav>
     </header>
 
     <main>
       <section class="hero">
-        <div class="hero-shell">
-          <div class="hero-copy">
-            <p class="eyebrow">GITHUB MISSION DECK</p>
-            <div class="focus-nav" aria-label="Interactive technology deck">
-              <button class="focus-node is-active" type="button" data-focus="react" aria-pressed="true">
-                <span class="focus-kicker">Frontend Anchor</span>
-                <strong>React 18</strong>
-              </button>
-              <button class="focus-node" type="button" data-focus="ts" aria-pressed="false">
-                <span class="focus-kicker">Typed UI</span>
-                <strong>TypeScript</strong>
-              </button>
-              <button class="focus-node" type="button" data-focus="echarts" aria-pressed="false">
-                <span class="focus-kicker">Visual Data</span>
-                <strong>ECharts</strong>
-              </button>
-              <button class="focus-node" type="button" data-focus="java" aria-pressed="false">
-                <span class="focus-kicker">Backend Logic</span>
-                <strong>Java</strong>
-              </button>
-              <button class="focus-node" type="button" data-focus="docker" aria-pressed="false">
-                <span class="focus-kicker">Ship Surface</span>
-                <strong>Docker</strong>
-              </button>
-              <button class="focus-node" type="button" data-focus="qiankun" aria-pressed="false">
-                <span class="focus-kicker">Micro Frontend</span>
-                <strong>qiankun</strong>
-              </button>
-            </div>
-            <h1 class="hero-title">
-              Frontend systems,
-              <span class="hero-highlight">agent-ready</span>
-              delivery.
-            </h1>
-            <p class="hero-title-zh">前端系统与智能体交付</p>
-            <div class="lede-bilingual hero-lede">
-              <p class="lede">
-                Click a stack node to switch the deck. Skills come first, interface second.
-              </p>
-              <p class="lede">
-                点击技能节点切换右侧面板。先突出技能，再展示交互。
-              </p>
-            </div>
-            <div class="hero-meta hero-meta-row">
-              <span>Official doc links</span>
-              <span>技术标签直达官方文档</span>
-              <span>Motion deck</span>
-              <span>动态交互展示页</span>
-            </div>
+        <div class="hero-copy">
+          <p class="eyebrow">GITHUB MISSION DECK</p>
+          <h1>
+            Building
+            <span>agent-native</span>
+            products with motion, structure, and taste.
+          </h1>
+          <p class="lede">
+            I design workflows that think clearly, interfaces that move with intent,
+            and AI tooling that feels operational instead of ornamental.
+          </p>
+          <div class="cta-row">
+            <a class="button primary" href="#work">See work</a>
+            <a class="button secondary" href="./README.md">Use README</a>
           </div>
+          <div class="hero-meta">
+            <span>Based in Asia / Remote</span>
+            <span>Currently shipping agent UX, research systems, and showcase frontends</span>
+          </div>
+        </div>
 
-          <div class="mission-stage" id="missionStage">
-            <div class="stage-shine" aria-hidden="true"></div>
-            <div class="stage-grid" aria-hidden="true"></div>
-            <div class="stage-flash" id="stageFlash" aria-hidden="true"></div>
+        <div class="scene-wrap">
+          <div class="scene" id="scene">
+            <div class="ring ring-a"></div>
+            <div class="ring ring-b"></div>
+            <div class="ring ring-c"></div>
 
-            <div class="stage-topline">
-              <span class="panel-badge" id="focusBadge">Frontend Anchor</span>
-              <a
-                class="panel-link"
-                id="focusDocLink"
-                href="https://react.dev/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Open docs
-              </a>
+            <div class="core-panel">
+              <div class="panel-label">ACTIVE STACK</div>
+              <div class="panel-title">Mission Control</div>
+              <p>Agent logic, frontend systems, automation design, and fast iteration loops.</p>
             </div>
 
-            <div class="stage-panel" id="stagePanel">
-              <h2 id="focusTitle">React 18</h2>
-              <p class="focus-title-zh" id="focusTitleZh">前端界面与组件系统</p>
-              <p class="panel-copy" id="focusCopyEn">
-                For interfaces that need composable screens, reusable state boundaries, and product motion that stays clear instead of noisy.
-              </p>
-              <p class="panel-copy panel-copy-zh" id="focusCopyZh">
-                适合需要组件化界面、清晰状态边界，以及克制但有质感动效的前端产品界面。
-              </p>
-              <ul class="focus-points" id="focusPoints">
-                <li>Composable UI systems</li>
-                <li>Clean stateful app shells</li>
-                <li>Pairs well with TypeScript and Ant Design</li>
-              </ul>
+            <div class="skill-cloud">
+              <span class="chip chip-1">TypeScript</span>
+              <span class="chip chip-2">Python</span>
+              <span class="chip chip-3">React</span>
+              <span class="chip chip-4">OpenAI API</span>
+              <span class="chip chip-5">Automation</span>
+              <span class="chip chip-6">GitHub</span>
+              <span class="chip chip-7">Notion MCP</span>
+              <span class="chip chip-8">Prompt Design</span>
+              <span class="chip chip-9">Data Viz</span>
             </div>
 
-            <div class="stage-status">
-              <span class="status-dot"></span>
-              <span id="focusStatus">UI systems · state boundaries · polished product motion</span>
+            <div class="stack-tower" aria-hidden="true">
+              <div class="tower-layer">AGENTS</div>
+              <div class="tower-layer">FRONTEND</div>
+              <div class="tower-layer">SYSTEMS</div>
+              <div class="tower-layer">SIGNALS</div>
             </div>
-
-            <span class="stage-float float-a" id="floatLabelA">Hooks</span>
-            <span class="stage-float float-b" id="floatLabelB">App Shell</span>
-            <span class="stage-float float-c" id="floatLabelC">Design System</span>
-
-            <article class="stack-card stack-card-a" id="stackCardA">
-              <span class="stack-kicker" id="stackKickerA">Primary</span>
-              <strong id="stackTitleA">UI Systems</strong>
-              <small id="stackTextA">Reusable surfaces and dependable state composition.</small>
-            </article>
-            <article class="stack-card stack-card-b" id="stackCardB">
-              <span class="stack-kicker" id="stackKickerB">Flow</span>
-              <strong id="stackTitleB">Interaction</strong>
-              <small id="stackTextB">Transitions that clarify structure instead of decorating it.</small>
-            </article>
-            <article class="stack-card stack-card-c" id="stackCardC">
-              <span class="stack-kicker" id="stackKickerC">Delivery</span>
-              <strong id="stackTitleC">Showcase</strong>
-              <small id="stackTextC">GitHub-ready interfaces with operational polish.</small>
-            </article>
           </div>
         </div>
       </section>
 
       <section class="band" id="skills">
         <div class="band-intro">
-          <p class="eyebrow">SKILL MAP</p>
-          <h2>Technical tags first, linked to the official docs.</h2>
-          <p class="section-subline">技能优先展示，点击即可直达官方文档。</p>
-          <p class="section-note">
-            Only English technical tags are shown here. Pure business capabilities stay out of the tag wall.
-            <br />
-            这里只展示英文技术标签，纯业务能力不放进这面标签墙。
-          </p>
+          <p class="eyebrow">BUILD LANES</p>
+          <h2>Three layers, one operating style.</h2>
         </div>
-        <div class="skill-grid">
-          <div class="skill-group">
-            <h3>Frontend</h3>
-            <div class="skill-tags">
-              <a class="skill-pill" href="https://react.dev/" target="_blank" rel="noreferrer">⚛️ React 18</a>
-              <a class="skill-pill" href="https://vuejs.org/" target="_blank" rel="noreferrer">💚 Vue 3</a>
-              <a class="skill-pill" href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer">🔷 TypeScript</a>
-              <a class="skill-pill" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer">🟨 JavaScript ES6+</a>
-              <a class="skill-pill" href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noreferrer">🧱 HTML5</a>
-              <a class="skill-pill" href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer">🎨 CSS3</a>
-              <a class="skill-pill" href="https://echarts.apache.org/" target="_blank" rel="noreferrer">📊 ECharts</a>
-              <a class="skill-pill" href="https://ant.design/" target="_blank" rel="noreferrer">🧩 Ant Design</a>
-              <a class="skill-pill" href="https://sass-lang.com/" target="_blank" rel="noreferrer">💠 Sass</a>
-              <a class="skill-pill" href="https://lesscss.org/" target="_blank" rel="noreferrer">🔹 Less</a>
-            </div>
+        <div class="lane-grid">
+          <div class="lane">
+            <h3>Agent Systems</h3>
+            <p>Tool orchestration, prompt systems, eval thinking, automation pipelines, operator-first flows.</p>
+            <ul>
+              <li>OpenAI API</li>
+              <li>Prompt architecture</li>
+              <li>Agent workflows</li>
+            </ul>
           </div>
-          <div class="skill-group">
-            <h3>Backend</h3>
-            <div class="skill-tags">
-              <a class="skill-pill" href="https://www.java.com/" target="_blank" rel="noreferrer">☕ Java</a>
-              <a class="skill-pill" href="https://www.mysql.com/" target="_blank" rel="noreferrer">🗄️ MySQL</a>
-              <a class="skill-pill" href="https://www.tencentcloud.com/products/cos" target="_blank" rel="noreferrer">☁️ Tencent COS</a>
-              <a class="skill-pill" href="https://www.docker.com/" target="_blank" rel="noreferrer">🐳 Docker</a>
-              <a class="skill-pill" href="https://nginx.org/" target="_blank" rel="noreferrer">🛡️ Nginx</a>
-            </div>
+          <div class="lane">
+            <h3>Frontend Craft</h3>
+            <p>Interactive prototypes, visual hierarchy, motion-led interfaces, GitHub Pages showcases.</p>
+            <ul>
+              <li>TypeScript / JavaScript</li>
+              <li>React / Vite</li>
+              <li>HTML / CSS / Motion</li>
+            </ul>
           </div>
-          <div class="skill-group">
-            <h3>Engineering</h3>
-            <div class="skill-tags">
-              <a class="skill-pill" href="https://v3.umijs.org/" target="_blank" rel="noreferrer">🛠️ Umi 3</a>
-              <a class="skill-pill" href="https://reactrouter.com/" target="_blank" rel="noreferrer">🧭 React Router 6</a>
-              <a class="skill-pill" href="https://redux-toolkit.js.org/" target="_blank" rel="noreferrer">🧰 Redux Toolkit</a>
-              <a class="skill-pill" href="https://dvajs.com/" target="_blank" rel="noreferrer">🌀 Dva</a>
-              <a class="skill-pill" href="https://vite.dev/" target="_blank" rel="noreferrer">⚡ Vite</a>
-              <a class="skill-pill" href="https://webpack.js.org/" target="_blank" rel="noreferrer">📦 Webpack</a>
-              <a class="skill-pill" href="https://git-scm.com/" target="_blank" rel="noreferrer">🌿 Git</a>
-              <a class="skill-pill" href="https://qiankun.umijs.org/" target="_blank" rel="noreferrer">🧬 qiankun</a>
-            </div>
+          <div class="lane">
+            <h3>Research Ops</h3>
+            <p>Signal curation, structured notes, AI media tracking, repeatable knowledge capture systems.</p>
+            <ul>
+              <li>Notion workflows</li>
+              <li>Content systems</li>
+              <li>AI source mapping</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -210,18 +132,13 @@
         <div class="band-intro">
           <p class="eyebrow">SELECTED WORK</p>
           <h2>Projects that act more like systems than screenshots.</h2>
-          <p class="section-subline">更像系统而不是截图的项目展示。</p>
         </div>
 
         <article class="project-row">
           <div class="project-index">01</div>
           <div class="project-copy">
             <h3>Moonforge Gate</h3>
-            <p>
-              Execution-oriented agent infrastructure with stronger control surfaces, repo-aware tooling, and pragmatic workflow boundaries.
-              <br />
-              面向执行的智能体基础设施，强调控制边界、仓库上下文和务实的工作流设计。
-            </p>
+            <p>Execution-oriented agent infrastructure with stronger control surfaces, repo-aware tooling, and pragmatic workflow boundaries.</p>
           </div>
           <div class="project-tag">Workflow System</div>
         </article>
@@ -230,11 +147,7 @@
           <div class="project-index">02</div>
           <div class="project-copy">
             <h3>Realtime QA Demo</h3>
-            <p>
-              A compact interface for testing flows, observing behavior quickly, and tightening product feedback loops.
-              <br />
-              用于快速验证流程、观察行为和缩短产品反馈回路的轻量界面。
-            </p>
+            <p>A compact interface for testing flows, observing behavior quickly, and tightening product feedback loops.</p>
           </div>
           <div class="project-tag">QA Surface</div>
         </article>
@@ -243,11 +156,7 @@
           <div class="project-index">03</div>
           <div class="project-copy">
             <h3>AI Signal Directory</h3>
-            <p>
-              An information design project turning AI source tracking into clean, GitHub-friendly directories and follow maps.
-              <br />
-              一个把 AI 信息源追踪整理成清晰目录与关注地图的信息设计项目。
-            </p>
+            <p>An information design project turning AI source tracking into clean, GitHub-friendly directories and follow maps.</p>
           </div>
           <div class="project-tag">Info Design</div>
         </article>
@@ -260,17 +169,16 @@
           </div>
           <div class="terminal-body">
             <p><span class="prompt">$</span> mode --current</p>
-            <p>BUILDING: agent UX, visual READMEs, research systems / 正在构建智能体交互、README 展示页和研究系统</p>
-            <p>LOOKING FOR: ambitious tools with sharp product edges / 希望参与边界清晰、产品感强的工具项目</p>
-            <p>STACK: TypeScript / Java / React / Docker / GitHub Pages / 技术栈以工程落地和展示体验为核心</p>
+            <p>BUILDING: agent UX, visual READMEs, research systems</p>
+            <p>LOOKING FOR: ambitious tools with sharp product edges</p>
+            <p>STACK: TypeScript / Python / React / OpenAI / GitHub Pages</p>
           </div>
         </div>
       </section>
 
       <section class="contact" id="contact">
         <p class="eyebrow">CONTACT</p>
-        <h2>Clean surface, direct links, no vanity widgets.</h2>
-        <p class="section-subline">界面保持克制，链接直接可用，不依赖花哨的统计组件。</p>
+        <h2>This ships clean even before you add socials.</h2>
         <div class="contact-row">
           <a class="button primary" href="./README.md">Open profile README</a>
           <a class="button secondary" href="#top">Back to top</a>
@@ -278,7 +186,6 @@
       </section>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

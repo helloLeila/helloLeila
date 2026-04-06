@@ -12,9 +12,9 @@ Optional edits before publishing:
 <p align="center">
   <strong>Frontend systems · Agent-ready flows · Stable engineering delivery</strong>
   <br />
-  React/Vue frontends, AI workflow interaction, and reliable engineering foundations.
+   Frontends and Backend, AI workflow interaction, and reliable engineering foundations.
   <br />
-  前端系统、智能体交互流程与稳定工程基础设施。
+  工程系统、智能体交互流程与稳定工程基础设施。
 </p>
 
 <p align="center">
@@ -55,6 +55,7 @@ Optional edits before publishing:
   <a href="https://www.tencentcloud.com/products/cos"><kbd>☁️ Tencent COS</kbd></a>
   <a href="https://www.docker.com/"><kbd>🐳 Docker</kbd></a>
   <a href="https://nginx.org/"><kbd>🛡️ Nginx</kbd></a>
+  <a href="https://nginx.org/"><kbd>🛡️ linux</kbd></a>
 </p>
 
 ### Engineering
