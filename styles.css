@@ -35,6 +35,8 @@ body {
     radial-gradient(circle at 80% 72%, rgba(255, 175, 119, 0.14), transparent 30%),
     linear-gradient(180deg, #fffaf4 0%, #fbfdff 48%, #fff7ef 100%);
   font-family: "Space Grotesk", "Noto Sans SC", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
@@ -45,6 +47,10 @@ a {
 
 button {
   font: inherit;
+}
+
+.zh {
+  font-family: "Noto Sans SC", "Space Grotesk", "Helvetica Neue", sans-serif;
 }
 
 #starfield,
@@ -136,7 +142,7 @@ button {
 
 .brand-copy {
   display: grid;
-  gap: 2px;
+  gap: 3px;
 }
 
 .brand-name {
@@ -152,6 +158,10 @@ button {
 .stack-text,
 .footer {
   color: var(--muted);
+}
+
+.brand-sub.zh {
+  font-size: 0.92rem;
 }
 
 .brand-sub,
@@ -175,7 +185,19 @@ button {
 }
 
 .nav a {
+  display: grid;
+  gap: 2px;
+  justify-items: end;
   opacity: 0.8;
+}
+
+.nav-en {
+  color: var(--text);
+}
+
+.nav-zh {
+  font-size: 0.8rem;
+  color: var(--muted);
 }
 
 .page-shell {
@@ -277,6 +299,8 @@ button {
 .theme-control {
   --mx: 0px;
   --my: 0px;
+  appearance: none;
+  -webkit-appearance: none;
   position: relative;
   display: grid;
   gap: 4px;
@@ -346,6 +370,7 @@ button {
   flex-wrap: wrap;
   gap: 18px;
   font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 .stage-panel {
@@ -363,6 +388,7 @@ button {
     radial-gradient(circle at 72% 80%, var(--stage-glow-c), transparent 28%),
     linear-gradient(140deg, rgba(255, 255, 255, 0.86), rgba(243, 248, 255, 0.76));
   box-shadow: var(--shadow-strong);
+  -webkit-backdrop-filter: blur(22px);
   backdrop-filter: blur(22px);
   transform: perspective(1200px) rotateX(var(--panel-rx)) rotateY(var(--panel-ry));
   transform-style: preserve-3d;
@@ -385,6 +411,7 @@ button {
     linear-gradient(rgba(67, 110, 206, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(67, 110, 206, 0.08) 1px, transparent 1px);
   background-size: 78px 78px;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.08));
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.08));
 }
 
@@ -440,9 +467,12 @@ button {
   border: 1px solid rgba(67, 110, 206, 0.16);
   background: rgba(255, 255, 255, 0.76);
   box-shadow: 0 10px 30px rgba(89, 113, 173, 0.1);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 
 .stage-doc-link {
+  white-space: nowrap;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
@@ -492,6 +522,7 @@ button {
   gap: 10px;
   margin: 10px 0 0;
   padding-left: 20px;
+  line-height: 1.7;
 }
 
 .stage-points li::marker {
@@ -514,7 +545,6 @@ button {
   bottom: 18px;
   justify-content: flex-start;
   font-size: 0.8rem;
-  backdrop-filter: blur(14px);
 }
 
 .stage-tags {
@@ -552,6 +582,7 @@ button {
   border: 1px solid rgba(67, 110, 206, 0.14);
   background: rgba(255, 255, 255, 0.82);
   box-shadow: var(--shadow-soft);
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   transform-origin: center;
   transition:
@@ -635,6 +666,8 @@ button {
   border: 1px solid rgba(67, 110, 206, 0.12);
   background: rgba(255, 255, 255, 0.72);
   box-shadow: var(--shadow-soft);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .support-card h3,
@@ -650,6 +683,10 @@ button {
 
 .support-card p {
   line-height: 1.7;
+}
+
+.support-card p + p {
+  margin-top: 10px;
 }
 
 .footer {
@@ -679,6 +716,10 @@ button {
   .topbar {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .nav a {
+    justify-items: start;
   }
 
   .theme-controls {
@@ -748,5 +789,18 @@ button {
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .stage-panel,
+  .stage-badge,
+  .stage-doc-link,
+  .float-tag,
+  .stage-status,
+  .skill-pill,
+  .stack-card,
+  .support-card {
+    background: rgba(255, 255, 255, 0.94);
   }
 }

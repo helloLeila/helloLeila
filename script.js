@@ -1,4 +1,4 @@
-const themeData = Array.isArray(window.themeData) ? window.themeData : [];
+const stageThemes = Array.isArray(window.themeData) ? window.themeData : [];
 
 const heroStage = document.getElementById("heroStage");
 const themeControls = [...document.querySelectorAll(".theme-control")];
@@ -102,7 +102,7 @@ function setStageTheme(theme) {
   heroSummaryEn.textContent = theme.summaryEn;
   heroSummaryZh.textContent = theme.summaryZh;
 
-  stageBadge.textContent = `${theme.buttonEn} / ${theme.buttonZh}`;
+  stageBadge.textContent = theme.badge;
   stageDocLink.href = theme.docLink;
   stageTitleEn.textContent = theme.titleEn;
   stageTitleZh.textContent = theme.titleZh;
@@ -118,7 +118,7 @@ function setStageTheme(theme) {
 }
 
 function activateTheme(key) {
-  const theme = themeData.find((item) => item.key === key);
+  const theme = stageThemes.find((item) => item.key === key);
   if (!theme) {
     return;
   }
@@ -178,6 +178,9 @@ function initStarfield() {
   }
 
   const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
   const stars = [];
   const density = reduceMotion ? 36 : 52;
 
@@ -241,7 +244,7 @@ function initStarfield() {
 }
 
 function init() {
-  if (!themeData.length) {
+  if (!stageThemes.length) {
     return;
   }
 
