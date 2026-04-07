@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leila | Mission Deck</title>
+    <title>Leila | Control Deck</title>
     <meta
       name="description"
-      content="Leila builds agent-native products, expressive frontends, and AI workflow systems."
+      content="A bilingual engineering and academic control deck for full-stack systems, frontend systems, data visualization, and academic research."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -19,173 +19,200 @@
   <body>
     <canvas id="starfield" aria-hidden="true"></canvas>
     <div class="noise" aria-hidden="true"></div>
+    <div class="orb orb-a" aria-hidden="true"></div>
+    <div class="orb orb-b" aria-hidden="true"></div>
+    <div class="orb orb-c" aria-hidden="true"></div>
 
     <header class="topbar" id="top">
-      <div class="brand">
+      <a class="brand" href="#top" aria-label="Leila control deck homepage">
         <span class="brand-mark">L</span>
-        <div>
-          <div class="brand-name">Leila</div>
-          <div class="brand-sub">Agent Systems / Frontend / AI Ops</div>
-        </div>
-      </div>
-      <nav class="nav">
+        <span class="brand-copy">
+          <strong class="brand-name">Leila</strong>
+          <span class="brand-sub">Engineering Systems / Research Interfaces</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#skills">Skills</a>
-        <!-- <a href="#contact">Contact</a> -->
+        <a href="#research">Research</a>
       </nav>
     </header>
 
-    <main>
-      <section class="hero">
+    <main class="page-shell">
+      <section class="hero-stage" id="heroStage">
         <div class="hero-copy">
-          <p class="eyebrow">GITHUB MISSION DECK</p>
-          <h1>
-            Building
-            <span>agent-native</span>
-            products with motion, structure, and taste.
-          </h1>
-          <p class="lede">
-            I design workflows that think clearly, interfaces that move with intent,
-            and AI tooling that feels operational instead of ornamental.
-          </p>
-          <div class="cta-row">
-            <a class="button primary" href="#work">See work</a>
-            <a class="button secondary" href="./README.md">Use README</a>
+          <p class="eyebrow">CONTROL DECK</p>
+          <div class="title-stack">
+            <h1 class="hero-title" id="heroTitleEn">Systems that feel operational.</h1>
+            <p class="hero-title-zh" id="heroTitleZh">兼具工程秩序与研究表达的双语互动首页。</p>
           </div>
-          <div class="hero-meta">
-            <span>Based in Asia / Remote</span>
-            <span>Currently shipping agent UX, research systems, and showcase frontends</span>
+
+          <div class="hero-summary">
+            <p class="hero-summary-line" id="heroSummaryEn">
+              A stage for shipping product systems, visual interfaces, and research-facing work with the same structural discipline.
+            </p>
+            <p class="hero-summary-line zh" id="heroSummaryZh">
+              这是一个把产品工程、界面表达和研究导向内容放进同一套结构化舞台里的双语主页。
+            </p>
+          </div>
+
+          <nav class="theme-controls" id="themeControls" aria-label="Theme controls">
+            <button class="theme-control is-active" type="button" data-theme="fullstack">
+              <span class="theme-control-en">Full-stack Engineering</span>
+              <span class="theme-control-zh">全栈工程</span>
+            </button>
+            <button class="theme-control" type="button" data-theme="frontend">
+              <span class="theme-control-en">Frontend Systems</span>
+              <span class="theme-control-zh">前端系统</span>
+            </button>
+            <button class="theme-control" type="button" data-theme="dataviz">
+              <span class="theme-control-en">Data Visualization</span>
+              <span class="theme-control-zh">数据可视化</span>
+            </button>
+            <button class="theme-control" type="button" data-theme="academic">
+              <span class="theme-control-en">Academic Research</span>
+              <span class="theme-control-zh">学术研究</span>
+            </button>
+          </nav>
+
+          <div class="hero-meta-row" id="heroMetaRow">
+            <span>Linked skill map</span>
+            <span>Interactive stage switching</span>
+            <span>Light-motion control deck</span>
           </div>
         </div>
 
-        <div class="scene-wrap">
-          <div class="scene" id="scene">
-            <div class="ring ring-a"></div>
-            <div class="ring ring-b"></div>
-            <div class="ring ring-c"></div>
+        <div class="stage-panel" id="stagePanel">
+          <div class="stage-flash" id="stageFlash" aria-hidden="true"></div>
+          <div class="stage-grid" aria-hidden="true"></div>
 
-            <div class="core-panel">
-              <div class="panel-label">ACTIVE STACK</div>
-              <div class="panel-title">Mission Control</div>
-              <p>Agent logic, frontend systems, automation design, and fast iteration loops.</p>
+          <div class="stage-head">
+            <span class="stage-badge" id="stageBadge">Full-stack Engineering</span>
+            <a
+              class="stage-doc-link"
+              id="stageDocLink"
+              href="https://www.java.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open Docs
+            </a>
+          </div>
+
+          <div class="stage-body">
+            <div class="stage-copy">
+              <h2 class="stage-title" id="stageTitleEn">Full-stack systems with reliable delivery.</h2>
+              <p class="stage-title-zh" id="stageTitleZh">强调稳定交付与系统协同的全栈工程能力。</p>
+              <p class="stage-copy-line" id="stageCopyEn">
+                From interface behavior to service coordination, the stage stays coherent under real constraints.
+              </p>
+              <p class="stage-copy-line zh" id="stageCopyZh">
+                从界面行为到服务协同，面向真实约束下的稳定实现与整体一致性。
+              </p>
+              <ul class="stage-points" id="stagePoints">
+                <li>Frontend and backend collaboration</li>
+                <li>Operational delivery under product constraints</li>
+                <li>Clear boundaries across interfaces and services</li>
+              </ul>
             </div>
 
-            <div class="skill-cloud">
-              <span class="chip chip-1">TypeScript</span>
-              <span class="chip chip-2">Python</span>
-              <span class="chip chip-3">React</span>
-              <span class="chip chip-4">OpenAI API</span>
-              <span class="chip chip-5">Automation</span>
-              <span class="chip chip-6">GitHub</span>
-              <span class="chip chip-7">Notion MCP</span>
-              <span class="chip chip-8">Prompt Design</span>
-              <span class="chip chip-9">Data Viz</span>
+            <div class="stage-visual">
+              <div class="stage-status" id="stageStatus">delivery systems · service coordination · interface contracts</div>
+
+              <div class="stage-tags">
+                <span class="float-tag" id="floatTagA">Java</span>
+                <span class="float-tag" id="floatTagB">Docker</span>
+                <span class="float-tag" id="floatTagC">MySQL</span>
+              </div>
+
+              <div class="stage-cards">
+                <article class="stack-card card-a" id="stackCardA">
+                  <small class="stack-kicker" id="stackKickerA">Delivery</small>
+                  <h3 class="stack-title" id="stackTitleA">System Flow</h3>
+                  <p class="stack-text" id="stackTextA">Stable coordination across client and service layers.</p>
+                </article>
+                <article class="stack-card card-b" id="stackCardB">
+                  <small class="stack-kicker" id="stackKickerB">Runtime</small>
+                  <h3 class="stack-title" id="stackTitleB">Operations</h3>
+                  <p class="stack-text" id="stackTextB">Deployment-aware implementation instead of static demos.</p>
+                </article>
+                <article class="stack-card card-c" id="stackCardC">
+                  <small class="stack-kicker" id="stackKickerC">Structure</small>
+                  <h3 class="stack-title" id="stackTitleC">Contracts</h3>
+                  <p class="stack-text" id="stackTextC">Clear interfaces between modules and responsibilities.</p>
+                </article>
+              </div>
             </div>
-
-            <div class="stack-tower" aria-hidden="true">
-              <div class="tower-layer">AGENTS</div>
-              <div class="tower-layer">FRONTEND</div>
-              <div class="tower-layer">SYSTEMS</div>
-              <div class="tower-layer">SIGNALS</div>
-            </div>
           </div>
         </div>
       </section>
 
-      <section class="band" id="skills">
-        <div class="band-intro">
-          <p class="eyebrow">BUILD LANES</p>
-          <h2>Three layers, one operating style.</h2>
+      <section class="support-section skill-map" id="skills">
+        <div class="section-intro">
+          <p class="section-kicker">Skill Map</p>
+          <h2>Linked technologies that support the stage.</h2>
+          <p>每个标签都对应你真实使用过的技术栈，并保留跳转到官方文档或官网的能力。</p>
         </div>
-        <div class="lane-grid">
-          <div class="lane">
-            <h3>Agent Systems</h3>
-            <p>Tool orchestration, prompt systems, eval thinking, automation pipelines, operator-first flows.</p>
-            <ul>
-              <li>OpenAI API</li>
-              <li>Prompt architecture</li>
-              <li>Agent workflows</li>
-            </ul>
-          </div>
-          <div class="lane">
-            <h3>Frontend Craft</h3>
-            <p>Interactive prototypes, visual hierarchy, motion-led interfaces, GitHub Pages showcases.</p>
-            <ul>
-              <li>TypeScript / JavaScript</li>
-              <li>React / Vite</li>
-              <li>HTML / CSS / Motion</li>
-            </ul>
-          </div>
-          <div class="lane">
-            <h3>Research Ops</h3>
-            <p>Signal curation, structured notes, AI media tracking, repeatable knowledge capture systems.</p>
-            <ul>
-              <li>Notion workflows</li>
-              <li>Content systems</li>
-              <li>AI source mapping</li>
-            </ul>
-          </div>
+        <div class="tag-grid">
+          <a class="skill-pill" href="https://react.dev/" target="_blank" rel="noreferrer">React 18</a>
+          <a class="skill-pill" href="https://vuejs.org/" target="_blank" rel="noreferrer">Vue 3</a>
+          <a class="skill-pill" href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer">TypeScript</a>
+          <a class="skill-pill" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer">JavaScript ES6+</a>
+          <a class="skill-pill" href="https://echarts.apache.org/" target="_blank" rel="noreferrer">ECharts</a>
+          <a class="skill-pill" href="https://ant.design/" target="_blank" rel="noreferrer">Ant Design</a>
+          <a class="skill-pill" href="https://www.java.com/" target="_blank" rel="noreferrer">Java</a>
+          <a class="skill-pill" href="https://www.mysql.com/" target="_blank" rel="noreferrer">MySQL</a>
+          <a class="skill-pill" href="https://www.docker.com/" target="_blank" rel="noreferrer">Docker</a>
+          <a class="skill-pill" href="https://nginx.org/" target="_blank" rel="noreferrer">Nginx</a>
+          <a class="skill-pill" href="https://v3.umijs.org/" target="_blank" rel="noreferrer">Umi 3</a>
+          <a class="skill-pill" href="https://qiankun.umijs.org/" target="_blank" rel="noreferrer">qiankun</a>
         </div>
       </section>
 
-      <section class="work" id="work">
-        <div class="band-intro">
-          <p class="eyebrow">SELECTED WORK</p>
-          <h2>Projects that act more like systems than screenshots.</h2>
+      <section class="support-section" id="work">
+        <div class="section-intro">
+          <p class="section-kicker">Engineering</p>
+          <h2>System building, interface discipline, and delivery-aware execution.</h2>
+          <p>从前端系统到全栈协作，重点放在真实业务约束下的结构组织、交互质量和交付稳定性。</p>
         </div>
-
-        <article class="project-row">
-          <div class="project-index">01</div>
-          <div class="project-copy">
-            <h3>Moonforge Gate</h3>
-            <p>Execution-oriented agent infrastructure with stronger control surfaces, repo-aware tooling, and pragmatic workflow boundaries.</p>
-          </div>
-          <div class="project-tag">Workflow System</div>
-        </article>
-
-        <article class="project-row">
-          <div class="project-index">02</div>
-          <div class="project-copy">
-            <h3>Realtime QA Demo</h3>
-            <p>A compact interface for testing flows, observing behavior quickly, and tightening product feedback loops.</p>
-          </div>
-          <div class="project-tag">QA Surface</div>
-        </article>
-
-        <article class="project-row">
-          <div class="project-index">03</div>
-          <div class="project-copy">
-            <h3>AI Signal Directory</h3>
-            <p>An information design project turning AI source tracking into clean, GitHub-friendly directories and follow maps.</p>
-          </div>
-          <div class="project-tag">Info Design</div>
-        </article>
-      </section>
-
-      <section class="now">
-        <div class="terminal">
-          <div class="terminal-bar">
-            <span></span><span></span><span></span>
-          </div>
-          <div class="terminal-body">
-            <p><span class="prompt">$</span> mode --current</p>
-            <p>BUILDING: agent UX, visual READMEs, research systems</p>
-            <p>LOOKING FOR: ambitious tools with sharp product edges</p>
-            <p>STACK: TypeScript / Python / React / OpenAI / GitHub Pages</p>
-          </div>
+        <div class="support-grid">
+          <article class="support-card">
+            <h3>Frontend Systems</h3>
+            <p>Componentized surfaces, stable state boundaries, and interfaces that stay readable as complexity grows.</p>
+          </article>
+          <article class="support-card">
+            <h3>Full-stack Delivery</h3>
+            <p>Service logic, interface contracts, deployment awareness, and engineering coordination across layers.</p>
+          </article>
         </div>
       </section>
 
-      <section class="contact" id="contact">
-        <p class="eyebrow">CONTACT</p>
-        <h2>This ships clean even before you add socials.</h2>
-        <div class="contact-row">
-          <a class="button primary" href="./README.md">Open profile README</a>
-          <a class="button secondary" href="#top">Back to top</a>
+      <section class="support-section" id="research">
+        <div class="section-intro">
+          <p class="section-kicker">Research</p>
+          <h2>Research-oriented framing, analysis, and bilingual technical expression.</h2>
+          <p>强调问题建模、结构化分析、技术表达和能够被复查与复用的输出方式。</p>
+        </div>
+        <div class="support-grid">
+          <article class="support-card">
+            <h3>Academic Structuring</h3>
+            <p>From topic framing to method comparison, outputs should remain reviewable instead of ornamental.</p>
+          </article>
+          <article class="support-card">
+            <h3>Bilingual Presentation</h3>
+            <p>Technical and research content should be understandable to both international and Chinese-speaking audiences.</p>
+          </article>
         </div>
       </section>
+
+      <footer class="footer">
+        <span>Mission Deck</span>
+        <a href="./README.md">README</a>
+        <a href="./SETUP.md">Setup</a>
+      </footer>
     </main>
 
+    <script src="./theme-data.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

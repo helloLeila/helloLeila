@@ -3,7 +3,8 @@
 ## What this folder contains
 
 - `README.md`: use this as the profile README inside your GitHub `<username>/<username>` repo.
-- `index.html`, `styles.css`, `script.js`: GitHub Pages homepage with the 3D-style treatment.
+- `index.html`, `styles.css`, `script.js`: GitHub Pages homepage with the interactive control deck treatment.
+- `theme-data.js`: shared bilingual theme data for the homepage stage.
 - `assets/orbit-banner.svg`: animated banner for the README hero.
 - `assets/previews/homepage-preview.png`: browser screenshot preview for GitHub display.
 - `preview-local.sh`: start a local preview server for the interactive homepage.
@@ -51,6 +52,13 @@ README local file preview:
 open '/Users/leila/Documents/Playground 3/github-profile-home/README.md'
 ```
 
+Homepage checks:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home'
+node --test tests/homepage-structure.test.mjs tests/homepage-theme-data.test.mjs
+```
+
 ## Publish flow
 
 1. Create a repository named exactly as your GitHub username.
@@ -70,6 +78,7 @@ https://helloleila.github.io/helloLeila/
 ## Why local preview and GitHub look different
 
 - `index.html` is the interactive page used by local preview and GitHub Pages.
+- `theme-data.js` holds the shared stage content and layout data for the 4 homepage modes.
 - `README.md` is the static page shown on your GitHub profile repository homepage.
 - GitHub profile README does not run custom JavaScript, so animation, panel switching, and pointer effects only exist in `index.html`.
 - To keep them visually aligned:
