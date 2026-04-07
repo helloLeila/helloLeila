@@ -55,53 +55,21 @@
     <path d="M0 80L146 0L286 80L140 160L0 80Z" fill="#FFFFFF" fill-opacity="0.84" stroke="#12BFA8" stroke-opacity="0.35"/>
     <path d="M0 80V240L140 320V160L0 80Z" fill="#E9F5FF" fill-opacity="0.92" stroke="#3E6FFF" stroke-opacity="0.25"/>
     <path d="M286 80V240L140 320V160L286 80Z" fill="#F4FBFF" fill-opacity="0.95" stroke="#12BFA8" stroke-opacity="0.25"/>
-    <path d="M46 104H238" stroke="#3E6FFF" stroke-opacity="0.14"/>
-    <path d="M36 138H248" stroke="#3E6FFF" stroke-opacity="0.1"/>
-    <path d="M28 172H256" stroke="#3E6FFF" stroke-opacity="0.08"/>
-    <text x="142" y="104" text-anchor="middle" fill="#12BFA8" font-size="17" font-family="JetBrains Mono, monospace" letter-spacing="3.6">MISSION CONTROL</text>
-    <text x="142" y="168" text-anchor="middle" fill="#10213F" font-size="48" font-family="Space Grotesk, Arial" font-weight="700">LEILA</text>
-    <text x="142" y="210" text-anchor="middle" fill="#48617E" font-size="18" font-family="JetBrains Mono, monospace">AI AGENTS / FRONTEND / SYSTEMS</text>
     <animateTransform attributeName="transform" attributeType="XML" type="translate" values="1284 120;1284 108;1284 120" dur="7.8s" repeatCount="indefinite"/>
   </g>
 
-  <g transform="translate(112 118)">
-    <text x="0" y="0" fill="#12BFA8" font-size="16" font-family="JetBrains Mono, monospace" letter-spacing="4">GITHUB PROFILE</text>
-    <text x="0" y="122" fill="#10213F" font-size="106" font-family="Space Grotesk, Arial" font-weight="700">Build things that</text>
-    <text x="0" y="236" fill="#10213F" font-size="106" font-family="Space Grotesk, Arial" font-weight="700">feel operational</text>
-    <text x="0" y="310" fill="#516B87" font-size="28" font-family="Space Grotesk, Arial">
-      Agent-native products, expressive frontends, and AI workflow systems
+  <g transform="translate(120 248)">
+    <text
+      x="0"
+      y="0"
+      fill="#10213F"
+      font-size="84"
+      font-family="Space Grotesk, Arial, Apple Color Emoji, Segoe UI Emoji, sans-serif"
+      font-weight="700"
+      letter-spacing="-2"
+    >
+      Hi there! Happy coding &amp; enjoy your day 😊
     </text>
-  </g>
-
-  <g font-family="JetBrains Mono, monospace" font-size="18">
-    <g transform="translate(112 446)">
-      <rect width="168" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#12BFA8" stroke-opacity="0.32"/>
-      <text x="84" y="27" text-anchor="middle" fill="#10213F">TypeScript</text>
-    </g>
-    <g transform="translate(298 446)">
-      <rect width="134" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#3E6FFF" stroke-opacity="0.32"/>
-      <text x="67" y="27" text-anchor="middle" fill="#10213F">Java</text>
-    </g>
-    <g transform="translate(446 446)">
-      <rect width="126" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#FF8A4C" stroke-opacity="0.32"/>
-      <text x="63" y="27" text-anchor="middle" fill="#10213F">React</text>
-    </g>
-    <g transform="translate(586 446)">
-      <rect width="164" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#12BFA8" stroke-opacity="0.32"/>
-      <text x="82" y="27" text-anchor="middle" fill="#10213F">Docker</text>
-    </g>
-    <g transform="translate(112 504)">
-      <rect width="170" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#3E6FFF" stroke-opacity="0.32"/>
-      <text x="85" y="27" text-anchor="middle" fill="#10213F">Vue 3</text>
-    </g>
-    <g transform="translate(300 504)">
-      <rect width="170" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#12BFA8" stroke-opacity="0.32"/>
-      <text x="85" y="27" text-anchor="middle" fill="#10213F">ECharts</text>
-    </g>
-    <g transform="translate(488 504)">
-      <rect width="188" height="42" rx="21" fill="#FFFFFF" fill-opacity="0.72" stroke="#3E6FFF" stroke-opacity="0.32"/>
-      <text x="94" y="27" text-anchor="middle" fill="#10213F">qiankun</text>
-    </g>
   </g>
 
   <g opacity="0.9">
