@@ -269,7 +269,7 @@ export function CoverageField({ lang, weather }) {
       setSceneError("");
 
       const [
-        { LineLayer, PointLayer, Scene,Zoom },
+        { LineLayer, PointLayer, Scene,Zoom,GeoLocate },
         { GaodeMap },
         { ThreeLayer, ThreeRender },
         THREE,
