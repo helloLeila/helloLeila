@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# GitHub 连通性检查脚本，用于排查仓库、DNS、HTTP 和 Git 拉取问题。
 
 set -u
 
@@ -12,27 +13,33 @@ RED="$(printf '\033[31m')"
 BLUE="$(printf '\033[34m')"
 RESET="$(printf '\033[0m')"
 
+# 输出分段标题，方便阅读诊断结果。
 section() {
   printf "\n${BLUE}== %s ==${RESET}\n" "$1"
 }
 
+# 输出成功状态。
 ok() {
   printf "${GREEN}[OK]${RESET} %s\n" "$1"
 }
 
+# 输出警告状态。
 warn() {
   printf "${YELLOW}[WARN]${RESET} %s\n" "$1"
 }
 
+# 输出失败状态。
 fail() {
   printf "${RED}[FAIL]${RESET} %s\n" "$1"
 }
 
+# 静默执行命令，并把标准输出和错误输出分别写入临时文件。
 run_quiet() {
   "$@" >/tmp/check-github.out 2>/tmp/check-github.err
   return $?
 }
 
+# 如果文件存在，则只打印前几行关键信息。
 print_file_if_exists() {
   local file="$1"
   if [[ -f "$file" ]]; then

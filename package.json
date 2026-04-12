@@ -1,0 +1,28 @@
+{
+  "name": "github-profile-home",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/site-content.test.mjs tests/live-panel.test.mjs tests/live-panel-workflow.test.mjs tests/hooks.test.mjs tests/sections.test.mjs tests/signal-cloud.test.mjs",
+    "refresh:live-panel": "python3 scripts/fetch_live_panel.py"
+  },
+  "dependencies": {
+    "@ant-design/plots": "^2.6.0",
+    "@antv/g2": "^5.4.8",
+    "@antv/l7": "^2.25.4",
+    "@antv/l7-maps": "^2.25.4",
+    "@antv/l7-three": "^2.25.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.183.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "less": "^4.6.4",
+    "vite": "^7.0.0"
+  }
+}

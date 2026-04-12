@@ -1,2 +1,4 @@
 .preview-server.log
 .worktrees/
+node_modules/
+dist/

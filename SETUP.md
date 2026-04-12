@@ -3,7 +3,8 @@
 ## What this folder contains
 
 - `README.md`: use this as the profile README inside your GitHub `<username>/<username>` repo.
-- `index.html`, `styles.css`, `script.js`: GitHub Pages homepage with the 3D-style treatment.
+- `index.html` + `src/`: React + Vite homepage source.
+- `package.json` + `vite.config.js`: local development and production build setup.
 - `assets/orbit-banner.svg`: animated banner for the README hero.
 - `assets/previews/homepage-preview.png`: browser screenshot preview for GitHub display.
 - `preview-local.sh`: start a local preview server for the interactive homepage.
@@ -15,28 +16,28 @@
 Interactive homepage preview:
 
 ```bash
-cd '/Users/leila/Documents/Playground 3/github-profile-home'
+cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage'
 ./preview-local.sh
 ```
 
 Then open this URL in your browser:
 
 ```bash
-http://127.0.0.1:8000/index.html
+http://127.0.0.1:4173/
 ```
 
 If you want the script to open the browser automatically on macOS:
 
 ```bash
-cd '/Users/leila/Documents/Playground 3/github-profile-home'
+cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage'
 ./preview-local.sh --open
 ```
 
 If port `8000` is occupied, choose another one:
 
 ```bash
-cd '/Users/leila/Documents/Playground 3/github-profile-home'
-PORT=8010 ./preview-local.sh --open
+cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage'
+PORT=4273 ./preview-local.sh --open
 ```
 
 To stop the local preview server:
@@ -45,23 +46,26 @@ To stop the local preview server:
 Ctrl+C
 ```
 
-README local file preview:
+Run tests:
 
 ```bash
-open '/Users/leila/Documents/Playground 3/github-profile-home/README.md'
+cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage'
+npm test
+```
+
+Build production bundle:
+
+```bash
+cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage'
+npm run build
 ```
 
 ## Publish flow
 
-1. Create a repository named exactly as your GitHub username.
-2. Copy these files into that repo root.
-3. Make any optional edits you want:
-   - `Leila` if you want a different display name
-   - `Asia / Remote` if you want a different location line
-   - the contact slot if you want email / Telegram / X links
-4. Commit and push.
-5. In repository settings, enable GitHub Pages from the root branch.
-6. Your Pages URL for this repo should be:
+1. Push the source code branch.
+2. In repository settings, set Pages source to `GitHub Actions`.
+3. The workflow in `.github/workflows/pages.yml` will build and publish the Vite app.
+4. Your Pages URL for this repo should be:
 
 ```bash
 https://helloleila.github.io/helloLeila/
@@ -69,30 +73,29 @@ https://helloleila.github.io/helloLeila/
 
 ## Why local preview and GitHub look different
 
-- `index.html` is the interactive page used by local preview and GitHub Pages.
+- `index.html` and `src/` are the React source for local preview and production build.
 - `README.md` is the static page shown on your GitHub profile repository homepage.
 - GitHub profile README does not run custom JavaScript, so animation, panel switching, and pointer effects only exist in `index.html`.
 - To keep them visually aligned:
   - keep `README.md` compact and skill-first
   - keep `index.html` as the motion-rich version for local preview and Pages
 
-If you changed files locally but GitHub still looks old, you usually only need to push again:
+If you changed files locally but GitHub still looks old, you usually need to rebuild and let the Pages workflow redeploy:
 
 ```bash
-cd '/Users/leila/Documents/Playground 3/github-profile-home'
-git add README.md index.html styles.css script.js assets/previews/homepage-preview.png
-git commit -m "refactor: align README and interactive homepage"
+cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage'
+git add .
+git commit -m "feat: update react homepage"
 git push origin main
 ```
 
-If `Mission Deck` opens a `404` page after upload, check this first:
+If the page opens but assets are missing, check:
 
 1. GitHub repo `Settings`
 2. `Pages`
-3. `Deploy from a branch`
-4. Branch: `main`
-5. Folder: `/ (root)`
-6. Wait 1-2 minutes for deployment
+3. `Build and deployment`
+4. Source: `GitHub Actions`
+5. Wait 1-2 minutes for deployment
 
 Important:
 
@@ -115,7 +118,7 @@ helloLeila.github.io
 Run this from the repo root:
 
 ```bash
-cd '/Users/leila/Documents/Playground 3/github-profile-home'
+cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage'
 ./capture-preview.sh
 ```
 

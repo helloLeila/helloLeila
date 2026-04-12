@@ -1,3 +1,4 @@
+// 旧静态原型主脚本，负责星空背景、焦点切换和舞台动效。
 const canvas = document.getElementById("starfield");
 const ctx = canvas.getContext("2d");
 
@@ -376,6 +377,7 @@ let width = 0;
 let height = 0;
 let activeFocus = "react";
 
+// 按单词和字符拆分标题，便于后续逐字符入场动画。
 function renderFocusTitle(text) {
   focusTitle.textContent = "";
   focusTitle.setAttribute("aria-label", text);
@@ -404,6 +406,7 @@ function renderFocusTitle(text) {
   });
 }
 
+// 为当前焦点标题执行逐字符显现动画。
 function animateFocusTitle() {
   if (!window.gsap) {
     return;
@@ -436,6 +439,7 @@ function animateFocusTitle() {
   );
 }
 
+// 让星空画布尺寸跟随当前窗口大小同步更新。
 function resizeCanvas() {
   width = window.innerWidth;
   height = window.innerHeight;
@@ -446,6 +450,7 @@ function resizeCanvas() {
   ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
 }
 
+// 根据当前画布尺寸生成一批带颜色和速度的星点。
 function seedStars() {
   stars.length = 0;
   const palette = [
@@ -467,6 +472,7 @@ function seedStars() {
   }
 }
 
+// 持续绘制并循环更新星点位置，形成背景流动效果。
 function drawStars() {
   ctx.clearRect(0, 0, width, height);
 
@@ -486,6 +492,7 @@ function drawStars() {
   requestAnimationFrame(drawStars);
 }
 
+// 把当前焦点的数据写入舞台文案、标签和卡片内容。
 function populateFocus(data) {
   focusBadge.textContent = data.badge;
   renderFocusTitle(data.title);
@@ -517,6 +524,7 @@ function populateFocus(data) {
   missionStage.style.setProperty("--focus-c", data.colors[2]);
 }
 
+// 根据不同焦点的布局参数更新舞台元素的位置和旋转角度。
 function applyStageLayout(data, immediate = false) {
   const layout = data.layout;
 
@@ -576,6 +584,7 @@ function applyStageLayout(data, immediate = false) {
   });
 }
 
+// 在焦点切换时触发一道闪光，强化舞台切换反馈。
 function triggerStageFlash() {
   if (!window.gsap || !stageFlash) {
     return;
@@ -609,6 +618,7 @@ function triggerStageFlash() {
     }, 0.48);
 }
 
+// 更新当前焦点状态，并串联内容替换、布局切换和过渡动画。
 function updateFocus(key, immediate = false) {
   const data = focusMap[key];
   if (!data || key === activeFocus && !immediate) {
@@ -705,6 +715,7 @@ function updateFocus(key, immediate = false) {
   );
 }
 
+// 绑定焦点节点点击事件，并初始化默认焦点内容。
 function initFocusNodes() {
   focusNodes.forEach((node) => {
     node.addEventListener("click", () => {
@@ -716,6 +727,7 @@ function initFocusNodes() {
   applyStageLayout(focusMap[activeFocus], true);
 }
 
+// 初始化首页各区域的 GSAP 入场和悬停动画。
 function initGsapEffects() {
   if (!window.gsap) {
     return;
@@ -885,6 +897,7 @@ function initGsapEffects() {
   });
 }
 
+// 为舞台区域绑定跟随指针的轻微倾斜效果。
 function initStageTilt() {
   if (!missionStage || !window.gsap) {
     return;
@@ -917,6 +930,7 @@ function initStageTilt() {
   });
 }
 
+// 页面加载后立即初始化静态原型的画布与交互动效。
 resizeCanvas();
 seedStars();
 drawStars();

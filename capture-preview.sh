@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 预览截图脚本，用于启动一个临时静态服务并抓取首页截图。
 
 set -euo pipefail
 
@@ -14,6 +15,7 @@ if [[ ! -x "$CHROME_BIN" ]]; then
   exit 1
 fi
 
+# 退出时关闭临时 HTTP 服务，避免残留后台进程。
 cleanup() {
   if [[ -n "${SERVER_PID:-}" ]]; then
     kill "$SERVER_PID" >/dev/null 2>&1 || true

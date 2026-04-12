@@ -1,191 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
+    <!-- React 单页应用入口模板，负责注入字体和根节点。 -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leila | Mission Deck</title>
+    <title>Leila | Personal Website / 个人网站</title>
     <meta
       name="description"
-      content="Leila builds agent-native products, expressive frontends, and AI workflow systems."
+      content="Leila personal website for enterprise systems, frontend platforms, data visualization, AI workflow interfaces, and technical research."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <canvas id="starfield" aria-hidden="true"></canvas>
-    <div class="noise" aria-hidden="true"></div>
-
-    <header class="topbar" id="top">
-      <div class="brand">
-        <span class="brand-mark">L</span>
-        <div>
-          <div class="brand-name">Leila</div>
-          <div class="brand-sub">Agent Systems / Frontend / AI Ops</div>
-        </div>
-      </div>
-      <nav class="nav">
-        <a href="#work">Work</a>
-        <a href="#skills">Skills</a>
-        <!-- <a href="#contact">Contact</a> -->
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">GITHUB MISSION DECK</p>
-          <h1>
-            Building
-            <span>agent-native</span>
-            products with motion, structure, and taste.
-          </h1>
-          <p class="lede">
-            I design workflows that think clearly, interfaces that move with intent,
-            and AI tooling that feels operational instead of ornamental.
-          </p>
-          <div class="cta-row">
-            <a class="button primary" href="#work">See work</a>
-            <a class="button secondary" href="./README.md">Use README</a>
-          </div>
-          <div class="hero-meta">
-            <span>Based in Asia / Remote</span>
-            <span>Currently shipping agent UX, research systems, and showcase frontends</span>
-          </div>
-        </div>
-
-        <div class="scene-wrap">
-          <div class="scene" id="scene">
-            <div class="ring ring-a"></div>
-            <div class="ring ring-b"></div>
-            <div class="ring ring-c"></div>
-
-            <div class="core-panel">
-              <div class="panel-label">ACTIVE STACK</div>
-              <div class="panel-title">Mission Control</div>
-              <p>Agent logic, frontend systems, automation design, and fast iteration loops.</p>
-            </div>
-
-            <div class="skill-cloud">
-              <span class="chip chip-1">TypeScript</span>
-              <span class="chip chip-2">Python</span>
-              <span class="chip chip-3">React</span>
-              <span class="chip chip-4">OpenAI API</span>
-              <span class="chip chip-5">Automation</span>
-              <span class="chip chip-6">GitHub</span>
-              <span class="chip chip-7">Notion MCP</span>
-              <span class="chip chip-8">Prompt Design</span>
-              <span class="chip chip-9">Data Viz</span>
-            </div>
-
-            <div class="stack-tower" aria-hidden="true">
-              <div class="tower-layer">AGENTS</div>
-              <div class="tower-layer">FRONTEND</div>
-              <div class="tower-layer">SYSTEMS</div>
-              <div class="tower-layer">SIGNALS</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="band" id="skills">
-        <div class="band-intro">
-          <p class="eyebrow">BUILD LANES</p>
-          <h2>Three layers, one operating style.</h2>
-        </div>
-        <div class="lane-grid">
-          <div class="lane">
-            <h3>Agent Systems</h3>
-            <p>Tool orchestration, prompt systems, eval thinking, automation pipelines, operator-first flows.</p>
-            <ul>
-              <li>OpenAI API</li>
-              <li>Prompt architecture</li>
-              <li>Agent workflows</li>
-            </ul>
-          </div>
-          <div class="lane">
-            <h3>Frontend Craft</h3>
-            <p>Interactive prototypes, visual hierarchy, motion-led interfaces, GitHub Pages showcases.</p>
-            <ul>
-              <li>TypeScript / JavaScript</li>
-              <li>React / Vite</li>
-              <li>HTML / CSS / Motion</li>
-            </ul>
-          </div>
-          <div class="lane">
-            <h3>Research Ops</h3>
-            <p>Signal curation, structured notes, AI media tracking, repeatable knowledge capture systems.</p>
-            <ul>
-              <li>Notion workflows</li>
-              <li>Content systems</li>
-              <li>AI source mapping</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="work" id="work">
-        <div class="band-intro">
-          <p class="eyebrow">SELECTED WORK</p>
-          <h2>Projects that act more like systems than screenshots.</h2>
-        </div>
-
-        <article class="project-row">
-          <div class="project-index">01</div>
-          <div class="project-copy">
-            <h3>Moonforge Gate</h3>
-            <p>Execution-oriented agent infrastructure with stronger control surfaces, repo-aware tooling, and pragmatic workflow boundaries.</p>
-          </div>
-          <div class="project-tag">Workflow System</div>
-        </article>
-
-        <article class="project-row">
-          <div class="project-index">02</div>
-          <div class="project-copy">
-            <h3>Realtime QA Demo</h3>
-            <p>A compact interface for testing flows, observing behavior quickly, and tightening product feedback loops.</p>
-          </div>
-          <div class="project-tag">QA Surface</div>
-        </article>
-
-        <article class="project-row">
-          <div class="project-index">03</div>
-          <div class="project-copy">
-            <h3>AI Signal Directory</h3>
-            <p>An information design project turning AI source tracking into clean, GitHub-friendly directories and follow maps.</p>
-          </div>
-          <div class="project-tag">Info Design</div>
-        </article>
-      </section>
-
-      <section class="now">
-        <div class="terminal">
-          <div class="terminal-bar">
-            <span></span><span></span><span></span>
-          </div>
-          <div class="terminal-body">
-            <p><span class="prompt">$</span> mode --current</p>
-            <p>BUILDING: agent UX, visual READMEs, research systems</p>
-            <p>LOOKING FOR: ambitious tools with sharp product edges</p>
-            <p>STACK: TypeScript / Python / React / OpenAI / GitHub Pages</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact" id="contact">
-        <p class="eyebrow">CONTACT</p>
-        <h2>This ships clean even before you add socials.</h2>
-        <div class="contact-row">
-          <a class="button primary" href="./README.md">Open profile README</a>
-          <a class="button secondary" href="#top">Back to top</a>
-        </div>
-      </section>
-    </main>
-
-    <script src="./script.js"></script>
+    <!-- 根节点由 React 在运行时挂载。 -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
