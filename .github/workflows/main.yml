@@ -1,0 +1,43 @@
+name: 自动构建部署
+
+# 🔥 修正后：仅推送这个分支时自动部署（完全匹配你的分支）
+on:
+  push:
+    branches:
+      - "codex/react-antv-homepage"  # 中文分支必须加引号
+  workflow_dispatch:  # 保留手动触发按钮
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+environment:
+  name: github-pages
+  url: ${{ steps.deployment.outputs.page_url }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 设置Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: 构建项目
+        run: npm run build
+
+      - name: 上传产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist  # React项目是dist，老项目是build，自行改
+
+      - name: 部署
+        uses: actions/deploy-pages@v4
