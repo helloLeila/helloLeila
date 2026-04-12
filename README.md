@@ -14,7 +14,7 @@ Optional edits before publishing:
   <br />
   Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
   <br />
-  前后端工程系统、智能体交互流程与稳定工程基础设施。
+  前后端工程系统、智能体交互流程与基础设施。
 </p>
 
 <p align="center">
@@ -81,6 +81,6 @@ Optional edits before publishing:
 
 ## Connect / 联系方式
 
-- Mission Deck: [3D homepage](https://helloleila.github.io/helloLeila/)
+- Mission Deck: [个人博客主页👋](https://helloleila.github.io/helloLeila/)
 - Profile README: [this file](./README.md)
 - Local preview guide: [SETUP.md](./SETUP.md)
