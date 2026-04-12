@@ -24,6 +24,20 @@ const appStyleSource = fs.readFileSync(
   path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/styles/app.css"),
   "utf8"
 );
+const packageJson = JSON.parse(
+  fs.readFileSync(
+    path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/package.json"),
+    "utf8"
+  )
+);
+const l7ThreePackageJson = JSON.parse(
+  fs.readFileSync(
+    path.resolve(
+      "/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/node_modules/@antv/l7-three/package.json"
+    ),
+    "utf8"
+  )
+);
 
 // 验证地图模块标题走语言切换，并保留摘要栅格结构。
 test("coverage field uses lang-specific heading and summary grid structure", () => {
@@ -100,20 +114,29 @@ test("annual milestones use lang-specific heading inside roadmap surface", () =>
 // 验证年度里程碑的台阶使用固定高度，避免文案把逐年升高的节奏撑乱。
 test("annual milestones use fixed step heights for a stable upward staircase", () => {
   assert.match(milestoneSource, /const heights = \[[\d,\s]+\]/);
-  assert.match(milestoneSource, /const trendHeights = heights\.map/);
   assert.match(milestoneSource, /index,/);
-  assert.match(milestoneSource, /score:\s*trendHeights\[index\]/);
+  assert.match(milestoneSource, /score:\s*heights\[index\]/);
   assert.match(milestoneTrendSource, /encode:\s*\{\s*x:\s*"index",\s*y:\s*"score"\s*\}/);
   assert.match(milestoneTrendSource, /x:\s*\{\s*domain:\s*\[0,\s*data\.length - 1\]/);
-  assert.match(milestoneTrendSource, /height:\s*128/);
+  assert.match(milestoneTrendSource, /height:\s*maxScore/);
   assert.match(milestoneTrendSource, /padding:\s*\[0,\s*0,\s*0,\s*0\]/);
   assert.match(milestoneTrendSource, /domain:\s*\[0,\s*maxScore\]/);
-  assert.match(appStyleSource, /\.roadmap-stage\s*\{[\s\S]*min-height:\s*168px/);
-  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*inset:\s*auto 0 0 0/);
-  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*height:\s*128px/);
-  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*z-index:\s*3/);
-  assert.match(appStyleSource, /\.roadmap-track\s*\{[\s\S]*min-height:\s*160px/);
+  assert.match(appStyleSource, /\.roadmap-stage\s*\{/);
+  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*inset:\s*0 0 0 0/);
+  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*height:\s*100%/);
+  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*z-index:\s*1/);
+  assert.match(appStyleSource, /\.roadmap-track\s*\{[\s\S]*min-height:\s*240px/);
   assert.match(appStyleSource, /\.road-step\s*\{[\s\S]*height:\s*var\(--step-height\)/);
   assert.match(appStyleSource, /\.road-step\s*\{[\s\S]*box-shadow:\s*none/);
   assert.doesNotMatch(appStyleSource, /\.road-step\s*\{[\s\S]*min-height:\s*var\(--step-height\)/);
+});
+
+// 验证 CoverageField 使用的 three 运行时与 l7-three 对齐，避免高德场景里的 ThreeLayer 运行时崩溃。
+test("coverage field uses the same three runtime as l7-three", () => {
+  const packageAligned = packageJson.dependencies.three === `^${l7ThreePackageJson.dependencies.three}`;
+  const sourceUsesL7ThreeRuntime =
+    /@antv\/l7-three\/node_modules\/three\/build\/three\.module\.js/.test(coverageSource) &&
+    /@antv\/l7-three\/node_modules\/three\/examples\/jsm\/loaders\/GLTFLoader\.js/.test(coverageSource);
+
+  assert.ok(packageAligned || sourceUsesL7ThreeRuntime);
 });

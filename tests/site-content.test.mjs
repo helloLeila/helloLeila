@@ -42,7 +42,7 @@ test("work links do not expose prototype reference links for G2 and L7", () => {
 // 验证深圳模块标题保持个人站语气。
 test("coverage section uses personal base wording", () => {
   assert.equal(siteContent.coverage.titleEn, "Current base: Shenzhen");
-  assert.equal(siteContent.coverage.titleZh, "当前主要阵地：深圳");
+  assert.equal(siteContent.coverage.titleZh, "主要阵地：深圳");
 });
 
 // 验证词云只保留真实技术栈关键词，并避免人造概念词。
