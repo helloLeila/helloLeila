@@ -101,14 +101,22 @@ def load_previous_panel() -> dict:
         return {}
 
 
-# 选择某天最接近目标小时的温度，确保早晚温度都能拿到。
-def pick_nearest_temperature(entries: list[tuple[str, float]], hour: int) -> int:
-    best_time, best_temp = min(
-        entries,
-        key=lambda item: abs(int(item[0][11:13]) - hour),
-    )
-    _ = best_time
-    return round(best_temp)
+# 按时间窗口聚合温度，避免单个整点取值被四舍五入后看起来早晚相同。
+def pick_window_temperature(entries: list[tuple[str, float]], start_hour: int, end_hour: int) -> float:
+    window_values = [
+        temp
+        for time_text, temp in entries
+        if start_hour <= int(time_text[11:13]) <= end_hour
+    ]
+
+    if not window_values:
+        fallback_values = [
+            item[1]
+            for item in sorted(entries, key=lambda item: abs(int(item[0][11:13]) - start_hour))[:3]
+        ]
+        window_values = fallback_values or [entries[0][1]]
+
+    return round(sum(window_values) / len(window_values), 1)
 
 
 # 将 Open-Meteo 小时级温度整理成七天早晚温差数据。
@@ -123,8 +131,8 @@ def build_daily_weather(hourly_times: list[str], hourly_temps: list[float]) -> l
 
     for date_text in sorted(grouped.keys())[:7]:
         entries = grouped[date_text]
-        morning = pick_nearest_temperature(entries, 8)
-        evening = pick_nearest_temperature(entries, 20)
+        morning = pick_window_temperature(entries, 6, 9)
+        evening = pick_window_temperature(entries, 18, 21)
         day_index = datetime.fromisoformat(date_text).weekday()
         daily.append(
             {
@@ -133,7 +141,7 @@ def build_daily_weather(hourly_times: list[str], hourly_temps: list[float]) -> l
                 "labelZh": weekday_zh[day_index],
                 "morningTemperature": morning,
                 "eveningTemperature": evening,
-                "swing": evening - morning,
+                "swing": round(evening - morning, 1),
             }
         )
 
@@ -166,6 +174,7 @@ def fetch_weather(previous_panel: dict) -> dict:
             "city": SHENZHEN["city"],
             "temperature": round(current.get("temperature_2m", 27)),
             "humidity": round(current.get("relative_humidity_2m", 70)),
+            "typhoonEta": {"en": "No active alert", "zh": "暂无台风预警"},
             "condition": WEATHER_CODE_MAP.get(weather_code, WEATHER_CODE_MAP[2]),
             "daily": daily or previous_panel.get("weather", {}).get("daily", DEFAULT_DAILY),
         }
@@ -175,6 +184,7 @@ def fetch_weather(previous_panel: dict) -> dict:
             "city": previous_weather.get("city", SHENZHEN["city"]),
             "temperature": previous_weather.get("temperature", 27),
             "humidity": previous_weather.get("humidity", 70),
+            "typhoonEta": previous_weather.get("typhoonEta", {"en": "No active alert", "zh": "暂无台风预警"}),
             "condition": previous_weather.get("condition", WEATHER_CODE_MAP[2]),
             "daily": previous_weather.get("daily", DEFAULT_DAILY),
         }

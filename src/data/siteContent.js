@@ -211,9 +211,9 @@ export const siteContent = {
     kickerEn: "Current Base",
     kickerZh: "当前主要阵地",
     titleEn: "Current base: Shenzhen",
-    titleZh: "当前主要工作地：深圳",
+    titleZh: "主要阵地：深圳",
     descriptionEn: "Based in Shenzhen, with recent delivery work centered on enterprise portals, agent interfaces, and data-expression surfaces for multi-region organizations.",
-    descriptionZh: "当前主要工作地在深圳，最近的交付重心仍然集中在企业门户、智能体界面，以及服务多区域组织的数据表达产品化。",
+    descriptionZh: "当前主要阵地在深圳，最近的交付重心仍然集中在企业门户、智能体界面，以及服务多区域组织的数据表达产品化。",
     facts: [
       { en: "Portal and process product delivery", zh: "门户与流程产品交付" },
       { en: "Agent-facing interfaces and workflow surfaces", zh: "智能体界面与工作流表层" },
@@ -221,9 +221,9 @@ export const siteContent = {
       { en: "Cross-team delivery and design review", zh: "跨团队交付与设计走查" }
     ],
     mapNotes: [
-      { labelEn: "Working city", labelZh: "当前城市", valueEn: "Shenzhen", valueZh: "深圳" },
-      { labelEn: "Delivery span", labelZh: "下次台风到达时间", valueEn: "31 days", valueZh: "31 天" },
-      { labelEn: "Connected systems", labelZh: "体感温度", valueEn: "31°C", valueZh: "31°C" },
+      { key: "city", labelEn: "Working city", labelZh: "当前城市", valueEn: "Shenzhen", valueZh: "深圳" },
+      { key: "range", labelEn: "Collaboration range", labelZh: "协作范围", valueEn: "Greater Bay Area", valueZh: "粤港澳大湾区" },
+      { key: "typhoonEta", labelEn: "Typhoon ETA", labelZh: "台风预计时间", valueEn: "No active alert", valueZh: "暂无台风预警" },
     ],
   },
   weather: {
@@ -240,8 +240,6 @@ export const siteContent = {
   ],
   workLinks: [
     { type: "framework", label: "React", href: "https://react.dev/" },
-    { type: "visual", label: "G2 Examples", href: "https://g2.antv.antgroup.com/examples" },
-    { type: "visual", label: "L7 Animate Grid", href: "https://l7.antv.antgroup.com/examples/gallery/animate/#grid" },
     { type: "chat", label: "ChatGPT", href: "https://chatgpt.com/?temporary-chat=true" },
     { type: "blog", label: "Juejin", href: "https://juejin.cn" },
     { type: "component", label: "Ant Design", href: "https://ant.design/" },

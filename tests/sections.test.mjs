@@ -12,6 +12,14 @@ const milestoneSource = fs.readFileSync(
   path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/components/AnnualMilestones.jsx"),
   "utf8"
 );
+const milestoneTrendSource = fs.readFileSync(
+  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/components/MilestoneTrend.jsx"),
+  "utf8"
+);
+const weatherTrendSource = fs.readFileSync(
+  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/components/WeatherTrendChart.jsx"),
+  "utf8"
+);
 const appStyleSource = fs.readFileSync(
   path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/styles/app.css"),
   "utf8"
@@ -26,6 +34,12 @@ test("coverage field uses lang-specific heading and summary grid structure", () 
   assert.match(coverageSource, /coverage-copy/);
   assert.match(coverageSource, /weather-panel/);
   assert.match(coverageSource, /WeatherTrendChart/);
+  assert.match(coverageSource, /forecast\[0\]\?\.morningTemperature\s*\?\?\s*"--"/);
+  assert.match(coverageSource, /forecast\[0\]\?\.eveningTemperature\s*\?\?\s*"--"/);
+  assert.doesNotMatch(coverageSource, /forecast\[0\]\?\.morningTemperature\s*\?\?\s*weather\?\.temperature/);
+  assert.doesNotMatch(coverageSource, /forecast\[0\]\?\.eveningTemperature\s*\?\?\s*weather\?\.temperature/);
+  assert.match(coverageSource, /typhoonEta/);
+  assert.match(coverageSource, /item\.key === "typhoonEta"/);
   assert.match(coverageSource, /coverage-summary-grid/);
 });
 
@@ -60,8 +74,20 @@ test("coverage field uses shenzhen and greater bay area coordinates instead of c
   assert.match(coverageSource, /textOffset:/);
   assert.match(coverageSource, /textAnchor:/);
   assert.match(coverageSource, /rotation:\s*0/);
+  assert.match(coverageSource, /style:\s*"blank"/);
+  assert.match(coverageSource, /const wallLayer = new LineLayer/);
+  assert.match(coverageSource, /\.shape\("wall"\)/);
+  assert.match(coverageSource, /scene\.setBgColor\("#ffffff"\)/);
+  assert.doesNotMatch(coverageSource, /scene\.setBgColor\("#6f95d1"\)/);
   assert.doesNotMatch(coverageSource, /长沙黄花国际机场/);
   assert.doesNotMatch(coverageSource, /常德桃花源机场/);
+});
+
+// 验证天气折线会按数据动态收紧纵轴，确保早晚差异在图上明显可见。
+test("weather trend chart tightens the y-domain around the daily temperature spread", () => {
+  assert.match(weatherTrendSource, /const minTemperature = Math\.min\(\.\.\.chartData\.map\(\(item\) => item\.temperature\)\)/);
+  assert.match(weatherTrendSource, /const maxTemperature = Math\.max\(\.\.\.chartData\.map\(\(item\) => item\.temperature\)\)/);
+  assert.match(weatherTrendSource, /domain:\s*\[minTemperature - 2,\s*maxTemperature \+ 2\]/);
 });
 
 // 验证里程碑模块标题走语言切换，并保留统一的趋势承载容器。
@@ -74,6 +100,20 @@ test("annual milestones use lang-specific heading inside roadmap surface", () =>
 // 验证年度里程碑的台阶使用固定高度，避免文案把逐年升高的节奏撑乱。
 test("annual milestones use fixed step heights for a stable upward staircase", () => {
   assert.match(milestoneSource, /const heights = \[[\d,\s]+\]/);
+  assert.match(milestoneSource, /const trendHeights = heights\.map/);
+  assert.match(milestoneSource, /index,/);
+  assert.match(milestoneSource, /score:\s*trendHeights\[index\]/);
+  assert.match(milestoneTrendSource, /encode:\s*\{\s*x:\s*"index",\s*y:\s*"score"\s*\}/);
+  assert.match(milestoneTrendSource, /x:\s*\{\s*domain:\s*\[0,\s*data\.length - 1\]/);
+  assert.match(milestoneTrendSource, /height:\s*128/);
+  assert.match(milestoneTrendSource, /padding:\s*\[0,\s*0,\s*0,\s*0\]/);
+  assert.match(milestoneTrendSource, /domain:\s*\[0,\s*maxScore\]/);
+  assert.match(appStyleSource, /\.roadmap-stage\s*\{[\s\S]*min-height:\s*168px/);
+  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*inset:\s*auto 0 0 0/);
+  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*height:\s*128px/);
+  assert.match(appStyleSource, /\.milestone-trend\s*\{[\s\S]*z-index:\s*3/);
+  assert.match(appStyleSource, /\.roadmap-track\s*\{[\s\S]*min-height:\s*160px/);
   assert.match(appStyleSource, /\.road-step\s*\{[\s\S]*height:\s*var\(--step-height\)/);
+  assert.match(appStyleSource, /\.road-step\s*\{[\s\S]*box-shadow:\s*none/);
   assert.doesNotMatch(appStyleSource, /\.road-step\s*\{[\s\S]*min-height:\s*var\(--step-height\)/);
 });

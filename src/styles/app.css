@@ -449,7 +449,9 @@ a {
 .footer-links {
   padding: 16px;
 }
-
+.graph-card{
+  padding-bottom: 0px;
+}
 .section-head {
   display: grid;
   gap: 8px;
@@ -668,8 +670,8 @@ a {
   overflow: hidden;
   border: 1px solid rgba(67, 110, 206, 0.1);
   background:
-    radial-gradient(circle at 18% 22%, rgba(24, 191, 174, 0.1), transparent 26%),
-    radial-gradient(circle at 82% 18%, rgba(61, 111, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 18% 22%, rgba(24, 191, 174, 0.06), transparent 26%),
+    radial-gradient(circle at 82% 18%, rgba(61, 111, 255, 0.08), transparent 28%),
     linear-gradient(180deg, rgba(249, 252, 255, 0.96), rgba(241, 247, 255, 0.92));
 }
 
@@ -680,29 +682,40 @@ a {
     linear-gradient(rgba(61, 111, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(61, 111, 255, 0.05) 1px, transparent 1px);
   background-size: 36px 36px;
-  opacity: 0.76;
+  opacity: 0.42;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 88%);
   -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 88%);
   pointer-events: none;
 }
 
+.roadmap-stage {
+  position: relative;
+  /* 跟随最高台阶自适应，不固定 min-height */
+}
+
 .roadmap-track {
-  margin-top: 6px;
+  height: 260px;
+  margin-top: 0;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 8px;
   align-items: end;
-  min-height: 168px;
-  padding-top: 0;
+  /* 最高台阶 232px，留 8px 顶部余量 */
+  min-height: 240px;
+  padding: 8px 0 0;
   position: relative;
   z-index: 2;
 }
 
 .milestone-trend {
-  height: 150px;
-  margin: 0 0 -10px;
-  opacity: 0.88;
-  position: relative;
+  /* 完全撑满 roadmap-stage，底部与台阶底部重合，顶部超出不裁剪 */
+  position: absolute !important ;
+  inset: 0 0 0 0;
+  /* 高度由 JS 传入的 maxScore（232px）决定，通过 autoFit 宽度自适应 */
+  height: 100%;
+  margin: 0;
+  opacity: 0.9;
+  /* 折线在台阶下方，台阶内容覆盖其上 */
   z-index: 1;
   pointer-events: none;
 }
@@ -714,10 +727,11 @@ a {
   height: var(--step-height);
   padding: 8px 8px 10px;
   border-radius: 18px 18px 8px 8px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(232, 242, 255, 0.92));
-  border: 1px solid rgba(67, 110, 206, 0.12);
-  box-shadow: 0 10px 20px rgba(84, 104, 152, 0.07);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(242, 247, 255, 0.84));
+  border: 1px solid rgba(95, 130, 242, 0.12);
+  box-shadow: none;
   position: relative;
+  backdrop-filter: blur(8px);
 }
 
 .road-step em {
@@ -729,28 +743,28 @@ a {
 
 .road-step strong {
   display: block;
-  font-size: 0.86rem;
+  font-size: 0.9rem;
 }
 
 .road-step span {
   margin-top: 4px;
-  color: var(--muted);
-  line-height: 1.28;
+  color: rgba(55, 84, 138, 0.82);
+  line-height: 1.32;
   font-size: 0.72rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  /* 完整显示，不截断 */
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .road-step.is-current {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(224, 238, 255, 0.98));
-  border-color: rgba(61, 111, 255, 0.22);
-  box-shadow: 0 14px 24px rgba(61, 111, 255, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(230, 239, 255, 0.96));
+  border-color: rgba(95, 130, 242, 0.22);
 }
 
 .road-step.is-system {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(234, 244, 255, 0.94));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(236, 244, 255, 0.92));
 }
 
 .coverage-layout {
@@ -827,9 +841,9 @@ a {
   overflow: hidden;
   border: 1px solid rgba(67, 110, 206, 0.1);
   background:
-    radial-gradient(circle at 76% 16%, rgba(98, 144, 255, 0.28), transparent 24%),
-    radial-gradient(circle at 22% 72%, rgba(123, 239, 255, 0.2), transparent 28%),
-    linear-gradient(180deg, rgba(114, 154, 220, 0.9), rgba(226, 244, 255, 0.86) 58%, rgba(250, 252, 255, 0.94));
+    radial-gradient(circle at 76% 16%, rgba(98, 144, 255, 0.06), transparent 24%),
+    radial-gradient(circle at 22% 72%, rgba(123, 239, 255, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(250, 252, 255, 0.99), rgba(245, 249, 255, 0.98) 58%, rgba(253, 254, 255, 0.99));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
 }
 
@@ -844,7 +858,7 @@ a {
   width: 100%;
   height: 100%;
   z-index: 1;
-  filter: saturate(1.08) contrast(1.04);
+  filter: saturate(0.96) contrast(1.02) brightness(1.01);
 }
 
 .coverage-chart > div,
@@ -857,9 +871,9 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 28%),
-    radial-gradient(circle at 50% 24%, rgba(255, 255, 255, 0.12), transparent 42%);
-  opacity: 0.52;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 26%),
+    radial-gradient(circle at 50% 24%, rgba(255, 255, 255, 0.05), transparent 42%);
+  opacity: 0.16;
   pointer-events: none;
 }
 
@@ -870,9 +884,9 @@ a {
   border-radius: 50%;
   right: -4%;
   top: -10%;
-  background: radial-gradient(circle, rgba(76, 126, 255, 0.28), rgba(76, 126, 255, 0));
+  background: radial-gradient(circle, rgba(76, 126, 255, 0.06), rgba(76, 126, 255, 0));
   filter: blur(20px);
-  opacity: 0.92;
+  opacity: 0.28;
 }
 
 .coverage-pulse,
@@ -894,7 +908,7 @@ a {
   background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 10px 24px rgba(84, 104, 152, 0.08);
   font-size: 0.78rem;
-  color: rgba(18, 38, 75, 0.76);
+  color: rgba(18, 38, 75, 0.82);
   backdrop-filter: blur(12px);
 }
 

@@ -2,6 +2,11 @@
 import { useEffect, useRef } from "react";
 import { Chart } from "@antv/g2";
 
+// 折线图里的温度标签统一格式化，避免小数位展示忽长忽短。
+function formatTemperature(value) {
+  return Number.isInteger(value) ? `${value}` : value.toFixed(1);
+}
+
 // 根据传入的七天天气数据渲染一个双折线温度图。
 export function WeatherTrendChart({ data, lang = "zh" }) {
   const containerRef = useRef(null);
@@ -24,30 +29,32 @@ export function WeatherTrendChart({ data, lang = "zh" }) {
           day: `${dayNumber}\n${weekdayLabel}`,
           period: periodLabels.morning,
           temperature: item.morningTemperature,
-          text: `${item.morningTemperature}°`,
+          text: `${formatTemperature(item.morningTemperature)}°`,
         },
         {
           day: `${dayNumber}\n${weekdayLabel}`,
           period: periodLabels.evening,
           temperature: item.eveningTemperature,
-          text: `${item.eveningTemperature}°`,
+          text: `${formatTemperature(item.eveningTemperature)}°`,
         },
       ];
     });
+    const minTemperature = Math.min(...chartData.map((item) => item.temperature));
+    const maxTemperature = Math.max(...chartData.map((item) => item.temperature));
 
     const chart = new Chart({
       container: containerRef.current,
       autoFit: true,
-      height: 186,
+      height: 194,
     });
 
     chart.options({
       type: "view",
       data: chartData,
-      padding: [20, 16, 34, 30],
+      padding: [18, 16, 34, 30],
       scale: {
         x: { range: [0.02, 0.98] },
-        y: { nice: true },
+        y: { domain: [minTemperature - 2, maxTemperature + 2], nice: false },
         color: {
           domain: [periodLabels.morning, periodLabels.evening],
           range: ["#18bfae", "#3d6fff"],
@@ -59,6 +66,7 @@ export function WeatherTrendChart({ data, lang = "zh" }) {
           title: false,
           labelFill: "#5e7398",
           labelFontSize: 10,
+          labelLineHeight: 14,
           grid: false,
         },
         y: {
@@ -74,6 +82,7 @@ export function WeatherTrendChart({ data, lang = "zh" }) {
           encode: { x: "day", y: "temperature", color: "period" },
           style: {
             lineWidth: 2.8,
+            opacity: 0.94,
           },
         },
         {
@@ -82,7 +91,7 @@ export function WeatherTrendChart({ data, lang = "zh" }) {
           style: {
             fill: "#ffffff",
             lineWidth: 1.8,
-            r: 4,
+            r: 4.2,
           },
         },
         {
@@ -91,7 +100,7 @@ export function WeatherTrendChart({ data, lang = "zh" }) {
           style: {
             fontSize: 10,
             fontWeight: 600,
-            dy: (datum) => (datum.period === periodLabels.morning ? -12 : 14),
+            dy: (datum) => (datum.period === periodLabels.morning ? -14 : 16),
           },
         },
       ],
@@ -103,7 +112,7 @@ export function WeatherTrendChart({ data, lang = "zh" }) {
                 (item) =>
                   `<div style="display:flex;justify-content:space-between;gap:18px;">
                     <span>${item.name}</span>
-                    <strong>${item.value}°C</strong>
+                    <strong>${formatTemperature(Number(item.value))}°C</strong>
                   </div>`
               )
               .join("");

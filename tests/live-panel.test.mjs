@@ -20,6 +20,9 @@ test("daily live panel fixture exposes seven-day weather and five source-driven 
   assert.ok(data.weather);
   assert.equal(typeof data.weather.temperature, "number");
   assert.equal(typeof data.weather.humidity, "number");
+  assert.ok(data.weather.typhoonEta);
+  assert.equal(typeof data.weather.typhoonEta.zh, "string");
+  assert.equal(typeof data.weather.typhoonEta.en, "string");
   assert.ok(Array.isArray(data.weather.daily));
   assert.equal(data.weather.daily.length, 7);
   assert.equal(typeof data.weather.daily[0].morningTemperature, "number");

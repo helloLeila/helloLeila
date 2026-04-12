@@ -32,17 +32,17 @@ test("news block is fixed to five items from the requested sources", () => {
   assert.match(hrefs, /oschina\.net/);
 });
 
-// 验证底部工作入口里包含 G2 和 L7 两个官方链接。
-test("work links include both G2 and L7 official entries", () => {
+// 验证底部工作入口不再暴露原型参考用的 G2 / L7 示例链接。
+test("work links do not expose prototype reference links for G2 and L7", () => {
   const hrefs = siteContent.workLinks.map((item) => item.href);
-  assert.ok(hrefs.includes("https://g2.antv.antgroup.com/examples"));
-  assert.ok(hrefs.includes("https://l7.antv.antgroup.com/examples/gallery/animate/#grid"));
+  assert.ok(!hrefs.includes("https://g2.antv.antgroup.com/examples"));
+  assert.ok(!hrefs.includes("https://l7.antv.antgroup.com/examples/gallery/animate/#grid"));
 });
 
 // 验证深圳模块标题保持个人站语气。
 test("coverage section uses personal base wording", () => {
   assert.equal(siteContent.coverage.titleEn, "Current base: Shenzhen");
-  assert.equal(siteContent.coverage.titleZh, "当前主要工作地：深圳");
+  assert.equal(siteContent.coverage.titleZh, "当前主要阵地：深圳");
 });
 
 // 验证词云只保留真实技术栈关键词，并避免人造概念词。

@@ -3,15 +3,18 @@ import { siteContent } from "../data/siteContent.js";
 import { textByLang } from "../utils/i18n.js";
 import { MilestoneTrend } from "./MilestoneTrend.jsx";
 
-const heights = [52, 70, 90, 112, 136, 160];
-const scores = [18, 32, 48, 66, 84, 98];
+// 台阶高度：指数式递增，视觉节奏感更强
+const heights = [92, 104, 130, 160, 194, 232];
 const stepTone = ["origin", "ramp", "ramp", "system", "system", "current"];
 
 // 按语言渲染年度里程碑的摘要信息、趋势图和时间台阶。
 export function AnnualMilestones({ lang }) {
+  // 折线得分直接映射台阶高度，确保折点锚在台阶顶部
+  const trendMax = heights[heights.length - 1];
   const trendData = siteContent.roadmap.steps.map((step, index) => ({
+    index,
     year: step.year,
-    score: scores[index],
+    score: heights[index],
   }));
 
   return (
@@ -33,19 +36,21 @@ export function AnnualMilestones({ lang }) {
 
       <div className="roadmap-surface">
         <div className="roadmap-grid-lines" aria-hidden="true" />
-        <MilestoneTrend data={trendData} />
-        <div className="roadmap-track">
-          {siteContent.roadmap.steps.map((step, index) => (
-            <div
-              className={`road-step is-${stepTone[index]}`}
-              key={step.year}
-              style={{ "--step-height": `${heights[index]}px` }}
-            >
-              <em>0{index + 1}</em>
-              <strong>{step.year}</strong>
-              <span>{textByLang(lang, step.en, step.zh)}</span>
-            </div>
-          ))}
+        <div className="roadmap-stage">
+          <MilestoneTrend data={trendData} maxScore={trendMax} />
+          <div className="roadmap-track">
+            {siteContent.roadmap.steps.map((step, index) => (
+              <div
+                className={`road-step is-${stepTone[index]}`}
+                key={step.year}
+                style={{ "--step-height": `${heights[index]}px` }}
+              >
+                <em>0{index + 1}</em>
+                <strong>{step.year}</strong>
+                <span>{textByLang(lang, step.en, step.zh)}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

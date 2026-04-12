@@ -4,18 +4,22 @@
     "city": "Shenzhen",
     "temperature": 27,
     "humidity": 70,
+    "typhoonEta": {
+      "en": "No active alert",
+      "zh": "暂无台风预警"
+    },
     "condition": {
       "en": "Partly cloudy",
       "zh": "多云"
     },
     "daily": [
-      { "date": "2026-04-12", "labelEn": "Sun", "labelZh": "周日", "morningTemperature": 23, "eveningTemperature": 28, "swing": 5 },
-      { "date": "2026-04-13", "labelEn": "Mon", "labelZh": "周一", "morningTemperature": 24, "eveningTemperature": 29, "swing": 5 },
-      { "date": "2026-04-14", "labelEn": "Tue", "labelZh": "周二", "morningTemperature": 24, "eveningTemperature": 30, "swing": 6 },
-      { "date": "2026-04-15", "labelEn": "Wed", "labelZh": "周三", "morningTemperature": 25, "eveningTemperature": 31, "swing": 6 },
-      { "date": "2026-04-16", "labelEn": "Thu", "labelZh": "周四", "morningTemperature": 25, "eveningTemperature": 30, "swing": 5 },
-      { "date": "2026-04-17", "labelEn": "Fri", "labelZh": "周五", "morningTemperature": 24, "eveningTemperature": 29, "swing": 5 },
-      { "date": "2026-04-18", "labelEn": "Sat", "labelZh": "周六", "morningTemperature": 23, "eveningTemperature": 28, "swing": 5 }
+      { "date": "2026-04-12", "labelEn": "Sun", "labelZh": "周日", "morningTemperature": 22.8, "eveningTemperature": 27.6, "swing": 4.8 },
+      { "date": "2026-04-13", "labelEn": "Mon", "labelZh": "周一", "morningTemperature": 23.4, "eveningTemperature": 28.7, "swing": 5.3 },
+      { "date": "2026-04-14", "labelEn": "Tue", "labelZh": "周二", "morningTemperature": 23.9, "eveningTemperature": 29.8, "swing": 5.9 },
+      { "date": "2026-04-15", "labelEn": "Wed", "labelZh": "周三", "morningTemperature": 24.6, "eveningTemperature": 30.4, "swing": 5.8 },
+      { "date": "2026-04-16", "labelEn": "Thu", "labelZh": "周四", "morningTemperature": 24.2, "eveningTemperature": 29.6, "swing": 5.4 },
+      { "date": "2026-04-17", "labelEn": "Fri", "labelZh": "周五", "morningTemperature": 23.7, "eveningTemperature": 28.9, "swing": 5.2 },
+      { "date": "2026-04-18", "labelEn": "Sat", "labelZh": "周六", "morningTemperature": 22.9, "eveningTemperature": 27.8, "swing": 4.9 }
     ]
   },
   "news": [

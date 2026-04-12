@@ -2,8 +2,8 @@
 import { useEffect, useRef } from "react";
 import { Chart } from "@antv/g2";
 
-// 根据年度得分数据渲染台阶上方的趋势线。
-export function MilestoneTrend({ data }) {
+// 根据年度得分数据渲染和台阶贴合的趋势线。
+export function MilestoneTrend({ data, maxScore = 160 }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -14,45 +14,41 @@ export function MilestoneTrend({ data }) {
     const chart = new Chart({
       container: containerRef.current,
       autoFit: true,
-      height: 164,
+      height: maxScore,
     });
 
     chart.options({
       type: "view",
       data,
-      padding: [12, 10, 12, 10],
+      // padding: [top, right, bottom, left]
+      // bottom=0 让 y=0 贴底，与台阶底部对齐
+      padding: [0, 0, 0, 0],
       scale: {
-        x: { range: [0, 1] },
-        y: { domain: [0, 100], nice: true },
+        x: { domain: [0, data.length - 1], range: [0.083, 0.917] },
+        y: { domain: [0, maxScore], nice: false },
       },
       axis: false,
       legend: false,
       children: [
         {
-          type: "area",
-          encode: { x: "year", y: "score" },
-          style: {
-            fill: "#8fb0ff",
-            fillOpacity: 0.12,
-          },
-        },
-        {
           type: "line",
-          encode: { x: "year", y: "score" },
+          encode: { x: "index", y: "score" },
           style: {
-            stroke: "#3d6fff",
-            lineWidth: 2.6,
-            opacity: 0.84,
+            stroke: "#5d83ff",
+            lineWidth: 2,
+            opacity: 0.85,
+            lineCap: "round",
+            lineJoin: "round",
           },
         },
         {
           type: "point",
-          encode: { x: "year", y: "score" },
+          encode: { x: "index", y: "score" },
           style: {
             fill: "#ffffff",
-            stroke: "#3d6fff",
+            stroke: "#5d83ff",
             lineWidth: 2,
-            r: 4.8,
+            r: 4,
           },
         },
       ],
@@ -64,7 +60,7 @@ export function MilestoneTrend({ data }) {
     return () => {
       chart.destroy();
     };
-  }, [data]);
+  }, [data, maxScore]);
 
   return <div className="milestone-trend" ref={containerRef} aria-hidden="true" />;
 }

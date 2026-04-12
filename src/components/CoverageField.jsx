@@ -78,6 +78,31 @@ const bayAreaBounds = {
   maxLat: 23.65,
 };
 
+// 给湾区舞台补一圈立体围墙，避免地图只剩下平面网格感。
+function createBayAreaWallData(bounds) {
+  return {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        properties: {
+          name: "大湾区边界",
+        },
+        geometry: {
+          type: "LineString",
+          coordinates: [
+            [bounds.minLng, bounds.minLat],
+            [bounds.maxLng, bounds.minLat],
+            [bounds.maxLng, bounds.maxLat],
+            [bounds.minLng, bounds.maxLat],
+            [bounds.minLng, bounds.minLat],
+          ],
+        },
+      },
+    ],
+  };
+}
+
 // 统一把模型材质转为线框风格，接近用户提供示例的视觉感受。
 function setMaterial(object) {
   if (object.children && object.children.length > 0) {
@@ -182,6 +207,15 @@ function formatUpdatedAt(updatedAt, lang) {
   }).format(date);
 }
 
+// 天气卡片统一格式化温度，避免整数与小数位展示不一致。
+function formatTemperature(value) {
+  if (typeof value !== "number") {
+    return value ?? "--";
+  }
+
+  return Number.isInteger(value) ? `${value}` : value.toFixed(1);
+}
+
 // 当前工作地卡片组件，把用户给定的 L7 示例封装到 React 生命周期里。
 export function CoverageField({ lang, weather }) {
   const mapRef = useRef(null);
@@ -193,8 +227,23 @@ export function CoverageField({ lang, weather }) {
   const weatherKicker = textByLang(lang, "Daily forecast", "每日天气");
   const forecast = weather?.daily || [];
   const updatedAt = formatUpdatedAt(weather?.updatedAt, lang);
+  const todayMorning = forecast[0]?.morningTemperature ?? "--";
+  const todayEvening = forecast[0]?.eveningTemperature ?? "--";
   const todaySwing = forecast[0]?.swing ?? "--";
   const clocks = getClockEntries(lang, clockNow);
+  const summaryNotes = siteContent.coverage.mapNotes.map((item) =>
+    item.key === "typhoonEta"
+      ? {
+          ...item,
+          valueEn: weather?.typhoonEta?.en || item.valueEn,
+          valueZh: weather?.typhoonEta?.zh || item.valueZh,
+        }
+      : item
+  );
+  const statusText =
+    sceneStatus === "error"
+      ? textByLang(lang, "Scene unavailable", "场景加载失败")
+      : textByLang(lang, "Current base", "当前主要阵地");
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -220,7 +269,7 @@ export function CoverageField({ lang, weather }) {
       setSceneError("");
 
       const [
-        { LineLayer, PointLayer, Scene },
+        { LineLayer, PointLayer, Scene,Zoom },
         { GaodeMap },
         { ThreeLayer, ThreeRender },
         THREE,
@@ -241,7 +290,8 @@ export function CoverageField({ lang, weather }) {
         "https://gw.alipayobjects.com/zos/bmw-prod/96327aa6-7fc5-4b5b-b1d8-65771e05afd8.svg";
       const modelUrl =
         "https://gw.alipayobjects.com/os/bmw-prod/3ca0a546-92d8-4ba0-a89c-017c218d5bea.gltf";
-      const gridGeoData = createGridGeoData(bayAreaBounds);
+      const gridGeoData = createGridGeoData(bayAreaBounds, 32, 22);
+      const wallData = createBayAreaWallData(bayAreaBounds);
 
       const threeJSLayer = new ThreeLayer({
         enableMultiPassRenderer: false,
@@ -291,18 +341,6 @@ export function CoverageField({ lang, weather }) {
         zIndex: 1,
       });
 
-      const airPrtsLayer = new PointLayer()
-        .source(airPorts, {
-          parser: {
-            type: "json",
-            x: "lng",
-            y: "lat",
-          },
-        })
-        .shape("name", "text")
-        .color("rgb(22,119,255)")
-        .size(10);
-
       const airLineLayer = new LineLayer({ blend: "normal" })
         .source(airLineData, {
           parser: {
@@ -315,10 +353,10 @@ export function CoverageField({ lang, weather }) {
         })
         .shape("arc3d")
         .size(1)
-        .color("#f00")
+        .color("#9aacd8")
         .style({
-          sourceColor: "rgb(22,119,255)",
-          targetColor: "rgba(242,246,250,0.1)",
+          sourceColor: "rgba(154,172,216,0.58)",
+          targetColor: "rgba(224,233,250,0.08)",
         });
 
       const airPlaneLayer = new LineLayer({ blend: "normal", zIndex: 1 })
@@ -333,8 +371,8 @@ export function CoverageField({ lang, weather }) {
         })
         .shape("arc3d")
         .texture("plane")
-        .size(30)
-        .color("#f00")
+        .size(24)
+        .color("rgba(255,255,255,0.9)")
         .animate({
           duration: 0.2,
           interval: 0.2,
@@ -355,11 +393,12 @@ export function CoverageField({ lang, weather }) {
           },
         })
         .shape("circle")
-        .color("rgb(22, 119, 255)")
+        .color("#c9d9ff")
         .size("size", (value) => value)
         .animate(true)
         .style({
           unit: "meter",
+          opacity: 0.12,
         });
 
       const barLayer = new PointLayer({ zIndex: 2, depth: false })
@@ -371,7 +410,7 @@ export function CoverageField({ lang, weather }) {
           },
         })
         .shape("cylinder")
-        .color("rgb(22, 119, 255)")
+        .color("size", ["#f4f7ff", "#c8d9ff", "#8ba7eb"])
         .size("size", (value) => [5, 5, value / 350])
         .animate(true)
         .style({
@@ -380,6 +419,7 @@ export function CoverageField({ lang, weather }) {
             dir: "up",
           },
           lightEnable: false,
+          opacity: 0.58,
         });
 
       const cityLabelLayer = new PointLayer({ zIndex: 3 })
@@ -391,8 +431,12 @@ export function CoverageField({ lang, weather }) {
           },
         })
         .shape("name", "text")
-        .color("rgb(22,119,255)")
-        .size(14);
+        .color("#e4ebfb")
+        .size(14)
+        .style({
+          stroke: "#8fa5d6",
+          strokeWidth: 0.6,
+        });
 
       const districtLabelLayer = new PointLayer({ zIndex: 4 })
         .source(shenzhenDistrictLabels, {
@@ -403,21 +447,33 @@ export function CoverageField({ lang, weather }) {
           },
         })
         .shape("name", "text")
-        .color("rgb(11,86,214)")
-        .size(16)
+        .color("#d8e3fb")
+        .size(15)
         .style({
           textAllowOverlap: true,
           padding: [0, 0],
+          stroke: "#869ccc",
+          strokeWidth: 0.6,
         });
 
       const gridLayer = new LineLayer({})
         .source(gridGeoData)
         .size(1)
         .shape("simple")
-        .color("rgb(22, 119, 255)")
+        .color("#c7d3eb")
         .style({
-          vertexHeightScale: 52000,
-          opacity: 0.36,
+          vertexHeightScale: 64000,
+          opacity: 0.24,
+        });
+
+      const wallLayer = new LineLayer({ zIndex: 1 })
+        .source(wallData)
+        .size(4600)
+        .shape("wall")
+        .style({
+          opacity: 0.08,
+          sourceColor: "#d7e2f8",
+          targetColor: "rgba(255,255,255,0.01)",
         });
 
       if (!isActive || !mapRef.current) {
@@ -426,34 +482,46 @@ export function CoverageField({ lang, weather }) {
 
       scene = new Scene({
         id: mapRef.current,
+        logoVisible: false,
         map: new GaodeMap({
           center: [114.0579, 22.5431],
-          pitch: 62,
-          zoom: 8.4,
+          pitch: 68,
+          zoom: 8.1,
           rotation: 0,
           style: "blank",
         }),
       });
 
-      scene.setBgColor("#000");
+      scene.setBgColor("#ffffff");
       scene.registerRenderService(ThreeRender);
 
       scene.on("loaded", () => {
         if (!isActive) {
           return;
         }
-
+const zoom = new Zoom({
+    zoomInTitle: '放大',
+    zoomOutTitle: '缩小',
+  });
+  const geoLocate = new GeoLocate({
+    transform: (position) => {
+      // 将获取到基于 WGS84 地理坐标系 的坐标转成 GCJ02 坐标系
+      return gcoord.transform(position, gcoord.WGS84, gcoord.GCJ02);
+    },
+  });
+  scene.addControl(zoom);
+  scene.addControl(geoLocate);
         try {
           scene.addImage("plane", planeUrl);
-          scene.addLayer(waveLayer);
-          scene.addLayer(barLayer);
-          scene.addLayer(threeJSLayer);
-          scene.addLayer(airPrtsLayer);
+          scene.addLayer(gridLayer);
+          scene.addLayer(wallLayer);
           scene.addLayer(airLineLayer);
           scene.addLayer(airPlaneLayer);
+          scene.addLayer(waveLayer);
+          scene.addLayer(barLayer);
           scene.addLayer(cityLabelLayer);
           scene.addLayer(districtLabelLayer);
-          scene.addLayer(gridLayer);
+          scene.addLayer(threeJSLayer);
 
           setSceneStatus("ready");
         } catch (error) {
@@ -506,15 +574,19 @@ export function CoverageField({ lang, weather }) {
 
               <div className="metric-row">
                 <div className="metric-pill coverage-metric-emphasis">
-                  <strong>{weather?.temperature ?? "--"}°C</strong>
-                  <span>{lang === "zh" ? "当前温度" : "Current temperature"}</span>
+                  <strong>{formatTemperature(todayMorning)}°C</strong>
+                  <span>{lang === "zh" ? "早间温度" : "Morning temperature"}</span>
+                </div>
+                <div className="metric-pill coverage-metric-emphasis">
+                  <strong>{formatTemperature(todayEvening)}°C</strong>
+                  <span>{lang === "zh" ? "晚间温度" : "Evening temperature"}</span>
                 </div>
                 <div className="metric-pill">
                   <strong>{weather?.humidity ?? "--"}%</strong>
                   <span>{lang === "zh" ? "当前湿度" : "Current humidity"}</span>
                 </div>
                 <div className="metric-pill">
-                  <strong>{todaySwing}°C</strong>
+                  <strong>{formatTemperature(todaySwing)}°C</strong>
                   <span>{lang === "zh" ? "今日早晚温差" : "Today swing"}</span>
                 </div>
               </div>
@@ -551,11 +623,11 @@ export function CoverageField({ lang, weather }) {
           <div className="coverage-chart" ref={mapRef} />
 
           <div className="coverage-status">
-            {textByLang(lang, "Current base", "当前位于")}
+            {statusText}
           </div>
 
           <div className="coverage-summary-grid">
-            {siteContent.coverage.mapNotes.map((item) => (
+            {summaryNotes.map((item) => (
               <article className="coverage-note" key={item.labelEn}>
                 <span>{textByLang(lang, item.labelEn, item.labelZh)}</span>
                 <strong>{textByLang(lang, item.valueEn, item.valueZh)}</strong>

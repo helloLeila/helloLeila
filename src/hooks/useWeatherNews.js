@@ -58,6 +58,7 @@ export function useWeatherNews(lang) {
           temperature: data.weather?.temperature ?? "--",
           humidity: data.weather?.humidity ?? "--",
           condition: data.weather?.condition?.[lang] || (lang === "zh" ? "实时" : "Live"),
+          typhoonEta: data.weather?.typhoonEta || { en: "No active alert", zh: "暂无台风预警" },
           daily: data.weather?.daily || buildFallbackDailyForecast(),
           updatedAt: data.updatedAt || "",
         });
@@ -69,6 +70,7 @@ export function useWeatherNews(lang) {
             temperature: 26,
             humidity: 71,
             condition: lang === "zh" ? "网络回退" : "Fallback",
+            typhoonEta: { en: "No active alert", zh: "暂无台风预警" },
             daily: buildFallbackDailyForecast(),
             updatedAt: new Date().toISOString(),
           });
