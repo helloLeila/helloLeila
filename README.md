@@ -14,7 +14,7 @@ Optional edits before publishing:
   <br />
   Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
   <br />
-  前后端工程系统、智能体交互流程与基础设施。
+  专注在前后端工程系统、智能体交互流程与基础设施。
 </p>
 
 <p align="center">
