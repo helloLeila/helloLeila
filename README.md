@@ -14,7 +14,7 @@ Optional edits before publishing:
   <br />
   Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
   <br />
-  专注在前后端工程系统、智能体交互流程与基础设施。
+  主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前关注并实践 AI Agent 及 RAG 相关技术，聚焦知识检索与智能应用体系构建，推进工程化落地与验证
 </p>
 
 <p align="center">
