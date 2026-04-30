@@ -10,7 +10,7 @@ Optional edits before publishing:
 </p>
 
 
-## who am I ？
+## Who am I ？
 <p align="left">
   <br />
   Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
