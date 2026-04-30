@@ -10,14 +10,17 @@ Optional edits before publishing:
 </p>
 
 
-<p align="center">
+## introduce
+<p align="left">
   <br />
   Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
   <br />
-  主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前正在关注并实践 AI Agent 及 RAG 相关技术，
+  一名coding 爱好者从业者，主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前正在关注并实践 AI Agent 及 RAG 相关技术，
   <br />
-  聚焦知识检索与智能应用体系构建，推进工程化落地与验证
 </p>
+
+> ***聚焦知识检索与智能应用体系构建，推进工程化落地与验证...***
+
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake-dark.svg" />
@@ -25,7 +28,7 @@ Optional edits before publishing:
   <img alt="github contribution snake" src="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake.svg" />
 </picture>
 
-
+-----------------
 ## Skill Map / 技能地图
 
 <a id="skill-map"></a>
