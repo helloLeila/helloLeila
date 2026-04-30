@@ -44,11 +44,11 @@
     y="106"
     text-anchor="middle"
     fill="#10213F"
-    font-size="60"
+    font-size="58"
     font-family="Space Grotesk, Noto Sans SC, Arial"
-    font-weight="1000"
+    font-weight="900"
     lengthAdjust="spacingAndGlyphs"
-    textLength="1550"
+    textLength="1350"
   >
     Hi there! Happy coding &amp; enjoy your day 😊
   </text>
