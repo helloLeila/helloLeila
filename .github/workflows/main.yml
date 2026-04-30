@@ -42,5 +42,6 @@ jobs:
       - name: 部署
         uses: actions/deploy-pages@v4
 
-      - name: generate-snake-game-from-github-contribution-grid
-        uses: Platane/snk@v3.5.0
+     
+
+      
