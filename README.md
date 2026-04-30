@@ -9,6 +9,14 @@ Optional edits before publishing:
   <img src="./assets/orbit-banner.svg" alt="Leila profile banner" width="100%" />
 </p>
 
+## Contributions
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake.svg" />
+  <img alt="github contribution snake" src="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake.svg" />
+</picture>
+
 <p align="center">
   <strong>Frontend systems · Agent-ready flows · Stable engineering delivery</strong>
   <br />
