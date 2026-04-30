@@ -1,6 +1,6 @@
-<svg width="1920" height="180" viewBox="0 0 1920 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1920" height="220" viewBox="0 0 1920 220" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="96" y1="48" x2="1724" y2="250" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="96" y1="48" x2="1724" y2="220" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFF7EC"/>
       <stop offset="0.5" stop-color="#F2FBFF"/>
       <stop offset="1" stop-color="#FFF0E0"/>
@@ -15,7 +15,7 @@
     </radialGradient>
   </defs>
 
-  <rect width="1920" height="200" rx="34" fill="url(#bg)"/>
+  <rect width="1920" height="220" rx="34" fill="url(#bg)"/>
   <rect x="0.5" y="0.5" width="1919" height="250" rx="33.5" stroke="#D8E5F7"/>
 
   <g opacity="0.14">
@@ -31,8 +31,8 @@
     <path d="M1680 0V360" stroke="#3E6FFF"/>
   </g>
 
-  <ellipse cx="360" cy="104" rx="200" ry="120" fill="url(#glowA)"/>
-  <ellipse cx="1548" cy="268" rx="200" ry="120" fill="url(#glowB)"/>
+  <ellipse cx="360" cy="104" rx="220" ry="120" fill="url(#glowA)"/>
+  <ellipse cx="1548" cy="268" rx="220" ry="120" fill="url(#glowB)"/>
 
   <circle cx="184" cy="94" r="3" fill="#12BFA8"/>
   <circle cx="1682" cy="94" r="3" fill="#3E6FFF"/>
@@ -41,7 +41,7 @@
 
   <text
     x="960"
-    y="106"
+    y="125"
     text-anchor="middle"
     fill="#10213F"
     font-size="58"
