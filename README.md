@@ -10,28 +10,21 @@ Optional edits before publishing:
 </p>
 
 
+<p align="center">
+  <br />
+  Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
+  <br />
+  主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前正在关注并实践 AI Agent 及 RAG 相关技术，
+  <br />
+  聚焦知识检索与智能应用体系构建，推进工程化落地与验证
+</p>
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake.svg" />
   <img alt="github contribution snake" src="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake.svg" />
 </picture>
 
-<p align="center">
-  <strong>Frontend systems · Agent-ready flows · Stable engineering delivery</strong>
-  <br />
-  Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
-  <br />
-  主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前关注并实践 AI Agent 及 RAG 相关技术，聚焦知识检索与智能应用体系构建，推进工程化落地与验证
-</p>
-
-<p align="center">
-  <a href="https://react.dev/"><kbd>⚛️ React 18</kbd></a>
-  <a href="https://www.typescriptlang.org/"><kbd>🔷 TypeScript</kbd></a>
-  <a href="https://echarts.apache.org/"><kbd>📊 ECharts</kbd></a>
-  <a href="https://www.java.com/"><kbd>☕ Java</kbd></a>
-  <a href="https://www.docker.com/"><kbd>🐳 Docker</kbd></a>
-  <a href="https://qiankun.umijs.org/"><kbd>🧬 qiankun</kbd></a>
-</p>
 
 ## Skill Map / 技能地图
 
