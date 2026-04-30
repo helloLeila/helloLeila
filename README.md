@@ -9,7 +9,6 @@ Optional edits before publishing:
   <img src="./assets/orbit-banner.svg" alt="Leila profile banner" width="100%" />
 </p>
 
-## Contributions
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/helloLeila/helloLeila/output/github-snake-dark.svg" />
