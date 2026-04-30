@@ -10,12 +10,12 @@ Optional edits before publishing:
 </p>
 
 
-## introduce
+## who am I？
 <p align="left">
   <br />
   Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
   <br />
-  一名coding 爱好者从业者，主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前正在关注并实践 AI Agent 及 RAG 相关技术，
+  一名coding 爱好者从业者，主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前正在关注并实践 AI Agent 及 RAG 相关技术
   <br />
 </p>
 
