@@ -15,7 +15,7 @@
     </radialGradient>
   </defs>
 
-  <rect width="1920" height="360" rx="34" fill="url(#bg)"/>
+  <rect width="1920" height="250" rx="34" fill="url(#bg)"/>
   <rect x="0.5" y="0.5" width="1919" height="359" rx="33.5" stroke="#D8E5F7"/>
 
   <g opacity="0.14">
