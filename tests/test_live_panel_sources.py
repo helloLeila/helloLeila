@@ -78,6 +78,21 @@ class LivePanelSourceTests(unittest.TestCase):
 
         self.assertEqual(self.module.normalize_codex_daily_news(payload, limit=5), [])
 
+    def test_codex_daily_json_rejects_local_or_private_http_urls(self):
+        blocked_urls = [
+            "http://127.0.0.1/story",
+            "http://localhost/story",
+            "http://192.168.1.20/story",
+            "http:///missing-host",
+        ]
+
+        for url in blocked_urls:
+            with self.subTest(url=url):
+                payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+                payload["news"][0]["url"] = url
+
+                self.assertEqual(self.module.normalize_codex_daily_news(payload, limit=5), [])
+
 
 if __name__ == "__main__":
     unittest.main()

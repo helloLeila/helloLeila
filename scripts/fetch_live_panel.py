@@ -12,9 +12,10 @@ import os
 import re
 from datetime import datetime
 from html import unescape
+from ipaddress import ip_address
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 from zoneinfo import ZoneInfo
@@ -212,7 +213,32 @@ def truncate_text(value: object, max_length: int) -> str:
 
 def is_public_http_url(value: object) -> bool:
     text = str(value or "").strip()
-    return text.startswith("https://") or text.startswith("http://")
+    try:
+        parsed = urlparse(text)
+        hostname = parsed.hostname
+    except ValueError:
+        return False
+
+    if parsed.scheme not in {"http", "https"} or not hostname:
+        return False
+
+    hostname = hostname.rstrip(".").lower()
+    if hostname == "localhost" or hostname.endswith(".localhost"):
+        return False
+
+    try:
+        address = ip_address(hostname)
+    except ValueError:
+        return True
+
+    return not (
+        address.is_private
+        or address.is_loopback
+        or address.is_link_local
+        or address.is_multicast
+        or address.is_reserved
+        or address.is_unspecified
+    )
 
 
 def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
