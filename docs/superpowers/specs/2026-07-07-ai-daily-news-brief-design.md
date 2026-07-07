@@ -55,9 +55,9 @@
 
 最终决策：`ai-daily/latest.json` 是个人站新闻主链路；如果 Codex 自动化没有输出、输出少于五条或结构校验失败，`scripts/fetch_live_panel.py` 再运行当前公开来源抓取作为兜底。
 
-新闻条目必须偏中文科技新闻，`url` 必须指向可公开访问的原文链接，不能使用占位链接、私有地址或不可核验的跳转地址。
+新闻条目必须偏中文科技新闻，`url` 必须指向可公开访问的原文链接，不能使用占位链接、私有地址或不可核验的跳转地址。这是 Codex 自动化的上游内容契约；站点脚本只做语法层面的 public HTTP(S) URL 校验，不逐条抓取并证明每个重定向最终目标。
 
-Codex 自动化在生成 Markdown 日报的同时，额外生成严格结构化的 JSON sidecar。飞书和 Server 酱继续使用 Markdown；个人网站从这个 JSON 中抽取前五条，生成 `public/live-panel.json`。如果 sidecar 不存在、少于五条或校验失败，个人站再回退到本仓库的公开来源抓取脚本。
+Codex 自动化在生成 Markdown 日报的同时，额外生成严格结构化的 JSON sidecar。飞书和 Server 酱继续使用 Markdown；个人网站从这个 JSON 中抽取前五条，生成正好五条新闻的 `public/live-panel.json`。如果 sidecar 不存在、少于五条有效新闻或校验失败，个人站再回退到本仓库的公开来源抓取脚本。
 
 不建议长期只从 Markdown 反向解析网站数据。Markdown 适合人读和通知渲染，但对前端来说过于脆弱。可以短期解析 `## 2. 热点新闻` 作为过渡，长期应让自动化直接输出 JSON。
 
@@ -111,9 +111,10 @@ Codex sidecar JSON 或兜底链路输出必须经过脚本校验后才能写入 
 
 校验规则：
 
-- `news` 必须正好 5 条。
+- Codex sidecar JSON 必须至少包含 5 条有效新闻；生成的 `public/live-panel.json` 必须正好包含 5 条新闻。
 - 每条必须包含 `title`、`url`、`source`、`summaryZh`、`summaryEn`、`whyItMattersZh`、`tags`。
-- `url` 必须是可公开访问的 HTTP 链接，防止占位链接、私有地址或不可核验的跳转地址进入网站。
+- `url` 必须通过语法层面的 public HTTP(S) URL 校验；脚本拒绝本地、私有、格式错误或欺骗性 host 形式，但不抓取并验证每个重定向最终目标。
+- 中文科技新闻和原文链接要求由 Codex 自动化 prompt 与内容生成流程保证，站点校验只负责拦截明显不适合公开页面展示的 URL 形态。
 - `title` 以候选池原始标题为准，防止 AI 改写标题造成事实漂移。
 - 摘要和推荐理由需要有最大长度限制，避免破坏前端布局。
 - Codex JSON 校验失败时运行公开来源抓取，并标记为 `fallback`。
@@ -137,13 +138,13 @@ Codex sidecar JSON 或兜底链路输出必须经过脚本校验后才能写入 
 ```json
 {
   "updatedAt": "2026-07-07T07:00:00+08:00",
-  "aiStatus": "ok",
+  "aiStatus": "codex",
   "weather": {},
   "news": [
     {
       "title": "原始新闻标题",
-      "url": "https://example.com/story",
-      "source": "36kr",
+      "url": "https://www.oschina.net/news/471539",
+      "source": "OSChina",
       "summaryZh": "一句中文摘要。",
       "summaryEn": "One-sentence English summary.",
       "whyItMattersZh": "说明它为什么值得个人站访客关注。",
@@ -155,9 +156,8 @@ Codex sidecar JSON 或兜底链路输出必须经过脚本校验后才能写入 
 
 `aiStatus` 可取：
 
-- `ok`：Codex sidecar JSON 被接受。
+- `codex`：Codex sidecar JSON 被接受。
 - `fallback`：Codex JSON 不可用，使用当前公开来源抓取。
-- `previous`：Codex JSON 和公开来源抓取都失败，沿用上一次可用数据。
 
 ## 工作流设计
 
@@ -167,8 +167,8 @@ Codex sidecar JSON 或兜底链路输出必须经过脚本校验后才能写入 
 2. 安装 Node 依赖。
 3. 运行 `npm run refresh:live-panel`。
 4. 脚本优先读取 `ai-daily/latest.json` 或 `AI_DAILY_JSON_URL`。
-5. 如果 Codex JSON 缺失、少于五条或校验失败，脚本再运行当前公开来源抓取。
-6. 生成并校验 `public/live-panel.json`。
+5. 如果 Codex JSON 缺失、少于五条有效新闻或校验失败，脚本再运行当前公开来源抓取。
+6. 生成并校验正好五条新闻的 `public/live-panel.json`。
 7. 运行 `npm run build`。
 8. 部署到 GitHub Pages。
 
@@ -188,8 +188,9 @@ Codex 自动化作为上游时，工作流调整为：
 
 失败场景按优先级处理：
 
-- Codex JSON 不存在、少于五条或结构校验失败：运行当前公开来源抓取。
-- Codex JSON 含占位链接、私有地址或不可核验跳转：拒绝该输出，少于五条则进入 `fallback`。
+- Codex JSON 不存在、少于五条有效新闻或结构校验失败：运行当前公开来源抓取。
+- Codex JSON 含本地、私有、格式错误或欺骗性 host 形式：拒绝该输出，少于五条有效新闻则进入 `fallback`。
+- Codex JSON 含占位链接、聚合页或非原文链接：这是上游自动化内容契约问题，应在 Codex prompt 和日报生成流程中修正。
 - 某个新闻源失败：跳过该来源，继续使用其他来源。
 - 所有新闻源失败：沿用上一次 `live-panel.json` 中的新闻。
 - 写文件失败：让 workflow 失败，避免发布不完整构建。
@@ -210,8 +211,8 @@ Codex 自动化作为上游时，工作流调整为：
 需要新增或调整测试：
 
 - 抓取脚本可以在无 Codex JSON 时生成合法 `live-panel.json`。
-- Codex JSON 校验器会拒绝少于五条、占位链接、私有地址和不可核验跳转。
-- `news` 数组最终始终收敛到 5 条。
+- Codex JSON 校验器会拒绝少于五条、本地地址、私有地址、格式错误 URL 和欺骗性 host 形式；占位链接、聚合页或非原文链接由上游 Codex 自动化内容契约约束。
+- Codex sidecar JSON 至少提供 5 条有效新闻；`public/live-panel.json` 最终始终收敛到正好 5 条。
 - 新字段缺失时前端仍然回退到标题链接展示。
 - workflow 测试继续约束每日北京时间 07:00 触发。
 
@@ -231,7 +232,7 @@ Codex 自动化作为上游时，工作流调整为：
 ## 验收标准
 
 - 每日 workflow 可以在没有常驻后端的情况下刷新新闻。
-- `public/live-panel.json` 始终包含 5 条可展示新闻。
+- `public/live-panel.json` 始终包含正好 5 条可展示新闻。
 - Codex JSON 成功时，每条新闻都有摘要、推荐理由和标签。
 - Codex JSON 失败时，页面仍然展示公开来源抓取新闻。
 - 前端不泄露 API key。
