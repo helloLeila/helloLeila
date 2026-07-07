@@ -149,6 +149,7 @@ test("utilities panel renders enriched ai daily brief fields", () => {
 
   assert.match(utilitiesSource, /AI daily brief \/ AI 每日精选/);
   assert.match(utilitiesSource, /news-row-head/);
+  assert.match(utilitiesSource, /item\.source/);
   assert.match(utilitiesSource, /item\.summary/);
   assert.match(utilitiesSource, /item\.whyItMatters/);
   assert.match(utilitiesSource, /news-tags/);
