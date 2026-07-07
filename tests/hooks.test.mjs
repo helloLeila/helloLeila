@@ -29,3 +29,12 @@ test("useWeatherNews normalizes enriched news fields", () => {
   assert.match(source, /whyItMattersZh/);
   assert.match(source, /tags\.slice\(0,\s*4\)/);
 });
+
+test("useWeatherNews normalizes initial fallback news state", () => {
+  const source = fs.readFileSync(path.resolve(process.cwd(), "src/hooks/useWeatherNews.js"), "utf8");
+
+  assert.match(
+    source,
+    /const\s+\[news,\s*setNews\]\s*=\s*useState\(\s*\(\)\s*=>\s*siteContent\.newsFallback\.slice\(0,\s*5\)\.map\(\s*\(item\)\s*=>\s*normalizeNewsItem\(item,\s*lang\)\s*\)\s*,?\s*\)/,
+  );
+});

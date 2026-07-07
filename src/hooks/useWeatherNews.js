@@ -54,7 +54,9 @@ function normalizeNewsItem(item, lang) {
 // 根据语言返回天气与新闻数据，供实时面板模块直接消费。
 export function useWeatherNews(lang) {
   const [weather, setWeather] = useState(null);
-  const [news, setNews] = useState(siteContent.newsFallback);
+  const [news, setNews] = useState(() =>
+    siteContent.newsFallback.slice(0, 5).map((item) => normalizeNewsItem(item, lang)),
+  );
   const panelUrl = getPanelUrl();
 
   useEffect(() => {
