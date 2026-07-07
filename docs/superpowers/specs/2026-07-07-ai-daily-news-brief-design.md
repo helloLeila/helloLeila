@@ -11,7 +11,7 @@
 ## 目标
 
 - 每天北京时间 07:00 自动生成一组 AI 精选新闻。
-- 优先消费 Codex Daily sidecar JSON；当 sidecar 不可用时，从多个公开来源抓取候选内容，去重后生成可展示的 5 条。
+- 优先消费 Codex Daily sidecar JSON；当 sidecar 不可用时，从多个公开来源抓取候选内容，去重后生成最多 5 条可展示新闻。
 - 为每条新闻生成中文摘要、英文摘要、推荐理由和标签。
 - 保持前端仍然只读取 `live-panel.json`，不在浏览器端直接调用 AI API。
 - 在 Codex 输出缺失、结构校验失败或公开抓取失败时保留可展示的兜底数据。
@@ -45,7 +45,7 @@
 两者的差异是出口不同：
 
 - Codex 自动化日报面向本人或团队通知，产物是 Markdown，重点是完整简报、飞书卡片和手机提醒。
-- 个人网站实时面板面向公开访问者，产物是 `live-panel.json`，重点是稳定展示、五条精选和前端布局安全。
+- 个人网站实时面板面向公开访问者，产物是 `live-panel.json`，重点是稳定展示、Codex 主链路五条精选和前端布局安全。
 
 推荐不要让两边各自独立抓取和总结新闻。更好的边界是建立一个共同的 Daily Brief 数据产物：
 
@@ -57,7 +57,7 @@
 
 新闻条目必须偏中文科技新闻，`url` 必须指向可公开访问的原文链接，不能使用占位链接、私有地址或不可核验的跳转地址。这是 Codex 自动化的上游内容契约；站点脚本只做语法层面的 public HTTP(S) URL 校验，不逐条抓取并证明每个重定向最终目标。
 
-Codex 自动化在生成 Markdown 日报的同时，额外生成严格结构化的 JSON sidecar。飞书和 Server 酱继续使用 Markdown；个人网站从这个 JSON 中抽取前五条，生成正好五条新闻的 `public/live-panel.json`。如果 sidecar 不存在、少于五条有效新闻或校验失败，个人站再回退到本仓库的公开来源抓取脚本。
+Codex 自动化在生成 Markdown 日报的同时，额外生成严格结构化的 JSON sidecar。飞书和 Server 酱继续使用 Markdown；个人网站从这个 JSON 中抽取前五条有效新闻。Codex path 成功时会写入五条新闻到 `public/live-panel.json`；如果 sidecar 不存在、少于五条有效新闻或校验失败，个人站再回退到本仓库的公开来源抓取脚本，兜底结果最多展示五条。
 
 不建议长期只从 Markdown 反向解析网站数据。Markdown 适合人读和通知渲染，但对前端来说过于脆弱。可以短期解析 `## 2. 热点新闻` 作为过渡，长期应让自动化直接输出 JSON。
 
@@ -65,17 +65,14 @@ Codex 自动化在生成 Markdown 日报的同时，额外生成严格结构化�
 
 ### 1. 候选采集器
 
-作为兜底链路，继续由 `scripts/fetch_live_panel.py` 负责。它抓取 RSS、公开 API 或公开页面，输出一个候选池。
+作为兜底链路，继续由 `scripts/fetch_live_panel.py` 负责。它抓取 RSS、公开 API 或公开页面，输出最多五条可展示新闻；来源能提供更多元信息时，可以在候选池里保留。
 
-候选项至少包含：
+兜底展示项至少包含：
 
 - `title`
 - `url`
-- `source`
-- `description`
-- `publishedAt`
 
-其中 `description` 可以来自 RSS 摘要、页面元信息或空字符串。没有正文时，后续 AI 只能做标题级解读，不能伪装成全文摘要。
+来源、摘要或发布时间可以在新闻源可用时保留为额外元信息；没有正文时，后续 AI 只能做标题级解读，不能伪装成全文摘要。
 
 ### 2. 候选清洗器
 
@@ -107,15 +104,16 @@ AI 需要为每条内容生成：
 
 ### 4. JSON 校验器
 
-Codex sidecar JSON 或兜底链路输出必须经过脚本校验后才能写入 `live-panel.json`。
+Codex sidecar JSON 必须经过脚本校验后才能作为主链路写入 `live-panel.json`；兜底链路沿用现有公开来源抓取与最多五条展示规则。
 
 校验规则：
 
-- Codex sidecar JSON 必须至少包含 5 条有效新闻；生成的 `public/live-panel.json` 必须正好包含 5 条新闻。
-- 每条必须包含 `title`、`url`、`source`、`summaryZh`、`summaryEn`、`whyItMattersZh`、`tags`。
+- Codex sidecar JSON 必须至少包含 5 条有效新闻；Codex path 成功时，生成的 `public/live-panel.json` 包含前 5 条有效新闻。
+- 每条必须包含 `title`、`url`、`summaryZh`、`summaryEn`、`whyItMattersZh`。
+- `source` 可选，缺失时默认写为 `Codex Daily`；`tags` 可选，非数组时按空数组处理，并最多保留 4 个标签。
 - `url` 必须通过语法层面的 public HTTP(S) URL 校验；脚本拒绝本地、私有、格式错误或欺骗性 host 形式，但不抓取并验证每个重定向最终目标。
 - 中文科技新闻和原文链接要求由 Codex 自动化 prompt 与内容生成流程保证，站点校验只负责拦截明显不适合公开页面展示的 URL 形态。
-- `title` 以候选池原始标题为准，防止 AI 改写标题造成事实漂移。
+- `title` 通过清洗和长度限制后保留 sidecar 标题；标题是否严格来自原文由上游 Codex 自动化内容契约保证。
 - 摘要和推荐理由需要有最大长度限制，避免破坏前端布局。
 - Codex JSON 校验失败时运行公开来源抓取，并标记为 `fallback`。
 
@@ -166,9 +164,9 @@ Codex sidecar JSON 或兜底链路输出必须经过脚本校验后才能写入 
 1. Checkout 仓库。
 2. 安装 Node 依赖。
 3. 运行 `npm run refresh:live-panel`。
-4. 脚本优先读取 `ai-daily/latest.json` 或 `AI_DAILY_JSON_URL`。
+4. 脚本优先读取 `AI_DAILY_JSON_URL`、`AI_DAILY_JSON_PATH` 或默认的 `ai-daily/latest.json`。
 5. 如果 Codex JSON 缺失、少于五条有效新闻或校验失败，脚本再运行当前公开来源抓取。
-6. 生成并校验正好五条新闻的 `public/live-panel.json`。
+6. Codex path 成功时生成五条新闻的 `public/live-panel.json`；fallback path 生成最多五条可展示新闻。
 7. 运行 `npm run build`。
 8. 部署到 GitHub Pages。
 
@@ -212,7 +210,7 @@ Codex 自动化作为上游时，工作流调整为：
 
 - 抓取脚本可以在无 Codex JSON 时生成合法 `live-panel.json`。
 - Codex JSON 校验器会拒绝少于五条、本地地址、私有地址、格式错误 URL 和欺骗性 host 形式；占位链接、聚合页或非原文链接由上游 Codex 自动化内容契约约束。
-- Codex sidecar JSON 至少提供 5 条有效新闻；`public/live-panel.json` 最终始终收敛到正好 5 条。
+- Codex sidecar JSON 至少提供 5 条有效新闻；Codex path 成功时 `public/live-panel.json` 写入 5 条，fallback path 最多写入 5 条。
 - 新字段缺失时前端仍然回退到标题链接展示。
 - workflow 测试继续约束每日北京时间 07:00 触发。
 
@@ -220,7 +218,7 @@ Codex 自动化作为上游时，工作流调整为：
 
 第一步先增强数据管道，不重做 UI：
 
-1. 扩展抓取脚本，优先读取 `ai-daily/latest.json` 或 `AI_DAILY_JSON_URL`。
+1. 扩展抓取脚本，优先读取 `AI_DAILY_JSON_URL`、`AI_DAILY_JSON_PATH` 或默认的 `ai-daily/latest.json`。
 2. 增加 Codex sidecar JSON 校验。
 3. 保留当前公开来源抓取作为 fallback。
 4. 更新 `live-panel.json` fixture。
@@ -232,7 +230,7 @@ Codex 自动化作为上游时，工作流调整为：
 ## 验收标准
 
 - 每日 workflow 可以在没有常驻后端的情况下刷新新闻。
-- `public/live-panel.json` 始终包含正好 5 条可展示新闻。
+- Codex path 成功时，`public/live-panel.json` 包含 5 条可展示新闻；fallback path 保持页面可展示，并最多输出 5 条。
 - Codex JSON 成功时，每条新闻都有摘要、推荐理由和标签。
 - Codex JSON 失败时，页面仍然展示公开来源抓取新闻。
 - 前端不泄露 API key。

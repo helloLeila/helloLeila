@@ -69,13 +69,13 @@ Supported inputs, set one at a time:
 Local JSON file:
 
 ```bash
-AI_DAILY_JSON_PATH=ai-daily/latest.json
+AI_DAILY_JSON_PATH=ai-daily/latest.json npm run refresh:live-panel
 ```
 
 Remote JSON URL:
 
 ```bash
-AI_DAILY_JSON_URL=<public-json-url>
+AI_DAILY_JSON_URL=<public-json-url> npm run refresh:live-panel
 ```
 
 If both are set, `AI_DAILY_JSON_URL` takes precedence.
@@ -101,9 +101,11 @@ Expected JSON shape:
 
 News items should be Chinese-facing technology news with URLs pointing to the original public article, not placeholder or aggregator-only links.
 
+Required sidecar fields are `title`, `url`, `summaryZh`, `summaryEn`, and `whyItMattersZh`. `source` is optional and defaults to `Codex Daily`; `tags` is optional and normalized to at most four labels.
+
 That original-article requirement is an upstream Codex automation content contract. The website script validates URLs syntactically as public HTTP(S) URLs and rejects local, private, malformed, or deceptive host forms; it does not fetch and prove every redirect target.
 
-The site accepts the Codex JSON only when at least five valid items are present. The generated `public/live-panel.json` contains exactly five news records. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler.
+The site accepts the Codex JSON only when at least five valid items are present. When the Codex path succeeds, the generated `public/live-panel.json` contains the first five validated news records. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler, capped at five displayable records.
 
 When updating the Codex Feishu automation prompt, ask it to generate both:
 

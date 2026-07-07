@@ -222,7 +222,7 @@ git commit -m "test: define codex daily news contract"
 
 - [ ] **Step 1: Add imports and constants**
 
-In `scripts/fetch_live_panel.py`, add `import os` near the other imports, then add these constants after `HEADERS`:
+In `scripts/fetch_live_panel.py`, add `import os`, `from ipaddress import ip_address`, and `urlparse` from `urllib.parse` near the other imports, then add these constants after `HEADERS`:
 
 ```python
 AI_DAILY_DEFAULT_PATH = Path(__file__).resolve().parents[1] / "ai-daily" / "latest.json"
@@ -232,6 +232,9 @@ AI_NEWS_MAX_SUMMARY_ZH = 120
 AI_NEWS_MAX_SUMMARY_EN = 180
 AI_NEWS_MAX_REASON_ZH = 160
 AI_NEWS_MAX_TAGS = 4
+PUBLIC_HOSTNAME_PATTERN = re.compile(
+    r"^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+)
 ```
 
 - [ ] **Step 2: Add text truncation and URL validation helpers**
@@ -244,9 +247,55 @@ def truncate_text(value: object, max_length: int) -> str:
     return text[:max_length].strip()
 
 
+def clean_required_text(value: object, max_length: int) -> str:
+    if not isinstance(value, str):
+        return ""
+
+    text = clean_title(value)
+    return text[:max_length].strip()
+
+
+def clean_optional_text(value: object, max_length: int, default: str = "") -> str:
+    text = clean_title(value) if isinstance(value, str) else ""
+    if not text:
+        text = default
+    return text[:max_length].strip()
+
+
 def is_public_http_url(value: object) -> bool:
-    text = str(value or "").strip()
-    return text.startswith("https://") or text.startswith("http://")
+    if not isinstance(value, str):
+        return False
+
+    text = value
+    if text != text.strip():
+        return False
+    if any(ord(char) < 32 for char in text) or re.search(r"\s", text):
+        return False
+
+    try:
+        parsed = urlparse(text)
+        hostname = parsed.hostname
+        parsed.port
+    except ValueError:
+        return False
+
+    if parsed.scheme not in {"http", "https"} or not hostname:
+        return False
+    if parsed.username is not None or parsed.password is not None:
+        return False
+
+    hostname = hostname.rstrip(".").lower()
+    if hostname == "localhost" or hostname.endswith(".localhost"):
+        return False
+
+    try:
+        address = ip_address(hostname)
+    except ValueError:
+        if re.fullmatch(r"[0-9.]+", hostname):
+            return False
+        return PUBLIC_HOSTNAME_PATTERN.fullmatch(hostname) is not None
+
+    return address.is_global
 ```
 
 - [ ] **Step 3: Add Codex daily normalization**
@@ -268,30 +317,43 @@ def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
     for item in raw_items:
         if not isinstance(item, dict):
             return []
-        if any(not item.get(field) for field in AI_NEWS_REQUIRED_FIELDS):
+
+        required_text = {
+            "title": clean_required_text(item.get("title"), AI_NEWS_MAX_TITLE),
+            "summaryZh": clean_required_text(item.get("summaryZh"), AI_NEWS_MAX_SUMMARY_ZH),
+            "summaryEn": clean_required_text(item.get("summaryEn"), AI_NEWS_MAX_SUMMARY_EN),
+            "whyItMattersZh": clean_required_text(item.get("whyItMattersZh"), AI_NEWS_MAX_REASON_ZH),
+        }
+        if any(not required_text[field] for field in required_text):
             return []
 
-        url = str(item.get("url", "")).strip()
+        url = item.get("url", "")
         if not is_public_http_url(url) or url in seen_urls:
             return []
 
         tags = item.get("tags", [])
         if not isinstance(tags, list):
             tags = []
-        clean_tags = [truncate_text(tag, 24) for tag in tags if truncate_text(tag, 24)]
+        clean_tags = []
+        for tag in tags:
+            clean_tag = truncate_text(tag, 24)
+            if clean_tag:
+                clean_tags.append(clean_tag)
 
         normalized.append(
             {
-                "title": truncate_text(item.get("title"), AI_NEWS_MAX_TITLE),
+                "title": required_text["title"],
                 "url": url,
-                "source": truncate_text(item.get("source") or "Codex Daily", 40),
-                "summaryZh": truncate_text(item.get("summaryZh"), AI_NEWS_MAX_SUMMARY_ZH),
-                "summaryEn": truncate_text(item.get("summaryEn"), AI_NEWS_MAX_SUMMARY_EN),
-                "whyItMattersZh": truncate_text(item.get("whyItMattersZh"), AI_NEWS_MAX_REASON_ZH),
+                "source": clean_optional_text(item.get("source"), 40, "Codex Daily"),
+                "summaryZh": required_text["summaryZh"],
+                "summaryEn": required_text["summaryEn"],
+                "whyItMattersZh": required_text["whyItMattersZh"],
                 "tags": clean_tags[:AI_NEWS_MAX_TAGS],
             }
         )
         seen_urls.add(url)
+        if len(normalized) >= limit:
+            break
 
     if len(normalized) < limit:
         return []
@@ -748,13 +810,13 @@ Supported inputs, set one at a time:
 Local JSON file:
 
 ```bash
-AI_DAILY_JSON_PATH=ai-daily/latest.json
+AI_DAILY_JSON_PATH=ai-daily/latest.json npm run refresh:live-panel
 ```
 
 Remote JSON URL:
 
 ```bash
-AI_DAILY_JSON_URL=<public-json-url>
+AI_DAILY_JSON_URL=<public-json-url> npm run refresh:live-panel
 ```
 
 If both are set, `AI_DAILY_JSON_URL` takes precedence.
@@ -780,7 +842,11 @@ Expected JSON shape:
 
 News items should be Chinese-facing technology news with URLs pointing to the original public article, not placeholder or aggregator-only links.
 
-The site accepts the Codex JSON only when at least five valid items are present. The generated `public/live-panel.json` contains exactly five news records. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler.
+Required sidecar fields are `title`, `url`, `summaryZh`, `summaryEn`, and `whyItMattersZh`. `source` is optional and defaults to `Codex Daily`; `tags` is optional and normalized to at most four labels.
+
+The original-article requirement is an upstream Codex automation content contract. The website script validates URLs syntactically as public HTTP(S) URLs and rejects local, private, malformed, or deceptive host forms; it does not fetch and prove every redirect target.
+
+The site accepts the Codex JSON only when at least five valid items are present. When the Codex path succeeds, the generated `public/live-panel.json` contains the first five validated news records. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler, capped at five displayable records.
 ````
 
 - [ ] **Step 2: Add the Codex automation prompt requirement**
@@ -868,7 +934,7 @@ Run:
 AI_DAILY_JSON_PATH=/tmp/missing-ai-daily.json npm run refresh:live-panel
 ```
 
-Expected: `public/live-panel.json` contains `"aiStatus": "fallback"` and five news records from the existing public-source fallback path or previous panel fallback.
+Expected: `public/live-panel.json` contains `"aiStatus": "fallback"` and up to five news records from the existing public-source fallback path or previous panel fallback.
 
 - [ ] **Step 6: Inspect the final diff**
 
