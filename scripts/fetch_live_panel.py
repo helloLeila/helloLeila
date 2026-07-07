@@ -39,6 +39,9 @@ AI_NEWS_MAX_SUMMARY_ZH = 120
 AI_NEWS_MAX_SUMMARY_EN = 180
 AI_NEWS_MAX_REASON_ZH = 160
 AI_NEWS_MAX_TAGS = 4
+PUBLIC_HOSTNAME_PATTERN = re.compile(
+    r"^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+)
 
 
 # 天气代码映射为中英文文案，方便页面直接使用。
@@ -229,16 +232,11 @@ def is_public_http_url(value: object) -> bool:
     try:
         address = ip_address(hostname)
     except ValueError:
-        return True
+        if re.fullmatch(r"[0-9.]+", hostname):
+            return False
+        return PUBLIC_HOSTNAME_PATTERN.fullmatch(hostname) is not None
 
-    return not (
-        address.is_private
-        or address.is_loopback
-        or address.is_link_local
-        or address.is_multicast
-        or address.is_reserved
-        or address.is_unspecified
-    )
+    return address.is_global
 
 
 def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
@@ -265,7 +263,11 @@ def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
         tags = item.get("tags", [])
         if not isinstance(tags, list):
             tags = []
-        clean_tags = [truncate_text(tag, 24) for tag in tags if truncate_text(tag, 24)]
+        clean_tags = []
+        for tag in tags:
+            clean_tag = truncate_text(tag, 24)
+            if clean_tag:
+                clean_tags.append(clean_tag)
 
         normalized.append(
             {
@@ -279,6 +281,8 @@ def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
             }
         )
         seen_urls.add(url)
+        if len(normalized) >= limit:
+            break
 
     if len(normalized) < limit:
         return []

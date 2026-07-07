@@ -84,6 +84,9 @@ class LivePanelSourceTests(unittest.TestCase):
             "http://localhost/story",
             "http://192.168.1.20/story",
             "http:///missing-host",
+            "http://100.64.0.1/x",
+            "http://2130706433/x",
+            "http://0177.0.0.1/x",
         ]
 
         for url in blocked_urls:
@@ -92,6 +95,22 @@ class LivePanelSourceTests(unittest.TestCase):
                 payload["news"][0]["url"] = url
 
                 self.assertEqual(self.module.normalize_codex_daily_news(payload, limit=5), [])
+
+    def test_codex_daily_json_ignores_invalid_items_after_limit(self):
+        payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+        payload["news"][5]["url"] = "javascript:late"
+
+        items = self.module.normalize_codex_daily_news(payload, limit=5)
+
+        self.assertEqual(len(items), 5)
+        self.assertEqual(items[0]["url"], "https://www.oschina.net/news/471539")
+        self.assertEqual(items[-1]["url"], "https://www.oschina.net/news/471516")
+
+    def test_codex_daily_json_rejects_invalid_items_within_limit(self):
+        payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+        payload["news"][4]["url"] = "javascript:early"
+
+        self.assertEqual(self.module.normalize_codex_daily_news(payload, limit=5), [])
 
 
 if __name__ == "__main__":
