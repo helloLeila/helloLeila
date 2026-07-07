@@ -37,6 +37,20 @@ function buildFallbackDailyForecast() {
   });
 }
 
+function normalizeNewsItem(item, lang) {
+  const title = item?.title || (lang === "zh" ? "每日快讯" : "Daily brief");
+  const summary = lang === "zh" ? item?.summaryZh : item?.summaryEn;
+
+  return {
+    title,
+    url: item?.url || "#",
+    source: item?.source || "",
+    summary: summary || item?.summaryZh || item?.summaryEn || "",
+    whyItMatters: item?.whyItMattersZh || "",
+    tags: Array.isArray(item?.tags) ? item.tags.slice(0, 4) : [],
+  };
+}
+
 // 根据语言返回天气与新闻数据，供实时面板模块直接消费。
 export function useWeatherNews(lang) {
   const [weather, setWeather] = useState(null);
@@ -62,7 +76,7 @@ export function useWeatherNews(lang) {
           daily: data.weather?.daily || buildFallbackDailyForecast(),
           updatedAt: data.updatedAt || "",
         });
-        setNews((data.news || siteContent.newsFallback).slice(0, 5));
+        setNews((data.news || siteContent.newsFallback).slice(0, 5).map((item) => normalizeNewsItem(item, lang)));
       } catch {
         if (!cancelled) {
           setWeather({
@@ -74,7 +88,7 @@ export function useWeatherNews(lang) {
             daily: buildFallbackDailyForecast(),
             updatedAt: new Date().toISOString(),
           });
-          setNews(siteContent.newsFallback.slice(0, 5));
+          setNews(siteContent.newsFallback.slice(0, 5).map((item) => normalizeNewsItem(item, lang)));
         }
       }
     }
