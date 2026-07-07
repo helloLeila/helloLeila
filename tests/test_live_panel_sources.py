@@ -25,6 +25,16 @@ class LivePanelSourceTests(unittest.TestCase):
         items = self.module.normalize_codex_daily_news(payload, limit=5)
 
         self.assertEqual(len(items), 5)
+        self.assertEqual(
+            [item["url"] for item in items],
+            [
+                "https://www.oschina.net/news/471539",
+                "https://www.oschina.net/news/471531",
+                "https://my.oschina.net/u/3874284/blog/19715962",
+                "https://www.oschina.net/news/471519/codeforge-26-4-0-released",
+                "https://www.oschina.net/news/471516",
+            ],
+        )
         self.assertEqual(items[0]["title"], "字节 Seed 开源 EdgeBench 基准测试")
         self.assertEqual(items[0]["source"], "Codex Daily")
         self.assertEqual(items[0]["summaryZh"], "字节 Seed 发布面向真实环境学习的长程智能体评测集。")
@@ -34,6 +44,16 @@ class LivePanelSourceTests(unittest.TestCase):
         self.assertNotIn("HarmonyOS7开发者声音-问卷调查", [item["title"] for item in items])
         for item in items:
             self.assertNotIn("example.com", item["url"])
+            for field in ["title", "url", "source", "summaryZh", "summaryEn", "whyItMattersZh"]:
+                self.assertIn(field, item)
+                self.assertIsInstance(item[field], str)
+                self.assertTrue(item[field].strip())
+            self.assertIn("tags", item)
+            self.assertIsInstance(item["tags"], list)
+            self.assertTrue(item["tags"])
+            for tag in item["tags"]:
+                self.assertIsInstance(tag, str)
+                self.assertTrue(tag.strip())
 
     def test_codex_daily_json_rejects_incomplete_payloads(self):
         payload = {
