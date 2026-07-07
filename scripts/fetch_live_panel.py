@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from datetime import datetime
 from html import unescape
@@ -30,6 +31,13 @@ HEADERS = {
     "User-Agent": "github-profile-home-live-panel/1.0",
     "Accept": "application/json",
 }
+AI_DAILY_DEFAULT_PATH = Path(__file__).resolve().parents[1] / "ai-daily" / "latest.json"
+AI_NEWS_REQUIRED_FIELDS = ("title", "url", "summaryZh", "summaryEn", "whyItMattersZh")
+AI_NEWS_MAX_TITLE = 160
+AI_NEWS_MAX_SUMMARY_ZH = 120
+AI_NEWS_MAX_SUMMARY_EN = 180
+AI_NEWS_MAX_REASON_ZH = 160
+AI_NEWS_MAX_TAGS = 4
 
 
 # 天气代码映射为中英文文案，方便页面直接使用。
@@ -197,6 +205,80 @@ def clean_title(text: str) -> str:
     return re.sub(r"\s+", " ", text)
 
 
+def truncate_text(value: object, max_length: int) -> str:
+    text = clean_title(str(value or ""))
+    return text[:max_length].strip()
+
+
+def is_public_http_url(value: object) -> bool:
+    text = str(value or "").strip()
+    return text.startswith("https://") or text.startswith("http://")
+
+
+def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
+    if not isinstance(payload, dict):
+        return []
+
+    raw_items = payload.get("news") or payload.get("items")
+    if not isinstance(raw_items, list):
+        return []
+
+    normalized = []
+    seen_urls = set()
+
+    for item in raw_items:
+        if not isinstance(item, dict):
+            return []
+        if any(not item.get(field) for field in AI_NEWS_REQUIRED_FIELDS):
+            return []
+
+        url = str(item.get("url", "")).strip()
+        if not is_public_http_url(url) or url in seen_urls:
+            return []
+
+        tags = item.get("tags", [])
+        if not isinstance(tags, list):
+            tags = []
+        clean_tags = [truncate_text(tag, 24) for tag in tags if truncate_text(tag, 24)]
+
+        normalized.append(
+            {
+                "title": truncate_text(item.get("title"), AI_NEWS_MAX_TITLE),
+                "url": url,
+                "source": truncate_text(item.get("source") or "Codex Daily", 40),
+                "summaryZh": truncate_text(item.get("summaryZh"), AI_NEWS_MAX_SUMMARY_ZH),
+                "summaryEn": truncate_text(item.get("summaryEn"), AI_NEWS_MAX_SUMMARY_EN),
+                "whyItMattersZh": truncate_text(item.get("whyItMattersZh"), AI_NEWS_MAX_REASON_ZH),
+                "tags": clean_tags[:AI_NEWS_MAX_TAGS],
+            }
+        )
+        seen_urls.add(url)
+
+    if len(normalized) < limit:
+        return []
+
+    return normalized[:limit]
+
+
+def load_codex_daily_payload() -> object:
+    source_url = os.getenv("AI_DAILY_JSON_URL", "").strip()
+    source_path = os.getenv("AI_DAILY_JSON_PATH", "").strip()
+
+    if source_url:
+        return fetch_json(source_url)
+
+    candidates = []
+    if source_path:
+        candidates.append(Path(source_path).expanduser())
+    candidates.append(AI_DAILY_DEFAULT_PATH)
+
+    for candidate in candidates:
+        if candidate.exists():
+            return json.loads(candidate.read_text(encoding="utf-8"))
+
+    return {}
+
+
 # 解析 RSS/Atom 内容，提取标题与链接。
 def parse_rss_items(feed_text: str, limit: int) -> list[dict]:
     root = ET.fromstring(feed_text)
@@ -279,7 +361,7 @@ def interleave_news_lists(news_lists: list[list[dict]], limit: int) -> list[dict
 
 
 # 聚合用户指定的新闻源，最终输出 5 条。
-def fetch_news(previous_panel: dict, limit: int = 5) -> list[dict]:
+def fetch_fallback_news(previous_panel: dict, limit: int = 5) -> list[dict]:
     source_lists = [
         fetch_html_news(
             "https://juejin.cn/hot/articles",
@@ -304,14 +386,27 @@ def fetch_news(previous_panel: dict, limit: int = 5) -> list[dict]:
     return previous_news[:limit] if isinstance(previous_news, list) and previous_news else DEFAULT_NEWS[:limit]
 
 
+def build_news(previous_panel: dict, limit: int = 5) -> tuple[str, list[dict]]:
+    try:
+        codex_news = normalize_codex_daily_news(load_codex_daily_payload(), limit=limit)
+        if codex_news:
+            return "codex", codex_news
+    except (HTTPError, URLError, TimeoutError, ValueError, OSError, json.JSONDecodeError):
+        pass
+
+    return "fallback", fetch_fallback_news(previous_panel, limit=limit)
+
+
 # 生成完整面板结构并落盘。
 def build_panel() -> dict:
     previous_panel = load_previous_panel()
     now = datetime.now(ZoneInfo(TIMEZONE)).replace(second=0, microsecond=0)
+    ai_status, news = build_news(previous_panel, limit=5)
     return {
         "updatedAt": now.isoformat(),
+        "aiStatus": ai_status,
         "weather": fetch_weather(previous_panel),
-        "news": fetch_news(previous_panel, limit=5),
+        "news": news,
     }
 
 
