@@ -58,53 +58,53 @@ Create `tests/fixtures/ai-daily-latest.json` with this exact structure:
   "updatedAt": "2026-07-07T07:00:00+08:00",
   "news": [
     {
-      "title": "OpenAI releases new agent workflow guidance",
-      "url": "https://example.com/openai-agent-workflow",
+      "title": "字节 Seed 开源 EdgeBench 基准测试",
+      "url": "https://www.oschina.net/news/471539",
       "source": "Codex Daily",
-      "summaryZh": "OpenAI 更新了智能体工作流相关实践。",
-      "summaryEn": "OpenAI updated practical guidance for agent workflows.",
-      "whyItMattersZh": "这类变化会影响个人站关注的 AI 工程化与智能体编排方向。",
-      "tags": ["AI", "Agent", "Workflow"]
+      "summaryZh": "字节 Seed 发布面向真实环境学习的长程智能体评测集。",
+      "summaryEn": "ByteDance Seed released EdgeBench for long-horizon agent evaluation.",
+      "whyItMattersZh": "它能帮助判断智能体是否具备持续执行复杂任务的工程能力。",
+      "tags": ["AI", "Agent", "Benchmark"]
     },
     {
-      "title": "Frontend teams adopt structured AI review loops",
-      "url": "https://example.com/frontend-ai-review",
+      "title": "CSDI峰会开启：Agentic AI 落地应用的黄金期，智能系统重塑生产力",
+      "url": "https://www.oschina.net/news/471531",
       "source": "Codex Daily",
-      "summaryZh": "前端团队开始把 AI 审查纳入工程流程。",
-      "summaryEn": "Frontend teams are folding AI review into engineering loops.",
-      "whyItMattersZh": "它和个人站展示的前端系统、AI 工作流能力直接相关。",
-      "tags": ["Frontend", "Review", "AI"]
+      "summaryZh": "CSDI 峰会聚焦 Agentic AI 在产业生产系统中的落地。",
+      "summaryEn": "CSDI focused on applying agentic AI in industrial production systems.",
+      "whyItMattersZh": "这类产业化信号和个人站的 AI 工作流、企业系统表达方向一致。",
+      "tags": ["AI", "Agentic AI", "Industry"]
     },
     {
-      "title": "Data visualization tooling adds narrative dashboards",
-      "url": "https://example.com/dataviz-narrative-dashboard",
+      "title": "Qoder 集成 STAROps，重塑“编码 - 发布 - 诊断 - 修复”DevOps 闭环",
+      "url": "https://my.oschina.net/u/3874284/blog/19715962",
       "source": "Codex Daily",
-      "summaryZh": "数据可视化工具继续强化叙事型仪表盘能力。",
-      "summaryEn": "Data visualization tools are adding stronger narrative dashboard features.",
-      "whyItMattersZh": "这能支撑个人站里数据表达和可视化模块的长期方向。",
-      "tags": ["DataViz", "Dashboard"]
+      "summaryZh": "Qoder 将编码、发布、诊断和修复串成更完整的 DevOps 闭环。",
+      "summaryEn": "Qoder connects coding, release, diagnosis, and repair into a DevOps loop.",
+      "whyItMattersZh": "它对应 AI 辅助研发从写代码走向完整工程流程的趋势。",
+      "tags": ["DevOps", "AI", "Engineering"]
     },
     {
-      "title": "Research agents improve literature triage workflows",
-      "url": "https://example.com/research-agent-triage",
+      "title": "从拖拽到 JOIN：CodeForge 26.4.0 把 SQL 查询变成搭积木",
+      "url": "https://www.oschina.net/news/471519/codeforge-26-4-0-released",
       "source": "Codex Daily",
-      "summaryZh": "研究型智能体在文献筛选流程中继续落地。",
-      "summaryEn": "Research agents are becoming more useful in literature triage workflows.",
-      "whyItMattersZh": "这契合个人站对学术方法和工程工具链结合的定位。",
-      "tags": ["Research", "Agent"]
+      "summaryZh": "CodeForge 26.4.0 用可视化方式降低复杂 SQL 查询构建门槛。",
+      "summaryEn": "CodeForge 26.4.0 lowers the barrier for complex SQL query construction.",
+      "whyItMattersZh": "它和数据表达、低代码查询、工程工具体验这些方向相关。",
+      "tags": ["Database", "Low Code", "Tooling"]
     },
     {
-      "title": "Developer productivity tools expose workflow metrics",
-      "url": "https://example.com/dev-productivity-metrics",
+      "title": "腾讯混元 Hy3 开源发布",
+      "url": "https://www.oschina.net/news/471516",
       "source": "Codex Daily",
-      "summaryZh": "开发者工具开始暴露更细的工作流指标。",
-      "summaryEn": "Developer tools are exposing more granular workflow metrics.",
-      "whyItMattersZh": "它有助于解释 AI 工作流如何被度量和持续改进。",
-      "tags": ["Engineering", "Metrics"]
+      "summaryZh": "腾讯混元 Hy3 开源发布，继续推进推理、智能体和长上下文能力。",
+      "summaryEn": "Tencent Hunyuan Hy3 was open-sourced with reasoning, agent, and long-context updates.",
+      "whyItMattersZh": "国产大模型开源进展会影响 AI 应用和智能体工程选型。",
+      "tags": ["AI", "Open Source", "Model"]
     },
     {
       "title": "Extra item should not appear on the homepage",
-      "url": "https://example.com/extra-item",
+      "url": "https://www.oschina.net/news/471529",
       "source": "Codex Daily",
       "summaryZh": "第六条用于验证截断。",
       "summaryEn": "The sixth item verifies truncation.",
@@ -147,20 +147,22 @@ class LivePanelSourceTests(unittest.TestCase):
         items = self.module.normalize_codex_daily_news(payload, limit=5)
 
         self.assertEqual(len(items), 5)
-        self.assertEqual(items[0]["title"], "OpenAI releases new agent workflow guidance")
+        self.assertEqual(items[0]["title"], "字节 Seed 开源 EdgeBench 基准测试")
         self.assertEqual(items[0]["source"], "Codex Daily")
-        self.assertEqual(items[0]["summaryZh"], "OpenAI 更新了智能体工作流相关实践。")
-        self.assertEqual(items[0]["summaryEn"], "OpenAI updated practical guidance for agent workflows.")
-        self.assertEqual(items[0]["whyItMattersZh"], "这类变化会影响个人站关注的 AI 工程化与智能体编排方向。")
-        self.assertEqual(items[0]["tags"], ["AI", "Agent", "Workflow"])
+        self.assertEqual(items[0]["summaryZh"], "字节 Seed 发布面向真实环境学习的长程智能体评测集。")
+        self.assertEqual(items[0]["summaryEn"], "ByteDance Seed released EdgeBench for long-horizon agent evaluation.")
+        self.assertEqual(items[0]["whyItMattersZh"], "它能帮助判断智能体是否具备持续执行复杂任务的工程能力。")
+        self.assertEqual(items[0]["tags"], ["AI", "Agent", "Benchmark"])
         self.assertNotIn("Extra item should not appear on the homepage", [item["title"] for item in items])
+        for item in items:
+            self.assertNotIn("example.com", item["url"])
 
     def test_codex_daily_json_rejects_incomplete_payloads(self):
         payload = {
             "news": [
                 {
                     "title": "Only one item",
-                    "url": "https://example.com/one",
+                    "url": "https://www.oschina.net/news/471539",
                     "source": "Codex Daily",
                     "summaryZh": "只有一条。",
                     "summaryEn": "Only one item.",
@@ -390,13 +392,13 @@ Keep the existing weather shape. Add top-level `aiStatus` and replace `news` wit
 "aiStatus": "codex",
 "news": [
   {
-    "title": "OpenAI releases new agent workflow guidance",
-    "url": "https://example.com/openai-agent-workflow",
+    "title": "字节 Seed 开源 EdgeBench 基准测试",
+    "url": "https://www.oschina.net/news/471539",
     "source": "Codex Daily",
-    "summaryZh": "OpenAI 更新了智能体工作流相关实践。",
-    "summaryEn": "OpenAI updated practical guidance for agent workflows.",
-    "whyItMattersZh": "这类变化会影响个人站关注的 AI 工程化与智能体编排方向。",
-    "tags": ["AI", "Agent", "Workflow"]
+    "summaryZh": "字节 Seed 发布面向真实环境学习的长程智能体评测集。",
+    "summaryEn": "ByteDance Seed released EdgeBench for long-horizon agent evaluation.",
+    "whyItMattersZh": "它能帮助判断智能体是否具备持续执行复杂任务的工程能力。",
+    "tags": ["AI", "Agent", "Benchmark"]
   }
 ]
 ```
@@ -762,7 +764,7 @@ Expected JSON shape:
   "news": [
     {
       "title": "Original title",
-      "url": "https://example.com/story",
+      "url": "https://www.oschina.net/news/471539",
       "source": "Codex Daily",
       "summaryZh": "一句中文摘要。",
       "summaryEn": "One English summary.",
