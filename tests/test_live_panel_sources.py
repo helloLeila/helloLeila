@@ -78,6 +78,21 @@ class LivePanelSourceTests(unittest.TestCase):
 
         self.assertEqual(self.module.normalize_codex_daily_news(payload, limit=5), [])
 
+    def test_codex_daily_json_rejects_required_fields_that_clean_to_blank_or_are_not_strings(self):
+        invalid_values = [
+            "   ",
+            "<span></span>",
+            True,
+            {},
+        ]
+
+        for value in invalid_values:
+            with self.subTest(value=value):
+                payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+                payload["news"][0]["summaryZh"] = value
+
+                self.assertEqual(self.module.normalize_codex_daily_news(payload, limit=5), [])
+
     def test_codex_daily_json_rejects_local_or_private_http_urls(self):
         blocked_urls = [
             "http://127.0.0.1/story",
@@ -87,6 +102,21 @@ class LivePanelSourceTests(unittest.TestCase):
             "http://100.64.0.1/x",
             "http://2130706433/x",
             "http://0177.0.0.1/x",
+        ]
+
+        for url in blocked_urls:
+            with self.subTest(url=url):
+                payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+                payload["news"][0]["url"] = url
+
+                self.assertEqual(self.module.normalize_codex_daily_news(payload, limit=5), [])
+
+    def test_codex_daily_json_rejects_malformed_or_deceptive_public_urls(self):
+        blocked_urls = [
+            "https://example.com:bad/x",
+            "https://www.oschina.net@evil.com/x",
+            "https://www.oschina.net/news/471539\nhttps://evil.com",
+            "https://www.oschina.net/news/471539 bad",
         ]
 
         for url in blocked_urls:

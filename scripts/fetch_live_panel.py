@@ -214,15 +214,41 @@ def truncate_text(value: object, max_length: int) -> str:
     return text[:max_length].strip()
 
 
+def clean_required_text(value: object, max_length: int) -> str:
+    if not isinstance(value, str):
+        return ""
+
+    text = clean_title(value)
+    return text[:max_length].strip()
+
+
+def clean_optional_text(value: object, max_length: int, default: str = "") -> str:
+    text = clean_title(value) if isinstance(value, str) else ""
+    if not text:
+        text = default
+    return text[:max_length].strip()
+
+
 def is_public_http_url(value: object) -> bool:
-    text = str(value or "").strip()
+    if not isinstance(value, str):
+        return False
+
+    text = value
+    if text != text.strip():
+        return False
+    if any(ord(char) < 32 for char in text) or re.search(r"\s", text):
+        return False
+
     try:
         parsed = urlparse(text)
         hostname = parsed.hostname
+        parsed.port
     except ValueError:
         return False
 
     if parsed.scheme not in {"http", "https"} or not hostname:
+        return False
+    if parsed.username is not None or parsed.password is not None:
         return False
 
     hostname = hostname.rstrip(".").lower()
@@ -253,10 +279,17 @@ def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
     for item in raw_items:
         if not isinstance(item, dict):
             return []
-        if any(not item.get(field) for field in AI_NEWS_REQUIRED_FIELDS):
+
+        required_text = {
+            "title": clean_required_text(item.get("title"), AI_NEWS_MAX_TITLE),
+            "summaryZh": clean_required_text(item.get("summaryZh"), AI_NEWS_MAX_SUMMARY_ZH),
+            "summaryEn": clean_required_text(item.get("summaryEn"), AI_NEWS_MAX_SUMMARY_EN),
+            "whyItMattersZh": clean_required_text(item.get("whyItMattersZh"), AI_NEWS_MAX_REASON_ZH),
+        }
+        if any(not required_text[field] for field in required_text):
             return []
 
-        url = str(item.get("url", "")).strip()
+        url = item.get("url", "")
         if not is_public_http_url(url) or url in seen_urls:
             return []
 
@@ -271,12 +304,12 @@ def normalize_codex_daily_news(payload: object, limit: int = 5) -> list[dict]:
 
         normalized.append(
             {
-                "title": truncate_text(item.get("title"), AI_NEWS_MAX_TITLE),
+                "title": required_text["title"],
                 "url": url,
-                "source": truncate_text(item.get("source") or "Codex Daily", 40),
-                "summaryZh": truncate_text(item.get("summaryZh"), AI_NEWS_MAX_SUMMARY_ZH),
-                "summaryEn": truncate_text(item.get("summaryEn"), AI_NEWS_MAX_SUMMARY_EN),
-                "whyItMattersZh": truncate_text(item.get("whyItMattersZh"), AI_NEWS_MAX_REASON_ZH),
+                "source": clean_optional_text(item.get("source"), 40, "Codex Daily"),
+                "summaryZh": required_text["summaryZh"],
+                "summaryEn": required_text["summaryEn"],
+                "whyItMattersZh": required_text["whyItMattersZh"],
                 "tags": clean_tags[:AI_NEWS_MAX_TAGS],
             }
         )
