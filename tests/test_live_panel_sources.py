@@ -31,7 +31,7 @@ class LivePanelSourceTests(unittest.TestCase):
         self.assertEqual(items[0]["summaryEn"], "ByteDance Seed released EdgeBench for long-horizon agent evaluation.")
         self.assertEqual(items[0]["whyItMattersZh"], "它能帮助判断智能体是否具备持续执行复杂任务的工程能力。")
         self.assertEqual(items[0]["tags"], ["AI", "Agent", "Benchmark"])
-        self.assertNotIn("Extra item should not appear on the homepage", [item["title"] for item in items])
+        self.assertNotIn("HarmonyOS7开发者声音-问卷调查", [item["title"] for item in items])
         for item in items:
             self.assertNotIn("example.com", item["url"])
 

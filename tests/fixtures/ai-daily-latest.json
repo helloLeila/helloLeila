@@ -47,13 +47,13 @@
       "tags": ["AI", "Open Source", "Model"]
     },
     {
-      "title": "Extra item should not appear on the homepage",
+      "title": "HarmonyOS7开发者声音-问卷调查",
       "url": "https://www.oschina.net/news/471529",
       "source": "Codex Daily",
-      "summaryZh": "第六条用于验证截断。",
-      "summaryEn": "The sixth item verifies truncation.",
-      "whyItMattersZh": "页面只展示前五条。",
-      "tags": ["Fixture"]
+      "summaryZh": "OSCHINA 发起问卷，调研开发者对 HarmonyOS 7 技术的认知、使用情况、实际问题与需求。",
+      "summaryEn": "OSCHINA launched a survey on developers' HarmonyOS 7 awareness, usage, issues, and needs.",
+      "whyItMattersZh": "开发者反馈能反映 HarmonyOS 生态工具链与应用开发体验的真实需求。",
+      "tags": ["HarmonyOS", "Survey", "Developer"]
     }
   ]
 }
