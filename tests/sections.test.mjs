@@ -140,3 +140,16 @@ test("coverage field uses the same three runtime as l7-three", () => {
 
   assert.ok(packageAligned || sourceUsesL7ThreeRuntime);
 });
+
+test("utilities panel renders enriched ai daily brief fields", () => {
+  const utilitiesSource = fs.readFileSync(
+    path.resolve(process.cwd(), "src/components/UtilitiesPanel.jsx"),
+    "utf8"
+  );
+
+  assert.match(utilitiesSource, /AI daily brief \/ AI 每日精选/);
+  assert.match(utilitiesSource, /news-row-head/);
+  assert.match(utilitiesSource, /item\.summary/);
+  assert.match(utilitiesSource, /item\.whyItMatters/);
+  assert.match(utilitiesSource, /news-tags/);
+});

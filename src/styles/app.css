@@ -2,6 +2,7 @@
 :root {
   --bg: #fff8ef;
   --text: #12264b;
+  --text-soft: rgba(18, 38, 75, 0.78);
   --muted: rgba(18, 38, 75, 0.68);
   --line: rgba(67, 110, 206, 0.14);
   --line-strong: rgba(67, 110, 206, 0.22);
@@ -1130,23 +1131,67 @@ a {
 
 .news-list li {
   list-style: none;
-}
-
-.news-list a {
-  display: grid;
-  gap: 4px;
   padding: 12px;
   border-radius: 16px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(244, 248, 255, 0.84));
   border: 1px solid rgba(67, 110, 206, 0.12);
+}
+
+.news-row-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.news-row-head span {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.news-list a {
   text-decoration: none;
   color: inherit;
   font-size: 0.88rem;
   line-height: 1.45;
+  min-width: 0;
 }
 
 .news-list a:hover {
-  border-color: var(--line-strong);
+  color: var(--blue);
+}
+
+.news-list p {
+  margin: 6px 0 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.news-list small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.news-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.news-tags span {
+  border: 1px solid rgba(66, 94, 122, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 5px 8px;
 }
 
 .link-grid {

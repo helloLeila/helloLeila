@@ -35,14 +35,26 @@ export function UtilitiesPanel({ lang, weather, news }) {
       <article className="live-card">
         <div className="section-head compact">
           <div className="section-kicker">Today&apos;s Tech Headlines / 今日技术快讯</div>
-          <h2>5 live links / 5 条链接（python接入 未完成）</h2>
+          <h2>AI daily brief / AI 每日精选</h2>
         </div>
         <ol className="news-list">
           {news.slice(0, 5).map((item) => (
             <li key={item.url}>
-              <a href={item.url} target="_blank" rel="noreferrer">
-                {item.title}
-              </a>
+              <div className="news-row-head">
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  {item.title}
+                </a>
+                {item.source ? <span>{item.source}</span> : null}
+              </div>
+              {item.summary ? <p>{item.summary}</p> : null}
+              {item.whyItMatters ? <small>{item.whyItMatters}</small> : null}
+              {item.tags?.length ? (
+                <div className="news-tags" aria-label={lang === "zh" ? "新闻标签" : "News tags"}>
+                  {item.tags.map((tag) => (
+                    <span key={`${item.url}-${tag}`}>{tag}</span>
+                  ))}
+                </div>
+              ) : null}
             </li>
           ))}
         </ol>
