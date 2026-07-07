@@ -1,22 +1,21 @@
-// 实时面板工作流测试，约束抓取脚本语言与每日刷新时间。
+// 实时面板工作流测试，约束抓取脚本语言、每日刷新时间与 Codex 日报主链路。
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
+const root = process.cwd();
+
 const packageJson = JSON.parse(
-  fs.readFileSync(
-    path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/package.json"),
-    "utf8"
-  )
+  fs.readFileSync(path.resolve(root, "package.json"), "utf8")
 );
 
 const workflowSource = fs.readFileSync(
-  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/.github/workflows/pages.yml"),
+  path.resolve(root, ".github/workflows/pages.yml"),
   "utf8"
 );
 const fetchScriptSource = fs.readFileSync(
-  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/scripts/fetch_live_panel.py"),
+  path.resolve(root, "scripts/fetch_live_panel.py"),
   "utf8"
 );
 
@@ -37,4 +36,14 @@ test("live panel crawler targets the requested news sources with five final item
   assert.match(fetchScriptSource, /theverge\.com\/rss\/index\.xml/);
   assert.match(fetchScriptSource, /oschina\.net\/news/);
   assert.match(fetchScriptSource, /limit:\s*int\s*=\s*5/);
+});
+
+// 验证 Codex 日报 JSON 是主链路，公开新闻源抓取是兜底链路。
+test("live panel prefers codex daily json before crawler fallback", () => {
+  assert.match(fetchScriptSource, /AI_DAILY_JSON_PATH/);
+  assert.match(fetchScriptSource, /AI_DAILY_JSON_URL/);
+  assert.match(fetchScriptSource, /normalize_codex_daily_news/);
+  assert.match(fetchScriptSource, /fetch_fallback_news/);
+  assert.match(fetchScriptSource, /"codex"/);
+  assert.match(fetchScriptSource, /"fallback"/);
 });
