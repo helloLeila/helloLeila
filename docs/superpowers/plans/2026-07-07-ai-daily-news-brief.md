@@ -749,12 +749,21 @@ In `SETUP.md`, add a section titled `AI daily brief source`:
 
 The live panel uses Codex daily JSON as the primary source when available.
 
-Supported inputs:
+Supported inputs, set one at a time:
+
+Local JSON file:
 
 ```bash
 AI_DAILY_JSON_PATH=ai-daily/latest.json
-AI_DAILY_JSON_URL=https://example.com/ai-daily/latest.json
 ```
+
+Remote JSON URL:
+
+```bash
+AI_DAILY_JSON_URL=<public-json-url>
+```
+
+If both are set, `AI_DAILY_JSON_URL` takes precedence.
 
 Expected JSON shape:
 
@@ -775,7 +784,7 @@ Expected JSON shape:
 }
 ```
 
-The site accepts the Codex JSON only when at least five valid HTTP links are present. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler.
+The site accepts the Codex JSON only when at least five valid items are present. The generated `public/live-panel.json` contains exactly five news records. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler.
 ````
 
 - [ ] **Step 2: Add the Codex automation prompt requirement**
