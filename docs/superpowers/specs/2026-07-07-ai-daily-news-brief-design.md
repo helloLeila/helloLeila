@@ -11,10 +11,10 @@
 ## 目标
 
 - 每天北京时间 07:00 自动生成一组 AI 精选新闻。
-- 从多个公开来源抓取候选内容，去重后让 AI 选出最适合个人网站定位的 5 条。
+- 优先消费 Codex Daily sidecar JSON；当 sidecar 不可用时，从多个公开来源抓取候选内容，去重后生成可展示的 5 条。
 - 为每条新闻生成中文摘要、英文摘要、推荐理由和标签。
 - 保持前端仍然只读取 `live-panel.json`，不在浏览器端直接调用 AI API。
-- 在 AI 调用失败、抓取失败或 JSON 校验失败时保留可展示的兜底数据。
+- 在 Codex 输出缺失、结构校验失败或公开抓取失败时保留可展示的兜底数据。
 - 保持系统低维护、低成本、适合 GitHub Pages。
 
 ## 非目标
@@ -28,11 +28,15 @@
 
 ## 推荐架构
 
-采用 GitHub Actions 定时工作流：
+采用 Codex Daily sidecar JSON 作为主链路，并保留 GitHub Actions 中的当前公开来源抓取作为兜底链路：
 
-`抓取候选新闻 -> 去重清洗 -> AI 选择并摘要 -> JSON 校验 -> 写入 live-panel.json -> Vite build -> GitHub Pages deploy`
+`Codex 自动化 -> ai-daily/latest.json -> JSON 校验 -> 写入 live-panel.json -> Vite build -> GitHub Pages deploy`
 
-这条链路与现有仓库最贴合。它不需要服务器，不需要数据库，也不改变当前 React/Vite 前端的部署模型。AI API key 放在 GitHub Actions Secrets 中，只在构建任务里使用。
+如果 Codex sidecar 不可用，再运行当前站点抓取链路：
+
+`公开来源抓取 -> 去重清洗 -> JSON 校验 -> 写入 live-panel.json -> Vite build -> GitHub Pages deploy`
+
+这条链路与现有仓库最贴合。它不需要服务器，不需要数据库，也不改变当前 React/Vite 前端的部署模型。
 
 ## 与 Codex 飞书自动化的关系
 
@@ -49,7 +53,11 @@
 
 `Daily Brief JSON -> live-panel.json -> GitHub Pages`
 
-第一版可以让 Codex 自动化在生成 Markdown 日报的同时，额外生成一个严格结构化的 JSON sidecar，例如 `ai-daily/latest.json`。飞书和 Server 酱继续使用 Markdown；个人网站从这个 JSON 中抽取前五条，生成 `public/live-panel.json`。如果 sidecar 不存在或校验失败，个人站再回退到本仓库的确定性抓取脚本。
+最终决策：`ai-daily/latest.json` 是个人站新闻主链路；如果 Codex 自动化没有输出、输出少于五条或结构校验失败，`scripts/fetch_live_panel.py` 再运行当前公开来源抓取作为兜底。
+
+新闻条目必须偏中文科技新闻，`url` 必须指向可公开访问的原文链接，不能使用占位链接、私有地址或不可核验的跳转地址。
+
+Codex 自动化在生成 Markdown 日报的同时，额外生成严格结构化的 JSON sidecar。飞书和 Server 酱继续使用 Markdown；个人网站从这个 JSON 中抽取前五条，生成 `public/live-panel.json`。如果 sidecar 不存在、少于五条或校验失败，个人站再回退到本仓库的公开来源抓取脚本。
 
 不建议长期只从 Markdown 反向解析网站数据。Markdown 适合人读和通知渲染，但对前端来说过于脆弱。可以短期解析 `## 2. 热点新闻` 作为过渡，长期应让自动化直接输出 JSON。
 
@@ -57,7 +65,7 @@
 
 ### 1. 候选采集器
 
-继续由 `scripts/fetch_live_panel.py` 负责。它抓取 RSS、公开 API 或公开页面，输出一个候选池。
+作为兜底链路，继续由 `scripts/fetch_live_panel.py` 负责。它抓取 RSS、公开 API 或公开页面，输出一个候选池。
 
 候选项至少包含：
 
@@ -99,16 +107,16 @@ AI 需要为每条内容生成：
 
 ### 4. JSON 校验器
 
-AI 输出必须经过脚本校验后才能写入 `live-panel.json`。
+Codex sidecar JSON 或兜底链路输出必须经过脚本校验后才能写入 `live-panel.json`。
 
 校验规则：
 
 - `news` 必须正好 5 条。
 - 每条必须包含 `title`、`url`、`source`、`summaryZh`、`summaryEn`、`whyItMattersZh`、`tags`。
-- `url` 必须来自候选池，防止 AI 编造链接。
+- `url` 必须是可公开访问的 HTTP 链接，防止占位链接、私有地址或不可核验的跳转地址进入网站。
 - `title` 以候选池原始标题为准，防止 AI 改写标题造成事实漂移。
 - 摘要和推荐理由需要有最大长度限制，避免破坏前端布局。
-- 校验失败时使用非 AI 候选前五条，并标记 AI 状态为失败。
+- Codex JSON 校验失败时运行公开来源抓取，并标记为 `fallback`。
 
 ### 5. 前端展示层
 
@@ -147,9 +155,9 @@ AI 输出必须经过脚本校验后才能写入 `live-panel.json`。
 
 `aiStatus` 可取：
 
-- `ok`：AI 精选和摘要成功。
-- `fallback`：AI 不可用，使用确定性候选前五条。
-- `previous`：抓取或生成失败，沿用上一次可用数据。
+- `ok`：Codex sidecar JSON 被接受。
+- `fallback`：Codex JSON 不可用，使用当前公开来源抓取。
+- `previous`：Codex JSON 和公开来源抓取都失败，沿用上一次可用数据。
 
 ## 工作流设计
 
@@ -158,14 +166,15 @@ AI 输出必须经过脚本校验后才能写入 `live-panel.json`。
 1. Checkout 仓库。
 2. 安装 Node 依赖。
 3. 运行 `npm run refresh:live-panel`。
-4. 脚本读取 GitHub Actions Secret 中的 AI API key。
-5. 生成并校验 `public/live-panel.json`。
-6. 运行 `npm run build`。
-7. 部署到 GitHub Pages。
+4. 脚本优先读取 `ai-daily/latest.json` 或 `AI_DAILY_JSON_URL`。
+5. 如果 Codex JSON 缺失、少于五条或校验失败，脚本再运行当前公开来源抓取。
+6. 生成并校验 `public/live-panel.json`。
+7. 运行 `npm run build`。
+8. 部署到 GitHub Pages。
 
-如果没有配置 AI API key，本地和 CI 都应能运行，只是进入 `fallback` 模式。
+如果没有配置 Codex JSON，本地和 CI 都应能运行，只是进入公开来源抓取的 `fallback` 模式。
 
-如果使用 Codex 自动化作为上游，工作流调整为：
+Codex 自动化作为上游时，工作流调整为：
 
 1. Codex 自动化抓取并生成 `ai-daily/YYYY-MM-DD-ai-daily.md`。
 2. Codex 自动化同时生成 `ai-daily/latest.json`。
@@ -179,20 +188,20 @@ AI 输出必须经过脚本校验后才能写入 `live-panel.json`。
 
 失败场景按优先级处理：
 
+- Codex JSON 不存在、少于五条或结构校验失败：运行当前公开来源抓取。
+- Codex JSON 含占位链接、私有地址或不可核验跳转：拒绝该输出，少于五条则进入 `fallback`。
 - 某个新闻源失败：跳过该来源，继续使用其他来源。
 - 所有新闻源失败：沿用上一次 `live-panel.json` 中的新闻。
-- AI API 失败：使用清洗后的候选前五条，并生成基础字段。
-- AI 返回非 JSON：丢弃本次 AI 输出，进入 `fallback`。
-- AI 编造 URL：校验失败，进入 `fallback`。
 - 写文件失败：让 workflow 失败，避免发布不完整构建。
 
 前端永远不应该因为 AI 字段缺失而白屏。
 
 ## 安全与成本
 
-- AI API key 只放在 GitHub Actions Secrets。
+- 需要 AI/API key 时，只在 Codex 自动化或 GitHub Actions Secrets 中使用。
 - 前端不接触任何 secret。
-- 每天调用一次 AI，候选池限制在 20 到 40 条，成本可控。
+- 个人网站 workflow 优先消费结构化 JSON，不在浏览器端调用 AI。
+- Codex 自动化每天生成一次日报，成本可控。
 - Prompt 中不放隐私数据。
 - 只把公开新闻标题、链接、来源和公开摘要交给 AI。
 
@@ -200,8 +209,8 @@ AI 输出必须经过脚本校验后才能写入 `live-panel.json`。
 
 需要新增或调整测试：
 
-- 抓取脚本可以在无 AI key 时生成合法 `live-panel.json`。
-- AI 输出校验器会拒绝编造 URL。
+- 抓取脚本可以在无 Codex JSON 时生成合法 `live-panel.json`。
+- Codex JSON 校验器会拒绝少于五条、占位链接、私有地址和不可核验跳转。
 - `news` 数组最终始终收敛到 5 条。
 - 新字段缺失时前端仍然回退到标题链接展示。
 - workflow 测试继续约束每日北京时间 07:00 触发。
@@ -210,9 +219,9 @@ AI 输出必须经过脚本校验后才能写入 `live-panel.json`。
 
 第一步先增强数据管道，不重做 UI：
 
-1. 扩展抓取脚本的数据模型和候选池。
-2. 增加 AI 精选与摘要函数。
-3. 增加严格 JSON 校验和 fallback。
+1. 扩展抓取脚本，优先读取 `ai-daily/latest.json` 或 `AI_DAILY_JSON_URL`。
+2. 增加 Codex sidecar JSON 校验。
+3. 保留当前公开来源抓取作为 fallback。
 4. 更新 `live-panel.json` fixture。
 5. 更新前端 hook 兼容新增字段。
 6. 更新测试覆盖。
@@ -223,7 +232,7 @@ AI 输出必须经过脚本校验后才能写入 `live-panel.json`。
 
 - 每日 workflow 可以在没有常驻后端的情况下刷新新闻。
 - `public/live-panel.json` 始终包含 5 条可展示新闻。
-- AI 成功时，每条新闻都有摘要、推荐理由和标签。
-- AI 失败时，页面仍然展示确定性候选新闻。
+- Codex JSON 成功时，每条新闻都有摘要、推荐理由和标签。
+- Codex JSON 失败时，页面仍然展示公开来源抓取新闻。
 - 前端不泄露 API key。
 - 架构仍然保持 GitHub Pages 静态站的简单性。

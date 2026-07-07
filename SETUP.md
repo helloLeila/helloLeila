@@ -60,6 +60,47 @@ cd '/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-ant
 npm run build
 ```
 
+## AI daily brief source
+
+The live panel uses Codex daily JSON as the primary source when available.
+
+Supported inputs:
+
+```bash
+AI_DAILY_JSON_PATH=ai-daily/latest.json
+AI_DAILY_JSON_URL=https://example.com/ai-daily/latest.json
+```
+
+Expected JSON shape:
+
+```json
+{
+  "updatedAt": "2026-07-07T07:00:00+08:00",
+  "news": [
+    {
+      "title": "Original title",
+      "url": "https://www.oschina.net/news/471539",
+      "source": "Codex Daily",
+      "summaryZh": "一句中文摘要。",
+      "summaryEn": "One English summary.",
+      "whyItMattersZh": "为什么值得关注。",
+      "tags": ["AI", "Workflow"]
+    }
+  ]
+}
+```
+
+News items should be Chinese-facing technology news with URLs pointing to the original public article, not placeholder or aggregator-only links.
+
+The site accepts the Codex JSON only when at least five valid HTTP links are present. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler.
+
+When updating the Codex Feishu automation prompt, ask it to generate both:
+
+- `ai-daily/YYYY-MM-DD-ai-daily.md` for Feishu and Server 酱.
+- `ai-daily/latest.json` for the personal website.
+
+The Markdown remains the notification artifact. The JSON is the website artifact.
+
 ## Publish flow
 
 1. Push the source code branch.
