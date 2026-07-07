@@ -605,13 +605,7 @@ git commit -m "feat: normalize enriched live panel news"
 
 - [ ] **Step 1: Update the news panel title**
 
-In `src/components/UtilitiesPanel.jsx`, replace:
-
-```jsx
-          <h2>5 live links / 5 条链接（python接入 未完成）</h2>
-```
-
-with:
+In `src/components/UtilitiesPanel.jsx`, replace the existing news panel `<h2>` with:
 
 ```jsx
           <h2>AI daily brief / AI 每日精选</h2>
@@ -783,6 +777,8 @@ Expected JSON shape:
   ]
 }
 ```
+
+News items should be Chinese-facing technology news with URLs pointing to the original public article, not placeholder or aggregator-only links.
 
 The site accepts the Codex JSON only when at least five valid items are present. The generated `public/live-panel.json` contains exactly five news records. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler.
 ````
