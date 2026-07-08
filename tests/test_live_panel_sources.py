@@ -7,6 +7,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = ROOT / "scripts" / "fetch_live_panel.py"
 FIXTURE_PATH = ROOT / "tests" / "fixtures" / "ai-daily-latest.json"
+DEFAULT_AI_DAILY_PATH = ROOT / "ai-daily" / "latest.json"
 
 
 def load_module():
@@ -54,6 +55,15 @@ class LivePanelSourceTests(unittest.TestCase):
             for tag in item["tags"]:
                 self.assertIsInstance(tag, str)
                 self.assertTrue(tag.strip())
+
+    def test_repository_default_codex_daily_json_is_valid(self):
+        payload = json.loads(DEFAULT_AI_DAILY_PATH.read_text(encoding="utf-8"))
+        items = self.module.normalize_codex_daily_news(payload, limit=5)
+
+        self.assertEqual(len(items), 5)
+        self.assertTrue(all(item["source"] == "OSChina" for item in items))
+        self.assertTrue(all(item["summaryZh"] for item in items))
+        self.assertTrue(all(item["whyItMattersZh"] for item in items))
 
     def test_codex_daily_json_rejects_incomplete_payloads(self):
         payload = {
