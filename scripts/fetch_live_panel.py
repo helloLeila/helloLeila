@@ -30,6 +30,7 @@ TIMEZONE = "Asia/Shanghai"
 PANEL_PATH = Path(__file__).resolve().parents[1] / "public" / "live-panel.json"
 OPEN_METEO_SOURCE = "Open-Meteo"
 OPEN_METEO_FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
+TYPHOON_ALERT_UNAVAILABLE = {"en": "Alert source not connected", "zh": "暂未接入台风预警源"}
 HEADERS = {
     "User-Agent": "github-profile-home-live-panel/1.0",
     "Accept": "application/json",
@@ -192,7 +193,7 @@ def fetch_weather(previous_panel: dict) -> dict:
             "city": SHENZHEN["city"],
             "temperature": round(current.get("temperature_2m", 27)),
             "humidity": round(current.get("relative_humidity_2m", 70)),
-            "typhoonEta": {"en": "No active alert", "zh": "暂无台风预警"},
+            "typhoonEta": TYPHOON_ALERT_UNAVAILABLE,
             "condition": WEATHER_CODE_MAP.get(weather_code, WEATHER_CODE_MAP[2]),
             "daily": daily or previous_panel.get("weather", {}).get("daily", DEFAULT_DAILY),
             "source": OPEN_METEO_SOURCE,
@@ -206,7 +207,7 @@ def fetch_weather(previous_panel: dict) -> dict:
             "city": previous_weather.get("city", SHENZHEN["city"]),
             "temperature": previous_weather.get("temperature", 27),
             "humidity": previous_weather.get("humidity", 70),
-            "typhoonEta": previous_weather.get("typhoonEta", {"en": "No active alert", "zh": "暂无台风预警"}),
+            "typhoonEta": TYPHOON_ALERT_UNAVAILABLE,
             "condition": previous_weather.get("condition", WEATHER_CODE_MAP[2]),
             "daily": previous_weather.get("daily", DEFAULT_DAILY),
             "source": previous_weather.get("source", OPEN_METEO_SOURCE),

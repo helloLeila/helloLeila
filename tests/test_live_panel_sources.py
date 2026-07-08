@@ -132,7 +132,7 @@ class LivePanelSourceTests(unittest.TestCase):
                 "sourceUrl": "https://api.open-meteo.com/v1/forecast?old=1",
                 "observedAt": "2026-07-08T06:45",
                 "condition": {"en": "Partly cloudy", "zh": "多云"},
-                "typhoonEta": {"en": "No active alert", "zh": "暂无台风预警"},
+                "typhoonEta": {"en": "Alert source not connected", "zh": "暂未接入台风预警源"},
                 "daily": self.module.DEFAULT_DAILY,
             },
         }
