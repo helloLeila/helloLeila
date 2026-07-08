@@ -190,6 +190,14 @@ export function CoverageField({ lang, weather }) {
   const weatherSourceLabel = weather?.isFallback
     ? textByLang(lang, `${weather?.source || "Open-Meteo"} fallback`, `${weather?.source || "Open-Meteo"} 回退`)
     : weather?.source || "Open-Meteo";
+  const alertSourceLabel = weather?.typhoonAlert?.isFallback
+    ? textByLang(
+        lang,
+        `${weather?.typhoonAlert?.source || "NMC Typhoon"} fallback`,
+        `${weather?.typhoonAlert?.source || "中央气象台台风网"} 回退`,
+      )
+    : weather?.typhoonAlert?.source || textByLang(lang, "NMC Typhoon", "中央气象台台风网");
+  const alertSourceUrl = weather?.typhoonAlert?.alertUrl || weather?.typhoonAlert?.sourceUrl || "";
   const todayMorning = forecast[0]?.morningTemperature ?? "--";
   const todayEvening = forecast[0]?.eveningTemperature ?? "--";
   const todaySwing = forecast[0]?.swing ?? "--";
@@ -470,6 +478,16 @@ export function CoverageField({ lang, weather }) {
               <div className="weather-source weather-observed">
                 <span>{weather?.isFallback ? (lang === "zh" ? "沿用观测" : "Fallback observed") : (lang === "zh" ? "观测时间" : "Observed")}</span>
                 <strong>{observedAt || updatedAt}</strong>
+              </div>
+              <div className="weather-source weather-alert-source">
+                <span>{lang === "zh" ? "预警来源" : "Alert source"}</span>
+                {alertSourceUrl ? (
+                  <a className="weather-source-link" href={alertSourceUrl} target="_blank" rel="noreferrer">
+                    {alertSourceLabel}
+                  </a>
+                ) : (
+                  <strong>{alertSourceLabel}</strong>
+                )}
               </div>
             </footer>
 

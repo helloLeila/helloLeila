@@ -119,6 +119,18 @@ When updating the Codex Feishu automation prompt, ask it to generate both:
 
 The Markdown remains the notification artifact. The JSON is the website artifact.
 
+## Weather and typhoon warning source
+
+`npm run refresh:live-panel` writes weather and warning data into `public/live-panel.json`.
+
+- Weather forecast: Open-Meteo forecast API for Shenzhen coordinates.
+- Warning source: 中央气象台台风网, read through its public warning JSONP endpoint.
+- Typhoon activity: 中央气象台台风网 active typhoon list.
+
+The warning data is filtered to Shenzhen entries. If a Shenzhen typhoon warning is active, the site shows that warning title and links to the original notice. If Shenzhen has no typhoon warning but has other active warnings, the site says so explicitly, for example `暂无深圳台风预警；现有：雷雨大风黄色预警信号`. If the warning endpoint fails, the script reuses the previous saved warning payload and marks it as fallback; if no saved payload exists, it shows `台风预警源暂不可用`.
+
+This keeps the static GitHub Pages site honest: Open-Meteo remains the weather source, while typhoon and local warning status come from a China Meteorological Administration source. A commercial API such as QWeather can still be added later if you want SLA-style stability or wider city coverage, but it usually needs account credentials or a configured API host. The current implementation avoids secrets and still gives clickable original warning links.
+
 ## Publish flow
 
 1. Push the source code branch.

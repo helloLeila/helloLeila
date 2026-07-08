@@ -2,6 +2,18 @@
 import { useEffect, useMemo, useState } from "react";
 import { siteContent } from "../data/siteContent.js";
 
+const DEFAULT_TYPHOON_ALERT = {
+  status: "source-unavailable",
+  source: "中央气象台台风网",
+  sourceUrl: "https://typhoon.nmc.cn/web.html",
+  observedAt: "",
+  alertUrl: "https://typhoon.nmc.cn/web.html",
+  activeAlerts: [],
+  activeTyphoons: [],
+  isFallback: true,
+};
+const DEFAULT_TYPHOON_ETA = { en: "Typhoon alert source unavailable", zh: "台风预警源暂不可用" };
+
 // 生成当前部署环境下的实时面板地址，兼容本地预览和 Pages 部署。
 function getPanelUrl() {
   const baseUrl = import.meta?.env?.BASE_URL || "/";
@@ -75,7 +87,8 @@ export function useWeatherNews(lang) {
           temperature: data.weather?.temperature ?? "--",
           humidity: data.weather?.humidity ?? "--",
           condition: data.weather?.condition?.[lang] || (lang === "zh" ? "实时" : "Live"),
-          typhoonEta: data.weather?.typhoonEta || { en: "Alert source not connected", zh: "暂未接入台风预警源" },
+          typhoonEta: data.weather?.typhoonEta || DEFAULT_TYPHOON_ETA,
+          typhoonAlert: data.weather?.typhoonAlert || DEFAULT_TYPHOON_ALERT,
           daily: data.weather?.daily || buildFallbackDailyForecast(),
           updatedAt: data.updatedAt || "",
           source: data.weather?.source || "Open-Meteo",
@@ -94,7 +107,8 @@ export function useWeatherNews(lang) {
             temperature: 26,
             humidity: 71,
             condition: lang === "zh" ? "网络回退" : "Fallback",
-            typhoonEta: { en: "Alert source not connected", zh: "暂未接入台风预警源" },
+            typhoonEta: DEFAULT_TYPHOON_ETA,
+            typhoonAlert: DEFAULT_TYPHOON_ALERT,
             daily: buildFallbackDailyForecast(),
             updatedAt: new Date().toISOString(),
             source: lang === "zh" ? "本地回退" : "Local fallback",

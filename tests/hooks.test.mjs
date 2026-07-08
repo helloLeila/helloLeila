@@ -39,6 +39,14 @@ test("useWeatherNews exposes codex news separately from public news", () => {
   assert.match(source, /return\s+useMemo\(\(\)\s*=>\s*\(\{\s*weather,\s*news,\s*codexNews\s*\}\)/);
 });
 
+test("useWeatherNews exposes typhoon alert provenance", () => {
+  const source = fs.readFileSync(path.resolve(process.cwd(), "src/hooks/useWeatherNews.js"), "utf8");
+
+  assert.match(source, /typhoonAlert:\s*data\.weather\?\.typhoonAlert/);
+  assert.match(source, /中央气象台台风网/);
+  assert.match(source, /https:\/\/typhoon\.nmc\.cn\/web\.html/);
+});
+
 test("useWeatherNews normalizes initial fallback news state", () => {
   const source = fs.readFileSync(path.resolve(process.cwd(), "src/hooks/useWeatherNews.js"), "utf8");
 

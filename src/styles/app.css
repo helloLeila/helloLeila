@@ -1116,12 +1116,11 @@ a {
 }
 
 .weather-panel-footer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+  align-items: start;
   gap: 12px;
   padding-top: 2px;
-  flex-wrap: wrap;
 }
 
 .weather-source {
@@ -1147,8 +1146,8 @@ a {
 }
 
 .weather-observed {
-  justify-items: end;
-  text-align: right;
+  justify-items: start;
+  text-align: left;
 }
 
 .coverage-clock-panel {

@@ -62,6 +62,9 @@ test("coverage field uses lang-specific heading and summary grid structure", () 
   assert.match(coverageSource, /weather\?\.sourceUrl/);
   assert.match(coverageSource, /weather\?\.isFallback/);
   assert.match(coverageSource, /weather-source-link/);
+  assert.match(coverageSource, /alertSourceLabel/);
+  assert.match(coverageSource, /weather\?\.typhoonAlert\?\.alertUrl/);
+  assert.match(coverageSource, /weather-alert-source/);
 });
 
 // 验证地图示例被封装成真正的 React 组件，而不是直接把 demo 源码铺在模块顶层。
@@ -191,6 +194,8 @@ test("layout css protects mobile content from clipping", () => {
   assert.match(appStyleSource, /\.coverage-copy\s*\{[^}]*min-width:\s*0/);
   assert.match(appStyleSource, /\.coverage-weather-card\s*\{[^}]*min-width:\s*0/);
   assert.match(appStyleSource, /\.metric-row\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.weather-panel-footer\s*\{[\s\S]*display:\s*grid/);
+  assert.match(appStyleSource, /\.weather-panel-footer\s*\{[\s\S]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(126px,\s*1fr\)\)/);
   assert.match(appStyleSource, /\.section-head\s*\{[^}]*min-width:\s*0/);
   assert.match(appStyleSource, /\.section-kicker\s*\{[^}]*white-space:\s*normal/);
   assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.toolbar-note\s*\{[\s\S]*white-space:\s*normal/);

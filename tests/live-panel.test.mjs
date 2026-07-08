@@ -26,6 +26,14 @@ test("daily live panel fixture exposes weather, codex global brief, and public n
   assert.ok(data.weather.typhoonEta);
   assert.equal(typeof data.weather.typhoonEta.zh, "string");
   assert.equal(typeof data.weather.typhoonEta.en, "string");
+  assert.ok(data.weather.typhoonAlert);
+  assert.equal(data.weather.typhoonAlert.source, "中央气象台台风网");
+  assert.match(data.weather.typhoonAlert.sourceUrl, /^https:\/\/typhoon\.nmc\.cn\/web\.html/);
+  assert.equal(typeof data.weather.typhoonAlert.status, "string");
+  assert.equal(typeof data.weather.typhoonAlert.alertUrl, "string");
+  assert.equal(typeof data.weather.typhoonAlert.isFallback, "boolean");
+  assert.ok(Array.isArray(data.weather.typhoonAlert.activeAlerts));
+  assert.ok(Array.isArray(data.weather.typhoonAlert.activeTyphoons));
   assert.ok(Array.isArray(data.weather.daily));
   assert.equal(data.weather.daily.length, 7);
   assert.equal(typeof data.weather.daily[0].morningTemperature, "number");

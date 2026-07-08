@@ -1,13 +1,45 @@
 {
-  "updatedAt": "2026-07-08T12:15:00+08:00",
+  "updatedAt": "2026-07-08T12:34:00+08:00",
   "aiStatus": "codex",
   "weather": {
     "city": "Shenzhen",
     "temperature": 29,
-    "humidity": 81,
+    "humidity": 80,
     "typhoonEta": {
-      "en": "Alert source not connected",
-      "zh": "暂未接入台风预警源"
+      "en": "No Shenzhen typhoon alert; active local alert: 雷雨大风黄色预警信号; Active cyclone: 巴威",
+      "zh": "暂无深圳台风预警；现有：雷雨大风黄色预警信号"
+    },
+    "typhoonAlert": {
+      "status": "clear",
+      "source": "中央气象台台风网",
+      "sourceUrl": "https://typhoon.nmc.cn/web.html",
+      "observedAt": "2026年07月08日11时42分",
+      "alertUrl": "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708114238.html",
+      "activeAlerts": [
+        {
+          "title": "广东省深圳市发布雷雨大风黄色预警信号",
+          "publishedAt": "2026年07月08日11时42分",
+          "description": "【深圳市扩展分区雷雨大风黄色预警信号】深圳市气象台2026年07月08日11时37分将分区雷雨大风黄色预警信号扩展至光明区和宝安区（石岩街道），预计2小时内受雷雨云团影响，上述地区有（雷）阵雨，部分时间雨势较大，并伴有强雷电和8级左右短时大风。请落实各项防风防雨防雷电措施。",
+          "url": "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708114238.html",
+          "type": "雷雨大风",
+          "level": "黄色"
+        }
+      ],
+      "activeTyphoons": [
+        {
+          "id": "3257931",
+          "nameEn": "BAVI",
+          "nameZh": "巴威",
+          "number": "2609",
+          "status": "start",
+          "url": "https://typhoon.nmc.cn/web.html?tid=3257931"
+        }
+      ],
+      "isFallback": false,
+      "typhoonEta": {
+        "en": "No Shenzhen typhoon alert; active local alert: 雷雨大风黄色预警信号; Active cyclone: 巴威",
+        "zh": "暂无深圳台风预警；现有：雷雨大风黄色预警信号"
+      }
     },
     "condition": {
       "en": "Thunderstorm",
@@ -73,7 +105,7 @@
     ],
     "source": "Open-Meteo",
     "sourceUrl": "https://api.open-meteo.com/v1/forecast?latitude=22.5431&longitude=114.0579&current=temperature_2m%2Crelative_humidity_2m%2Cweather_code&hourly=temperature_2m&timezone=Asia%2FShanghai&forecast_days=7",
-    "observedAt": "2026-07-08T12:15",
+    "observedAt": "2026-07-08T12:30",
     "isFallback": false
   },
   "codexNews": [

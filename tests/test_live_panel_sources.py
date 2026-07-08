@@ -109,6 +109,7 @@ class LivePanelSourceTests(unittest.TestCase):
             }
 
         self.module.fetch_json = fake_fetch_json
+        self.module.fetch_text = lambda url: "fetch_json_warning_json([])" if "warning" in url else "typhoon_jsons_list_default(({\"typhoonList\":[]}))"
 
         weather = self.module.fetch_weather({})
 
@@ -120,6 +121,10 @@ class LivePanelSourceTests(unittest.TestCase):
         self.assertEqual(weather["condition"]["zh"], "雷暴")
         self.assertEqual(weather["temperature"], 28)
         self.assertEqual(weather["humidity"], 85)
+        self.assertEqual(weather["typhoonAlert"]["source"], "中央气象台台风网")
+        self.assertEqual(weather["typhoonAlert"]["status"], "clear")
+        self.assertFalse(weather["typhoonAlert"]["isFallback"])
+        self.assertEqual(weather["typhoonEta"]["zh"], "暂无深圳台风预警")
 
     def test_fetch_weather_marks_previous_data_when_api_falls_back(self):
         previous_panel = {
@@ -133,10 +138,30 @@ class LivePanelSourceTests(unittest.TestCase):
                 "observedAt": "2026-07-08T06:45",
                 "condition": {"en": "Partly cloudy", "zh": "多云"},
                 "typhoonEta": {"en": "Alert source not connected", "zh": "暂未接入台风预警源"},
+                "typhoonAlert": {
+                    "status": "active",
+                    "source": "中央气象台台风网",
+                    "sourceUrl": "https://typhoon.nmc.cn/web.html",
+                    "observedAt": "2026年07月08日06时30分",
+                    "alertUrl": "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708063000.html",
+                    "activeAlerts": [
+                        {
+                            "title": "广东省深圳市发布台风蓝色预警信号",
+                            "publishedAt": "2026年07月08日06时30分",
+                            "description": "深圳市气象台发布台风蓝色预警信号。",
+                            "url": "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708063000.html",
+                            "type": "台风",
+                            "level": "蓝色",
+                        }
+                    ],
+                    "activeTyphoons": [{"id": "3257931", "nameZh": "巴威", "nameEn": "BAVI", "number": "2609", "status": "start"}],
+                    "isFallback": False,
+                },
                 "daily": self.module.DEFAULT_DAILY,
             },
         }
         self.module.fetch_json = lambda url: (_ for _ in ()).throw(self.module.URLError("offline"))
+        self.module.fetch_text = lambda url: (_ for _ in ()).throw(self.module.URLError("offline"))
 
         weather = self.module.fetch_weather(previous_panel)
 
@@ -146,6 +171,89 @@ class LivePanelSourceTests(unittest.TestCase):
         self.assertTrue(weather["isFallback"])
         self.assertEqual(weather["temperature"], 27)
         self.assertEqual(weather["humidity"], 70)
+        self.assertEqual(weather["typhoonAlert"]["status"], "active")
+        self.assertTrue(weather["typhoonAlert"]["isFallback"])
+        self.assertEqual(weather["typhoonEta"]["zh"], "广东省深圳市发布台风蓝色预警信号")
+
+    def test_parse_nmc_warning_jsonp_filters_shenzhen_alerts_and_links_original_notice(self):
+        payload = (
+            'fetch_json_warning_json([["广东省深圳市发布台风蓝色预警信号","","","","",'
+            '"2026年07月08日06时30分","/alarm/p0010004.png","22.547","114.0859",'
+            '"深圳市气象台发布台风蓝色预警信号。","1","/publish/alarm/44030041600000_20260708063000.html"],'
+            '["广东省广州市发布雷雨大风黄色预警信号","","","","","2026年07月08日06时20分",'
+            '"/alarm/p0015003.png","23.1307","113.2545","广州预警正文","1",'
+            '"/publish/alarm/44010041600000_20260708062000.html"]])'
+        )
+
+        alerts = self.module.parse_nmc_warning_alerts(payload)
+
+        self.assertEqual(len(alerts), 1)
+        self.assertEqual(alerts[0]["title"], "广东省深圳市发布台风蓝色预警信号")
+        self.assertEqual(alerts[0]["type"], "台风")
+        self.assertEqual(alerts[0]["level"], "蓝色")
+        self.assertEqual(alerts[0]["publishedAt"], "2026年07月08日06时30分")
+        self.assertEqual(alerts[0]["url"], "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708063000.html")
+
+    def test_build_typhoon_alert_summary_prefers_active_shenzhen_typhoon_warning(self):
+        alerts = [
+            {
+                "title": "广东省深圳市发布台风蓝色预警信号",
+                "publishedAt": "2026年07月08日06时30分",
+                "description": "深圳市气象台发布台风蓝色预警信号。",
+                "url": "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708063000.html",
+                "type": "台风",
+                "level": "蓝色",
+            }
+        ]
+        active_typhoons = [{"id": "3257931", "nameZh": "巴威", "nameEn": "BAVI", "number": "2609", "status": "start"}]
+
+        summary = self.module.build_typhoon_alert_summary(alerts, active_typhoons)
+
+        self.assertEqual(summary["status"], "active")
+        self.assertEqual(summary["typhoonEta"]["zh"], "广东省深圳市发布台风蓝色预警信号")
+        self.assertEqual(summary["alertUrl"], "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708063000.html")
+        self.assertEqual(summary["observedAt"], "2026年07月08日06时30分")
+        self.assertEqual(summary["activeTyphoons"][0]["nameZh"], "巴威")
+
+    def test_build_typhoon_alert_summary_reports_non_typhoon_shenzhen_alerts_truthfully(self):
+        alerts = [
+            {
+                "title": "广东省深圳市发布雷雨大风黄色预警信号",
+                "publishedAt": "2026年07月08日11时42分",
+                "description": "深圳市气象台发布雷雨大风黄色预警信号。",
+                "url": "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708114238.html",
+                "type": "雷雨大风",
+                "level": "黄色",
+            }
+        ]
+        active_typhoons = [{"id": "3257931", "nameZh": "巴威", "nameEn": "BAVI", "number": "2609", "status": "start"}]
+
+        summary = self.module.build_typhoon_alert_summary(alerts, active_typhoons)
+
+        self.assertEqual(summary["status"], "clear")
+        self.assertEqual(summary["typhoonEta"]["zh"], "暂无深圳台风预警；现有：雷雨大风黄色预警信号")
+        self.assertIn("Active cyclone", summary["typhoonEta"]["en"])
+        self.assertEqual(summary["alertUrl"], "https://typhoon.nmc.cn/weatherservice/publish/alarm/44030041600000_20260708114238.html")
+
+    def test_parse_nmc_typhoon_list_extracts_active_typhoons(self):
+        payload = (
+            'typhoon_jsons_list_default(({"typhoonList":['
+            '[3257931,"BAVI","巴威","2609","2609",null,"位于越南北部的山脉","start"],'
+            '[3252248,"HIGOS","海高斯","2608","2608",null,"无花果","stop"]]}))'
+        )
+
+        active_typhoons = self.module.parse_nmc_active_typhoons(payload)
+
+        self.assertEqual(active_typhoons, [
+            {
+                "id": "3257931",
+                "nameEn": "BAVI",
+                "nameZh": "巴威",
+                "number": "2609",
+                "status": "start",
+                "url": "https://typhoon.nmc.cn/web.html?tid=3257931",
+            }
+        ])
 
     def test_codex_daily_json_rejects_incomplete_payloads(self):
         payload = {

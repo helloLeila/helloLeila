@@ -223,7 +223,7 @@ export const siteContent = {
     mapNotes: [
       { key: "city", labelEn: "Working city", labelZh: "当前城市", valueEn: "Shenzhen", valueZh: "深圳" },
       { key: "range", labelEn: "Collaboration range", labelZh: "协作范围", valueEn: "Greater Bay Area", valueZh: "粤港澳大湾区" },
-      { key: "typhoonEta", labelEn: "Typhoon alert source", labelZh: "台风预警源", valueEn: "Alert source not connected", valueZh: "暂未接入台风预警源" },
+      { key: "typhoonEta", labelEn: "Typhoon / alerts", labelZh: "台风/预警", valueEn: "Typhoon alert source unavailable", valueZh: "台风预警源暂不可用" },
     ],
   },
   weather: {

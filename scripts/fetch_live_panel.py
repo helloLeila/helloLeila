@@ -15,7 +15,7 @@ from html import unescape
 from ipaddress import ip_address
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode, urlparse
+from urllib.parse import urlencode, urljoin, urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 from zoneinfo import ZoneInfo
@@ -30,7 +30,14 @@ TIMEZONE = "Asia/Shanghai"
 PANEL_PATH = Path(__file__).resolve().parents[1] / "public" / "live-panel.json"
 OPEN_METEO_SOURCE = "Open-Meteo"
 OPEN_METEO_FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
-TYPHOON_ALERT_UNAVAILABLE = {"en": "Alert source not connected", "zh": "暂未接入台风预警源"}
+NMC_TYPHOON_SOURCE = "中央气象台台风网"
+NMC_TYPHOON_WEB_URL = "https://typhoon.nmc.cn/web.html"
+NMC_WEATHER_SERVICE_URL = "https://typhoon.nmc.cn/weatherservice"
+NMC_WARNING_URL = f"{NMC_WEATHER_SERVICE_URL}/fetch_json/warning/json"
+NMC_TYPHOON_LIST_URL = f"{NMC_WEATHER_SERVICE_URL}/typhoon/jsons/list_default"
+TYPHOON_ALERT_UNAVAILABLE = {"en": "Typhoon alert source unavailable", "zh": "台风预警源暂不可用"}
+TYPHOON_ALERT_CLEAR = {"en": "No Shenzhen typhoon alert", "zh": "暂无深圳台风预警"}
+WARNING_LEVELS = ("红色", "橙色", "黄色", "蓝色")
 HEADERS = {
     "User-Agent": "github-profile-home-live-panel/1.0",
     "Accept": "application/json",
@@ -178,8 +185,219 @@ def build_weather_url() -> str:
     return f"{OPEN_METEO_FORECAST_URL}?{params}"
 
 
+def parse_jsonp_payload(text: str) -> object:
+    start = text.find("(")
+    end = text.rfind(")")
+    if start < 0 or end <= start:
+        raise ValueError("JSONP payload missing wrapper")
+
+    payload = text[start + 1:end].strip()
+    while payload.startswith("(") and payload.endswith(")"):
+        payload = payload[1:-1].strip()
+
+    return json.loads(payload)
+
+
+def infer_warning_type_and_level(title: str) -> tuple[str, str]:
+    level = next((item for item in WARNING_LEVELS if item in title), "")
+    text = title.split("发布", 1)[1] if "发布" in title else title
+    text = text.replace("预警信号", "").replace("预警", "")
+    for item in WARNING_LEVELS:
+        text = text.replace(item, "")
+    text = text.strip(" ：:[]【】")
+    return text or "天气", level
+
+
+def full_nmc_url(path: object) -> str:
+    if not isinstance(path, str) or not path.strip():
+        return NMC_TYPHOON_WEB_URL
+    return urljoin(f"{NMC_WEATHER_SERVICE_URL}/", path.strip().lstrip("/"))
+
+
+def parse_nmc_warning_alerts(text: str) -> list[dict]:
+    payload = parse_jsonp_payload(text)
+    if not isinstance(payload, list):
+        return []
+
+    alerts = []
+    for row in payload:
+        if not isinstance(row, list) or len(row) < 12:
+            continue
+
+        title = clean_title(row[0])
+        description = clean_title(row[9])
+        if "深圳" not in title and "深圳" not in description:
+            continue
+
+        alert_type, level = infer_warning_type_and_level(title)
+        alerts.append(
+            {
+                "title": title,
+                "publishedAt": clean_title(row[5]),
+                "description": description,
+                "url": full_nmc_url(row[11]),
+                "type": alert_type,
+                "level": level,
+            }
+        )
+
+    return alerts
+
+
+def parse_nmc_active_typhoons(text: str) -> list[dict]:
+    payload = parse_jsonp_payload(text)
+    typhoon_list = payload.get("typhoonList", []) if isinstance(payload, dict) else []
+    active = []
+
+    for item in typhoon_list:
+        if not isinstance(item, list) or len(item) < 8 or item[7] != "start":
+            continue
+
+        typhoon_id = str(item[0])
+        active.append(
+            {
+                "id": typhoon_id,
+                "nameEn": clean_title(item[1]),
+                "nameZh": clean_title(item[2]),
+                "number": clean_title(item[4] or item[3]),
+                "status": clean_title(item[7]),
+                "url": f"{NMC_TYPHOON_WEB_URL}?tid={typhoon_id}",
+            }
+        )
+
+    return active
+
+
+def format_alert_label(alert: dict) -> str:
+    label = f"{alert.get('type', '')}{alert.get('level', '')}预警信号"
+    return clean_title(label) or alert.get("title", "天气预警")
+
+
+def format_active_typhoon_names(active_typhoons: list[dict]) -> str:
+    names = []
+    for typhoon in active_typhoons[:3]:
+        name = typhoon.get("nameZh") or typhoon.get("nameEn") or typhoon.get("number")
+        if name:
+            names.append(name)
+    return "、".join(names)
+
+
+def is_unavailable_typhoon_eta(value: object) -> bool:
+    if not isinstance(value, dict):
+        return True
+    text = f"{value.get('zh', '')} {value.get('en', '')}"
+    return "未接入" in text or "暂不可用" in text or "unavailable" in text.lower() or "not connected" in text.lower()
+
+
+def build_typhoon_alert_summary(alerts: list[dict], active_typhoons: list[dict], is_fallback: bool = False) -> dict:
+    shenzhen_alerts = alerts[:5]
+    typhoon_alerts = [
+        alert
+        for alert in shenzhen_alerts
+        if "台风" in alert.get("type", "") or "台风" in alert.get("title", "") or "台风" in alert.get("description", "")
+    ]
+    primary_alert = typhoon_alerts[0] if typhoon_alerts else (shenzhen_alerts[0] if shenzhen_alerts else None)
+    active_names = format_active_typhoon_names(active_typhoons)
+
+    summary = {
+        "status": "clear",
+        "source": NMC_TYPHOON_SOURCE,
+        "sourceUrl": NMC_TYPHOON_WEB_URL,
+        "observedAt": primary_alert.get("publishedAt", "") if primary_alert else "",
+        "alertUrl": primary_alert.get("url", NMC_TYPHOON_WEB_URL) if primary_alert else NMC_TYPHOON_WEB_URL,
+        "activeAlerts": shenzhen_alerts,
+        "activeTyphoons": active_typhoons[:3],
+        "isFallback": is_fallback,
+        "typhoonEta": TYPHOON_ALERT_CLEAR,
+    }
+
+    if typhoon_alerts:
+        title = primary_alert["title"]
+        summary["status"] = "active"
+        summary["typhoonEta"] = {
+            "en": f"Active Shenzhen typhoon alert: {format_alert_label(primary_alert)}",
+            "zh": title,
+        }
+        return summary
+
+    if shenzhen_alerts:
+        labels = "、".join(format_alert_label(alert) for alert in shenzhen_alerts[:2])
+        english = f"No Shenzhen typhoon alert; active local alert: {labels}"
+        if active_names:
+            english = f"{english}; Active cyclone: {active_names}"
+        summary["typhoonEta"] = {
+            "en": english,
+            "zh": f"暂无深圳台风预警；现有：{labels}",
+        }
+        return summary
+
+    if active_names:
+        summary["typhoonEta"] = {
+            "en": f"No Shenzhen typhoon alert; Active cyclone: {active_names}",
+            "zh": f"暂无深圳台风预警；活动台风：{active_names}",
+        }
+
+    return summary
+
+
+def fallback_typhoon_alert(previous_weather: dict, active_typhoons: list[dict] | None = None) -> dict:
+    previous_alert = previous_weather.get("typhoonAlert")
+    if isinstance(previous_alert, dict):
+        previous_alerts = previous_alert.get("activeAlerts", [])
+        previous_typhoon_alert = next(
+            (
+                alert
+                for alert in previous_alerts
+                if isinstance(alert, dict)
+                and ("台风" in alert.get("type", "") or "台风" in alert.get("title", "") or "台风" in alert.get("description", ""))
+            ),
+            None,
+        )
+        typhoon_eta = previous_weather.get("typhoonEta") or previous_alert.get("typhoonEta") or TYPHOON_ALERT_UNAVAILABLE
+        if previous_typhoon_alert and is_unavailable_typhoon_eta(typhoon_eta):
+            typhoon_eta = {
+                "en": f"Active Shenzhen typhoon alert: {format_alert_label(previous_typhoon_alert)}",
+                "zh": previous_typhoon_alert.get("title", TYPHOON_ALERT_UNAVAILABLE["zh"]),
+            }
+        fallback_alert = {
+            **previous_alert,
+            "source": previous_alert.get("source", NMC_TYPHOON_SOURCE),
+            "sourceUrl": previous_alert.get("sourceUrl", NMC_TYPHOON_WEB_URL),
+            "activeAlerts": previous_alerts,
+            "activeTyphoons": previous_alert.get("activeTyphoons", active_typhoons or []),
+            "isFallback": True,
+        }
+        fallback_alert["typhoonEta"] = typhoon_eta
+        return fallback_alert
+
+    return {
+        "status": "source-unavailable",
+        "source": NMC_TYPHOON_SOURCE,
+        "sourceUrl": NMC_TYPHOON_WEB_URL,
+        "observedAt": previous_weather.get("observedAt", ""),
+        "alertUrl": NMC_TYPHOON_WEB_URL,
+        "activeAlerts": [],
+        "activeTyphoons": active_typhoons or [],
+        "isFallback": True,
+        "typhoonEta": previous_weather.get("typhoonEta", TYPHOON_ALERT_UNAVAILABLE),
+    }
+
+
+def fetch_typhoon_alert(previous_weather: dict) -> dict:
+    active_typhoons = []
+
+    try:
+        alerts = parse_nmc_warning_alerts(fetch_text(NMC_WARNING_URL))
+        active_typhoons = parse_nmc_active_typhoons(fetch_text(NMC_TYPHOON_LIST_URL))
+        return build_typhoon_alert_summary(alerts, active_typhoons)
+    except (HTTPError, URLError, TimeoutError, ValueError, json.JSONDecodeError, TypeError):
+        return fallback_typhoon_alert(previous_weather, active_typhoons)
+
+
 def fetch_weather(previous_panel: dict) -> dict:
     url = build_weather_url()
+    previous_weather = previous_panel.get("weather", {})
+    typhoon_alert = fetch_typhoon_alert(previous_weather)
 
     try:
         data = fetch_json(url)
@@ -193,7 +411,8 @@ def fetch_weather(previous_panel: dict) -> dict:
             "city": SHENZHEN["city"],
             "temperature": round(current.get("temperature_2m", 27)),
             "humidity": round(current.get("relative_humidity_2m", 70)),
-            "typhoonEta": TYPHOON_ALERT_UNAVAILABLE,
+            "typhoonEta": typhoon_alert["typhoonEta"],
+            "typhoonAlert": typhoon_alert,
             "condition": WEATHER_CODE_MAP.get(weather_code, WEATHER_CODE_MAP[2]),
             "daily": daily or previous_panel.get("weather", {}).get("daily", DEFAULT_DAILY),
             "source": OPEN_METEO_SOURCE,
@@ -202,12 +421,12 @@ def fetch_weather(previous_panel: dict) -> dict:
             "isFallback": False,
         }
     except (HTTPError, URLError, TimeoutError, ValueError, KeyError):
-        previous_weather = previous_panel.get("weather", {})
         return {
             "city": previous_weather.get("city", SHENZHEN["city"]),
             "temperature": previous_weather.get("temperature", 27),
             "humidity": previous_weather.get("humidity", 70),
-            "typhoonEta": TYPHOON_ALERT_UNAVAILABLE,
+            "typhoonEta": typhoon_alert["typhoonEta"],
+            "typhoonAlert": typhoon_alert,
             "condition": previous_weather.get("condition", WEATHER_CODE_MAP[2]),
             "daily": previous_weather.get("daily", DEFAULT_DAILY),
             "source": previous_weather.get("source", OPEN_METEO_SOURCE),
