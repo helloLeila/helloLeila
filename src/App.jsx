@@ -12,7 +12,7 @@ import { useWeatherNews } from "./hooks/useWeatherNews.js";
 // 根据当前语言和实时数据渲染完整个人网站页面。
 export default function App() {
   const [lang, setLang] = useState("zh");
-  const { weather, news } = useWeatherNews(lang);
+  const { weather, news, codexNews } = useWeatherNews(lang);
 
   useEffect(() => {
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
@@ -37,7 +37,7 @@ export default function App() {
           </div>
 
           <CoverageField lang={lang} weather={weather} />
-          <UtilitiesPanel lang={lang} news={news} weather={weather} />
+          <UtilitiesPanel lang={lang} news={news} codexNews={codexNews} weather={weather} />
           <WorkLinks />
         </section>
       </main>

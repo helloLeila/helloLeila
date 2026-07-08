@@ -72,9 +72,9 @@ WEATHER_CODE_MAP = {
 DEFAULT_NEWS = [
     {"title": "36氪最新资讯", "url": "https://36kr.com/feed"},
     {"title": "掘金热榜文章", "url": "https://juejin.cn/hot/articles"},
-    {"title": "The Verge latest stories", "url": "https://www.theverge.com/rss/index.xml"},
     {"title": "开源中国资讯", "url": "https://www.oschina.net/news"},
-    {"title": "36氪科技快讯", "url": "https://36kr.com/"},
+    {"title": "InfoQ 中文资讯", "url": "https://www.infoq.cn/"},
+    {"title": "机器之心资讯", "url": "https://www.jiqizhixin.com/"},
 ]
 
 DEFAULT_DAILY = [
@@ -369,7 +369,7 @@ def parse_rss_items(feed_text: str, limit: int) -> list[dict]:
     return items
 
 
-# 通过公开 RSS 抓取 36 氪与 The Verge 新闻。
+# 通过公开 RSS 抓取中文科技新闻。
 def fetch_rss_news(url: str, limit: int) -> list[dict]:
     try:
         return parse_rss_items(fetch_text(url), limit)
@@ -438,7 +438,6 @@ def fetch_fallback_news(previous_panel: dict, limit: int = 5) -> list[dict]:
             r'href="(https://www\.oschina\.net/news/[^"]+)".*?>([^<]{4,120})</a>',
             limit=3,
         ),
-        fetch_rss_news("https://www.theverge.com/rss/index.xml", limit=3),
     ]
 
     mixed = interleave_news_lists(source_lists, limit)
@@ -449,27 +448,28 @@ def fetch_fallback_news(previous_panel: dict, limit: int = 5) -> list[dict]:
     return previous_news[:limit] if isinstance(previous_news, list) and previous_news else DEFAULT_NEWS[:limit]
 
 
-def build_news(previous_panel: dict, limit: int = 5) -> tuple[str, list[dict]]:
+def build_news(previous_panel: dict, limit: int = 5) -> tuple[str, list[dict], list[dict]]:
+    codex_news = []
     try:
         codex_news = normalize_codex_daily_news(load_codex_daily_payload(), limit=limit)
-        if codex_news:
-            return "codex", codex_news
     except (HTTPError, URLError, TimeoutError, ValueError, OSError, json.JSONDecodeError):
         pass
 
-    return "fallback", fetch_fallback_news(previous_panel, limit=limit)
+    public_news = fetch_fallback_news(previous_panel, limit=limit)
+    return "codex" if codex_news else "fallback", codex_news, public_news
 
 
 # 生成完整面板结构并落盘。
 def build_panel() -> dict:
     previous_panel = load_previous_panel()
     now = datetime.now(ZoneInfo(TIMEZONE)).replace(second=0, microsecond=0)
-    ai_status, news = build_news(previous_panel, limit=5)
+    ai_status, codex_news, public_news = build_news(previous_panel, limit=5)
     return {
         "updatedAt": now.isoformat(),
         "aiStatus": ai_status,
         "weather": fetch_weather(previous_panel),
-        "news": news,
+        "codexNews": codex_news,
+        "news": public_news,
     }
 
 

@@ -4,36 +4,39 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
+const root = process.cwd();
+
 const coverageSource = fs.readFileSync(
-  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/components/CoverageField.jsx"),
+  path.resolve(root, "src/components/CoverageField.jsx"),
   "utf8"
 );
 const milestoneSource = fs.readFileSync(
-  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/components/AnnualMilestones.jsx"),
+  path.resolve(root, "src/components/AnnualMilestones.jsx"),
   "utf8"
 );
 const milestoneTrendSource = fs.readFileSync(
-  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/components/MilestoneTrend.jsx"),
+  path.resolve(root, "src/components/MilestoneTrend.jsx"),
   "utf8"
 );
 const weatherTrendSource = fs.readFileSync(
-  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/components/WeatherTrendChart.jsx"),
+  path.resolve(root, "src/components/WeatherTrendChart.jsx"),
   "utf8"
 );
 const appStyleSource = fs.readFileSync(
-  path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/src/styles/app.css"),
+  path.resolve(root, "src/styles/app.css"),
   "utf8"
 );
 const packageJson = JSON.parse(
   fs.readFileSync(
-    path.resolve("/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/package.json"),
+    path.resolve(root, "package.json"),
     "utf8"
   )
 );
 const l7ThreePackageJson = JSON.parse(
   fs.readFileSync(
     path.resolve(
-      "/Users/leila/Documents/Playground 3/github-profile-home/.worktrees/react-antv-homepage/node_modules/@antv/l7-three/package.json"
+      root,
+      "node_modules/@antv/l7-three/package.json"
     ),
     "utf8"
   )
@@ -141,13 +144,22 @@ test("coverage field uses the same three runtime as l7-three", () => {
   assert.ok(packageAligned || sourceUsesL7ThreeRuntime);
 });
 
-test("utilities panel renders enriched ai daily brief fields", () => {
+test("utilities panel renders codex and public news panes", () => {
   const utilitiesSource = fs.readFileSync(
     path.resolve(process.cwd(), "src/components/UtilitiesPanel.jsx"),
     "utf8"
   );
 
-  assert.match(utilitiesSource, /AI daily brief \/ AI 每日精选/);
+  assert.match(utilitiesSource, /codexNews\s*=\s*\[\]/);
+  assert.match(utilitiesSource, /const hasCodexNews = codexNews\?\.length > 0/);
+  assert.match(utilitiesSource, /Codex global brief \/ Codex 国外精选/);
+  assert.match(utilitiesSource, /Current public feed \/ 当前五条/);
+  assert.match(utilitiesSource, /news-brief-grid/);
+  assert.match(utilitiesSource, /has-codex/);
+  assert.match(utilitiesSource, /news-pane/);
+  assert.match(utilitiesSource, /id="live-news"/);
+  assert.match(utilitiesSource, /\{hasCodexNews \? \(/);
+  assert.match(utilitiesSource, /variant="codex"[\s\S]*\) : null\}/);
   assert.match(utilitiesSource, /news-row-head/);
   assert.match(utilitiesSource, /href=\{item\.url\}/);
   assert.match(utilitiesSource, /item\.title/);
@@ -156,4 +168,15 @@ test("utilities panel renders enriched ai daily brief fields", () => {
   assert.match(utilitiesSource, /item\.whyItMatters/);
   assert.match(utilitiesSource, /item\.tags\.map/);
   assert.match(utilitiesSource, /news-tags/);
+});
+
+test("layout css protects mobile content from clipping", () => {
+  assert.match(appStyleSource, /\.shell\s*\{[\s\S]*width:\s*min\(100%,\s*1540px\)/);
+  assert.match(appStyleSource, /\.hero-stage\s*\{[\s\S]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.toolbar\s*\{[\s\S]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.toolbar-note\s*\{[\s\S]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.headline\s*\{[\s\S]*overflow-wrap:\s*anywhere/);
+  assert.match(appStyleSource, /\.live-news-card\s*\{[\s\S]*overflow:\s*visible/);
+  assert.match(appStyleSource, /\.news-list li\s*\{[\s\S]*min-width:\s*0/);
+  assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.toolbar-note\s*\{[\s\S]*white-space:\s*normal/);
 });

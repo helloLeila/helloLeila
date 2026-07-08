@@ -29,20 +29,20 @@ class LivePanelSourceTests(unittest.TestCase):
         self.assertEqual(
             [item["url"] for item in items],
             [
-                "https://www.oschina.net/news/471539",
-                "https://www.oschina.net/news/471531",
-                "https://my.oschina.net/u/3874284/blog/19715962",
-                "https://www.oschina.net/news/471519/codeforge-26-4-0-released",
-                "https://www.oschina.net/news/471516",
+                "https://github.blog/changelog/2026-07-07-github-copilot-app-available-to-all/",
+                "https://www.axios.com/2026/07/07/report-ai-safety-pledges",
+                "https://www.wsj.com/tech/ai/killer-robots-must-be-banned-u-n-secretary-general-says-00603020",
+                "https://www.businessinsider.com/vercel-ceo-guillermo-rauch-ai-lab-partner-outdated-2026-7",
+                "https://www.businessinsider.com/openai-hiring-expert-investment-banking-job-pay-experience-2026-7",
             ],
         )
-        self.assertEqual(items[0]["title"], "字节 Seed 开源 EdgeBench 基准测试")
-        self.assertEqual(items[0]["source"], "Codex Daily")
-        self.assertEqual(items[0]["summaryZh"], "字节 Seed 发布面向真实环境学习的长程智能体评测集。")
-        self.assertEqual(items[0]["summaryEn"], "ByteDance Seed released EdgeBench for long-horizon agent evaluation.")
-        self.assertEqual(items[0]["whyItMattersZh"], "它能帮助判断智能体是否具备持续执行复杂任务的工程能力。")
-        self.assertEqual(items[0]["tags"], ["AI", "Agent", "Benchmark"])
-        self.assertNotIn("HarmonyOS7开发者声音-问卷调查", [item["title"] for item in items])
+        self.assertEqual(items[0]["title"], "GitHub Copilot app 面向所有套餐开放")
+        self.assertEqual(items[0]["source"], "GitHub Blog")
+        self.assertEqual(items[0]["summaryZh"], "GitHub 将 Copilot app 推向所有套餐，并新增按用户设置 cost center 预算的能力。")
+        self.assertEqual(items[0]["summaryEn"], "GitHub opened the Copilot app to all plans and added per-user cost-center budgets.")
+        self.assertEqual(items[0]["whyItMattersZh"], "AI 编程工具正从个人效率工具进入企业级治理和成本控制阶段。")
+        self.assertEqual(items[0]["tags"], ["AI Coding", "GitHub", "Enterprise"])
+        self.assertNotIn("OpenAI 招聘投行专家", [item["title"] for item in items[0:4]])
         for item in items:
             self.assertNotIn("example.com", item["url"])
             for field in ["title", "url", "source", "summaryZh", "summaryEn", "whyItMattersZh"]:
@@ -61,9 +61,29 @@ class LivePanelSourceTests(unittest.TestCase):
         items = self.module.normalize_codex_daily_news(payload, limit=5)
 
         self.assertEqual(len(items), 5)
-        self.assertTrue(all(item["source"] == "OSChina" for item in items))
+        self.assertEqual(items[0]["source"], "GitHub Blog")
+        self.assertTrue(any(item["source"] == "Axios" for item in items))
+        self.assertTrue(any(item["source"] == "Business Insider" for item in items))
         self.assertTrue(all(item["summaryZh"] for item in items))
         self.assertTrue(all(item["whyItMattersZh"] for item in items))
+
+    def test_build_news_returns_codex_and_public_streams(self):
+        payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+        public_news = [
+            {"title": "公开新闻一", "url": "https://www.oschina.net/news/471539"},
+            {"title": "公开新闻二", "url": "https://www.oschina.net/news/471531"},
+            {"title": "公开新闻三", "url": "https://my.oschina.net/u/3874284/blog/19715962"},
+            {"title": "公开新闻四", "url": "https://www.oschina.net/news/471519/codeforge-26-4-0-released"},
+            {"title": "公开新闻五", "url": "https://www.oschina.net/news/471516"},
+        ]
+        self.module.load_codex_daily_payload = lambda: payload
+        self.module.fetch_fallback_news = lambda previous_panel, limit=5: public_news[:limit]
+
+        ai_status, codex_news, current_news = self.module.build_news({}, limit=5)
+
+        self.assertEqual(ai_status, "codex")
+        self.assertEqual(len(codex_news), 5)
+        self.assertEqual([item["url"] for item in current_news], [item["url"] for item in public_news])
 
     def test_codex_daily_json_rejects_incomplete_payloads(self):
         payload = {
@@ -143,8 +163,8 @@ class LivePanelSourceTests(unittest.TestCase):
         items = self.module.normalize_codex_daily_news(payload, limit=5)
 
         self.assertEqual(len(items), 5)
-        self.assertEqual(items[0]["url"], "https://www.oschina.net/news/471539")
-        self.assertEqual(items[-1]["url"], "https://www.oschina.net/news/471516")
+        self.assertEqual(items[0]["url"], "https://github.blog/changelog/2026-07-07-github-copilot-app-available-to-all/")
+        self.assertEqual(items[-1]["url"], "https://www.businessinsider.com/openai-hiring-expert-investment-banking-job-pay-experience-2026-7")
 
     def test_codex_daily_json_rejects_invalid_items_within_limit(self):
         payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))

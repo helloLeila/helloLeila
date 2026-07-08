@@ -232,11 +232,11 @@ export const siteContent = {
     longitude: 114.0579,
   },
   newsFallback: [
-    { title: "36Kr latest stories", url: "https://36kr.com/feed" },
-    { title: "Juejin trending articles", url: "https://juejin.cn/hot/articles" },
-    { title: "The Verge latest stories", url: "https://www.theverge.com/rss/index.xml" },
-    { title: "OSChina latest news", url: "https://www.oschina.net/news" },
-    { title: "36Kr tech snapshots", url: "https://36kr.com/" }
+    { title: "36氪最新资讯", url: "https://36kr.com/feed" },
+    { title: "掘金热榜文章", url: "https://juejin.cn/hot/articles" },
+    { title: "开源中国资讯", url: "https://www.oschina.net/news" },
+    { title: "InfoQ 中文资讯", url: "https://www.infoq.cn/" },
+    { title: "机器之心资讯", url: "https://www.jiqizhixin.com/" }
   ],
   workLinks: [
     { type: "framework", label: "React", href: "https://react.dev/" },

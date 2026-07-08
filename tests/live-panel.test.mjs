@@ -12,8 +12,8 @@ test("daily live panel fixture exists", () => {
   assert.ok(fs.existsSync(livePanelPath));
 });
 
-// 验证实时面板文件里同时包含七天天气摘要和五条指定来源新闻。
-test("daily live panel fixture exposes seven-day weather and five source-driven news items", () => {
+// 验证实时面板文件里同时包含七天天气摘要、Codex 日报与公开来源五条新闻。
+test("daily live panel fixture exposes weather, codex global brief, and public news items", () => {
   const data = JSON.parse(fs.readFileSync(livePanelPath, "utf8"));
 
   assert.ok(data.weather);
@@ -28,8 +28,9 @@ test("daily live panel fixture exposes seven-day weather and five source-driven 
   assert.equal(typeof data.weather.daily[0].eveningTemperature, "number");
   assert.equal(typeof data.weather.daily[0].swing, "number");
   assert.equal(data.aiStatus, "codex");
-  assert.equal(data.news.length, 5);
-  for (const item of data.news) {
+
+  assert.equal(data.codexNews.length, 5);
+  for (const item of data.codexNews) {
     assert.equal(typeof item.title, "string");
     assert.match(item.url, /^https?:\/\//);
     assert.equal(typeof item.source, "string");
@@ -39,8 +40,18 @@ test("daily live panel fixture exposes seven-day weather and five source-driven 
     assert.ok(Array.isArray(item.tags));
   }
 
-  const urls = data.news.map((item) => item.url);
-  assert.ok(urls.every((url) => !url.includes("example.com")));
-  assert.ok(urls.some((url) => /^https:\/\/www\.oschina\.net\/news\//.test(url)));
-  assert.ok(urls.some((url) => /^https:\/\/my\.oschina\.net\/u\/\d+\/blog\/\d+/.test(url)));
+  assert.equal(data.news.length, 5);
+  for (const item of data.news) {
+    assert.equal(typeof item.title, "string");
+    assert.match(item.url, /^https?:\/\//);
+  }
+
+  const codexUrls = data.codexNews.map((item) => item.url);
+  const publicUrls = data.news.map((item) => item.url);
+  assert.ok(codexUrls.every((url) => !url.includes("example.com")));
+  assert.ok(publicUrls.every((url) => !url.includes("example.com")));
+  assert.ok(codexUrls.some((url) => /^https:\/\/github\.blog\/changelog\//.test(url)));
+  assert.ok(codexUrls.some((url) => /^https:\/\/www\.axios\.com\//.test(url)));
+  assert.ok(publicUrls.some((url) => /^https:\/\/www\.oschina\.net\/news\//.test(url)));
+  assert.ok(publicUrls.some((url) => /^https:\/\/my\.oschina\.net\/u\/\d+\/blog\/\d+/.test(url)));
 });

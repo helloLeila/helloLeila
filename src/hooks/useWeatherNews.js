@@ -54,6 +54,7 @@ function normalizeNewsItem(item, lang) {
 // 根据语言返回天气与新闻数据，供实时面板模块直接消费。
 export function useWeatherNews(lang) {
   const [weather, setWeather] = useState(null);
+  const [codexNews, setCodexNews] = useState([]);
   const [news, setNews] = useState(() =>
     siteContent.newsFallback.slice(0, 5).map((item) => normalizeNewsItem(item, lang)),
   );
@@ -78,7 +79,10 @@ export function useWeatherNews(lang) {
           daily: data.weather?.daily || buildFallbackDailyForecast(),
           updatedAt: data.updatedAt || "",
         });
-        setNews((data.news || siteContent.newsFallback).slice(0, 5).map((item) => normalizeNewsItem(item, lang)));
+        const nextCodexNews = Array.isArray(data.codexNews) ? data.codexNews : [];
+        const nextNews = Array.isArray(data.news) && data.news.length ? data.news : siteContent.newsFallback;
+        setCodexNews(nextCodexNews.slice(0, 5).map((item) => normalizeNewsItem(item, lang)));
+        setNews(nextNews.slice(0, 5).map((item) => normalizeNewsItem(item, lang)));
       } catch {
         if (!cancelled) {
           setWeather({
@@ -90,6 +94,7 @@ export function useWeatherNews(lang) {
             daily: buildFallbackDailyForecast(),
             updatedAt: new Date().toISOString(),
           });
+          setCodexNews([]);
           setNews(siteContent.newsFallback.slice(0, 5).map((item) => normalizeNewsItem(item, lang)));
         }
       }
@@ -102,5 +107,5 @@ export function useWeatherNews(lang) {
     };
   }, [lang, panelUrl]);
 
-  return useMemo(() => ({ weather, news }), [weather, news]);
+  return useMemo(() => ({ weather, news, codexNews }), [weather, news, codexNews]);
 }

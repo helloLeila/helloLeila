@@ -62,7 +62,12 @@ npm run build
 
 ## AI daily brief source
 
-The live panel uses Codex daily JSON as the primary source when available.
+The live panel stores two news streams in `public/live-panel.json`:
+
+- `codexNews`: Codex automation output for the left-side global AI brief.
+- `news`: public Chinese-source crawler output for the right-side current five.
+
+If `codexNews` is empty or invalid, the left pane is hidden and the public news pane remains visible.
 
 Supported inputs, set one at a time:
 
@@ -84,12 +89,12 @@ Expected JSON shape:
 
 ```json
 {
-  "updatedAt": "2026-07-07T07:00:00+08:00",
+  "updatedAt": "2026-07-08T07:00:00+08:00",
   "news": [
     {
-      "title": "Original title",
-      "url": "https://www.oschina.net/news/471539",
-      "source": "Codex Daily",
+      "title": "Original global AI title",
+      "url": "https://github.blog/changelog/2026-07-07-github-copilot-app-available-to-all/",
+      "source": "GitHub Blog",
       "summaryZh": "一句中文摘要。",
       "summaryEn": "One English summary.",
       "whyItMattersZh": "为什么值得关注。",
@@ -99,13 +104,13 @@ Expected JSON shape:
 }
 ```
 
-News items should be Chinese-facing technology news with URLs pointing to the original public article, not placeholder or aggregator-only links.
+Codex items can come from global AI sources, but they should be Chinese-facing summaries with URLs pointing to the original public article, not placeholder or aggregator-only links.
 
 Required sidecar fields are `title`, `url`, `summaryZh`, `summaryEn`, and `whyItMattersZh`. `source` is optional and defaults to `Codex Daily`; `tags` is optional and normalized to at most four labels.
 
 That original-article requirement is an upstream Codex automation content contract. The website script validates URLs syntactically as public HTTP(S) URLs and rejects local, private, malformed, or deceptive host forms; it does not fetch and prove every redirect target.
 
-The site accepts the Codex JSON only when at least five valid items are present. When the Codex path succeeds, the generated `public/live-panel.json` contains the first five validated news records. If the file is missing, invalid, or too short, `scripts/fetch_live_panel.py` falls back to the built-in public news crawler, capped at five displayable records.
+The site accepts the Codex JSON only when at least five valid items are present. When the Codex path succeeds, the generated `public/live-panel.json` writes the first five validated records to `codexNews`. The script still runs the built-in public Chinese-source crawler for `news`, capped at five displayable records. If the Codex file is missing, invalid, or too short, `codexNews` becomes an empty array and the left pane is hidden.
 
 When updating the Codex Feishu automation prompt, ask it to generate both:
 

@@ -29,21 +29,25 @@ test("pages workflow refreshes at 7am Asia Shanghai time", () => {
   assert.match(workflowSource, /cron:\s*"0 23 \* \* \*"/);
 });
 
-// 验证抓取脚本使用用户指定的新闻源，并把结果收敛到五条。
-test("live panel crawler targets the requested news sources with five final items", () => {
+// 验证抓取脚本使用中文公开新闻源，并把结果收敛到五条。
+test("live panel crawler targets chinese public news sources with five final items", () => {
   assert.match(fetchScriptSource, /36kr\.com\/feed/);
   assert.match(fetchScriptSource, /juejin\.cn/);
-  assert.match(fetchScriptSource, /theverge\.com\/rss\/index\.xml/);
   assert.match(fetchScriptSource, /oschina\.net\/news/);
+  assert.doesNotMatch(fetchScriptSource, /theverge\.com\/rss\/index\.xml/);
   assert.match(fetchScriptSource, /limit:\s*int\s*=\s*5/);
 });
 
-// 验证 Codex 日报 JSON 是主链路，公开新闻源抓取是兜底链路。
-test("live panel prefers codex daily json before crawler fallback", () => {
+// 验证 Codex 日报 JSON 是左栏主链路，公开新闻源抓取继续服务右栏。
+test("live panel keeps codex daily json separate from public crawler news", () => {
   assert.match(fetchScriptSource, /AI_DAILY_JSON_PATH/);
   assert.match(fetchScriptSource, /AI_DAILY_JSON_URL/);
   assert.match(fetchScriptSource, /normalize_codex_daily_news/);
   assert.match(fetchScriptSource, /fetch_fallback_news/);
+  assert.match(fetchScriptSource, /codex_news/);
+  assert.match(fetchScriptSource, /public_news/);
+  assert.match(fetchScriptSource, /"codexNews":\s*codex_news/);
+  assert.match(fetchScriptSource, /"news":\s*public_news/);
   assert.match(fetchScriptSource, /"codex"/);
   assert.match(fetchScriptSource, /"fallback"/);
 });

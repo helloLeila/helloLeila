@@ -30,6 +30,15 @@ test("useWeatherNews normalizes enriched news fields", () => {
   assert.match(source, /tags\.slice\(0,\s*4\)/);
 });
 
+test("useWeatherNews exposes codex news separately from public news", () => {
+  const source = fs.readFileSync(path.resolve(process.cwd(), "src/hooks/useWeatherNews.js"), "utf8");
+
+  assert.match(source, /const\s+\[codexNews,\s*setCodexNews\]\s*=\s*useState/);
+  assert.match(source, /data\.codexNews/);
+  assert.match(source, /setCodexNews/);
+  assert.match(source, /return\s+useMemo\(\(\)\s*=>\s*\(\{\s*weather,\s*news,\s*codexNews\s*\}\)/);
+});
+
 test("useWeatherNews normalizes initial fallback news state", () => {
   const source = fs.readFileSync(path.resolve(process.cwd(), "src/hooks/useWeatherNews.js"), "utf8");
 

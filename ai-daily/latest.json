@@ -2,49 +2,58 @@
   "updatedAt": "2026-07-08T07:00:00+08:00",
   "news": [
     {
-      "title": "字节 Seed 开源 EdgeBench 基准测试",
-      "url": "https://www.oschina.net/news/471539",
-      "source": "OSChina",
-      "summaryZh": "字节 Seed 发布面向真实环境学习的长程智能体评测集。",
-      "summaryEn": "ByteDance Seed released EdgeBench for long-horizon agent evaluation.",
-      "whyItMattersZh": "它能帮助判断智能体是否具备持续执行复杂任务的工程能力。",
-      "tags": ["AI", "Agent", "Benchmark"]
+      "title": "GitHub Copilot app 面向所有套餐开放",
+      "url": "https://github.blog/changelog/2026-07-07-github-copilot-app-available-to-all/",
+      "source": "GitHub Blog",
+      "summaryZh": "GitHub 将 Copilot app 推向所有套餐，并新增按用户设置 cost center 预算的能力。",
+      "summaryEn": "GitHub opened the Copilot app to all plans and added per-user cost-center budgets.",
+      "whyItMattersZh": "AI 编程工具正从个人效率工具进入企业级治理和成本控制阶段。",
+      "tags": ["AI Coding", "GitHub", "Enterprise"]
     },
     {
-      "title": "CSDI峰会开启：Agentic AI 落地应用的黄金期，智能系统重塑生产力",
-      "url": "https://www.oschina.net/news/471531",
-      "source": "OSChina",
-      "summaryZh": "CSDI 峰会聚焦 Agentic AI 在产业生产系统中的落地。",
-      "summaryEn": "CSDI focused on applying agentic AI in industrial production systems.",
-      "whyItMattersZh": "这类产业化信号和个人站的 AI 工作流、企业系统表达方向一致。",
-      "tags": ["AI", "Agentic AI", "Industry"]
+      "title": "Axios 发布 AI 安全承诺指数观察",
+      "url": "https://www.axios.com/2026/07/07/report-ai-safety-pledges",
+      "source": "Axios",
+      "summaryZh": "Axios 跟踪主要 AI 公司安全承诺，提醒外部承诺与实际治理仍需持续验证。",
+      "summaryEn": "Axios tracked major AI safety pledges and the gap between commitments and governance.",
+      "whyItMattersZh": "真实可审计的安全实践会影响大模型进入企业和公共部门的信任门槛。",
+      "tags": ["AI Safety", "Governance", "Policy"]
     },
     {
-      "title": "Qoder 集成 STAROps，重塑“编码 - 发布 - 诊断 - 修复”DevOps 闭环",
-      "url": "https://my.oschina.net/u/3874284/blog/19715962",
-      "source": "OSChina",
-      "summaryZh": "Qoder 将编码、发布、诊断和修复串成更完整的 DevOps 闭环。",
-      "summaryEn": "Qoder connects coding, release, diagnosis, and repair into a DevOps loop.",
-      "whyItMattersZh": "它对应 AI 辅助研发从写代码走向完整工程流程的趋势。",
-      "tags": ["DevOps", "AI", "Engineering"]
+      "title": "联合国秘书长呼吁禁止自主杀手机器人",
+      "url": "https://www.wsj.com/tech/ai/killer-robots-must-be-banned-u-n-secretary-general-says-00603020",
+      "source": "Wall Street Journal",
+      "summaryZh": "联合国秘书长再次要求推动限制可自主选择目标并使用致命武力的 AI 武器。",
+      "summaryEn": "The UN secretary-general renewed calls to ban lethal autonomous weapons.",
+      "whyItMattersZh": "AI 治理正在从模型安全扩展到军事、国际法和人类控制权边界。",
+      "tags": ["AI Policy", "Defense", "UN"]
     },
     {
-      "title": "从拖拽到 JOIN：CodeForge 26.4.0 把 SQL 查询变成搭积木",
-      "url": "https://www.oschina.net/news/471519/codeforge-26-4-0-released",
-      "source": "OSChina",
-      "summaryZh": "CodeForge 26.4.0 用可视化方式降低复杂 SQL 查询构建门槛。",
-      "summaryEn": "CodeForge 26.4.0 lowers the barrier for complex SQL query construction.",
-      "whyItMattersZh": "它和数据表达、低代码查询、工程工具体验这些方向相关。",
-      "tags": ["Database", "Low Code", "Tooling"]
+      "title": "Vercel CEO 倡导多模型合作策略",
+      "url": "https://www.businessinsider.com/vercel-ceo-guillermo-rauch-ai-lab-partner-outdated-2026-7",
+      "source": "Business Insider",
+      "summaryZh": "Vercel CEO 表示，企业不应只绑定一家 AI 实验室，而应保持多模型合作与替换弹性。",
+      "summaryEn": "Vercel's CEO argued companies should avoid depending on a single AI lab.",
+      "whyItMattersZh": "这体现了 AI 应用层工程正在转向模型可替换、成本可控和供应商风险管理。",
+      "tags": ["AI Apps", "Vercel", "Strategy"]
     },
     {
-      "title": "腾讯混元 Hy3 开源发布",
-      "url": "https://www.oschina.net/news/471516",
-      "source": "OSChina",
-      "summaryZh": "腾讯混元 Hy3 开源发布，继续推进推理、智能体和长上下文能力。",
-      "summaryEn": "Tencent Hunyuan Hy3 was open-sourced with reasoning, agent, and long-context updates.",
-      "whyItMattersZh": "国产大模型开源进展会影响 AI 应用和智能体工程选型。",
-      "tags": ["AI", "Open Source", "Model"]
+      "title": "OpenAI 招聘投行专家强化企业金融场景",
+      "url": "https://www.businessinsider.com/openai-hiring-expert-investment-banking-job-pay-experience-2026-7",
+      "source": "Business Insider",
+      "summaryZh": "OpenAI 招聘具备投行经验的人才，显示其继续深入企业知识工作和金融场景。",
+      "summaryEn": "OpenAI is hiring investment banking expertise as it expands into enterprise finance workflows.",
+      "whyItMattersZh": "大模型公司正在用行业专家补齐场景知识，把通用模型推向高价值垂直流程。",
+      "tags": ["OpenAI", "Finance", "Enterprise"]
+    },
+    {
+      "title": "GitHub billing UI 新增 cost center 用户预算",
+      "url": "https://github.blog/changelog/2026-07-07-per-user-budgets-for-cost-centers-in-the-billing-ui/",
+      "source": "GitHub Blog",
+      "summaryZh": "GitHub 在 billing UI 中加入按用户配置 cost center 预算的入口。",
+      "summaryEn": "GitHub added per-user cost-center budget controls to its billing UI.",
+      "whyItMattersZh": "预算粒度变细，有利于企业把 AI 工具支出纳入日常工程管理。",
+      "tags": ["GitHub", "FinOps", "AI Coding"]
     }
   ]
 }

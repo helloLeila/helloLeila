@@ -28,8 +28,10 @@ test("news block is fixed to five items from the requested sources", () => {
   const hrefs = siteContent.newsFallback.map((item) => item.url).join(",");
   assert.match(hrefs, /36kr\.com/);
   assert.match(hrefs, /juejin\.cn/);
-  assert.match(hrefs, /theverge\.com/);
   assert.match(hrefs, /oschina\.net/);
+  assert.match(hrefs, /infoq\.cn/);
+  assert.match(hrefs, /jiqizhixin\.com/);
+  assert.doesNotMatch(hrefs, /theverge\.com/);
 });
 
 // 验证底部工作入口不再暴露原型参考用的 G2 / L7 示例链接。
