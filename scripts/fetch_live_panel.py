@@ -28,6 +28,8 @@ SHENZHEN = {
 }
 TIMEZONE = "Asia/Shanghai"
 PANEL_PATH = Path(__file__).resolve().parents[1] / "public" / "live-panel.json"
+OPEN_METEO_SOURCE = "Open-Meteo"
+OPEN_METEO_FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 HEADERS = {
     "User-Agent": "github-profile-home-live-panel/1.0",
     "Accept": "application/json",
@@ -161,7 +163,7 @@ def build_daily_weather(hourly_times: list[str], hourly_temps: list[float]) -> l
 
 
 # 通过 Open-Meteo 获取深圳天气，完全基于公开 API。
-def fetch_weather(previous_panel: dict) -> dict:
+def build_weather_url() -> str:
     params = urlencode(
         {
             "latitude": SHENZHEN["latitude"],
@@ -172,7 +174,11 @@ def fetch_weather(previous_panel: dict) -> dict:
             "forecast_days": 7,
         }
     )
-    url = f"https://api.open-meteo.com/v1/forecast?{params}"
+    return f"{OPEN_METEO_FORECAST_URL}?{params}"
+
+
+def fetch_weather(previous_panel: dict) -> dict:
+    url = build_weather_url()
 
     try:
         data = fetch_json(url)
@@ -189,6 +195,10 @@ def fetch_weather(previous_panel: dict) -> dict:
             "typhoonEta": {"en": "No active alert", "zh": "暂无台风预警"},
             "condition": WEATHER_CODE_MAP.get(weather_code, WEATHER_CODE_MAP[2]),
             "daily": daily or previous_panel.get("weather", {}).get("daily", DEFAULT_DAILY),
+            "source": OPEN_METEO_SOURCE,
+            "sourceUrl": url,
+            "observedAt": current.get("time") or datetime.now(ZoneInfo(TIMEZONE)).replace(second=0, microsecond=0).isoformat(),
+            "isFallback": False,
         }
     except (HTTPError, URLError, TimeoutError, ValueError, KeyError):
         previous_weather = previous_panel.get("weather", {})
@@ -199,6 +209,10 @@ def fetch_weather(previous_panel: dict) -> dict:
             "typhoonEta": previous_weather.get("typhoonEta", {"en": "No active alert", "zh": "暂无台风预警"}),
             "condition": previous_weather.get("condition", WEATHER_CODE_MAP[2]),
             "daily": previous_weather.get("daily", DEFAULT_DAILY),
+            "source": previous_weather.get("source", OPEN_METEO_SOURCE),
+            "sourceUrl": previous_weather.get("sourceUrl", url),
+            "observedAt": previous_weather.get("observedAt", previous_panel.get("updatedAt", "")),
+            "isFallback": True,
         }
 
 

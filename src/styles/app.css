@@ -17,6 +17,7 @@
   --radius-md: 18px;
   --mono: "JetBrains Mono", monospace;
   --sans: "Space Grotesk", "PingFang SC", "Noto Sans SC", sans-serif;
+  --page-gutter: clamp(28px, 4.6vw, 86px);
 }
 
 * {
@@ -88,7 +89,7 @@ a {
   width: min(100%, 1540px);
   max-width: 1540px;
   margin: 0 auto;
-  padding: 16px 20px 24px;
+  padding: 24px var(--page-gutter) 44px;
   min-width: 0;
 }
 
@@ -177,6 +178,7 @@ a {
   box-shadow: 0 14px 28px rgba(84, 104, 152, 0.08);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  min-width: 0;
 }
 
 .hero-stage {
@@ -184,7 +186,7 @@ a {
   min-width: 0;
   border-radius: var(--radius-xl);
   overflow: visible;
-  padding: 18px;
+  padding: 22px;
   background:
     linear-gradient(rgba(61, 111, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(61, 111, 255, 0.05) 1px, transparent 1px),
@@ -192,7 +194,7 @@ a {
   background-size: 76px 76px, 76px 76px, auto;
   display: grid;
   grid-template-rows: auto auto 1fr;
-  gap: 12px;
+  gap: 14px;
 }
 
 .hero-top {
@@ -223,6 +225,8 @@ a {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   max-width: 100%;
+  min-width: 0;
+  white-space: normal;
   overflow-wrap: anywhere;
 }
 
@@ -295,7 +299,7 @@ a {
 .hero-middle {
   display: grid;
   grid-template-columns: 1.04fr 0.96fr;
-  gap: 12px;
+  gap: 16px;
   align-items: stretch;
   min-width: 0;
 }
@@ -458,16 +462,18 @@ a {
 }
 
 .insight-section {
-  margin-top: 18px;
+  margin-top: 24px;
   display: grid;
-  gap: 16px;
+  gap: 24px;
+  min-width: 0;
 }
 
 .insight-grid {
   display: grid;
   grid-template-columns: 1.16fr 0.84fr;
-  gap: 12px;
+  gap: 18px;
   align-items: stretch;
+  min-width: 0;
 }
 
 .graph-card,
@@ -476,7 +482,7 @@ a {
 .roadmap-card,
 .live-card,
 .footer-links {
-  padding: 16px;
+  padding: 20px;
 }
 .graph-card{
   padding-bottom: 0px;
@@ -485,6 +491,7 @@ a {
   display: grid;
   gap: 8px;
   margin-bottom: 14px;
+  min-width: 0;
 }
 
 .section-head.compact {
@@ -799,20 +806,23 @@ a {
 .coverage-layout {
   display: grid;
   grid-template-columns: 0.92fr 1.08fr;
-  gap: 16px;
+  gap: 22px;
   align-items: stretch;
+  min-width: 0;
 }
 
 .coverage-copy {
   display: grid;
   gap: 12px;
   align-content: start;
+  min-width: 0;
 }
 
 .coverage-weather-card {
   height: 100%;
   align-content: start;
   gap: 14px;
+  min-width: 0;
   background:
     radial-gradient(circle at 18% 20%, rgba(24, 191, 174, 0.12), transparent 28%),
     radial-gradient(circle at 84% 12%, rgba(61, 111, 255, 0.16), transparent 30%),
@@ -1018,7 +1028,7 @@ a {
 
 .utility-grid {
   display: grid;
-  gap: 12px;
+  gap: 18px;
 }
 
 .weather-panel,
@@ -1063,6 +1073,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  min-width: 0;
 }
 
 .metric-pill {
@@ -1106,15 +1117,38 @@ a {
 
 .weather-panel-footer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   padding-top: 2px;
+  flex-wrap: wrap;
 }
 
-.weather-panel-footer strong {
+.weather-source {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.weather-panel-footer strong,
+.weather-source-link {
   font-size: 0.84rem;
   color: #1a3566;
+  line-height: 1.3;
+}
+
+.weather-source-link {
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.weather-source-link:hover {
+  color: var(--blue);
+}
+
+.weather-observed {
+  justify-items: end;
+  text-align: right;
 }
 
 .coverage-clock-panel {
@@ -1179,12 +1213,12 @@ a {
 .news-brief-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 14px;
+  gap: 16px;
 }
 
 .news-brief-grid.has-codex {
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-  gap: 18px;
+  gap: 22px;
 }
 
 .news-pane {
@@ -1192,7 +1226,7 @@ a {
 }
 
 .codex-news-pane {
-  padding-right: 18px;
+  padding-right: 22px;
   border-right: 1px solid rgba(67, 110, 206, 0.12);
 }
 
@@ -1243,7 +1277,7 @@ a {
 
 .news-list {
   display: grid;
-  gap: 10px;
+  gap: 12px;
   margin: 0;
   padding-left: 0;
   list-style: none;
@@ -1252,7 +1286,7 @@ a {
 .news-list li {
   list-style: none;
   min-width: 0;
-  padding: 12px;
+  padding: 14px;
   border-radius: 16px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(244, 248, 255, 0.84));
   border: 1px solid rgba(67, 110, 206, 0.12);
@@ -1461,7 +1495,7 @@ a {
 
 @media (max-width: 840px) {
   .shell {
-    padding: 10px;
+    padding: 12px 16px 24px;
   }
 
   .hero-stage,
@@ -1475,7 +1509,16 @@ a {
   }
 
   .hero-stage {
-    padding: 12px;
+    padding: 14px;
+  }
+
+  .graph-card,
+  .coverage-card,
+  .word-cloud-card,
+  .roadmap-card,
+  .live-card,
+  .footer-links {
+    padding: 14px;
   }
 
   .hero-top,
@@ -1572,5 +1615,10 @@ a {
   .news-row-head {
     display: grid;
     gap: 5px;
+  }
+
+  .weather-observed {
+    justify-items: start;
+    text-align: left;
   }
 }

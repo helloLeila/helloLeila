@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-07-08T11:16:00+08:00",
+  "updatedAt": "2026-07-08T11:59:00+08:00",
   "aiStatus": "codex",
   "weather": {
     "city": "Shenzhen",
-    "temperature": 27,
-    "humidity": 70,
+    "temperature": 28,
+    "humidity": 85,
     "typhoonEta": {
       "en": "No active alert",
       "zh": "暂无台风预警"
     },
     "condition": {
-      "en": "Partly cloudy",
-      "zh": "多云"
+      "en": "Thunderstorm",
+      "zh": "雷暴"
     },
     "daily": [
       {
@@ -19,58 +19,62 @@
         "labelEn": "Wed",
         "labelZh": "周三",
         "morningTemperature": 26.1,
-        "eveningTemperature": 30.4,
-        "swing": 4.3
+        "eveningTemperature": 27.0,
+        "swing": 0.9
       },
       {
         "date": "2026-07-09",
         "labelEn": "Thu",
         "labelZh": "周四",
-        "morningTemperature": 26.4,
-        "eveningTemperature": 31.0,
-        "swing": 4.6
+        "morningTemperature": 26.5,
+        "eveningTemperature": 27.6,
+        "swing": 1.1
       },
       {
         "date": "2026-07-10",
         "labelEn": "Fri",
         "labelZh": "周五",
-        "morningTemperature": 26.6,
-        "eveningTemperature": 31.2,
-        "swing": 4.6
+        "morningTemperature": 27.0,
+        "eveningTemperature": 28.1,
+        "swing": 1.1
       },
       {
         "date": "2026-07-11",
         "labelEn": "Sat",
         "labelZh": "周六",
-        "morningTemperature": 26.2,
-        "eveningTemperature": 30.8,
-        "swing": 4.6
+        "morningTemperature": 27.4,
+        "eveningTemperature": 29.1,
+        "swing": 1.7
       },
       {
         "date": "2026-07-12",
         "labelEn": "Sun",
         "labelZh": "周日",
-        "morningTemperature": 25.9,
-        "eveningTemperature": 30.2,
-        "swing": 4.3
+        "morningTemperature": 28.9,
+        "eveningTemperature": 28.5,
+        "swing": -0.4
       },
       {
         "date": "2026-07-13",
         "labelEn": "Mon",
         "labelZh": "周一",
-        "morningTemperature": 26.0,
-        "eveningTemperature": 30.6,
-        "swing": 4.6
+        "morningTemperature": 26.3,
+        "eveningTemperature": 27.4,
+        "swing": 1.1
       },
       {
         "date": "2026-07-14",
         "labelEn": "Tue",
         "labelZh": "周二",
-        "morningTemperature": 26.3,
-        "eveningTemperature": 30.9,
-        "swing": 4.6
+        "morningTemperature": 26.7,
+        "eveningTemperature": 27.4,
+        "swing": 0.7
       }
-    ]
+    ],
+    "source": "Open-Meteo",
+    "sourceUrl": "https://api.open-meteo.com/v1/forecast?latitude=22.5431&longitude=114.0579&current=temperature_2m%2Crelative_humidity_2m%2Cweather_code&hourly=temperature_2m&timezone=Asia%2FShanghai&forecast_days=7",
+    "observedAt": "2026-07-08T11:45",
+    "isFallback": false
   },
   "codexNews": [
     {
@@ -141,69 +145,24 @@
   ],
   "news": [
     {
-      "title": "字节 Seed 开源 EdgeBench 基准测试",
-      "url": "https://www.oschina.net/news/471539",
-      "source": "OSChina",
-      "summaryZh": "字节 Seed 发布面向真实环境学习的长程智能体评测集。",
-      "summaryEn": "ByteDance Seed released EdgeBench for long-horizon agent evaluation.",
-      "whyItMattersZh": "它能帮助判断智能体是否具备持续执行复杂任务的工程能力。",
-      "tags": [
-        "AI",
-        "Agent",
-        "Benchmark"
-      ]
+      "title": "AI 视频全面成熟：Seedance 2.0 领衔，6 款主流工具深度横评",
+      "url": "https://36kr.com/p/3886403765596418?f=rss"
     },
     {
-      "title": "CSDI峰会开启：Agentic AI 落地应用的黄金期，智能系统重塑生产力",
-      "url": "https://www.oschina.net/news/471531",
-      "source": "OSChina",
-      "summaryZh": "CSDI 峰会聚焦 Agentic AI 在产业生产系统中的落地。",
-      "summaryEn": "CSDI focused on applying agentic AI in industrial production systems.",
-      "whyItMattersZh": "这类产业化信号和个人站的 AI 工作流、企业系统表达方向一致。",
-      "tags": [
-        "AI",
-        "Agentic AI",
-        "Industry"
-      ]
+      "title": "开源软件",
+      "url": "https://www.oschina.net/news/rss"
     },
     {
-      "title": "Qoder 集成 STAROps，重塑“编码 - 发布 - 诊断 - 修复”DevOps 闭环",
-      "url": "https://my.oschina.net/u/3874284/blog/19715962",
-      "source": "OSChina",
-      "summaryZh": "Qoder 将编码、发布、诊断和修复串成更完整的 DevOps 闭环。",
-      "summaryEn": "Qoder connects coding, release, diagnosis, and repair into a DevOps loop.",
-      "whyItMattersZh": "它对应 AI 辅助研发从写代码走向完整工程流程的趋势。",
-      "tags": [
-        "DevOps",
-        "AI",
-        "Engineering"
-      ]
+      "title": "36氪首发 | 五粮液基金领投，国产高端机床企业获数亿元融资，加速海外市场布局",
+      "url": "https://36kr.com/p/3886400975040520?f=rss"
     },
     {
-      "title": "从拖拽到 JOIN：CodeForge 26.4.0 把 SQL 查询变成搭积木",
-      "url": "https://www.oschina.net/news/471519/codeforge-26-4-0-released",
-      "source": "OSChina",
-      "summaryZh": "CodeForge 26.4.0 用可视化方式降低复杂 SQL 查询构建门槛。",
-      "summaryEn": "CodeForge 26.4.0 lowers the barrier for complex SQL query construction.",
-      "whyItMattersZh": "它和数据表达、低代码查询、工程工具体验这些方向相关。",
-      "tags": [
-        "Database",
-        "Low Code",
-        "Tooling"
-      ]
+      "title": "综合资讯",
+      "url": "https://www.oschina.net/news/industry"
     },
     {
-      "title": "腾讯混元 Hy3 开源发布",
-      "url": "https://www.oschina.net/news/471516",
-      "source": "OSChina",
-      "summaryZh": "腾讯混元 Hy3 开源发布，继续推进推理、智能体和长上下文能力。",
-      "summaryEn": "Tencent Hunyuan Hy3 was open-sourced with reasoning, agent, and long-context updates.",
-      "whyItMattersZh": "国产大模型开源进展会影响 AI 应用和智能体工程选型。",
-      "tags": [
-        "AI",
-        "Open Source",
-        "Model"
-      ]
+      "title": "36氪首发 | 获上海国投领投，这家量子传感企业产品已落地惯性导航、气体监测等",
+      "url": "https://36kr.com/p/3886301334630407?f=rss"
     }
   ]
 }

@@ -58,6 +58,10 @@ test("coverage field uses lang-specific heading and summary grid structure", () 
   assert.match(coverageSource, /typhoonEta/);
   assert.match(coverageSource, /item\.key === "typhoonEta"/);
   assert.match(coverageSource, /coverage-summary-grid/);
+  assert.match(coverageSource, /weatherSourceLabel/);
+  assert.match(coverageSource, /weather\?\.sourceUrl/);
+  assert.match(coverageSource, /weather\?\.isFallback/);
+  assert.match(coverageSource, /weather-source-link/);
 });
 
 // 验证地图示例被封装成真正的 React 组件，而不是直接把 demo 源码铺在模块顶层。
@@ -171,12 +175,24 @@ test("utilities panel renders codex and public news panes", () => {
 });
 
 test("layout css protects mobile content from clipping", () => {
+  assert.match(appStyleSource, /--page-gutter:\s*clamp\(28px,\s*4\.6vw,\s*86px\)/);
   assert.match(appStyleSource, /\.shell\s*\{[\s\S]*width:\s*min\(100%,\s*1540px\)/);
+  assert.match(appStyleSource, /\.shell\s*\{[\s\S]*padding:\s*24px var\(--page-gutter\) 44px/);
+  assert.match(appStyleSource, /\.insight-section\s*\{[\s\S]*gap:\s*24px/);
   assert.match(appStyleSource, /\.hero-stage\s*\{[\s\S]*min-width:\s*0/);
   assert.match(appStyleSource, /\.toolbar\s*\{[\s\S]*min-width:\s*0/);
   assert.match(appStyleSource, /\.toolbar-note\s*\{[\s\S]*min-width:\s*0/);
   assert.match(appStyleSource, /\.headline\s*\{[\s\S]*overflow-wrap:\s*anywhere/);
   assert.match(appStyleSource, /\.live-news-card\s*\{[\s\S]*overflow:\s*visible/);
   assert.match(appStyleSource, /\.news-list li\s*\{[\s\S]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.graph-card,[\s\S]*\.footer-links\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.insight-grid\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.coverage-layout\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.coverage-copy\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.coverage-weather-card\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.metric-row\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.section-head\s*\{[^}]*min-width:\s*0/);
+  assert.match(appStyleSource, /\.section-kicker\s*\{[^}]*white-space:\s*normal/);
   assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.toolbar-note\s*\{[\s\S]*white-space:\s*normal/);
+  assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.shell\s*\{[\s\S]*padding:\s*12px 16px 24px/);
 });

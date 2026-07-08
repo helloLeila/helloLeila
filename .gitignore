@@ -1,4 +1,5 @@
 .preview-server.log
+.playwright-cli/
 .worktrees/
 node_modules/
 dist/

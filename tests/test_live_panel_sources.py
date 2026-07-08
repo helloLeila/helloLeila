@@ -85,6 +85,68 @@ class LivePanelSourceTests(unittest.TestCase):
         self.assertEqual(len(codex_news), 5)
         self.assertEqual([item["url"] for item in current_news], [item["url"] for item in public_news])
 
+    def test_fetch_weather_marks_open_meteo_data_as_live_source(self):
+        captured_urls = []
+
+        def fake_fetch_json(url):
+            captured_urls.append(url)
+            return {
+                "current": {
+                    "time": "2026-07-08T11:00",
+                    "temperature_2m": 28.4,
+                    "relative_humidity_2m": 85,
+                    "weather_code": 95,
+                },
+                "hourly": {
+                    "time": [
+                        "2026-07-08T06:00",
+                        "2026-07-08T18:00",
+                        "2026-07-09T06:00",
+                        "2026-07-09T18:00",
+                    ],
+                    "temperature_2m": [26.0, 29.0, 26.5, 30.5],
+                },
+            }
+
+        self.module.fetch_json = fake_fetch_json
+
+        weather = self.module.fetch_weather({})
+
+        self.assertEqual(weather["source"], "Open-Meteo")
+        self.assertIn("api.open-meteo.com/v1/forecast", weather["sourceUrl"])
+        self.assertEqual(weather["sourceUrl"], captured_urls[0])
+        self.assertEqual(weather["observedAt"], "2026-07-08T11:00")
+        self.assertFalse(weather["isFallback"])
+        self.assertEqual(weather["condition"]["zh"], "雷暴")
+        self.assertEqual(weather["temperature"], 28)
+        self.assertEqual(weather["humidity"], 85)
+
+    def test_fetch_weather_marks_previous_data_when_api_falls_back(self):
+        previous_panel = {
+            "updatedAt": "2026-07-08T07:00:00+08:00",
+            "weather": {
+                "city": "Shenzhen",
+                "temperature": 27,
+                "humidity": 70,
+                "source": "Open-Meteo",
+                "sourceUrl": "https://api.open-meteo.com/v1/forecast?old=1",
+                "observedAt": "2026-07-08T06:45",
+                "condition": {"en": "Partly cloudy", "zh": "多云"},
+                "typhoonEta": {"en": "No active alert", "zh": "暂无台风预警"},
+                "daily": self.module.DEFAULT_DAILY,
+            },
+        }
+        self.module.fetch_json = lambda url: (_ for _ in ()).throw(self.module.URLError("offline"))
+
+        weather = self.module.fetch_weather(previous_panel)
+
+        self.assertEqual(weather["source"], "Open-Meteo")
+        self.assertEqual(weather["sourceUrl"], "https://api.open-meteo.com/v1/forecast?old=1")
+        self.assertEqual(weather["observedAt"], "2026-07-08T06:45")
+        self.assertTrue(weather["isFallback"])
+        self.assertEqual(weather["temperature"], 27)
+        self.assertEqual(weather["humidity"], 70)
+
     def test_codex_daily_json_rejects_incomplete_payloads(self):
         payload = {
             "news": [

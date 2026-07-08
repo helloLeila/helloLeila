@@ -19,6 +19,10 @@ test("daily live panel fixture exposes weather, codex global brief, and public n
   assert.ok(data.weather);
   assert.equal(typeof data.weather.temperature, "number");
   assert.equal(typeof data.weather.humidity, "number");
+  assert.equal(data.weather.source, "Open-Meteo");
+  assert.match(data.weather.sourceUrl, /^https:\/\/api\.open-meteo\.com\/v1\/forecast\?/);
+  assert.equal(typeof data.weather.observedAt, "string");
+  assert.equal(typeof data.weather.isFallback, "boolean");
   assert.ok(data.weather.typhoonEta);
   assert.equal(typeof data.weather.typhoonEta.zh, "string");
   assert.equal(typeof data.weather.typhoonEta.en, "string");
@@ -52,6 +56,13 @@ test("daily live panel fixture exposes weather, codex global brief, and public n
   assert.ok(publicUrls.every((url) => !url.includes("example.com")));
   assert.ok(codexUrls.some((url) => /^https:\/\/github\.blog\/changelog\//.test(url)));
   assert.ok(codexUrls.some((url) => /^https:\/\/www\.axios\.com\//.test(url)));
-  assert.ok(publicUrls.some((url) => /^https:\/\/www\.oschina\.net\/news\//.test(url)));
-  assert.ok(publicUrls.some((url) => /^https:\/\/my\.oschina\.net\/u\/\d+\/blog\/\d+/.test(url)));
+  const allowedPublicSources = [
+    /^https:\/\/36kr\.com\//,
+    /^https:\/\/juejin\.cn\/post\//,
+    /^https:\/\/www\.oschina\.net\/news(?:\/|$)/,
+    /^https:\/\/my\.oschina\.net\/u\/\d+\/blog\/\d+/,
+  ];
+  assert.ok(publicUrls.every((url) => allowedPublicSources.some((pattern) => pattern.test(url))));
+  assert.ok(publicUrls.some((url) => /^https:\/\/36kr\.com\//.test(url)));
+  assert.ok(publicUrls.some((url) => /^https:\/\/www\.oschina\.net\/news(?:\/|$)/.test(url)));
 });

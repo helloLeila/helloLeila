@@ -186,6 +186,10 @@ export function CoverageField({ lang, weather }) {
   const weatherKicker = textByLang(lang, "Daily forecast", "每日天气");
   const forecast = weather?.daily || [];
   const updatedAt = formatUpdatedAt(weather?.updatedAt, lang);
+  const observedAt = formatUpdatedAt(weather?.observedAt || weather?.updatedAt, lang);
+  const weatherSourceLabel = weather?.isFallback
+    ? textByLang(lang, `${weather?.source || "Open-Meteo"} fallback`, `${weather?.source || "Open-Meteo"} 回退`)
+    : weather?.source || "Open-Meteo";
   const todayMorning = forecast[0]?.morningTemperature ?? "--";
   const todayEvening = forecast[0]?.eveningTemperature ?? "--";
   const todaySwing = forecast[0]?.swing ?? "--";
@@ -453,8 +457,20 @@ export function CoverageField({ lang, weather }) {
             </div>
 
             <footer className="weather-panel-footer">
-              <span>{lang === "zh" ? "最近刷新" : "Last refresh"}</span>
-              <strong>{updatedAt}</strong>
+              <div className="weather-source">
+                <span>{lang === "zh" ? "数据来源" : "Source"}</span>
+                {weather?.sourceUrl ? (
+                  <a className="weather-source-link" href={weather.sourceUrl} target="_blank" rel="noreferrer">
+                    {weatherSourceLabel}
+                  </a>
+                ) : (
+                  <strong>{weatherSourceLabel}</strong>
+                )}
+              </div>
+              <div className="weather-source weather-observed">
+                <span>{weather?.isFallback ? (lang === "zh" ? "沿用观测" : "Fallback observed") : (lang === "zh" ? "观测时间" : "Observed")}</span>
+                <strong>{observedAt || updatedAt}</strong>
+              </div>
             </footer>
 
             <div className="time-panel coverage-clock-panel">

@@ -78,6 +78,10 @@ export function useWeatherNews(lang) {
           typhoonEta: data.weather?.typhoonEta || { en: "No active alert", zh: "暂无台风预警" },
           daily: data.weather?.daily || buildFallbackDailyForecast(),
           updatedAt: data.updatedAt || "",
+          source: data.weather?.source || "Open-Meteo",
+          sourceUrl: data.weather?.sourceUrl || "",
+          observedAt: data.weather?.observedAt || data.updatedAt || "",
+          isFallback: Boolean(data.weather?.isFallback),
         });
         const nextCodexNews = Array.isArray(data.codexNews) ? data.codexNews : [];
         const nextNews = Array.isArray(data.news) && data.news.length ? data.news : siteContent.newsFallback;
@@ -93,6 +97,10 @@ export function useWeatherNews(lang) {
             typhoonEta: { en: "No active alert", zh: "暂无台风预警" },
             daily: buildFallbackDailyForecast(),
             updatedAt: new Date().toISOString(),
+            source: lang === "zh" ? "本地回退" : "Local fallback",
+            sourceUrl: "",
+            observedAt: new Date().toISOString(),
+            isFallback: true,
           });
           setCodexNews([]);
           setNews(siteContent.newsFallback.slice(0, 5).map((item) => normalizeNewsItem(item, lang)));
