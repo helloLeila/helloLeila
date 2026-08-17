@@ -487,6 +487,12 @@ a {
 .graph-card{
   padding-bottom: 0px;
 }
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  min-height: 286px;
+}
 .section-head {
   display: grid;
   gap: 8px;
@@ -1384,7 +1390,8 @@ a {
 }
 
 .back-top-row {
-  margin-top: 14px;
+  margin-top: auto;
+  padding-top: 18px;
   display: flex;
   justify-content: flex-end;
 }
@@ -1518,6 +1525,10 @@ a {
   .live-card,
   .footer-links {
     padding: 14px;
+  }
+
+  .footer-links {
+    min-height: auto;
   }
 
   .hero-top,
