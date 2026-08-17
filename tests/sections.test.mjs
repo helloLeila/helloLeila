@@ -217,3 +217,8 @@ test("work links use a continuous accessible marquee", () => {
   assert.match(appStyleSource, /\.link-marquee:hover \.link-track,[\s\S]*\.link-marquee:focus-within \.link-track\s*\{[\s\S]*animation-play-state:\s*paused/);
   assert.match(appStyleSource, /@media \(prefers-reduced-motion:\s*reduce\)\s*\{[\s\S]*\.link-marquee\s*\{[\s\S]*overflow-x:\s*auto/);
 });
+
+test("work links marquee does not force extra footer height", () => {
+  assert.doesNotMatch(appStyleSource, /\.footer-links\s*\{\s*display:\s*flex;\s*flex-direction:\s*column;\s*min-height:\s*286px/);
+  assert.match(appStyleSource, /\.back-top-row\s*\{\s*margin-top:\s*14px/);
+});
