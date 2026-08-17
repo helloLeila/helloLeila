@@ -8,13 +8,30 @@ export function WorkLinks() {
       <div className="section-head compact">
         <div className="section-kicker">Common Work Entrances / 常用网站入口</div>
       </div>
-      <div className="link-grid">
-        {siteContent.workLinks.map((link) => (
-          <a className="link-pill" href={link.href} key={link.href} target="_blank" rel="noreferrer">
-            <em>{link.type}</em>
-            <span>{link.label}</span>
-          </a>
-        ))}
+      <div className="link-marquee" aria-label="Common work entrances / 常用网站入口">
+        <div className="link-track">
+          {[false, true].map((isDuplicate) => (
+            <div
+              className="link-sequence"
+              aria-hidden={isDuplicate}
+              key={isDuplicate ? "duplicate" : "primary"}
+            >
+              {siteContent.workLinks.map((link) => (
+                <a
+                  className="link-pill"
+                  href={link.href}
+                  key={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  tabIndex={isDuplicate ? -1 : undefined}
+                >
+                  <em>{link.type}</em>
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="back-top-row">
         <a className="back-top" href="#top">

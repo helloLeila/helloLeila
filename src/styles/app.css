@@ -1360,17 +1360,41 @@ a {
   padding: 5px 8px;
 }
 
-.link-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.link-marquee {
+  --marquee-gap: 10px;
+  --marquee-half-gap: 5px;
+  position: relative;
+  overflow: hidden;
   margin-top: 12px;
+  mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+}
+
+.link-track {
+  display: flex;
+  width: max-content;
+  gap: var(--marquee-gap);
+  animation: workLinksMarquee 32s linear infinite;
+  will-change: transform;
+}
+
+.link-sequence {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--marquee-gap);
+}
+
+.link-marquee:hover .link-track,
+.link-marquee:focus-within .link-track {
+  animation-play-state: paused;
 }
 
 .link-pill {
   display: inline-grid;
+  flex: 0 0 auto;
   gap: 3px;
   align-content: center;
+  min-width: 132px;
   min-height: 46px;
   padding: 8px 14px;
   border-radius: 18px;
@@ -1408,6 +1432,16 @@ a {
   text-decoration: none;
   font-size: 0.82rem;
   box-shadow: 0 10px 24px rgba(84, 104, 152, 0.08);
+}
+
+@keyframes workLinksMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-50% - var(--marquee-half-gap)), 0, 0);
+  }
 }
 
 @keyframes gridFloat {
@@ -1630,5 +1664,19 @@ a {
   .weather-observed {
     justify-items: start;
     text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-marquee {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+    scrollbar-width: thin;
+  }
+
+  .link-track {
+    animation: none;
+    transform: none;
   }
 }

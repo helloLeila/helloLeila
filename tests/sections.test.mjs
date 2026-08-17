@@ -22,6 +22,10 @@ const weatherTrendSource = fs.readFileSync(
   path.resolve(root, "src/components/WeatherTrendChart.jsx"),
   "utf8"
 );
+const workLinksSource = fs.readFileSync(
+  path.resolve(root, "src/components/WorkLinks.jsx"),
+  "utf8"
+);
 const appStyleSource = fs.readFileSync(
   path.resolve(root, "src/styles/app.css"),
   "utf8"
@@ -200,4 +204,16 @@ test("layout css protects mobile content from clipping", () => {
   assert.match(appStyleSource, /\.section-kicker\s*\{[^}]*white-space:\s*normal/);
   assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.toolbar-note\s*\{[\s\S]*white-space:\s*normal/);
   assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.shell\s*\{[\s\S]*padding:\s*12px 16px 24px/);
+});
+
+test("work links use a continuous accessible marquee", () => {
+  assert.match(workLinksSource, /className="link-marquee"/);
+  assert.match(workLinksSource, /className="link-track"/);
+  assert.match(workLinksSource, /\[false,\s*true\]\.map/);
+  assert.match(workLinksSource, /aria-hidden=\{isDuplicate\}/);
+  assert.match(workLinksSource, /tabIndex=\{isDuplicate \? -1 : undefined\}/);
+  assert.match(appStyleSource, /\.link-track\s*\{[\s\S]*animation:\s*workLinksMarquee [^;]+ linear infinite/);
+  assert.match(appStyleSource, /@keyframes workLinksMarquee\s*\{/);
+  assert.match(appStyleSource, /\.link-marquee:hover \.link-track,[\s\S]*\.link-marquee:focus-within \.link-track\s*\{[\s\S]*animation-play-state:\s*paused/);
+  assert.match(appStyleSource, /@media \(prefers-reduced-motion:\s*reduce\)\s*\{[\s\S]*\.link-marquee\s*\{[\s\S]*overflow-x:\s*auto/);
 });
