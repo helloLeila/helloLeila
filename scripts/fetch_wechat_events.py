@@ -257,7 +257,9 @@ def extract_ai_event(article: dict, api_key: str, model: str, now: str) -> dict 
                     "verifiedAt": now,
                     "articleHash": article.get("contentHash", ""),
                     "sourceKind": article.get("sourceKind", "wechat-public"),
-                    "status": "published"
+                    "status": "needs-review"
+                    if article.get("sourceKind") == "wechat-search-candidate"
+                    else "published"
                     if float(result.get("confidence", 0) or 0) >= 0.75 and result.get("startTime")
                     else "needs-review",
                 }
@@ -305,6 +307,7 @@ def build_payload(
     for source in config.get("sources", []):
         feed_url = source.get("feedUrl", "")
         manual_urls = source.get("confirmedArticleUrls", [])
+        articles: list[dict] = []
         candidates = []
         discovery_status = source.get("discoveryStatus", "pending")
         if not feed_url and not manual_urls and discovery_status != "confirmed":
@@ -335,11 +338,10 @@ def build_payload(
             if discovery_status == "unavailable":
                 source["discoveryStatus"] = "unavailable"
                 discovery_unavailable += 1
-        if not source.get("enabled") and not manual_urls and not feed_url:
+        if not source.get("enabled") and not manual_urls and not feed_url and not articles:
             source_records.append(_source_record(source, now, discovery_status))
             continue
         active += 1
-        articles: list[dict] = []
         errors = []
         try:
             if feed_url:

@@ -2,6 +2,7 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -140,6 +141,29 @@ class WechatEventRadarTests(unittest.TestCase):
         self.assertEqual(candidates[0]["url"], "https://mp.weixin.qq.com/s/shenzhen-tech-event")
         self.assertGreater(candidates[0]["score"], candidates[1]["score"])
         self.assertEqual(candidates[0]["discoveryStatus"], "needs-confirmation")
+
+    def test_successful_name_discovery_does_not_crash_or_publish_unconfirmed_event(self):
+        fetcher = load_fetch_module()
+        config = {"sources": [{"id": "source", "name": "深圳理工大学", "feedUrl": "", "enabled": False}], "manualArticleUrls": []}
+        candidate = {
+            "sourceId": "source",
+            "sourceName": "深圳理工大学",
+            "title": "深圳理工大学 AI 活动报名",
+            "url": "https://mp.weixin.qq.com/s/candidate",
+            "excerpt": "8月29日活动报名",
+            "publishedAt": "",
+            "contentHash": "candidate-hash",
+            "score": 9,
+            "discoveryStatus": "needs-confirmation",
+        }
+
+        with patch.object(fetcher, "discover_source_candidates", return_value=([candidate], "needs-confirmation")):
+            payload = fetcher.build_payload(config, now="2026-08-20T07:00:00+08:00", previous={}, verified_events=[])
+
+        self.assertEqual(payload["sourceStats"]["discoveryHits"], 1)
+        self.assertEqual(payload["sources"][0]["discoveryCandidates"][0]["score"], 9)
+        self.assertEqual(len(payload["events"]), 1)
+        self.assertEqual(payload["events"][0]["status"], "needs-review")
 
 
 if __name__ == "__main__":
