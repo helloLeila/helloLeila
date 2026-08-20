@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>示例教育机构</title>
+  <entry>
+    <title>公开课：生成式 AI 入门</title>
+    <link href="https://example.org/atom-event" />
+    <id>tag:example.org,2026:atom-event</id>
+    <updated>2026-08-20T02:00:00Z</updated>
+    <summary>8月30日线上公开课，免费报名。</summary>
+  </entry>
+</feed>

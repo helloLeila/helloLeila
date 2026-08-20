@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19T07:00:00+08:00",
+  "status": "ok",
+  "sourceStats": {"configured": 1, "succeeded": 1, "failed": 0},
+  "sources": [],
+  "events": [
+    {
+      "id": "old-event",
+      "title": "仍未开始的旧活动",
+      "startTime": "2026-08-28T10:00:00+08:00",
+      "endTime": null,
+      "city": "深圳",
+      "location": "南山",
+      "isOnline": false,
+      "registrationUrl": null,
+      "summary": "继续保留。",
+      "sourceAccount": "示例技术社区",
+      "sourceArticleUrl": "https://example.org/old-event",
+      "tags": ["AI"],
+      "status": "published",
+      "discoveredAt": "2026-08-19T07:00:00+08:00",
+      "verifiedAt": "2026-08-19T07:00:00+08:00",
+      "articleHash": "old-hash"
+    },
+    {
+      "id": "expired-event",
+      "title": "已经结束的活动",
+      "startTime": "2026-08-01T10:00:00+08:00",
+      "endTime": null,
+      "city": "深圳",
+      "location": "福田",
+      "isOnline": false,
+      "registrationUrl": null,
+      "summary": "应该过期。",
+      "sourceAccount": "示例技术社区",
+      "sourceArticleUrl": "https://example.org/expired-event",
+      "tags": [],
+      "status": "published",
+      "discoveredAt": "2026-08-01T07:00:00+08:00",
+      "verifiedAt": "2026-08-01T07:00:00+08:00",
+      "articleHash": "expired-hash"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>示例技术社区</title>
+    <item>
+      <title>AI Agent 技术沙龙开放报名</title>
+      <link>https://mp.weixin.qq.com/s/event-1</link>
+      <guid>event-1</guid>
+      <pubDate>Thu, 20 Aug 2026 06:30:00 +0800</pubDate>
+      <description>2026年8月29日 14:00，深圳南山区，报名参加 AI Agent 技术沙龙。</description>
+    </item>
+    <item>
+      <title>本周产品新闻回顾</title>
+      <link>https://mp.weixin.qq.com/s/news-1</link>
+      <guid>news-1</guid>
+      <pubDate>Wed, 19 Aug 2026 08:00:00 +0800</pubDate>
+      <description>本周产品更新和行业新闻汇总。</description>
+    </item>
+  </channel>
+</rss>

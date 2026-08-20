@@ -3,10 +3,15 @@ import { siteContent } from "../data/siteContent.js";
 
 // 渲染底部工作入口与回到顶部链接。
 export function WorkLinks() {
+  const eventsUrl = `${import.meta.env.BASE_URL || "/"}events/`;
+
   return (
     <section className="footer-links">
       <div className="section-head compact">
         <div className="section-kicker">Common Work Entrances / 常用网站入口</div>
+        <a className="events-page-link" href={eventsUrl}>
+          Activity radar / 活动雷达 ↗
+        </a>
       </div>
       <div className="link-marquee" aria-label="Common work entrances / 常用网站入口">
         <div className="link-track">

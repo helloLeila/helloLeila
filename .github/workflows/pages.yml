@@ -33,11 +33,25 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Install
         run: npm install
 
       - name: Refresh live panel data
         run: npm run refresh:live-panel
+
+      - name: Refresh WeChat event radar
+        run: npm run refresh:wechat-events
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+
+      - name: Test
+        run: npm test
 
       - name: Build
         run: npm run build

@@ -131,6 +131,35 @@ The warning data is filtered to Shenzhen entries. If a Shenzhen typhoon warning 
 
 This keeps the static GitHub Pages site honest: Open-Meteo remains the weather source, while typhoon and local warning status come from a China Meteorological Administration source. A commercial API such as QWeather can still be added later if you want SLA-style stability or wider city coverage, but it usually needs account credentials or a configured API host. The current implementation avoids secrets and still gives clickable original warning links.
 
+## Public WeChat event radar
+
+The activity page is published at:
+
+```text
+https://helloleila.github.io/helloLeila/events/
+```
+
+The source catalog lives in `data/wechat-event-sources.json`. Every name in that file is preserved even when its public feed address has not been discovered yet. A source with only a name stays `discoveryStatus: "pending"`; it is not deleted or treated as invalid. When an official public article URL is known, add it to `confirmedArticleUrls` until a stable RSS/Atom address is available.
+
+The catalog intentionally does not contain a personal WeChat login, Cookie, QR session, or private API credential. The collector only uses public RSS/Atom addresses and manually confirmed public article URLs. It runs once per day, limits each source to ten recent entries, serializes requests, and stops on login pages, challenges, or access errors.
+
+Local refresh:
+
+```bash
+npm run refresh:wechat-events
+```
+
+The command writes `public/wechat-events.json`. With no configured feed URLs or `OPENAI_API_KEY`, it still produces a valid honest payload and keeps prior published events when available. New article candidates become `needs-review` and are hidden from the public list until structured extraction confirms a title and start date.
+
+Optional GitHub Actions configuration:
+
+- Repository Secret: `OPENAI_API_KEY`
+- Repository Variable: `OPENAI_MODEL`
+
+The model receives only public article metadata and excerpt text. The browser never receives the API key. The Pages workflow runs the event refresh, then `npm test`, then the production build. A source failure produces `partial` or `stale` data while preserving the last valid event list.
+
+When a source name cannot be uniquely matched to a public account, keep the name in the catalog and ask for one article URL or a screenshot of the account details. Do not silently remove it.
+
 ## Publish flow
 
 1. Push the source code branch.
