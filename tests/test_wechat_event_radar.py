@@ -107,7 +107,7 @@ class WechatEventRadarTests(unittest.TestCase):
     def test_empty_catalog_payload_is_honest_without_ai_or_feed_urls(self):
         fetcher = load_fetch_module()
         config = {"sources": [{"id": "named-only", "name": "仅有名称", "feedUrl": "", "enabled": False}], "manualArticleUrls": []}
-        payload = fetcher.build_payload(config, now="2026-08-20T07:00:00+08:00", previous={})
+        payload = fetcher.build_payload(config, now="2026-08-20T07:00:00+08:00", previous={}, verified_events=[])
 
         self.assertEqual(payload["status"], "empty")
         self.assertEqual(payload["sourceStats"]["cataloged"], 1)
@@ -122,6 +122,24 @@ class WechatEventRadarTests(unittest.TestCase):
             error="private stack trace and local path",
         )
         self.assertEqual(record["error"], "source unavailable")
+
+    def test_verified_public_events_are_loaded_when_feeds_are_empty(self):
+        fetcher = load_fetch_module()
+        events = fetcher.load_verified_events(ROOT / "data/verified-public-events.json")
+        self.assertGreaterEqual(len(events), 5)
+        self.assertIn("AICon 全球人工智能开发与应用大会（深圳站）", [event["title"] for event in events])
+
+    def test_name_discovery_builds_search_url_and_scores_wechat_candidates(self):
+        fetcher = load_fetch_module()
+        search_url = fetcher.build_discovery_url("深圳理工大学")
+        self.assertIn("format=rss", search_url)
+        self.assertIn("%E6%B7%B1%E5%9C%B3%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6", search_url)
+
+        xml = (ROOT / "tests/fixtures/wechat-events/bing-discovery.xml").read_text(encoding="utf-8")
+        candidates = fetcher.parse_discovery_results(xml, "sz-tech", "深圳理工大学")
+        self.assertEqual(candidates[0]["url"], "https://mp.weixin.qq.com/s/shenzhen-tech-event")
+        self.assertGreater(candidates[0]["score"], candidates[1]["score"])
+        self.assertEqual(candidates[0]["discoveryStatus"], "needs-confirmation")
 
 
 if __name__ == "__main__":

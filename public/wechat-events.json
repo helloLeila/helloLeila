@@ -1,310 +1,538 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-20T18:16:45+08:00",
-  "status": "empty",
+  "updatedAt": "2026-08-20T20:48:31+08:00",
+  "status": "partial",
   "sourceStats": {
     "cataloged": 37,
     "configured": 1,
     "succeeded": 0,
-    "failed": 1
+    "failed": 1,
+    "verified": 5,
+    "discoveryHits": 0,
+    "discoveryNeedsConfirmation": 0,
+    "discoveryUnavailable": 36
   },
   "sources": [
     {
       "id": "shenzhen-university-of-advanced-technology",
       "name": "深圳理工大学",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "siat-cas",
       "name": "中国科学院深圳先进技术研究院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "ishenzhen",
       "name": "i深圳",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "qbitai",
       "name": "量子位",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "jiqizhixin",
       "name": "机器之心",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-robotics-association",
       "name": "深圳市机器人协会",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "innovation-nanshan",
       "name": "创新南山",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "aliyun-cloud-native",
       "name": "阿里云云原生",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "appso",
       "name": "APPSO",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "ai-time",
       "name": "AI TIME论道",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "cuhksz-sse",
       "name": "香港中文大学深圳SSE理工学院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "modelscope",
       "name": "魔搭ModelScope社区",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "szau-ai",
       "name": "深圳大学人工智能学院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-bay-checkin",
       "name": "打卡深圳湾",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "data-whale",
       "name": "Data WHALE",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "datafun-talk",
       "name": "DataFunTalk",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-library",
       "name": "深圳图书馆",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "nanshan-library",
       "name": "南山图书馆",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "openbuild",
       "name": "OpenBuild",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "osc",
       "name": "OSC开源魔力",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "segmentfault",
       "name": "Segment Fault思否",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-pro",
       "name": "深圈Pro",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-hackathon",
       "name": "深客松",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "hetau-academy",
       "name": "深圳河套学院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-software-window",
       "name": "深圳软件之窗",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-big-data-institute",
       "name": "深圳大数据研究院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "nanshan-culture-center",
       "name": "深圳市南山区文化馆",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-ai-robotics-institute",
       "name": "深圳市人工智能与机器人研究院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "shenzhen-data-economy-institute",
       "name": "深圳数据经济研究院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "trae-ai",
       "name": "Trae AI",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "user-group",
       "name": "User Group",
       "status": "failed",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": "source unavailable"
+      "error": "source unavailable",
+      "discoveryStatus": "confirmed",
+      "discoveryCandidates": []
     },
     {
       "id": "cuhk-ai",
       "name": "香港中文大学人工智能学院",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "hkbu",
       "name": "香港浸会大学",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "hku",
       "name": "香港大学",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "cuhksz-sse-postgraduate",
       "name": "香港中文大学深圳SSE硕博项目",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "36kr",
       "name": "36氪",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     },
     {
       "id": "tencent-cloud",
       "name": "腾讯云",
-      "status": "pending",
-      "checkedAt": "2026-08-20T18:16:45+08:00",
+      "status": "unavailable",
+      "checkedAt": "2026-08-20T20:48:31+08:00",
       "newArticleCount": 0,
-      "error": ""
+      "error": "",
+      "discoveryStatus": "unavailable",
+      "discoveryCandidates": []
     }
   ],
-  "events": []
+  "events": [
+    {
+      "id": "aicon-shenzhen-2026",
+      "title": "AICon 全球人工智能开发与应用大会（深圳站）",
+      "organizer": "InfoQ / AICon",
+      "eventType": "conference",
+      "startTime": "2026-08-21T08:50:00+08:00",
+      "endTime": "2026-08-22T18:00:00+08:00",
+      "timezone": "Asia/Shanghai",
+      "city": "深圳",
+      "location": "深圳湾万丽酒店",
+      "isOnline": false,
+      "registrationUrl": "https://www.bagevent.com/event/gosimshenzhen2026",
+      "registrationDeadline": null,
+      "priceText": "以报名页为准",
+      "summary": "聚焦 Agent 工程化、大模型基础设施、AI Native 研发与具身智能的技术大会。",
+      "sourceAccount": "AICon / InfoQ",
+      "sourceArticleUrl": "https://www.bagevent.com/event/9228523",
+      "sourceKind": "verified-public-web",
+      "tags": [
+        "AI",
+        "Agent",
+        "工程化",
+        "深圳"
+      ],
+      "status": "published",
+      "confidence": 0.98,
+      "discoveredAt": "2026-08-20T07:00:00+08:00",
+      "verifiedAt": "2026-08-20T07:00:00+08:00",
+      "articleHash": "verified-aicon-shenzhen-2026"
+    },
+    {
+      "id": "szbl-evident-2026",
+      "title": "第四届深圳湾实验室-EVIDENT 显微成像专题研讨会",
+      "organizer": "深圳湾实验室与 EVIDENT",
+      "eventType": "seminar",
+      "startTime": "2026-08-21T09:00:00+08:00",
+      "endTime": "2026-08-21T17:00:00+08:00",
+      "timezone": "Asia/Shanghai",
+      "city": "深圳",
+      "location": "高科创新中心 A401 报告厅",
+      "isOnline": false,
+      "registrationUrl": "https://www.szbl.ac.cn/news-events/calendar.htm",
+      "registrationDeadline": null,
+      "priceText": "以官方活动页为准",
+      "summary": "深圳湾实验室活动日历列出的显微成像专题研讨会。",
+      "sourceAccount": "深圳湾实验室",
+      "sourceArticleUrl": "https://www.szbl.ac.cn/news-events/calendar.htm",
+      "sourceKind": "verified-public-web",
+      "tags": [
+        "科研",
+        "研讨会",
+        "深圳"
+      ],
+      "status": "published",
+      "confidence": 0.95,
+      "discoveredAt": "2026-08-20T07:00:00+08:00",
+      "verifiedAt": "2026-08-20T07:00:00+08:00",
+      "articleHash": "verified-szbl-evident-2026"
+    },
+    {
+      "id": "ai-with-hkpc-2026",
+      "title": "AI with HKPC 企業賦能：AI 及數碼轉型專區",
+      "organizer": "香港生產力促進局 HKPC",
+      "eventType": "conference",
+      "startTime": "2026-08-21T10:00:00+08:00",
+      "endTime": "2026-08-24T19:00:00+08:00",
+      "timezone": "Asia/Shanghai",
+      "city": "香港",
+      "location": "香港會議展覽中心 1C 展廳",
+      "isOnline": false,
+      "registrationUrl": "https://campaigns.hkpc.org/zh-hk/ai-with-hkpc-business-empowerment",
+      "registrationDeadline": null,
+      "priceText": "免費登記",
+      "summary": "30 個展商、20 多場研討會，覆盖 Agentic AI、防騙 AI、企業 AI 應用與 AI 培訓。",
+      "sourceAccount": "HKPC",
+      "sourceArticleUrl": "https://campaigns.hkpc.org/zh-hk/ai-with-hkpc-business-empowerment",
+      "sourceKind": "verified-public-web",
+      "tags": [
+        "AI",
+        "Agentic AI",
+        "企业应用",
+        "香港"
+      ],
+      "status": "published",
+      "confidence": 0.98,
+      "discoveredAt": "2026-08-20T07:00:00+08:00",
+      "verifiedAt": "2026-08-20T07:00:00+08:00",
+      "articleHash": "verified-ai-with-hkpc-2026"
+    },
+    {
+      "id": "avnet-shenzhen-2026",
+      "title": "2026 安富利智慧科技生态圈论坛（深圳站）",
+      "organizer": "安富利 Avnet",
+      "eventType": "forum",
+      "startTime": "2026-09-18T08:30:00+08:00",
+      "endTime": "2026-09-18T16:30:00+08:00",
+      "timezone": "Asia/Shanghai",
+      "city": "深圳",
+      "location": "深圳湾万丽酒店",
+      "isOnline": false,
+      "registrationUrl": "https://www.avnet.com/apac/resources/training-and-events/event/!ut/p/z0/fYzBCsIwEAV_JZcew8YitdcqaBHxUkXNRda6tlG7sUks6tdbBMGTxxnePNCwBc3YmQqDsYzXnnc62edqkgyyVC3TUZGpbDxd5qvVQo3iIRTE-3UBc9D_d_2RObetzkCXlgM9AmzRGxQf4iCu5uDQPYUUrzpS2DGF2jYUKUfe3l1JPlLBoWHDlUQ-Sur67EeKXoqv_PSSSuufPlAjA5W1PFl3b7yMVZzA7TLbvAGu4muK/?locale=en_US",
+      "registrationDeadline": null,
+      "priceText": "以官方注册页为准",
+      "summary": "围绕 AI 基建、Physical AI 与 AI 应用创新，讨论算力、机器人、智能制造和行业落地。",
+      "sourceAccount": "安富利 Avnet",
+      "sourceArticleUrl": "https://www.avnet.com/apac/resources/training-and-events/event/!ut/p/z0/fYzBCsIwEAV_JZcew8YitdcqaBHxUkXNRda6tlG7sUks6tdbBMGTxxnePNCwBc3YmQqDsYzXnnc62edqkgyyVC3TUZGpbDxd5qvVQo3iIRTE-3UBc9D_d_2RObetzkCXlgM9AmzRGxQf4iCu5uDQPYUUrzpS2DGF2jYUKUfe3l1JPlLBoWHDlUQ-Sur67EeKXoqv_PSSSuufPlAjA5W1PFl3b7yMVZzA7TLbvAGu4muK/?locale=en_US",
+      "sourceKind": "verified-public-web",
+      "tags": [
+        "AI 基建",
+        "Physical AI",
+        "机器人",
+        "深圳"
+      ],
+      "status": "published",
+      "confidence": 0.98,
+      "discoveredAt": "2026-08-20T07:00:00+08:00",
+      "verifiedAt": "2026-08-20T07:00:00+08:00",
+      "articleHash": "verified-avnet-shenzhen-2026"
+    },
+    {
+      "id": "gosim-shenzhen-2026",
+      "title": "GOSIM Shenzhen 2026 开源 AI 与机器人峰会",
+      "organizer": "GOSIM",
+      "eventType": "summit",
+      "startTime": "2026-10-16T09:00:00+08:00",
+      "endTime": "2026-10-17T18:00:00+08:00",
+      "timezone": "Asia/Shanghai",
+      "city": "深圳",
+      "location": "ADEN Hotel Shenzhen Nanshan",
+      "isOnline": false,
+      "registrationUrl": "https://www.bagevent.com/event/9228523",
+      "registrationDeadline": null,
+      "priceText": "以官方报名页为准",
+      "summary": "开源模型、Agentic AI、MCP/A2A、开源机器人、边缘智能与开发者基础设施。",
+      "sourceAccount": "GOSIM / OpenBuild",
+      "sourceArticleUrl": "https://shenzhen2026.gosim.org/",
+      "sourceKind": "verified-public-web",
+      "tags": [
+        "开源",
+        "Agentic AI",
+        "机器人",
+        "深圳"
+      ],
+      "status": "published",
+      "confidence": 0.97,
+      "discoveredAt": "2026-08-20T07:00:00+08:00",
+      "verifiedAt": "2026-08-20T07:00:00+08:00",
+      "articleHash": "verified-gosim-shenzhen-2026"
+    }
+  ]
 }

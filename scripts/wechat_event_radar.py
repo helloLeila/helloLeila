@@ -282,6 +282,7 @@ def normalize_event(event: dict, now: str | None = None) -> dict:
         "summary": clean_text(event.get("summary"))[:MAX_SUMMARY_LENGTH],
         "sourceAccount": clean_text(event.get("sourceAccount")),
         "sourceArticleUrl": article_url,
+        "sourceKind": clean_text(event.get("sourceKind")) or "wechat-public",
         "tags": [clean_text(tag) for tag in tags if clean_text(tag)][:MAX_TAGS],
         "status": clean_text(event.get("status")) or "needs-review",
         "confidence": float(event.get("confidence", 0) or 0),

@@ -27,6 +27,7 @@ function EventRow({ event }) {
         <div className="event-eyebrow">
           <span>{event.isOnline ? "线上" : event.city || "地点待确认"}</span>
           {event.sourceAccount ? <span>{event.sourceAccount}</span> : null}
+          {event.sourceKind === "verified-public-web" ? <span>公开网页核验</span> : null}
         </div>
         <h2>{event.title}</h2>
         <p className="event-meta">

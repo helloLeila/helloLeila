@@ -14,6 +14,7 @@ from html import unescape
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from urllib.parse import quote_plus
 
 # Make direct `python scripts/fetch_wechat_events.py` and unittest loading share the same import path.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -40,6 +41,9 @@ USER_AGENT = "helloLeila-event-radar/1.0 (+public-feed; no-login-state)"
 REQUEST_TIMEOUT = 20
 REQUEST_DELAY_SECONDS = 2
 MAX_ARTICLES_PER_SOURCE = 10
+DISCOVERY_RESULT_LIMIT = 5
+DISCOVERY_SCORE_THRESHOLD = 6
+DISCOVERY_SEARCH_ENDPOINT = "https://www.bing.com/search?format=rss&q="
 
 
 def load_config(path: Path = CONFIG_PATH) -> dict:
@@ -96,6 +100,72 @@ def fetch_json(url: str) -> dict | None:
     return payload if isinstance(payload, dict) else None
 
 
+def build_discovery_url(source_name: str) -> str:
+    query = f'"{source_name}" 微信公众号 活动'
+    return f"{DISCOVERY_SEARCH_ENDPOINT}{quote_plus(query)}"
+
+
+def _source_name_tokens(value: str) -> list[str]:
+    return [token for token in re.split(r"[\s·，、（）()/_-]+", value.lower()) if len(token) > 1]
+
+
+def score_source_candidate(candidate: dict, source_name: str) -> int:
+    title = str(candidate.get("title", "")).lower()
+    excerpt = str(candidate.get("excerpt", "")).lower()
+    url = str(candidate.get("url", "")).lower()
+    haystack = f"{title} {excerpt}"
+    score = 0
+    if "mp.weixin.qq.com" in url:
+        score += 4
+    if "微信公众号" in haystack or "公众号" in haystack:
+        score += 2
+    if source_name.lower() in haystack:
+        score += 5
+    score += min(sum(1 for token in _source_name_tokens(source_name) if token in haystack), 3)
+    if any(word in haystack for word in ("招聘", "职位", "求职")):
+        score -= 3
+    return score
+
+
+def parse_discovery_results(xml_text: str, source_id: str, source_name: str, limit: int = DISCOVERY_RESULT_LIMIT) -> list[dict]:
+    results = parse_feed(xml_text, source_id, source_name, limit=limit)
+    candidates = []
+    seen = set()
+    for result in results:
+        if not result.get("url") or result["url"] in seen:
+            continue
+        seen.add(result["url"])
+        result["score"] = score_source_candidate(result, source_name)
+        result["discoveryStatus"] = "needs-confirmation"
+        candidates.append(result)
+    return sorted(candidates, key=lambda item: (-item["score"], item.get("title", "")))
+
+
+def discover_source_candidates(source: dict) -> tuple[list[dict], str]:
+    if source.get("discoveryStatus") == "confirmed":
+        return [], "confirmed"
+    try:
+        result = parse_discovery_results(
+            fetch_text(build_discovery_url(source["name"])),
+            source["id"],
+            source["name"],
+        )
+    except (OSError, ValueError, HTTPError, URLError):
+        return [], "unavailable"
+    if not result:
+        return [], "not-found"
+    return result, "needs-confirmation"
+
+
+def load_verified_events(path: Path = ROOT / "data" / "verified-public-events.json") -> list[dict]:
+    if not path.exists():
+        return []
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        raise ValueError("verified public events must be an array")
+    return [normalize_event({**item, "sourceKind": "verified-public-web"}) for item in payload if isinstance(item, dict)]
+
+
 def load_previous(path: Path = OUTPUT_PATH) -> dict:
     local = None
     if path.exists():
@@ -150,6 +220,7 @@ def _candidate_event(article: dict, now: str) -> dict:
             "discoveredAt": now,
             "verifiedAt": now,
             "articleHash": article.get("contentHash", ""),
+            "sourceKind": article.get("sourceKind", "wechat-public"),
         },
         now=now,
     )
@@ -185,6 +256,7 @@ def extract_ai_event(article: dict, api_key: str, model: str, now: str) -> dict 
                     "discoveredAt": now,
                     "verifiedAt": now,
                     "articleHash": article.get("contentHash", ""),
+                    "sourceKind": article.get("sourceKind", "wechat-public"),
                     "status": "published"
                     if float(result.get("confidence", 0) or 0) >= 0.75 and result.get("startTime")
                     else "needs-review",
@@ -207,6 +279,8 @@ def _source_record(source: dict, now: str, status: str, count: int = 0, error: s
         "newArticleCount": count,
         # Keep implementation details out of the public JSON; workflow logs retain the raw exception.
         "error": "source unavailable" if error else "",
+        "discoveryStatus": source.get("discoveryStatus", status),
+        "discoveryCandidates": source.get("discoveryCandidates", []),
     }
 
 
@@ -216,19 +290,53 @@ def build_payload(
     previous: dict | None = None,
     api_key: str | None = None,
     model: str | None = None,
+    verified_events: list[dict] | None = None,
 ) -> dict:
     now = now or datetime.now(TIMEZONE).isoformat(timespec="seconds")
     previous = previous or {}
     events: list[dict] = []
     source_records = []
     succeeded = failed = active = 0
+    verified_events = verified_events if verified_events is not None else load_verified_events()
+    discovery_hits = discovery_needs_confirmation = discovery_unavailable = 0
+    events.extend(verified_events)
     last_request_at = 0.0
 
     for source in config.get("sources", []):
         feed_url = source.get("feedUrl", "")
         manual_urls = source.get("confirmedArticleUrls", [])
-        if not source.get("enabled") and not manual_urls:
-            source_records.append(_source_record(source, now, source.get("discoveryStatus", "pending")))
+        candidates = []
+        discovery_status = source.get("discoveryStatus", "pending")
+        if not feed_url and not manual_urls and discovery_status != "confirmed":
+            candidates, discovery_status = discover_source_candidates(source)
+            source["discoveryCandidates"] = [
+                {
+                    "title": item.get("title", ""),
+                    "url": item.get("url", ""),
+                    "excerpt": item.get("excerpt", "")[:240],
+                    "score": item.get("score", 0),
+                    "discoveryStatus": item.get("discoveryStatus", "needs-confirmation"),
+                }
+                for item in candidates
+            ]
+            # Search is discovery-only until a candidate is confirmed; this prevents same-name accounts from being bound silently.
+            if candidates:
+                source["discoveryStatus"] = "needs-confirmation"
+                discovery_hits += len(candidates)
+                discovery_needs_confirmation += 1
+                articles.extend(
+                    {
+                        **candidate,
+                        "sourceKind": "wechat-search-candidate",
+                    }
+                    for candidate in candidates
+                    if candidate.get("score", 0) >= DISCOVERY_SCORE_THRESHOLD
+                )
+            if discovery_status == "unavailable":
+                source["discoveryStatus"] = "unavailable"
+                discovery_unavailable += 1
+        if not source.get("enabled") and not manual_urls and not feed_url:
+            source_records.append(_source_record(source, now, discovery_status))
             continue
         active += 1
         articles: list[dict] = []
@@ -287,6 +395,10 @@ def build_payload(
             "configured": active,
             "succeeded": succeeded,
             "failed": failed,
+            "verified": len(verified_events),
+            "discoveryHits": discovery_hits,
+            "discoveryNeedsConfirmation": discovery_needs_confirmation,
+            "discoveryUnavailable": discovery_unavailable,
         },
         "sources": source_records,
         "events": visible_events,

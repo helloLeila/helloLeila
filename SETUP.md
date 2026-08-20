@@ -143,6 +143,20 @@ The source catalog lives in `data/wechat-event-sources.json`. Every name in that
 
 The catalog intentionally does not contain a personal WeChat login, Cookie, QR session, or private API credential. The collector only uses public RSS/Atom addresses and manually confirmed public article URLs. It runs once per day, limits each source to ten recent entries, serializes requests, and stops on login pages, challenges, or access errors.
 
+### Name-based discovery
+
+For a source that has a name but no `feedUrl`, the daily script runs a public Bing RSS search for:
+
+```text
+"公众号名称" 微信公众号 活动
+```
+
+It scores candidates by public WeChat host, exact name/snippet match, and公众号 signals, then writes the top candidates to that source's `discoveryCandidates` field in `wechat-events.json`. A candidate is never silently bound when the name is ambiguous; it remains `needs-confirmation` until an article URL is added to `confirmedArticleUrls`. This is why every name stays in the catalog even when discovery is incomplete.
+
+The generated file also contains `sourceStats.discoveryHits`, `sourceStats.discoveryNeedsConfirmation`, and `sourceStats.discoveryUnavailable`, so a run can be audited without exposing search-engine errors or private runtime details.
+
+The page currently also shows a small set of `verified-public-web` events cross-checked from official event pages. These are labeled as public-web verification, not presented as confirmed WeChat posts. Once a discovered article is confirmed, the same event pipeline can attribute it to the matching公众号.
+
 Local refresh:
 
 ```bash
