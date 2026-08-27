@@ -28,12 +28,11 @@ export default function App() {
         <HeroStage lang={lang} setLang={setLang} />
 
         <section className="insight-section">
+          <SignalCloud lang={lang} />
+
           <div className="insight-grid">
             <WorkflowCanvas lang={lang} />
-            <div className="right-rail">
-              <SignalCloud lang={lang} />
-              <AnnualMilestones lang={lang} />
-            </div>
+            <AnnualMilestones lang={lang} />
           </div>
 
           <CoverageField lang={lang} weather={weather} />

@@ -26,6 +26,15 @@ const workLinksSource = fs.readFileSync(
   path.resolve(root, "src/components/WorkLinks.jsx"),
   "utf8"
 );
+const appSource = fs.readFileSync(path.resolve(root, "src/App.jsx"), "utf8");
+const signalCloudSource = fs.readFileSync(
+  path.resolve(root, "src/components/SignalCloud.jsx"),
+  "utf8"
+);
+const skillGroupsSource = fs.readFileSync(
+  path.resolve(root, "src/components/SkillGroups.jsx"),
+  "utf8"
+);
 const appStyleSource = fs.readFileSync(
   path.resolve(root, "src/styles/app.css"),
   "utf8"
@@ -153,6 +162,38 @@ test("coverage field uses the same three runtime as l7-three", () => {
     /@antv\/l7-three\/node_modules\/three\/examples\/jsm\/loaders\/GLTFLoader\.js/.test(coverageSource);
 
   assert.ok(packageAligned || sourceUsesL7ThreeRuntime);
+});
+
+test("coverage field keeps map interaction optional without stealing page scroll", () => {
+  assert.match(coverageSource, /typeof mapService\.setMapStatus === "function"/);
+  assert.match(coverageSource, /dragEnable:\s*false/);
+  assert.match(coverageSource, /zoomEnable:\s*false/);
+  assert.match(coverageSource, /onPointerLeave/);
+  assert.match(coverageSource, /coverage-map-toggle/);
+  assert.match(coverageSource, /aria-pressed/);
+  assert.match(coverageSource, /onWheelCapture/);
+  assert.match(appStyleSource, /\.coverage-field\s*\{[\s\S]*touch-action:\s*pan-y/);
+  assert.match(appStyleSource, /\.coverage-chart\s*\{[\s\S]*overscroll-behavior:\s*contain/);
+});
+
+test("signal cloud is the primary capability surface and keeps the four real skill groups", () => {
+  assert.match(appSource, /<SignalCloud lang=\{lang\}\s*\/>[\s\S]*<div className="insight-grid">/);
+  assert.match(signalCloudSource, /import \{ SkillGroups \} from "\.\/SkillGroups\.jsx"/);
+  assert.match(signalCloudSource, /<SkillGroups lang=\{lang\} variant="index"\s*\/>/);
+  assert.match(skillGroupsSource, /variant\s*=\s*"default"/);
+  assert.match(skillGroupsSource, /skill-index/);
+  for (const key of ["frontend", "backend", "engineering", "ai-research"]) {
+    assert.match(skillGroupsSource, new RegExp(key));
+  }
+});
+
+test("editorial surface uses uneven composition and lighter structural lines", () => {
+  assert.match(appStyleSource, /\.signal-cloud-layout\s*\{/);
+  assert.match(appStyleSource, /\.signal-cloud-main\s*\{/);
+  assert.match(appStyleSource, /\.skill-index\s*\{/);
+  assert.match(appStyleSource, /grid-template-columns:\s*minmax\(0,\s*1\.35fr\)\s*minmax\(250px,\s*0\.65fr\)/);
+  assert.match(appStyleSource, /\.workflow-lines path\s*\{[\s\S]*stroke-width:\s*1/);
+  assert.doesNotMatch(appStyleSource, /\.workflow-lines path\s*\{[\s\S]*stroke-dasharray/);
 });
 
 test("utilities panel renders codex and public news panes", () => {

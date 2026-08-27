@@ -178,8 +178,10 @@ function formatTemperature(value) {
 export function CoverageField({ lang, weather }) {
   const mapRef = useRef(null);
   const sceneRef = useRef(null);
+  const mapServiceRef = useRef(null);
   const [sceneStatus, setSceneStatus] = useState("idle");
   const [sceneError, setSceneError] = useState("");
+  const [mapInteractive, setMapInteractive] = useState(false);
   const [clockNow, setClockNow] = useState(() => new Date());
   const title = textByLang(lang, siteContent.coverage.titleEn, siteContent.coverage.titleZh);
   const weatherTitle = textByLang(lang, "Shenzhen weather", "深圳天气");
@@ -210,6 +212,57 @@ export function CoverageField({ lang, weather }) {
   const statusText = sceneStatus === "error"
     ? textByLang(lang, "Scene unavailable", "场景加载失败")
     : textByLang(lang, "Current base", "当前主要阵地");
+  const mapToggleLabel = mapInteractive
+    ? textByLang(lang, "Exit map mode", "退出地图模式")
+    : textByLang(lang, "Explore map", "探索地图");
+
+  const applyMapStatus = (status) => {
+    const mapService = mapServiceRef.current;
+    if (!mapService) return;
+
+    if (typeof mapService.setMapStatus === "function") {
+      mapService.setMapStatus(status);
+      return;
+    }
+
+    if (typeof mapService.setStatus === "function") {
+      mapService.setStatus(status);
+      return;
+    }
+
+    if (typeof mapService.map?.setStatus === "function") {
+      mapService.map.setStatus(status);
+    }
+  };
+
+  // 地图默认只承担视觉上下文，显式开启后才接管拖拽，避免误触锁住页面滚动。
+  const disableMapInteraction = () => {
+    applyMapStatus({
+      dragEnable: false,
+      zoomEnable: false,
+      rotateEnable: false,
+      keyboardEnable: false,
+      doubleClickZoom: false,
+    });
+    setMapInteractive(false);
+  };
+
+  const enableMapInteraction = () => {
+    applyMapStatus({
+      dragEnable: true,
+      zoomEnable: false,
+      rotateEnable: false,
+      keyboardEnable: false,
+      doubleClickZoom: false,
+    });
+    setMapInteractive(true);
+  };
+
+  // L7 listens to wheel events on its canvas. Stop that listener at the field boundary so
+  // desktop scrolling remains a page action, while zoom controls stay available.
+  const handleMapWheelCapture = (event) => {
+    event.stopPropagation();
+  };
 
   // 默认地图视角
   const DEFAULT_VIEW = {
@@ -337,17 +390,20 @@ export function CoverageField({ lang, weather }) {
         .style({ opacity: 0.08, sourceColor: "#d7e2f8", targetColor: "rgba(255,255,255,0.01)" });
 
       // 初始化地图
-      scene = new Scene({
-        id: mapRef.current,
-        logoVisible: false,
-        map: new GaodeMap({
+      const mapService = new GaodeMap({
         center: [114.0579, 22.5431],
         pitch: 68,
         zoom: 8.1,
         rotation: 0,
         style: "blank",
-        token: "f0d74a97768261e0fe8366b05b9adb6a", 
-}),
+        token: "f0d74a97768261e0fe8366b05b9adb6a",
+      });
+      mapServiceRef.current = mapService;
+
+      scene = new Scene({
+        id: mapRef.current,
+        logoVisible: false,
+        map: mapService,
       });
 
       sceneRef.current = scene;
@@ -356,6 +412,7 @@ export function CoverageField({ lang, weather }) {
 
       scene.on("loaded", () => {
         if (!isActive) return;
+        disableMapInteraction();
         
         // 原生控件
         const zoom = new Zoom({ zoomInTitle: "放大", zoomOutTitle: "缩小" });
@@ -375,8 +432,9 @@ export function CoverageField({ lang, weather }) {
             btn.style.justifyContent = 'center';
             btn.style.fontSize = '14px';
             btn.innerText = '⟲';
-            btn.title = '返回默认视角';
-            btn.onclick = () => {
+              btn.title = '返回默认视角';
+              btn.onclick = () => {
+              disableMapInteraction();
               scene.setCenter(DEFAULT_VIEW.center);
               scene.setZoom(DEFAULT_VIEW.zoom);
               scene.setPitch(DEFAULT_VIEW.pitch);
@@ -421,6 +479,8 @@ export function CoverageField({ lang, weather }) {
 
     return () => {
       isActive = false;
+      disableMapInteraction();
+      mapServiceRef.current = null;
       scene?.destroy();
     };
   }, []);
@@ -502,13 +562,36 @@ export function CoverageField({ lang, weather }) {
           </article>
         </div>
 
-        <div className="coverage-field" data-coverage-status={sceneStatus} data-coverage-error={sceneError}>
-          <div className="coverage-grid" aria-hidden="true" />
-          <div className="coverage-glow" aria-hidden="true" />
-          <div className="coverage-chart" ref={mapRef} />
-          <div className="coverage-status">{statusText}</div>
+      <div
+        className={`coverage-field ${mapInteractive ? "is-map-active" : ""}`}
+        data-coverage-status={sceneStatus}
+        data-coverage-error={sceneError}
+        onPointerLeave={disableMapInteraction}
+        onPointerCancel={disableMapInteraction}
+        onBlur={disableMapInteraction}
+        onWheelCapture={handleMapWheelCapture}
+      >
+        <div className="coverage-grid" aria-hidden="true" />
+        <div className="coverage-glow" aria-hidden="true" />
+        <div className="coverage-chart" ref={mapRef} />
+        <div className="coverage-status">{statusText}</div>
+        <button
+          className="coverage-map-toggle"
+          type="button"
+          aria-pressed={mapInteractive}
+          onClick={(event) => {
+            event.stopPropagation();
+            if (mapInteractive) {
+              disableMapInteraction();
+            } else {
+              enableMapInteraction();
+            }
+          }}
+        >
+          {mapToggleLabel}
+        </button>
 
-          <div className="coverage-summary-grid">
+        <div className="coverage-summary-grid">
             {summaryNotes.map((item) => (
               <article className="coverage-note" key={item.labelEn}>
                 <span>{textByLang(lang, item.labelEn, item.labelZh)}</span>

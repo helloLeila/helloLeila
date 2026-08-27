@@ -2,6 +2,7 @@
 import { siteContent } from "../data/siteContent.js";
 import { textByLang } from "../utils/i18n.js";
 import { SignalCloudPlot } from "./SignalCloudPlot.jsx";
+import { SkillGroups } from "./SkillGroups.jsx";
 
 // 根据当前词云数据动态生成摘要标签，避免数量和配置脱节。
 function getCloudTags(count) {
@@ -17,29 +18,41 @@ export function SignalCloud({ lang }) {
 
   return (
     <section className="word-cloud-card" id="section-signal-cloud">
-      <div className="section-head compact">
-        <div className="section-kicker">{textByLang(lang, "Signal Cloud", "能力词云")}</div>
-        <h2>{textByLang(lang, "Technical vocabulary", "技术表达")}</h2>
-        <p>
-          {textByLang(
-            lang,
-            "A dynamic word cloud visualizing the technical terms and tools that frequently appear in my projects, reflecting the current focus and trends in my work.",
-            "一个动态词云，展示了在我的项目中频繁出现的技术术语和工具，反映了我工作中的当前重点和趋势。"
-          )}
-        </p>
-      </div>
-      <div className="cloud-meta-row" aria-label={textByLang(lang, "Cloud highlights", "词云摘要")}>
-        {cloudTags[lang].map((tag) => (
-          <span className="cloud-meta-pill" key={tag}>
-            {tag}
-          </span>
-        ))}
-      </div>
-      <div className="cloud-wrap">
-        <div className="cloud-grid" aria-hidden="true" />
-        <div className="cloud-stage">
-          <SignalCloudPlot data={siteContent.signalCloud} />
+      <div className="signal-cloud-layout">
+        <div className="signal-cloud-main">
+          <div className="section-head compact">
+            <div className="section-kicker">{textByLang(lang, "Signal Cloud", "能力词云")}</div>
+            <h2>{textByLang(lang, "Technical vocabulary", "技术表达")}</h2>
+            <p>
+              {textByLang(
+                lang,
+                "A dynamic word cloud visualizing the technical terms and tools that frequently appear in my projects, reflecting the current focus and trends in my work.",
+                "一个动态词云，展示了在我的项目中频繁出现的技术术语和工具，反映了我工作中的当前重点和趋势。"
+              )}
+            </p>
+          </div>
+          <div className="cloud-meta-row" aria-label={textByLang(lang, "Cloud highlights", "词云摘要")}>
+            {cloudTags[lang].map((tag) => (
+              <span className="cloud-meta-pill" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="cloud-wrap">
+            <div className="cloud-grid" aria-hidden="true" />
+            <div className="cloud-stage">
+              <SignalCloudPlot data={siteContent.signalCloud} />
+            </div>
+          </div>
         </div>
+
+        <aside className="signal-cloud-index" aria-label={textByLang(lang, "Skill index", "能力分类索引")}>
+          <div className="signal-index-note">
+            <span>{textByLang(lang, "How the stack is grouped", "能力如何积累")}</span>
+            <strong>{textByLang(lang, "Four working layers, one delivery habit.", "四个工作层次，最后都回到真实交付。")}</strong>
+          </div>
+          <SkillGroups lang={lang} variant="index" />
+        </aside>
       </div>
     </section>
   );

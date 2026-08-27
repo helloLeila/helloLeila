@@ -3,7 +3,7 @@ import { siteContent } from "../data/siteContent.js";
 import { textByLang } from "../utils/i18n.js";
 
 // 按分组渲染技能标签，并为每个标签提供独立外链。
-export function SkillGroups({ lang }) {
+export function SkillGroups({ lang, variant = "default" }) {
   const ids = {
     frontend: "skills-frontend",
     backend: "skills-backend",
@@ -12,7 +12,7 @@ export function SkillGroups({ lang }) {
   };
 
   return (
-    <div className="hero-bottom">
+    <div className={`hero-bottom ${variant === "index" ? "skill-index" : ""}`} data-skill-layout={variant}>
       {siteContent.skillGroups.map((group) => (
         <section className="skill-group" id={ids[group.key]} key={group.key}>
           <h3 style={group.highlightIndent ? { paddingLeft: `${group.highlightIndent}px` } : undefined}>
