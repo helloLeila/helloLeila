@@ -4,9 +4,6 @@ name: Deploy Pages
 on:
   push:
     branches:
-      - main
-      - codex/react-antv-homepage
-      - codex/wechat-source-config
       - codex/3d-feat
   schedule:
     - cron: "0 23 * * *"
