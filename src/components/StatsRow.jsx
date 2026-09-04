@@ -5,15 +5,33 @@ import { textByLang } from "../utils/i18n.js";
 // 按当前语言渲染四张事实卡。
 export function StatsRow({ lang }) {
   const statTones = ["primary", "support", "recognition", "system"];
+  const statContexts = [
+    ["branches", "省分公司"],
+    ["subsystems", "子系统"],
+    ["innovation cases", "创新成果"],
+    ["workflow system", "工作流系统"],
+  ];
 
   return (
-    <div className="stats-row">
-      {siteContent.stats.map((item, index) => (
-        <article className={`stat-card stat-card--${statTones[index]}`} key={item.en}>
-          <strong>{item.value ?? textByLang(lang, item.valueEn, item.valueZh)}</strong>
-          <p>{textByLang(lang, item.en, item.zh)}</p>
-        </article>
-      ))}
-    </div>
+    <>
+      <p className="stats-caption">
+        {textByLang(
+          lang,
+          "Delivery signals",
+          "交付线索"
+        )}
+      </p>
+      <div className="stats-row">
+        {siteContent.stats.map((item, index) => (
+          <article className={`stat-card stat-card--${statTones[index]}`} key={item.en}>
+            <strong>{item.value ?? textByLang(lang, item.valueEn, item.valueZh)}</strong>
+            <span className="stat-context">
+              {textByLang(lang, statContexts[index][0], statContexts[index][1])}
+            </span>
+            <p>{textByLang(lang, item.en, item.zh)}</p>
+          </article>
+        ))}
+      </div>
+    </>
   );
 }

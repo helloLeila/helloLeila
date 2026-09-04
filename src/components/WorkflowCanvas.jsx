@@ -22,6 +22,7 @@ function NodeCard({ node, lang, className, isActive, onSelect }) {
 export function WorkflowCanvas({ lang }) {
   const { workflowSection } = siteContent;
   const [activeNodeKey, setActiveNodeKey] = useState("project:Process Portal");
+  const [workflowTitleZh, workflowTitleNote] = workflowSection.titleZh.split("（");
 
   const selectNode = (kind, node) => {
     setActiveNodeKey(`${kind}:${node.titleEn}`);
@@ -34,9 +35,25 @@ export function WorkflowCanvas({ lang }) {
           {workflowSection.kickerEn} / {workflowSection.kickerZh}
         </div>
         <h2>
-          {workflowSection.titleEn} / {workflowSection.titleZh}
+          {workflowSection.titleEn} / {workflowTitleZh}
+          {workflowTitleNote ? <span className="workflow-title-note">（{workflowTitleNote}</span> : null}
         </h2>
         <p>{textByLang(lang, workflowSection.descriptionEn, workflowSection.descriptionZh)}</p>
+      </div>
+
+      <div className="workflow-route" aria-label={textByLang(lang, "From problem to delivery", "从问题到交付")}>
+        {[
+          ["Problem", "业务问题"],
+          ["Judgment", "我的判断"],
+          ["System", "我做的系统"],
+          ["Implementation", "技术实现"],
+          ["Delivery", "最终交付"],
+        ].map(([en, zh], index, items) => (
+          <span key={en}>
+            {textByLang(lang, en, zh)}
+            {index < items.length - 1 ? <b aria-hidden="true">→</b> : null}
+          </span>
+        ))}
       </div>
 
       <div className="workflow-layout">

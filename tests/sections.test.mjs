@@ -43,6 +43,10 @@ const heroSource = fs.readFileSync(
   path.resolve(root, "src/components/HeroStage.jsx"),
   "utf8"
 );
+const statsSource = fs.readFileSync(
+  path.resolve(root, "src/components/StatsRow.jsx"),
+  "utf8"
+);
 const edgeIndexPath = path.resolve(root, "src/components/EdgeIndex.jsx");
 const edgeIndexSource = fs.existsSync(edgeIndexPath) ? fs.readFileSync(edgeIndexPath, "utf8") : "";
 const skillGroupsSource = fs.readFileSync(
@@ -312,6 +316,55 @@ test("working lanes explain the delivered outcome before the technical vocabular
   assert.match(appStyleSource, /\.hero-thread-row small\s*\{/);
 });
 
+test("hero metrics explain themselves as delivery signals instead of an unexplained number wall", () => {
+  assert.match(statsSource, /stats-caption/);
+  assert.match(statsSource, /Delivery signals/);
+  assert.match(appStyleSource, /\.stats-caption\s*\{/);
+});
+
+test("narrow layouts keep hero text inside the viewport and remove the blocking edge index", () => {
+  assert.match(appStyleSource, /\.headline-wrap\s*\{[\s\S]*width:\s*100%/);
+  assert.match(appStyleSource, /\.headline-main,[\s\S]*word-break:\s*break-word/);
+  assert.match(appStyleSource, /@media \(max-width:\s*1220px\)\s*\{\s*\.edge-index\s*\{\s*display:\s*none/);
+});
+
+test("wide layouts hide the edge index before it can overlap hero content", () => {
+  assert.match(appStyleSource, /@media \(max-width:\s*1600px\)\s*\{\s*\.edge-index\s*\{\s*display:\s*none/);
+});
+
+test("hero makes the existing identity and work focus scannable", () => {
+  assert.match(heroSource, /hero-identity-label/);
+  assert.match(heroSource, /hero-purpose-label/);
+  assert.match(heroSource, /hero-role/);
+  assert.match(heroSource, /siteContent\.summary/);
+  assert.match(heroSource, /siteContent\.hero\.subline/);
+});
+
+test("hero leads with the work summary before the abstract thesis", () => {
+  assert.match(heroSource, /hero-purpose-label[\s\S]*siteContent\.hero\.subline[\s\S]*className="headline"/);
+  assert.match(appStyleSource, /@media \(min-width:\s*841px\)/);
+  assert.match(appStyleSource, /\.hero-focus-summary[\s\S]*font-size:/);
+});
+
+test("hero delivery numbers carry a short semantic cue without replacing the original evidence", () => {
+  assert.match(statsSource, /stat-context/);
+  assert.match(statsSource, /branches/);
+  assert.match(statsSource, /subsystems/);
+  assert.match(statsSource, /siteContent\.stats/);
+  assert.match(appStyleSource, /\.stat-context\s*\{/);
+});
+
+test("workflow context remains present but is visually subordinate to the title", () => {
+  assert.match(workflowSource, /workflow-title-note/);
+  assert.match(workflowSource, /workflowSection\.titleZh/);
+});
+
+test("map explore control stays clear of the native map controls", () => {
+  assert.match(appStyleSource, /\.coverage-map-toggle\s*\{[\s\S]*left:\s*50%/);
+  assert.match(appStyleSource, /\.coverage-map-toggle\s*\{[\s\S]*right:\s*auto/);
+  assert.match(appStyleSource, /\.coverage-map-toggle\s*\{[\s\S]*transform:\s*translateX\(-50%\)/);
+});
+
 test("hero uses the reserved second column for the existing personal summary", () => {
   assert.match(heroSource, /hero-top-side/);
   assert.match(heroSource, /hero-profile-column/);
@@ -439,9 +492,42 @@ test("layout css protects mobile content from clipping", () => {
 });
 
 test("footer callout keeps the continuous interaction without oversized section typography", () => {
-  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(1\.2rem,\s*1\.8vw,\s*1\.8rem\)/);
-  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*margin:\s*clamp\(10px,\s*1\.6vw,\s*18px\) auto 10px/);
-  assert.match(appStyleSource, /\.footer-callout\s*\{[\s\S]*padding:\s*clamp\(18px,\s*2\.8vw,\s*38px\)/);
+  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(1\.1rem,\s*1\.5vw,\s*1\.5rem\)/);
+  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*margin:\s*clamp\(8px,\s*1\.2vw,\s*14px\) auto 8px/);
+  assert.match(appStyleSource, /\.footer-callout\s*\{[\s\S]*padding:\s*clamp\(12px,\s*1\.8vw,\s*24px\)/);
+});
+
+test("footer entrances stay compact without shrinking the link interaction", () => {
+  assert.match(appStyleSource, /\.footer-marquee-band\s*\{[\s\S]*padding:\s*4px 0/);
+  assert.match(appStyleSource, /\.footer-marquee-band \.link-pill\s*\{[\s\S]*min-height:\s*28px/);
+  assert.match(appStyleSource, /\.footer-marquee-band \.link-pill span\s*\{[\s\S]*font-size:\s*clamp\(0\.9rem,\s*1\.45vw,\s*1\.2rem\)/);
+});
+
+test("desktop footer uses a quieter heading and shorter callout band", () => {
+  assert.match(appStyleSource, /@media \(min-width:\s*841px\)[\s\S]*\.footer-callout h2[\s\S]*font-size:\s*clamp\(1rem,\s*1\.2vw,\s*1\.2rem\)/);
+  assert.match(appStyleSource, /@media \(min-width:\s*841px\)[\s\S]*\.footer-callout[\s\S]*padding:\s*14px 28px 16px/);
+  assert.match(appStyleSource, /@media \(min-width:\s*841px\)[\s\S]*\.footer-signature[\s\S]*padding:\s*12px 28px/);
+});
+
+test("footer entrance stack keeps its compact mobile rhythm", () => {
+  assert.match(appStyleSource, /\.footer-callout-head\s*\{[\s\S]*gap:\s*8px 14px/);
+  assert.match(appStyleSource, /\.footer-marquee-band\s*\{[\s\S]*padding:\s*4px 0/);
+  assert.match(appStyleSource, /\.footer-marquee-band \.link-pill\s*\{[\s\S]*min-height:\s*28px/);
+  assert.match(appStyleSource, /\.footer-signature\s*\{[\s\S]*padding:\s*12px 18px/);
+});
+
+test("footer marquee keeps each entrance on one readable line", () => {
+  assert.match(appStyleSource, /\.footer-marquee-band \.link-pill\s*\{[\s\S]*display:\s*inline-flex/);
+  assert.match(appStyleSource, /\.footer-marquee-band \.link-pill\s*\{[\s\S]*align-items:\s*baseline/);
+});
+
+test("hero signal row is grouped instead of stretching into a metric wall", () => {
+  assert.match(appStyleSource, /\.stats-row\s*\{[\s\S]*max-width:\s*78rem/);
+});
+
+test("mobile workflow canvas uses one readable column instead of clipping the capability nodes", () => {
+  const finalResponsiveLayer = appStyleSource.slice(appStyleSource.lastIndexOf("@media (max-width: 840px)"));
+  assert.match(finalResponsiveLayer, /\.workflow-layout\s*\{[\s\S]*grid-template-columns:\s*1fr/);
 });
 
 test("work links use a continuous accessible marquee", () => {
@@ -459,4 +545,33 @@ test("work links use a continuous accessible marquee", () => {
 test("work links marquee does not force extra footer height", () => {
   assert.doesNotMatch(appStyleSource, /\.footer-links\s*\{\s*display:\s*flex;\s*flex-direction:\s*column;\s*min-height:\s*286px/);
   assert.match(appStyleSource, /\.back-top-row\s*\{\s*margin-top:\s*14px/);
+});
+
+test("desktop-only closing layer protects hierarchy and avoids mobile changes", () => {
+  const desktopLayerStart = appStyleSource.lastIndexOf(
+    "/* Final desktop pass: keep the authored layout as the last cascade layer. */"
+  );
+  const lastDesktopLayer = appStyleSource.slice(desktopLayerStart);
+
+  assert.match(lastDesktopLayer, /\.hero-top\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1\.08fr\)\s+minmax\(280px,\s*0\.92fr\)/);
+  assert.match(lastDesktopLayer, /\.headline\s*\{[\s\S]*font-size:\s*clamp\(2rem,\s*3vw,\s*3\.35rem\)/);
+  assert.match(lastDesktopLayer, /\.proof-deck-headline h2\s*\{[\s\S]*font-size:\s*clamp\(1\.55rem,\s*2\.3vw,\s*2\.4rem\)/);
+  assert.match(lastDesktopLayer, /\.roadmap-track\s*\{[\s\S]*height:\s*240px/);
+  assert.match(lastDesktopLayer, /\.coverage-field\s*\{[\s\S]*min-height:\s*420px/);
+  assert.match(lastDesktopLayer, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(0\.95rem,\s*1\.05vw,\s*1\.1rem\)/);
+  assert.match(lastDesktopLayer, /\.footer-marquee-band \.link-pill span\s*\{[\s\S]*font-size:\s*clamp\(0\.76rem,\s*1vw,\s*0\.98rem\)/);
+});
+
+test("desktop contrast pass makes the visual direction unmistakable without touching mobile", () => {
+  const contrastPassStart = appStyleSource.lastIndexOf("/* Desktop contrast pass:");
+  const contrastPass = appStyleSource.slice(contrastPassStart);
+
+  assert.match(contrastPass, /@media \(min-width:\s*841px\)/);
+  assert.match(contrastPass, /\.hero-stage::before\s*\{[\s\S]*clip-path:/);
+  assert.match(contrastPass, /\.hero-name\s*\{[\s\S]*background:\s*var\(--accent\)/);
+  assert.match(contrastPass, /\.stat-card--primary\s*\{[\s\S]*background:\s*var\(--accent\)/);
+  assert.match(contrastPass, /\.proof-project-row\.is-active\s*\{[\s\S]*background:\s*var\(--accent\)/);
+  assert.match(contrastPass, /\.workflow-node\.is-active\s*\{[\s\S]*background:\s*var\(--accent\)/);
+  assert.match(contrastPass, /\.road-step\.is-current\s*\{[\s\S]*background:\s*var\(--accent\)/);
+  assert.doesNotMatch(contrastPass, /@media \(max-width:/);
 });

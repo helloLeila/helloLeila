@@ -26,6 +26,9 @@ export function HeroStage({ lang, setLang }) {
         <div className="headline-wrap">
           <div className="eyebrow">{siteContent.hero.eyebrow}</div>
           <p className="hero-name">{textByLang(lang, "Hello, I'm Leila.", "你好，我是 Leila。")}</p>
+          <div className="hero-role">{textByLang(lang, "Full-stack engineer · AI practice", "全栈程序员 · AI 实践")}</div>
+          <div className="hero-purpose-label">{textByLang(lang, "What I build", "我做什么")}</div>
+          <p className="subline hero-focus-summary">{textByLang(lang, siteContent.hero.sublineEn, siteContent.hero.sublineZh)}</p>
           <h1 className="headline">
             <span className="headline-main">
               {textByLang(lang, siteContent.hero.titleEn, siteContent.hero.titleZh)}
@@ -34,7 +37,6 @@ export function HeroStage({ lang, setLang }) {
               {textByLang(lang, siteContent.hero.titleZh, siteContent.hero.titleEn)}
             </span>
           </h1>
-          <p className="subline">{textByLang(lang, siteContent.hero.sublineEn, siteContent.hero.sublineZh)}</p>
         </div>
 
         <div className="hero-profile-column hero-top-side">
@@ -49,6 +51,7 @@ export function HeroStage({ lang, setLang }) {
           </div>
 
           <article className="summary-card">
+            <div className="hero-identity-label">{textByLang(lang, "About me", "关于我")}</div>
             <p>{textByLang(lang, siteContent.summary.en, siteContent.summary.zh)}</p>
             <div className="domain-grid">
               {siteContent.domainLinks.map((link) => (
