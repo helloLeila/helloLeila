@@ -163,6 +163,12 @@ Local refresh:
 npm run refresh:wechat-events
 ```
 
+### Cloud refresh and deployment
+
+The same refresh command runs on a GitHub-hosted Ubuntu runner in `.github/workflows/pages.yml`, not in the browser and not on your laptop. It tries Bing RSS, Baidu, and Sogou from the runner, writes the generated JSON into the Pages build artifact, and deploys the result to `/events/`. The browser only reads the finished static JSON; it never holds the search credentials or performs the crawl.
+
+Push this branch and run the workflow from the GitHub Actions page once to verify cloud connectivity. For the daily schedule to keep running, merge `codex/wechat-source-config` into `main`, because GitHub scheduled workflows execute from the default branch's workflow file.
+
 ### Edit source names locally
 
 The `/events/` page has a **来源配置** button. Run the Vite development server on the loopback address, open the local events page, edit only the公众号名称, and click **保存到项目 JSON**:

@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - codex/react-antv-homepage
+      - codex/wechat-source-config
   schedule:
     - cron: "0 23 * * *"
   workflow_dispatch:
