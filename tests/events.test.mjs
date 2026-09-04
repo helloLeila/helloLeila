@@ -52,14 +52,14 @@ test("events page includes accessible filters and explicit source links", () => 
   assert.doesNotMatch(drawerSource, /文章地址|RSS|公众号 ID/);
 });
 
-test("Pages workflow refreshes event data before tests and build", () => {
+test("Pages workflow keeps event refresh optional so builds cannot be blocked", () => {
   const workflowSource = fs.readFileSync(path.resolve(root, ".github/workflows/pages.yml"), "utf8");
   const packageJson = JSON.parse(fs.readFileSync(path.resolve(root, "package.json"), "utf8"));
   const setupSource = fs.readFileSync(path.resolve(root, "SETUP.md"), "utf8");
   assert.match(packageJson.scripts["refresh:wechat-events"], /python3 scripts\/fetch_wechat_events\.py/);
   assert.match(workflowSource, /Setup Python/);
-  assert.match(workflowSource, /npm run refresh:wechat-events/);
-  assert.match(workflowSource, /OPENAI_API_KEY/);
+  assert.doesNotMatch(workflowSource, /npm run refresh:wechat-events/);
+  assert.doesNotMatch(workflowSource, /OPENAI_API_KEY/);
   assert.match(workflowSource, /Test event pipeline/);
   assert.ok(workflowSource.indexOf("Test event pipeline") < workflowSource.indexOf("npm run build"));
   assert.match(setupSource, /wechat-event-sources\.json/);
