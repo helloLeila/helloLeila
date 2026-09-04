@@ -67,7 +67,6 @@ export function ProofDeck({ lang }) {
       </div>
 
       <div className="proof-deck-intro">
-        <strong className="proof-deck-number">04</strong>
         <p className="proof-deck-intro-copy">
           {textByLang(
             lang,
@@ -111,7 +110,7 @@ export function ProofDeck({ lang }) {
 
       <aside className="proof-ai-note">
         <div className="proof-ai-heading">
-          <span>AI / 04</span>
+          <span>AI PRACTICE / 实践</span>
           <h3>AI Agent Knowledge / AI Agent 知识技能</h3>
         </div>
         <ul>

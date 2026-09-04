@@ -1,20 +1,31 @@
 // 工作流画布组件，用于把真实项目中的产品链路浓缩成结构化节点。
+import { useState } from "react";
 import { siteContent } from "../data/siteContent.js";
 import { textByLang } from "../utils/i18n.js";
 
 // 渲染单个工作流节点，统一左右两列节点的展示方式。
-function NodeCard({ node, lang, className }) {
+function NodeCard({ node, lang, className, isActive, onSelect }) {
   return (
-    <div className={`workflow-node ${className}`}>
+    <button
+      className={`workflow-node ${className} ${isActive ? "is-active" : ""}`}
+      type="button"
+      aria-pressed={isActive}
+      onClick={onSelect}
+    >
       <strong>{textByLang(lang, node.titleEn, node.titleZh)}</strong>
       <span>{textByLang(lang, node.subtitleEn, node.subtitleZh)}</span>
-    </div>
+    </button>
   );
 }
 
 // 渲染企业级工作流设计区，展示项目节点与能力节点之间的关系。
 export function WorkflowCanvas({ lang }) {
   const { workflowSection } = siteContent;
+  const [activeNodeKey, setActiveNodeKey] = useState("project:Process Portal");
+
+  const selectNode = (kind, node) => {
+    setActiveNodeKey(`${kind}:${node.titleEn}`);
+  };
 
   return (
     <section className="graph-card" id="section-workflow">
@@ -47,13 +58,27 @@ export function WorkflowCanvas({ lang }) {
 
         <div className="workflow-column workflow-column-left">
           {workflowSection.leftNodes.map((node) => (
-            <NodeCard className="project-node" key={node.titleEn} lang={lang} node={node} />
+            <NodeCard
+              className="project-node"
+              isActive={activeNodeKey === `project:${node.titleEn}`}
+              key={node.titleEn}
+              lang={lang}
+              node={node}
+              onSelect={() => selectNode("project", node)}
+            />
           ))}
         </div>
 
         <div className="workflow-column workflow-column-right">
           {workflowSection.rightNodes.map((node) => (
-            <NodeCard className="capability-node" key={node.titleEn} lang={lang} node={node} />
+            <NodeCard
+              className="capability-node"
+              isActive={activeNodeKey === `capability:${node.titleEn}`}
+              key={node.titleEn}
+              lang={lang}
+              node={node}
+              onSelect={() => selectNode("capability", node)}
+            />
           ))}
         </div>
       </div>

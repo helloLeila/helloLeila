@@ -486,7 +486,7 @@ export function CoverageField({ lang, weather }) {
   }, []);
 
   return (
-    <section className="coverage-card" aria-label={title}>
+    <section className="coverage-card" id="section-coverage" aria-label={title}>
       <div className="coverage-layout">
         <div className="coverage-copy">
           <article className="weather-panel coverage-weather-card">

@@ -35,10 +35,16 @@ const proofDeckSource = fs.readFileSync(
   path.resolve(root, "src/components/ProofDeck.jsx"),
   "utf8"
 );
+const workflowSource = fs.readFileSync(
+  path.resolve(root, "src/components/WorkflowCanvas.jsx"),
+  "utf8"
+);
 const heroSource = fs.readFileSync(
   path.resolve(root, "src/components/HeroStage.jsx"),
   "utf8"
 );
+const edgeIndexPath = path.resolve(root, "src/components/EdgeIndex.jsx");
+const edgeIndexSource = fs.existsSync(edgeIndexPath) ? fs.readFileSync(edgeIndexPath, "utf8") : "";
 const skillGroupsSource = fs.readFileSync(
   path.resolve(root, "src/components/SkillGroups.jsx"),
   "utf8"
@@ -184,6 +190,22 @@ test("coverage field keeps map interaction optional without stealing page scroll
   assert.match(appStyleSource, /\.coverage-chart\s*\{[\s\S]*overscroll-behavior:\s*contain/);
 });
 
+test("edge index follows real page sections instead of becoming a second top navigation", () => {
+  assert.match(appSource, /import \{ EdgeIndex \} from "\.\/components\/EdgeIndex\.jsx"/);
+  assert.match(appSource, /<EdgeIndex lang=\{lang\} \/>/);
+  assert.match(edgeIndexSource, /IntersectionObserver/);
+  assert.match(edgeIndexSource, /id: "top"/);
+  assert.match(edgeIndexSource, /id: "section-breakdown"/);
+  assert.match(edgeIndexSource, /id: "section-signal-cloud"/);
+  assert.match(edgeIndexSource, /id: "section-coverage"/);
+  assert.match(edgeIndexSource, /id: "section-roadmap"/);
+  assert.match(edgeIndexSource, /id: "live-news"/);
+  assert.match(edgeIndexSource, /aria-current/);
+  assert.match(appStyleSource, /\.edge-index\s*\{[\s\S]*position:\s*fixed/);
+  assert.match(appStyleSource, /\.edge-index-link::before/);
+  assert.doesNotMatch(appStyleSource, /\.edge-index\s*\{[\s\S]*border-left/);
+});
+
 test("signal cloud is the primary capability surface and keeps the four real skill groups", () => {
   assert.match(appSource, /<SignalCloud lang=\{lang\}\s*\/>[\s\S]*<div className="insight-grid">/);
   assert.match(signalCloudSource, /import \{ SkillGroups \} from "\.\/SkillGroups\.jsx"/);
@@ -221,8 +243,54 @@ test("selected project rows expose an accessible active state and color change",
   assert.match(proofDeckSource, /aria-pressed=\{isActive\}/);
   assert.match(proofDeckSource, /onClick=\{\(\) => setActiveProjectIndex\(index\)\}/);
   assert.match(proofDeckSource, /isActive/);
+  assert.doesNotMatch(proofDeckSource, /<strong className="proof-deck-number">04<\/strong>/);
   assert.match(appStyleSource, /\.proof-project-row\.is-active \.proof-project-label h3/);
   assert.match(appStyleSource, /\.proof-project-row\s*\{[^}]*background:\s*transparent/);
+  assert.match(appStyleSource, /\.proof-project-row:hover\s*\{[\s\S]*background:/);
+  assert.match(appStyleSource, /\.proof-project-row\.is-active\s*\{[\s\S]*background:/);
+  assert.match(appStyleSource, /\.proof-project-row:hover \.proof-project-copy > p/);
+});
+
+test("hero stats use one editorial accent instead of four repeated color blocks", () => {
+  assert.match(appStyleSource, /\.stat-card strong\s*\{[\s\S]*background:\s*transparent/);
+  assert.match(appStyleSource, /\.stat-card--primary strong\s*\{[\s\S]*color:\s*var\(--accent\)/);
+  assert.match(appStyleSource, /\.stat-card--support strong,[\s\S]*\.stat-card--recognition strong\s*\{[\s\S]*color:\s*var\(--ink\)/);
+  assert.match(appStyleSource, /\.stat-card--system strong\s*\{[\s\S]*color:\s*var\(--muted\)/);
+  assert.doesNotMatch(appStyleSource, /#8a6d00/);
+});
+
+test("AI knowledge is treated as a connected project postscript", () => {
+  assert.match(proofDeckSource, /AI PRACTICE \/ 实践/);
+  assert.doesNotMatch(proofDeckSource, /AI \/ 04/);
+  assert.match(appStyleSource, /\.proof-ai-note ul\s*\{[\s\S]*grid-template-columns:\s*repeat\(2/);
+  assert.match(appStyleSource, /\.proof-ai-note\s*\{[\s\S]*background:/);
+  assert.match(appStyleSource, /\.proof-ai-note\s*\{[\s\S]*margin-left:/);
+});
+
+test("hero stats use semantic layout tones instead of four unrelated colors", () => {
+  const statsSource = fs.readFileSync(path.resolve(root, "src/components/StatsRow.jsx"), "utf8");
+  assert.match(statsSource, /const statTones = \["primary", "support", "recognition", "system"\]/);
+  assert.match(statsSource, /stat-card--\$\{statTones\[index\]\}/);
+  assert.match(appStyleSource, /\.stat-card--primary\s+strong\s*\{[\s\S]*color:\s*var\(--accent\)/);
+  assert.match(appStyleSource, /\.stat-card--recognition\s+strong\s*\{[\s\S]*color:\s*var\(--ink\)/);
+  assert.doesNotMatch(appStyleSource, /\.stats-row\s*\{[\s\S]*grid-template-areas:/);
+  assert.match(appStyleSource, /\.stats-row\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1\.35fr\)\s*minmax\(0,\s*0\.9fr\)\s*minmax\(0,\s*1\.1fr\)\s*minmax\(0,\s*0\.9fr\)/);
+});
+
+test("workflow nodes expose hover and selected states for the project-to-capability path", () => {
+  assert.match(workflowSource, /import \{ useState \} from "react"/);
+  assert.match(workflowSource, /aria-pressed=\{isActive\}/);
+  assert.match(workflowSource, /className=\{`workflow-node \$\{className\} \$\{isActive \? "is-active" : ""\}`\}/);
+  assert.match(appStyleSource, /\.workflow-node:hover[\s\S]*background:/);
+  assert.match(appStyleSource, /\.workflow-node\.is-active[\s\S]*background:/);
+  assert.match(appStyleSource, /\.workflow-column-right\s*\{[\s\S]*grid-template-columns:\s*repeat\(2/);
+  assert.match(appStyleSource, /\.workflow-node\.is-active\s+strong\s*\{[\s\S]*color:\s*var\(--accent\)/);
+});
+
+test("selected work keeps the four project stories without an isolated giant count", () => {
+  assert.doesNotMatch(proofDeckSource, /proof-deck-count/);
+  assert.match(proofDeckSource, /四段真实项目经历/);
+  assert.match(appStyleSource, /\.proof-deck-headline h2\s*\{[\s\S]*font-size:\s*clamp\(1\.8rem,\s*3\.2vw,\s*3\.2rem\)/);
 });
 
 test("hero keeps a personal introduction and adds compact working lanes without dropping evidence", () => {
@@ -257,7 +325,7 @@ test("annual milestones get a full-width reading lane instead of a narrow side c
 
 test("selected work restores the historical editorial intro and keeps the full project rows", () => {
   assert.match(proofDeckSource, /proof-deck-intro/);
-  assert.match(proofDeckSource, /proof-deck-number/);
+  assert.match(proofDeckSource, /proof-deck-intro-copy/);
   assert.match(proofDeckSource, /四段真实项目经历/);
   assert.match(proofDeckSource, /siteContent\.problemsSolved\.map/);
   assert.match(proofDeckSource, /siteContent\.aiKnowledge\.map/);
@@ -338,8 +406,8 @@ test("utilities panel renders codex and public news panes", () => {
 });
 
 test("layout css protects mobile content from clipping", () => {
-  assert.match(appStyleSource, /--page-gutter:\s*clamp\(18px,\s*2vw,\s*34px\)/);
-  assert.match(appStyleSource, /\.shell\s*\{[\s\S]*width:\s*min\(100%,\s*1540px\)/);
+  assert.match(appStyleSource, /--page-gutter:\s*clamp\(4px,\s*0\.45vw,\s*8px\)/);
+  assert.match(appStyleSource, /\.shell\s*\{[\s\S]*width:\s*min\(100%,\s*1680px\)/);
   assert.match(appStyleSource, /\.shell\s*\{[\s\S]*padding:\s*24px var\(--page-gutter\) 44px/);
   assert.match(appStyleSource, /\.insight-section\s*\{[\s\S]*gap:\s*24px/);
   assert.match(appStyleSource, /\.hero-stage\s*\{[\s\S]*min-width:\s*0/);

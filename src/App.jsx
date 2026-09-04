@@ -8,6 +8,7 @@ import { AnnualMilestones } from "./components/AnnualMilestones.jsx";
 import { CoverageField } from "./components/CoverageField.jsx";
 import { UtilitiesPanel } from "./components/UtilitiesPanel.jsx";
 import { WorkLinks } from "./components/WorkLinks.jsx";
+import { EdgeIndex } from "./components/EdgeIndex.jsx";
 import { useWeatherNews } from "./hooks/useWeatherNews.js";
 
 // 根据当前语言和实时数据渲染完整个人网站页面。
@@ -24,6 +25,7 @@ export default function App() {
       <div className="page-grid" aria-hidden="true" />
       <div className="page-glow glow-a" aria-hidden="true" />
       <div className="page-glow glow-b" aria-hidden="true" />
+      <EdgeIndex lang={lang} />
 
       <main className="shell">
         <HeroStage lang={lang} setLang={setLang} />

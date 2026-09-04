@@ -4,10 +4,12 @@ import { textByLang } from "../utils/i18n.js";
 
 // 按当前语言渲染四张事实卡。
 export function StatsRow({ lang }) {
+  const statTones = ["primary", "support", "recognition", "system"];
+
   return (
     <div className="stats-row">
-      {siteContent.stats.map((item) => (
-        <article className="stat-card" key={item.en}>
+      {siteContent.stats.map((item, index) => (
+        <article className={`stat-card stat-card--${statTones[index]}`} key={item.en}>
           <strong>{item.value ?? textByLang(lang, item.valueEn, item.valueZh)}</strong>
           <p>{textByLang(lang, item.en, item.zh)}</p>
         </article>
