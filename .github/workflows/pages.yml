@@ -51,8 +51,10 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
 
-      - name: Test
-        run: npm test
+      - name: Test event pipeline
+        run: |
+          node --test tests/events.test.mjs tests/source-config.test.mjs
+          python3 -m unittest tests.test_wechat_event_radar
 
       - name: Build
         run: npm run build

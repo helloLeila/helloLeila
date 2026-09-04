@@ -60,7 +60,8 @@ test("Pages workflow refreshes event data before tests and build", () => {
   assert.match(workflowSource, /Setup Python/);
   assert.match(workflowSource, /npm run refresh:wechat-events/);
   assert.match(workflowSource, /OPENAI_API_KEY/);
-  assert.ok(workflowSource.indexOf("npm test") < workflowSource.indexOf("npm run build"));
+  assert.match(workflowSource, /Test event pipeline/);
+  assert.ok(workflowSource.indexOf("Test event pipeline") < workflowSource.indexOf("npm run build"));
   assert.match(setupSource, /wechat-event-sources\.json/);
   assert.match(setupSource, /OPENAI_API_KEY/);
 });
