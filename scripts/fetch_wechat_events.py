@@ -8,8 +8,10 @@ import json
 import os
 import re
 import shutil
+import signal
 import sys
 import subprocess
+import tempfile
 import time
 from datetime import datetime, timedelta, timezone
 from html import unescape
@@ -50,9 +52,12 @@ DISCOVERY_RESULT_LIMIT = 5
 DISCOVERY_SCORE_THRESHOLD = 6
 DISCOVERY_SEARCH_ENDPOINT = "https://www.bing.com/search?format=rss&q="
 DISCOVERY_HTML_ENDPOINTS = (
+    "https://m.baidu.com/s?word=",
     "https://www.baidu.com/s?wd=",
+    "https://cn.bing.com/search?q=",
     "https://weixin.sogou.com/weixin?type=2&query=",
 )
+BROWSER_DISCOVERY_ENDPOINT = "https://m.baidu.com/s?word="
 
 
 def load_config(path: Path = CONFIG_PATH) -> dict:
@@ -138,6 +143,61 @@ def fetch_json(url: str) -> dict | None:
     return payload if isinstance(payload, dict) else None
 
 
+def fetch_browser_text(url: str) -> str:
+    """Render a public search page when its HTML is assembled by JavaScript."""
+    browser = os.environ.get("CHROME_BIN")
+    if not browser:
+        browser = next(
+            (
+                candidate
+                for candidate in (
+                    shutil.which("google-chrome"),
+                    shutil.which("chromium"),
+                    shutil.which("chromium-browser"),
+                    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                )
+                if candidate
+            ),
+            "",
+        )
+    if not browser:
+        raise URLError("no Chromium browser available")
+    profile = tempfile.mkdtemp(prefix="wechat-search-")
+    output_path = tempfile.mktemp(prefix="wechat-search-dom-", suffix=".html")
+    try:
+        with open(output_path, "wb") as output:
+            process = subprocess.Popen(
+                [
+                    browser,
+                    "--headless=new",
+                    "--disable-gpu",
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage",
+                    "--no-first-run",
+                    "--no-default-browser-check",
+                    f"--user-data-dir={profile}",
+                    "--virtual-time-budget=8000",
+                    "--dump-dom",
+                    url,
+                ],
+                stdout=output,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True,
+            )
+            try:
+                process.wait(timeout=REQUEST_TIMEOUT + 10)
+            except subprocess.TimeoutExpired as exc:
+                os.killpg(process.pid, signal.SIGKILL)
+                process.wait()
+                raise URLError("browser search timed out") from exc
+        if process.returncode:
+            raise subprocess.CalledProcessError(process.returncode, process.args)
+        return Path(output_path).read_text(encoding="utf-8", errors="replace")
+    finally:
+        shutil.rmtree(profile, ignore_errors=True)
+        Path(output_path).unlink(missing_ok=True)
+
+
 def build_discovery_url(source_name: str) -> str:
     query = f'"{source_name}" 微信公众号 活动'
     return f"{DISCOVERY_SEARCH_ENDPOINT}{quote_plus(query)}"
@@ -189,9 +249,16 @@ def parse_html_discovery_results(html_text: str, source_id: str, source_name: st
     """Extract only direct mp.weixin.qq.com article URLs from search HTML."""
     candidates = []
     seen = set()
-    decoded = unescape(unquote(html_text))
-    pattern = re.compile(r"https?://mp\.weixin\.qq\.com/s/[A-Za-z0-9_-]+", re.IGNORECASE)
-    for match in pattern.finditer(decoded):
+    decoded = unescape(unquote(html_text)).replace(r"\/", "/")
+    patterns = (
+        re.compile(r"https?://mp\.weixin\.qq\.com/s/[A-Za-z0-9_-]+", re.IGNORECASE),
+        re.compile(r"https?://mp\.weixin\.qq\.com/s\?[^\"'<> \t\r\n]+", re.IGNORECASE),
+    )
+    matches = sorted(
+        (match for pattern in patterns for match in pattern.finditer(decoded)),
+        key=lambda match: match.start(),
+    )
+    for match in matches:
         url = normalize_url(match.group(0))
         if not is_wechat_article_url(url) or url in seen:
             continue
@@ -220,10 +287,12 @@ def discover_source_candidates(source: dict) -> tuple[list[dict], str]:
     if source.get("discoveryStatus") == "confirmed":
         return [], "confirmed"
     attempted = False
-    for url in [build_discovery_url(source["name"]), *build_html_discovery_urls(source["name"])]:
+    query_url = f"{BROWSER_DISCOVERY_ENDPOINT}{quote_plus(f'site:mp.weixin.qq.com/s/ "{source["name"]}" 活动 报名')}"
+    browser_urls = [query_url] if os.environ.get("WECHAT_BROWSER_DISCOVERY", "0") != "0" else []
+    for url in [*browser_urls, build_discovery_url(source["name"]), *build_html_discovery_urls(source["name"])]:
         try:
             attempted = True
-            response = fetch_text(url)
+            response = fetch_browser_text(url) if url == query_url else fetch_text(url)
             try:
                 result = parse_discovery_results(response, source["id"], source["name"])
             except (ET.ParseError, ValueError):
@@ -232,7 +301,7 @@ def discover_source_candidates(source: dict) -> tuple[list[dict], str]:
                 result = parse_html_discovery_results(response, source["id"], source["name"])
             if result:
                 return result, "needs-confirmation"
-        except (OSError, ValueError, HTTPError, URLError, ET.ParseError):
+        except (OSError, ValueError, HTTPError, URLError, ET.ParseError, subprocess.SubprocessError):
             continue
     return [], "unavailable" if attempted else "not-found"
 

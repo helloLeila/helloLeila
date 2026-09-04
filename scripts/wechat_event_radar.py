@@ -10,7 +10,7 @@ import re
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from html import unescape
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import parse_qs, urlsplit, urlunsplit
 from xml.etree import ElementTree as ET
 
 
@@ -104,7 +104,16 @@ def is_wechat_article_url(value: object) -> bool:
     if not normalized:
         return False
     parsed = urlsplit(normalized)
-    return parsed.hostname == WECHAT_ARTICLE_HOST and bool(re.fullmatch(r"/s/[^/?#]+", parsed.path))
+    if parsed.hostname != WECHAT_ARTICLE_HOST:
+        return False
+    if re.fullmatch(r"/s/[^/?#]+", parsed.path):
+        return True
+    if parsed.path != "/s":
+        return False
+    # Baidu and other indexes often expose WeChat's query-form article URL.
+    # It is still a concrete article when the stable article parameters exist.
+    query = parse_qs(parsed.query)
+    return all(query.get(key, [""])[0] for key in ("__biz", "mid", "idx", "sn"))
 
 
 def _child_text(element: ET.Element, names: tuple[str, ...]) -> str:

@@ -38,6 +38,9 @@ class WechatEventRadarTests(unittest.TestCase):
 
     def test_wechat_article_url_requires_exact_public_article_shape(self):
         self.assertTrue(self.module.is_wechat_article_url("https://mp.weixin.qq.com/s/example-event"))
+        self.assertTrue(self.module.is_wechat_article_url(
+            "https://mp.weixin.qq.com/s?__biz=MjM5MjEzNzA3MA==&mid=2651570651&idx=1&sn=50a9b4d717fdd04678af8fe22b22f7b5"
+        ))
         self.assertFalse(self.module.is_wechat_article_url("https://mp.weixin.qq.com/"))
         self.assertFalse(self.module.is_wechat_article_url("https://mp.weixin.qq.com/profile"))
         self.assertFalse(self.module.is_wechat_article_url("https://example.org/s/example-event"))
@@ -151,9 +154,19 @@ class WechatEventRadarTests(unittest.TestCase):
 
     def test_html_discovery_extracts_only_direct_wechat_articles(self):
         fetcher = load_fetch_module()
-        html = '<a href="https://www.baidu.com/link?url=x">普通网页</a> https://mp.weixin.qq.com/s/real-event'
+        html = (
+            '<a href="https://www.baidu.com/link?url=x">普通网页</a> '
+            'https://mp.weixin.qq.com/s/real-event '
+            'data-url="https://mp.weixin.qq.com/s?__biz=abc&mid=123&idx=1&sn=def"'
+        )
         candidates = fetcher.parse_html_discovery_results(html, "source", "示例公众号")
-        self.assertEqual([item["url"] for item in candidates], ["https://mp.weixin.qq.com/s/real-event"])
+        self.assertEqual(
+            [item["url"] for item in candidates],
+            [
+                "https://mp.weixin.qq.com/s/real-event",
+                "https://mp.weixin.qq.com/s?__biz=abc&mid=123&idx=1&sn=def",
+            ],
+        )
 
     def test_discovery_falls_back_after_malformed_rss(self):
         fetcher = load_fetch_module()
