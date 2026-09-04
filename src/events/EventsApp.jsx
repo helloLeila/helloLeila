@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   eventOptions,
   eventSummary,
@@ -7,6 +7,7 @@ import {
   getEventsUrl,
   normalizeEventsPayload,
 } from "./eventData.js";
+import SourceConfigDrawer from "./SourceConfigDrawer.jsx";
 
 const BASE_URL = import.meta.env.BASE_URL || "/";
 const EMPTY_FILTERS = { query: "", city: "", mode: "all", tag: "", status: "all" };
@@ -60,6 +61,8 @@ export default function EventsApp() {
   const [payload, setPayload] = useState(null);
   const [error, setError] = useState(false);
   const [filters, setFilters] = useState(EMPTY_FILTERS);
+  const [configOpen, setConfigOpen] = useState(false);
+  const configButtonRef = useRef(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -99,9 +102,21 @@ export default function EventsApp() {
           <h1>活动雷达</h1>
           <p className="events-intro">从公开文章里挑出值得参加的深圳、香港与线上活动。</p>
         </div>
-        <div className="events-freshness">
-          <span className={`status-dot ${payload?.status === "stale" || error ? "is-warning" : ""}`} />
-          <span>最近更新 {freshness}</span>
+        <div className="events-header-actions">
+          <div className="events-freshness">
+            <span className={`status-dot ${payload?.status === "stale" || error ? "is-warning" : ""}`} />
+            <span>最近更新 {freshness}</span>
+          </div>
+          <button
+            ref={configButtonRef}
+            type="button"
+            className="events-config-button"
+            aria-haspopup="dialog"
+            aria-expanded={configOpen}
+            onClick={() => setConfigOpen(true)}
+          >
+            <span aria-hidden="true">⚙</span> 来源配置
+          </button>
         </div>
       </header>
 
@@ -169,6 +184,12 @@ export default function EventsApp() {
           {visibleEvents.map((event) => <EventRow key={event.id} event={event} />)}
         </div>
       </section>
+      <SourceConfigDrawer
+        open={configOpen}
+        onClose={() => setConfigOpen(false)}
+        payloadSources={payload?.sources || []}
+        returnFocusRef={configButtonRef}
+      />
     </main>
   );
 }

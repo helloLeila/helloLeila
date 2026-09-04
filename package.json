@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test tests/site-content.test.mjs tests/live-panel.test.mjs tests/live-panel-workflow.test.mjs tests/hooks.test.mjs tests/sections.test.mjs tests/signal-cloud.test.mjs tests/events.test.mjs && python3 -m unittest tests.test_live_panel_sources tests.test_wechat_event_radar",
+    "test": "node --test tests/site-content.test.mjs tests/live-panel.test.mjs tests/live-panel-workflow.test.mjs tests/hooks.test.mjs tests/sections.test.mjs tests/signal-cloud.test.mjs tests/events.test.mjs tests/source-config.test.mjs && python3 -m unittest tests.test_live_panel_sources tests.test_wechat_event_radar",
     "refresh:live-panel": "python3 scripts/fetch_live_panel.py",
     "refresh:wechat-events": "python3 scripts/fetch_wechat_events.py"
   },
