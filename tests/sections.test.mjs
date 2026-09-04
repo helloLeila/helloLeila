@@ -31,6 +31,10 @@ const signalCloudSource = fs.readFileSync(
   path.resolve(root, "src/components/SignalCloud.jsx"),
   "utf8"
 );
+const proofDeckSource = fs.readFileSync(
+  path.resolve(root, "src/components/ProofDeck.jsx"),
+  "utf8"
+);
 const skillGroupsSource = fs.readFileSync(
   path.resolve(root, "src/components/SkillGroups.jsx"),
   "utf8"
@@ -194,6 +198,41 @@ test("editorial surface uses uneven composition and lighter structural lines", (
   assert.match(appStyleSource, /grid-template-columns:\s*minmax\(0,\s*1\.35fr\)\s*minmax\(250px,\s*0\.65fr\)/);
   assert.match(appStyleSource, /\.workflow-lines path\s*\{[\s\S]*stroke-width:\s*1/);
   assert.doesNotMatch(appStyleSource, /\.workflow-lines path\s*\{[\s\S]*stroke-dasharray/);
+});
+
+test("proof deck presents full project evidence as editorial rows instead of cards", () => {
+  assert.match(proofDeckSource, /proof-project-list/);
+  assert.match(proofDeckSource, /proof-project-row/);
+  assert.match(proofDeckSource, /proof-project-label/);
+  assert.match(proofDeckSource, /proof-project-trail/);
+  assert.match(proofDeckSource, /textByLang\(lang, item\.en, item\.zh\)/);
+  assert.match(proofDeckSource, /proof-ai-note/);
+  assert.match(proofDeckSource, /siteContent\.aiKnowledge/);
+  assert.doesNotMatch(proofDeckSource, /proof-card/);
+});
+
+test("editorial links do not use underlines or decorative bottom rules", () => {
+  assert.doesNotMatch(appStyleSource, /text-decoration\s*:\s*underline/);
+  assert.doesNotMatch(appStyleSource, /text-underline-offset/);
+  assert.doesNotMatch(appStyleSource, /border-bottom\s*:/);
+  assert.match(appStyleSource, /\.events-page-link\s*\{[\s\S]*text-decoration:\s*none/);
+});
+
+test("editorial surfaces do not use decorative left rails", () => {
+  assert.doesNotMatch(appStyleSource, /border-left(?:-color|-width)?\s*:/);
+  assert.match(appStyleSource, /\.word-cloud-card,[\s\S]*\.footer-links\s*\{[\s\S]*border:\s*0/);
+  assert.match(appStyleSource, /\.workflow-node\s*\{[\s\S]*border:\s*0/);
+  assert.match(appStyleSource, /\.road-step\s*\{[\s\S]*border:\s*0/);
+  assert.match(appStyleSource, /\.coverage-note\s*\{[\s\S]*border:\s*0/);
+});
+
+test("editorial surfaces use light backgrounds instead of black panels", () => {
+  assert.match(appStyleSource, /--sage-surface:\s*#e4ebe2/);
+  assert.match(appStyleSource, /\.hero-stage\s*\{[\s\S]*#fffdf8[\s\S]*color:\s*var\(--text\)/);
+  assert.match(appStyleSource, /\.cloud-wrap\s*\{[\s\S]*var\(--sage-surface\)/);
+  assert.match(appStyleSource, /\.coverage-card\s*\{[\s\S]*var\(--sage-surface\)[\s\S]*color:\s*var\(--text\)/);
+  assert.doesNotMatch(appStyleSource, /background:\s*var\(--ink\)/);
+  assert.doesNotMatch(appStyleSource, /#151814|#171b16|#20261e/);
 });
 
 test("utilities panel renders codex and public news panes", () => {

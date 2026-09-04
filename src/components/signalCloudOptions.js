@@ -1,6 +1,6 @@
 // 词云配置工厂，统一生成 G2 词云图所需的布局和样式选项。
 
-const signalCloudPalette = ["#f4f1e6", "#d9ff4f", "#ff775b", "#f4f1e6", "#d9ff4f"];
+const signalCloudPalette = ["#243129", "#647600", "#d05b45", "#243129", "#8b9f1c"];
 
 // 根据词云数据生成 G2 配置，确保技术栈关键词能够稳定且密集地排布。
 export function createSignalCloudOptions(data) {
