@@ -67,9 +67,7 @@ jobs:
   # 部署任务把构建产物发布到 GitHub Pages。
   deploy:
     environment:
-      # 旧的 github-pages 环境只允许默认发布分支，当前功能分支会被保护规则拒绝。
-      # 使用独立环境保留 Pages 部署，同时避免把功能分支强行改写成 main。
-      name: github-pages-wechat-source
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
