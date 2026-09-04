@@ -17,6 +17,7 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from urllib.parse import quote_plus, unquote
+from xml.etree import ElementTree as ET
 
 # Make direct `python scripts/fetch_wechat_events.py` and unittest loading share the same import path.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -223,12 +224,15 @@ def discover_source_candidates(source: dict) -> tuple[list[dict], str]:
         try:
             attempted = True
             response = fetch_text(url)
-            result = parse_discovery_results(response, source["id"], source["name"])
+            try:
+                result = parse_discovery_results(response, source["id"], source["name"])
+            except (ET.ParseError, ValueError):
+                result = []
             if not result:
                 result = parse_html_discovery_results(response, source["id"], source["name"])
             if result:
                 return result, "needs-confirmation"
-        except (OSError, ValueError, HTTPError, URLError):
+        except (OSError, ValueError, HTTPError, URLError, ET.ParseError):
             continue
     return [], "unavailable" if attempted else "not-found"
 

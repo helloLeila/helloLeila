@@ -155,6 +155,17 @@ class WechatEventRadarTests(unittest.TestCase):
         candidates = fetcher.parse_html_discovery_results(html, "source", "示例公众号")
         self.assertEqual([item["url"] for item in candidates], ["https://mp.weixin.qq.com/s/real-event"])
 
+    def test_discovery_falls_back_after_malformed_rss(self):
+        fetcher = load_fetch_module()
+        responses = iter([
+            "<html>rate limited</html>",
+            '<a href="https://mp.weixin.qq.com/s/real-event">公众号活动</a>',
+        ])
+        with patch.object(fetcher, "fetch_text", side_effect=lambda _url: next(responses)):
+            candidates, status = fetcher.discover_source_candidates({"id": "source", "name": "示例公众号", "discoveryStatus": "pending"})
+        self.assertEqual(status, "needs-confirmation")
+        self.assertEqual(candidates[0]["url"], "https://mp.weixin.qq.com/s/real-event")
+
     def test_fetch_text_falls_back_to_curl_when_python_tls_fails(self):
         fetcher = load_fetch_module()
         completed = SimpleNamespace(stdout=b"<rss><channel /></rss>", stderr=b"")
