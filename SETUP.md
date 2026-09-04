@@ -163,6 +163,33 @@ Local refresh:
 npm run refresh:wechat-events
 ```
 
+### Edit source names locally
+
+The `/events/` page has a **来源配置** button. Run the Vite development server on the loopback address, open the local events page, edit only the公众号名称, and click **保存到项目 JSON**:
+
+```bash
+npm run dev -- --host 127.0.0.1 --port 4174
+```
+
+Open `http://127.0.0.1:4174/events/`. The save operation writes directly to:
+
+```text
+data/wechat-event-sources.json
+```
+
+The local API is available only in Vite `serve` mode and only to `127.0.0.1`, `::1`, or `::ffff:127.0.0.1`. It accepts a list of `id`/`name` pairs, preserves source categories, feed addresses, enabled flags, discovery state, confirmed article URLs, and other project fields, and refuses to remove any original source. It also refuses blank or duplicate names.
+
+After reviewing the change, commit and push the JSON yourself so the next GitHub Actions refresh can use it:
+
+```bash
+git diff -- data/wechat-event-sources.json
+git add data/wechat-event-sources.json
+git commit -m "chore: update event source names"
+git push
+```
+
+The deployed GitHub Pages page is read-only. It does not contain a write API, does not receive WeChat login state, and cannot edit the repository from a visitor's browser.
+
 The command writes `public/wechat-events.json`. With no configured feed URLs or `OPENAI_API_KEY`, it still produces a valid honest payload and keeps prior published events when available. New article candidates become `needs-review` and are hidden from the public list until structured extraction confirms a title and start date.
 
 Optional GitHub Actions configuration:
