@@ -15,6 +15,7 @@ from xml.etree import ElementTree as ET
 
 
 TIMEZONE = timezone(timedelta(hours=8))
+WECHAT_ARTICLE_HOST = "mp.weixin.qq.com"
 MAX_TITLE_LENGTH = 240
 MAX_SUMMARY_LENGTH = 500
 MAX_TAGS = 8
@@ -95,6 +96,15 @@ def normalize_url(value: object) -> str:
         return ""
     parsed = urlsplit(str(value).strip())
     return urlunsplit((parsed.scheme.lower(), parsed.netloc.lower(), parsed.path or "/", parsed.query, ""))
+
+
+def is_wechat_article_url(value: object) -> bool:
+    """Return True only for a public WeChat article URL, never a search or profile page."""
+    normalized = normalize_url(value)
+    if not normalized:
+        return False
+    parsed = urlsplit(normalized)
+    return parsed.hostname == WECHAT_ARTICLE_HOST and bool(re.fullmatch(r"/s/[^/?#]+", parsed.path))
 
 
 def _child_text(element: ET.Element, names: tuple[str, ...]) -> str:

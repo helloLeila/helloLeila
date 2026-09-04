@@ -36,6 +36,12 @@ class WechatEventRadarTests(unittest.TestCase):
         self.assertFalse(self.module.is_public_http_url("http://127.0.0.1/a"))
         self.assertFalse(self.module.is_public_http_url("http://192.168.1.2/a"))
 
+    def test_wechat_article_url_requires_exact_public_article_shape(self):
+        self.assertTrue(self.module.is_wechat_article_url("https://mp.weixin.qq.com/s/example-event"))
+        self.assertFalse(self.module.is_wechat_article_url("https://mp.weixin.qq.com/"))
+        self.assertFalse(self.module.is_wechat_article_url("https://mp.weixin.qq.com/profile"))
+        self.assertFalse(self.module.is_wechat_article_url("https://example.org/s/example-event"))
+
     def test_rss_and_atom_entries_are_normalized(self):
         rss = (ROOT / "tests/fixtures/wechat-events/feed-rss.xml").read_text(encoding="utf-8")
         atom = (ROOT / "tests/fixtures/wechat-events/feed-atom.xml").read_text(encoding="utf-8")
@@ -129,8 +135,7 @@ class WechatEventRadarTests(unittest.TestCase):
     def test_verified_public_events_are_loaded_when_feeds_are_empty(self):
         fetcher = load_fetch_module()
         events = fetcher.load_verified_events(ROOT / "data/verified-public-events.json")
-        self.assertGreaterEqual(len(events), 5)
-        self.assertIn("AICon 全球人工智能开发与应用大会（深圳站）", [event["title"] for event in events])
+        self.assertEqual(events, [])
 
     def test_name_discovery_builds_search_url_and_scores_wechat_candidates(self):
         fetcher = load_fetch_module()
@@ -141,7 +146,7 @@ class WechatEventRadarTests(unittest.TestCase):
         xml = (ROOT / "tests/fixtures/wechat-events/bing-discovery.xml").read_text(encoding="utf-8")
         candidates = fetcher.parse_discovery_results(xml, "sz-tech", "深圳理工大学")
         self.assertEqual(candidates[0]["url"], "https://mp.weixin.qq.com/s/shenzhen-tech-event")
-        self.assertGreater(candidates[0]["score"], candidates[1]["score"])
+        self.assertEqual(len(candidates), 1)
         self.assertEqual(candidates[0]["discoveryStatus"], "needs-confirmation")
 
     def test_fetch_text_falls_back_to_curl_when_python_tls_fails(self):

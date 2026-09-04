@@ -28,7 +28,7 @@ function EventRow({ event }) {
         <div className="event-eyebrow">
           <span>{event.isOnline ? "线上" : event.city || "地点待确认"}</span>
           {event.sourceAccount ? <span>{event.sourceAccount}</span> : null}
-          {event.sourceKind === "verified-public-web" ? <span>公开网页核验</span> : null}
+          {event.sourceKind === "wechat-public" ? <span>微信公众号文章</span> : null}
         </div>
         <h2>{event.title}</h2>
         <p className="event-meta">
@@ -86,7 +86,7 @@ export default function EventsApp() {
   const visibleEvents = useMemo(() => filterEvents(events, filters), [events, filters]);
   const summary = useMemo(() => eventSummary(events), [events]);
   const freshness = payload?.updatedAt
-    ? new Intl.DateTimeFormat("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Shanghai" }).format(new Date(payload.updatedAt))
+    ? `${new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Shanghai" }).format(new Date(payload.updatedAt))}（北京时间）`
     : "等待首次刷新";
 
   function updateFilter(key, value) {
@@ -170,14 +170,24 @@ export default function EventsApp() {
             <p className="events-kicker">CURATED UPCOMING EVENTS</p>
             <h2>{visibleEvents.length} 场活动</h2>
           </div>
-          {payload?.status === "partial" || payload?.status === "stale" ? (
-            <p className="events-notice">部分来源暂不可用，当前列表沿用最近一次有效结果。</p>
-          ) : null}
+          <div className="events-list-meta">
+            {payload?.sourceStats ? (
+              <p className="events-notice">
+                已核验公众号文章 {payload.sourceStats.wechatArticles ?? 0} 篇 ·
+                已遍历 {payload.sourceStats.cataloged ?? 0} 个来源
+              </p>
+            ) : null}
+            {payload?.status === "partial" || payload?.status === "stale" ? (
+              <p className="events-notice">部分来源暂不可用，列表保留最近一次有效结果。</p>
+            ) : null}
+          </div>
         </div>
         {error ? <div className="events-state">活动数据暂时无法读取，请稍后刷新。</div> : null}
         {!error && !visibleEvents.length ? (
           <div className="events-state">
-            {payload?.status === "empty" ? "来源目录已建立，等待公开订阅地址接入。" : "没有符合当前筛选条件的活动。"}
+            {payload?.status === "empty"
+              ? "本次刷新没有拿到可验证的微信公众号文章。搜索候选、官网页面和百科结果不会冒充活动。"
+              : "没有符合当前筛选条件的活动。"}
           </div>
         ) : null}
         <div className="event-list">

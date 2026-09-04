@@ -25,6 +25,7 @@ from wechat_event_radar import (
     TIMEZONE,
     build_ai_request,
     is_public_http_url,
+    is_wechat_article_url,
     merge_events,
     normalize_event,
     normalize_url,
@@ -67,7 +68,7 @@ def load_config(path: Path = CONFIG_PATH) -> dict:
         source["confirmedArticleUrls"] = [
             normalize_url(url)
             for url in confirmed_urls
-            if normalize_url(url)
+            if is_wechat_article_url(url)
         ] if isinstance(confirmed_urls, list) else []
         source["discoveryStatus"] = str(
             source.get("discoveryStatus") or ("configured" if source["feedUrl"] else "pending")
@@ -163,7 +164,7 @@ def parse_discovery_results(xml_text: str, source_id: str, source_name: str, lim
     candidates = []
     seen = set()
     for result in results:
-        if not result.get("url") or result["url"] in seen:
+        if not is_wechat_article_url(result.get("url")) or result["url"] in seen:
             continue
         seen.add(result["url"])
         result["score"] = score_source_candidate(result, source_name)
@@ -194,7 +195,12 @@ def load_verified_events(path: Path = ROOT / "data" / "verified-public-events.js
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, list):
         raise ValueError("verified public events must be an array")
-    return [normalize_event({**item, "sourceKind": "verified-public-web"}) for item in payload if isinstance(item, dict)]
+    verified = []
+    for item in payload:
+        if not isinstance(item, dict) or not is_wechat_article_url(item.get("sourceArticleUrl")):
+            continue
+        verified.append(normalize_event({**item, "sourceKind": "wechat-public"}))
+    return verified
 
 
 def load_previous(path: Path = OUTPUT_PATH) -> dict:
@@ -220,13 +226,21 @@ def _strip_html(value: str) -> str:
 
 
 def parse_public_article(html: str, url: str, source_id: str, source_name: str) -> dict:
+    if not is_wechat_article_url(url):
+        raise ValueError("article URL is not a public WeChat article")
+    plain_text = _strip_html(html)
+    blocked_markers = ("环境异常", "访问过于频繁", "验证后继续", "antispider", "登录后查看")
+    if not plain_text or any(marker.lower() in plain_text.lower() for marker in blocked_markers):
+        raise ValueError("WeChat article page is blocked or unavailable")
     title_match = re.search(r"<title[^>]*>([\s\S]*?)</title>", html, flags=re.IGNORECASE)
     description_match = re.search(
         r'<meta[^>]+(?:name|property)=["\'](?:description|og:description)["\'][^>]+content=["\']([\s\S]*?)["\']',
         html,
         flags=re.IGNORECASE,
     )
-    title = _strip_html(title_match.group(1)) if title_match else url
+    title = _strip_html(title_match.group(1)) if title_match else ""
+    if not title or title == url:
+        raise ValueError("WeChat article page has no public title")
     excerpt = _strip_html(description_match.group(1)) if description_match else _strip_html(html)[:500]
     return {
         "sourceId": source_id,
@@ -397,6 +411,8 @@ def build_payload(
         elif errors:
             failed += 1
         for article in articles:
+            if not is_wechat_article_url(article.get("url")):
+                continue
             if not screen_article(article):
                 continue
             try:
@@ -409,9 +425,11 @@ def build_payload(
             _source_record(source, now, "ok" if articles and not errors else "partial" if articles else "failed" if errors else "pending", len(articles), "; ".join(errors))
         )
 
-    merged = merge_events(previous.get("events", []) if isinstance(previous, dict) else [], events, now)
+    merged_all = merge_events(previous.get("events", []) if isinstance(previous, dict) else [], events, now)
+    # The public contract is strict: every visible item must link to a real WeChat article.
+    merged = [event for event in merged_all if is_wechat_article_url(event.get("sourceArticleUrl"))]
     visible_events = [event for event in merged if event.get("status") in {"published", "needs-review", "expired", "cancelled"}]
-    if failed and previous.get("events") and not events:
+    if failed and any(is_wechat_article_url(event.get("sourceArticleUrl")) for event in (previous.get("events", []) if isinstance(previous, dict) else [])) and not events:
         status = "stale"
     elif not visible_events:
         status = "empty"
@@ -429,6 +447,12 @@ def build_payload(
             "succeeded": succeeded,
             "failed": failed,
             "verified": len(verified_events),
+            "wechatArticles": sum(1 for event in visible_events if is_wechat_article_url(event.get("sourceArticleUrl"))),
+            "rejectedNonWechat": sum(
+                1
+                for event in merged_all
+                if not is_wechat_article_url(event.get("sourceArticleUrl"))
+            ),
             "discoveryHits": discovery_hits,
             "discoveryNeedsConfirmation": discovery_needs_confirmation,
             "discoveryUnavailable": discovery_unavailable,

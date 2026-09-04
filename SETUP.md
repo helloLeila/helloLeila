@@ -153,9 +153,9 @@ For a source that has a name but no `feedUrl`, the daily script runs a public Bi
 
 It scores candidates by public WeChat host, exact name/snippet match, and公众号 signals, then writes the top candidates to that source's `discoveryCandidates` field in `wechat-events.json`. A candidate is never silently bound when the name is ambiguous; it remains `needs-confirmation` until an article URL is added to `confirmedArticleUrls`. This is why every name stays in the catalog even when discovery is incomplete.
 
-The generated file also contains `sourceStats.discoveryHits`, `sourceStats.discoveryNeedsConfirmation`, and `sourceStats.discoveryUnavailable`, so a run can be audited without exposing search-engine errors or private runtime details.
+The generated file also contains `sourceStats.discoveryHits`, `sourceStats.discoveryNeedsConfirmation`, `sourceStats.discoveryUnavailable`, and `sourceStats.wechatArticles`. The public list is a strict whitelist: `sourceArticleUrl` must be an exact `https://mp.weixin.qq.com/s/...` URL, and the fetched page must expose a public title without a login or anti-bot challenge. Search results, Baidu百科 pages, company sites, and ordinary news pages are retained only as rejected audit input and are never published as events.
 
-The page currently also shows a small set of `verified-public-web` events cross-checked from official event pages. These are labeled as public-web verification, not presented as confirmed WeChat posts. Once a discovered article is confirmed, the same event pipeline can attribute it to the matching公众号.
+If no article can be fetched and verified during a run, the page intentionally shows zero activities and says so. This is preferable to displaying a plausible but unverified date or event.
 
 Local refresh:
 
