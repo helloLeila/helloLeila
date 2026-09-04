@@ -2,6 +2,8 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+from types import SimpleNamespace
+from urllib.error import URLError
 from unittest.mock import patch
 
 
@@ -141,6 +143,22 @@ class WechatEventRadarTests(unittest.TestCase):
         self.assertEqual(candidates[0]["url"], "https://mp.weixin.qq.com/s/shenzhen-tech-event")
         self.assertGreater(candidates[0]["score"], candidates[1]["score"])
         self.assertEqual(candidates[0]["discoveryStatus"], "needs-confirmation")
+
+    def test_fetch_text_falls_back_to_curl_when_python_tls_fails(self):
+        fetcher = load_fetch_module()
+        completed = SimpleNamespace(stdout=b"<rss><channel /></rss>", stderr=b"")
+        fake_shutil = SimpleNamespace(which=lambda name: "/usr/bin/curl")
+        def fake_run(*args, **kwargs):
+            fake_subprocess.last_args = args
+            fake_subprocess.last_kwargs = kwargs
+            return completed
+        fake_subprocess = SimpleNamespace(run=fake_run, last_args=None, last_kwargs=None)
+        with patch.object(fetcher, "urlopen", side_effect=URLError("CERTIFICATE_VERIFY_FAILED")), \
+             patch.object(fetcher, "shutil", fake_shutil, create=True), \
+             patch.object(fetcher, "subprocess", fake_subprocess, create=True):
+            self.assertEqual(fetcher.fetch_text("https://www.bing.com/search?format=rss&q=test"), "<rss><channel /></rss>")
+        self.assertEqual(fake_subprocess.last_args[0][0], "/usr/bin/curl")
+        self.assertIn("--fail", fake_subprocess.last_args[0])
 
     def test_successful_name_discovery_does_not_crash_or_publish_unconfirmed_event(self):
         fetcher = load_fetch_module()

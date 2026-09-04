@@ -7,7 +7,9 @@ import argparse
 import json
 import os
 import re
+import shutil
 import sys
+import subprocess
 import time
 from datetime import datetime, timedelta, timezone
 from html import unescape
@@ -88,8 +90,37 @@ def fetch_text(url: str) -> str:
             "Accept": "application/rss+xml, application/atom+xml, text/xml, text/html;q=0.9, */*;q=0.1",
         },
     )
-    with urlopen(request, timeout=REQUEST_TIMEOUT) as response:
-        return response.read().decode("utf-8", errors="replace")
+    try:
+        with urlopen(request, timeout=REQUEST_TIMEOUT) as response:
+            return response.read().decode("utf-8", errors="replace")
+    except (OSError, URLError) as primary_error:
+        curl_path = shutil.which("curl")
+        if not curl_path:
+            raise
+        try:
+            result = subprocess.run(
+                [
+                    curl_path,
+                    "--fail",
+                    "--location",
+                    "--silent",
+                    "--show-error",
+                    "--max-time",
+                    str(REQUEST_TIMEOUT),
+                    "--user-agent",
+                    USER_AGENT,
+                    "--header",
+                    "Accept: application/rss+xml, application/atom+xml, text/xml, text/html;q=0.9, */*;q=0.1",
+                    url,
+                ],
+                check=True,
+                capture_output=True,
+                timeout=REQUEST_TIMEOUT + 5,
+            )
+            output = result.stdout
+            return output.decode("utf-8", errors="replace") if isinstance(output, bytes) else str(output)
+        except Exception as fallback_error:
+            raise URLError(f"{primary_error}; curl fallback failed: {fallback_error}") from primary_error
 
 
 def fetch_json(url: str) -> dict | None:

@@ -1,43 +1,115 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-20T20:48:31+08:00",
-  "status": "partial",
+  "updatedAt": "2026-09-04T15:29:20+08:00",
+  "status": "ok",
   "sourceStats": {
     "cataloged": 37,
-    "configured": 1,
-    "succeeded": 0,
-    "failed": 1,
+    "configured": 5,
+    "succeeded": 5,
+    "failed": 0,
     "verified": 5,
-    "discoveryHits": 0,
-    "discoveryNeedsConfirmation": 0,
-    "discoveryUnavailable": 36
+    "discoveryHits": 160,
+    "discoveryNeedsConfirmation": 32,
+    "discoveryUnavailable": 4
   },
   "sources": [
     {
       "id": "shenzhen-university-of-advanced-technology",
       "name": "深圳理工大学",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "siat-cas",
       "name": "中国科学院深圳先进技术研究院",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "中华人民共和国_百度百科",
+          "url": "https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD/106554",
+          "excerpt": "中华人民共和国（the People's Republic of China），简称“中国”，成立于1949年10月1日，位于亚洲东部，太平洋西岸，是工人阶级领导的、以工农联盟为基础的人民民主专政的社会主义国家，以五星红旗为国旗、《义勇军进行曲》为国歌，国徽中间是五星照耀下的 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "中国政府网_中央人民政府门户网站",
+          "url": "https://www.gov.cn/",
+          "excerpt": "全力夺取秋粮丰收 持续提升农业综合生产能力确保粮食安全 丁薛祥在安徽合肥出席财政科学管理试点座谈会时强调 落实当家理财责任 提升财政工作水平 更好服务和保障中国式现代化建设 刘国中出席第十一届亚太经合组织粮食安全部长级会议开幕式并致辞 更多",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "中国网--网上中国",
+          "url": "http://www.china.com.cn/",
+          "excerpt": "国家重点新闻网站，拥有十个语种独立新闻采编、报道和发布权；第一时间报道国家重大新闻事件；国情信息库服务全球读者了解中国；国务院新闻 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "中国（世界四大文明古国之一）_百度百科",
+          "url": "https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD/1122445",
+          "excerpt": "中国各族人民共同创造了光辉灿烂的文化，具有光荣的革命传统。 中国是以汉族为主体民族的多民族国家，通用汉语、汉字，汉族与少数民族统称为“中华民族”，自称“炎黄子孙”、“龙的传人”。 中国是世界四大文明古国之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "中國政府網_中央人民政府門戶網站",
+          "url": "http://big5.www.gov.cn/gate/big5/www.gov.cn/",
+          "excerpt": "中國政府網|關於本網|網站聲明|聯絡我們|網站糾錯 主辦單位：國務院辦公廳 運行維護單位：中國政府網運行中心 版權所有：中國政府網 中文域名：中国政府网.政务 網站標識碼bm01000001 京ICP備05070218號 京公網安備11010202000001號 國務院客戶端 國務院客戶端小程序",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "ishenzhen",
       "name": "i深圳",
       "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
       "discoveryStatus": "unavailable",
@@ -46,48 +118,192 @@
     {
       "id": "qbitai",
       "name": "量子位",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "什么是量子科技？都有哪些应用？一文了解_新闻频道_央视网 ...",
+          "url": "https://news.cctv.com/2025/09/21/ARTIsDIZPQJx7agYgKGXRf93250921.shtml",
+          "excerpt": "2025年3月，我国自主研发的量子计算原型机“祖冲之三号”问世，刷新超导体系全球量子计算优越性新纪录。 2025年7月，我国科研团队打造出“纳米双光子工厂”，制备出保真度达99.4%的新型量子纠缠光源，为更先进的量子应用奠定关键基础。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "潘建伟院士：一分钟说清楚什么是量子 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/2002173328836817863",
+          "excerpt": "光子虽无 静质量，却携带 动量 与能量，参与相互作用时表现出 粒子性。 原子、分子乃至我们自身，归根结底，都是由这些基本量子激发态构成的复杂结构。 所以，当我们说“万物皆量子”，并非玄学修辞，而是 现代物理学 最坚实的结论之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "量子技术_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%87%8F%E5%AD%90%E6%8A%80%E6%9C%AF/68739774",
+          "excerpt": "量子技术是以 量子力学 基本原理为基础，利用 量子叠加 、 量子纠缠 、量子不可克隆等特性，进行信息获取、处理和传输的前沿技术集群 [1] [5]。 其核心在于利用微观粒子的量子态实现经典物理体系无法或难以达成的功能 [7-8]。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "量子究竟是什么？一文搞懂，拒绝被坑 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/266261222",
+          "excerpt": "原子、质子、电子都是构成物质的实物粒子，可量子却不是粒子，它是一种物理概念，不是实物。 在微观世界中，某些物理量的变化不是连续的，只能以最小单位的倍数跳跃式改变，这个最小的单位就叫做量子。 量子不是粒…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "量子（现代物理概念）_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%87%8F%E5%AD%90/135660",
+          "excerpt": "“量子” 是微观世界能量、物质的最小离散基本单元，是现代量子理论的核心基础概念。 对“量子”的最早研究始于1900 年，普朗克为解决黑体辐射 “紫外灾难” 提出能量量子假说，指出能量不可无限分割，只能以最小能量子整数倍存在，标志量子概念诞生。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "jiqizhixin",
       "name": "机器之心",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "machine - 搜索 词典",
+          "url": "https://global.bing.com/dict/search?q=machine&FORM=BDVSP6&cc=cn",
+          "excerpt": "机器； 机械装置 a piece of equipment with moving parts that is designed to do a particular job. The power used to work a machine may be electricity, steam, gas, etc. or human power.",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "一文搞懂 “机器”：不是所有机械都叫机器！分类实例小白也能 ...",
+          "url": "https://www.toutiao.com/article/7540906324884783631/",
+          "excerpt": "每天出门见的汽车、家里用的洗衣机、工厂里转的机床…… 这些都叫 “机器”，但你真的知道 “机器到底是什么” 吗？ 很多人把 “机器” 和 “工具”“零件” 混为一谈，其实机器有明确的定义和分类。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "机器的意思_机器的解释-汉语国学",
+          "url": "https://www.hanyuguoxue.com/cidian/ci-6f28e722b",
+          "excerpt": "它是用来代替人的劳动、 进行 能量变换、信息处理、 以及 产生有用功。 机器 贯穿 在人类 历史 的全过程中。 但是 近代 真正 意义 上的“机器”，却是在 西方 工业革命 后才 逐步 被发明 出来。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "机器（汉语词语）_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%9C%BA%E5%99%A8/65322532",
+          "excerpt": "在学术文献中，\"机器\"常作为技术主体出现于系统优化讨论，例如通过改进分词算法提升汉英机器翻译准确度的理论探索。 这种用法凸显了该词汇在专业领域的核心地位，形成\"人类-机器\"协同的研究范式。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "机器（由各种金属和非金属部件组装成的装置）_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%9C%BA%E5%99%A8/2275865",
+          "excerpt": "机器（外文名：machine），是由各种金属和非金属部件组装成的装置，消耗能源，可以运转、做功。 它是用来代替人的劳动、进行能量变换、信息处理、以及产生有用功。 机器贯穿在人类历史的全过程中。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "shenzhen-robotics-association",
       "name": "深圳市机器人协会",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "innovation-nanshan",
       "name": "创新南山",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "习近平总书记论创新思维 - 求是网",
+          "url": "https://www.qstheory.cn/2023-08/09/c_1129795522.htm",
+          "excerpt": "”2022年10月，在党的二十大报告中深刻指出：“必须坚持守正创新。 我们从事的是前无古人的伟大事业，守正才能不迷失方向、不犯颠覆性错误，创新才能把握时代、引领时代。 ”这是对于为什么要守正创新，守正与创新的实质内涵及其辩证关系的经典凝练表达。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "全国大学生创业服务网",
+          "url": "http://cy.ncss.cn/",
+          "excerpt": "获得金奖项目的指导教师为“优秀创新创业导师”（限前五名）。 产业赛道： 设置金奖70个、银奖140个和铜奖440个。 萌芽赛道： 设置创新潜力奖20个。 入围总决赛但未获创新潜力奖的项目，发放“入围总决赛”证书。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "创新科技CREATIVE官方网站 - 数码娱乐产品的全球领导厂商 ...",
+          "url": "https://cn.creative.com/",
+          "excerpt": "CREATIVE创新科技总部位于新加坡，是研究多媒体，平板电脑和网络方面，专注Sound Blaster声卡，ZEN MP3播放器，ZiiO平板电脑等无线设备开发和生产的全球领导厂商。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "创新（创新）_百度百科",
+          "url": "https://baike.baidu.com/item/%E5%88%9B%E6%96%B0/11073960",
+          "excerpt": "百度百科是一部内容开放、自由的网络百科全书，旨在创造一个涵盖所有领域知识，服务所有互联网用户的中文知识性百科全书。在这里你可以参与词条编辑，分享贡献你的知识。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "创新（汉语词语）_百度百科",
+          "url": "https://baike.baidu.com/item/%E5%88%9B%E6%96%B0/6047",
+          "excerpt": "创新理论起源于熊彼特1912年提出的生产要素重组理论。 20世纪60年代罗斯托提出“起飞”六阶段理论，强化技术创新地位。 1976年美国国家科学基金会（NSF）将模仿与技术改进纳入创新范畴，形成现代技术创新框架 [2] [12]。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "aliyun-cloud-native",
       "name": "阿里云云原生",
       "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
       "discoveryStatus": "unavailable",
@@ -96,78 +312,330 @@
     {
       "id": "appso",
       "name": "APPSO",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
-      "newArticleCount": 0,
+      "status": "ok",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
+      "newArticleCount": 5,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "微信公众号：APPSO | AIGC工具导航",
+          "url": "https://www.aigc.cn/sites/101418.html",
+          "excerpt": "结语 APPSO 不仅是一个工具评测平台，更是 「数字效率文化」 的布道者。 其通过 「技术中立性」「场景化内容」「用户深度参与」 构建了独特的生态体系，在工具与用户之间架起了专业、可信的桥梁。",
+          "score": 8,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "APPSO - 爱范儿",
+          "url": "https://www.ifanr.com/author/appso",
+          "excerpt": "6 台机器人拼长城、首款智能体手机首秀：阶跃把 AI 塞进了现实世界｜WAIC 2026 大模型的下一站，是走出屏幕，自己动手 APPSO 07-17 21:01 1 0 糖纸",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "AppSolution | 爱范儿",
+          "url": "https://www.ifanr.com/app",
+          "excerpt": "精选全球最棒的应用，发现更好用的 App。",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "AppSo，让智能手机更好用的秘密",
+          "url": "http://app.so/landing/",
+          "excerpt": "一个分享科技资讯、产品评测和生活指南的平台，助您更好地使用智能手机。",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "每日精品限免/促销应用 | APPSO",
+          "url": "https://app.so/xianmian/",
+          "excerpt": "安全保管您最有价值的私密笔记，让他人无法窥探。 用户可以使用 Touch ID 或密码安全上锁，设置安全问题和答案，并将重要笔记备份到 iCloud，在 iPhone 和 iPad 之间快速同步笔记。",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "ai-time",
       "name": "AI TIME论道",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "AI工具集官网 | 1000+ AI工具集合，国内外AI工具集导航大全",
+          "url": "https://ai-bot.cn/",
+          "excerpt": "AI工具集官网收录了国内外数百个AI工具，该导航网站包括AI写作工具、AI图像生成和背景移除、AI视频制作、AI音频转录、AI辅助编程、AI音乐生成、AI绘画设计、AI对话聊天等AI工具集合大全，以及AI学习开发的常用网站、框架和模型，帮助你加入人工智能浪潮 ...",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "Kimi AI 官网 - K3 上线，专为智能体编程与知识工作打造",
+          "url": "https://www.kimi.com/",
+          "excerpt": "全新 Kimi K3 现已上线：构建可玩的多人与3D游戏，生成咨询级PPT，用 Swarm 智能体集群与 Goal 模式并行执行任务，知识工作更高效。",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "What Is Artificial Intelligence (AI)? | IBM",
+          "url": "https://www.ibm.com/think/topics/artificial-intelligence",
+          "excerpt": "But in 2024, most AI researchers, practitioners and most AI-related headlines are focused on breakthroughs in generative AI (gen AI), a technology that can create original text, images, video and other content.",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "免费AI工具 - 在线使用免费AI工具大全 | AIGC工具导航",
+          "url": "https://www.aigc.cn/free-ai-tools",
+          "excerpt": "免费AI工具 AIGC 工具导航汇聚全网最全的 免费AI 工具集合，无论是AI智能助手、 AI写作 工具、 AI绘画 工具、AI PPT制作 、 AI简历 制作、AI翻译工具还是AI思维导图等。 注册即可享受免费体验、免费tokens、积分赠送！",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "即梦AI - 一站式AI创作平台",
+          "url": "https://jimeng.jianying.com/ai-tool/home",
+          "excerpt": "即梦AI是一个AI创作平台，可激发艺术创意、提升绘画和视频创作体验。 您可以利用AI智能，将想象变为现实。 即梦AI支持文字绘图、文字生成视频和图片生成视频，并提供创作灵感。 让即梦AI开启您的AI生成艺术之旅，探索创造的无限可能！",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "cuhksz-sse",
       "name": "香港中文大学深圳SSE理工学院",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "去过香港不下30次，总结一份超全的玩法攻略 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/697719377",
+          "excerpt": "很多人第一次出境旅行就是香港 拔地而起的摩天大楼，复古红的出租车 高低交错的街道，港风的霓虹招牌 组成一个赛博朋克的世界 这里有TVB港剧、粤语歌、港式美食 每个转角都有种王家卫电影的纸醉金迷 香港处处给你…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首頁 | 香港旅遊發展局 - Hong Kong Tourism Board",
+          "url": "https://www.discoverhongkong.com/tc/index.html",
+          "excerpt": "從道地攻略到主流玩法，尋找適合自己風格的旅行體驗。 人氣精選 初訪必遊 親子樂 文化深度遊 美食愛好者 藝術愛好者 咫尺自然 探索舊城中環：發掘地道新體驗 《米其林指南2026》香港最新星級餐廳 香港中秋節10大親子賞月地點 探索香港海島旅遊 啟德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首页 | 香港旅游发展局",
+          "url": "https://www.discoverhongkong.cn/index.html",
+          "excerpt": "从地道攻略到主流玩法，寻找适合自己风格的旅行体验。 人气精选 初访必游 亲子乐 文化深度游 美食爱好者 艺术爱好者 咫尺自然 探索旧城中环：发掘地道新体验 《米其林指南2026》香港最新星级餐厅 香港中秋节10大亲子赏月地点 探索香港海岛旅游 启德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港十八区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E5%8D%81%E5%85%AB%E5%8C%BA/7265721",
+          "excerpt": "香港十八区是中国香港的基层行政区划体系，由香港岛的4个区（中西区、东区、南区、湾仔区）、九龙半岛的5个区（九龙城区、观塘区、深水埗区、黄大仙区、油尖旺区）及新界的9个区（离岛区、葵青区、北区、西贡区、沙田区、大埔区、荃湾区、屯门区 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港特别行政区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E7%89%B9%E5%88%AB%E8%A1%8C%E6%94%BF%E5%8C%BA/24510970",
+          "excerpt": "香港自古以来就是中国的领土，1842~1997年曾受英国殖民统治。 二战以后，香港经济和社会迅速发展，不仅跻身“亚洲四小龙”行列，更成为全球最富裕、经济最发达和生活水准最高的地区之一。 1997年7月1日，中国政府对香港恢复行使主权，香港特别行政区成立。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "modelscope",
       "name": "魔搭ModelScope社区",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "《魔》-高清电影-完整版在线观看",
+          "url": "https://waptv.sogou.com/movie/mzuwy3k7geytcnrtg4e4jjy.html",
+          "excerpt": "魔，是由桂治洪导演，由高飞，王龙威，林晓燕，卫加文主演的奇幻电影。 为您提供魔在线观看、魔演员表、魔下载等相关信息，影片简介：黑道分子陈雄（高飞 饰）也是一名拳场高手...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "魔曰 - Abracadabra",
+          "url": "https://abra.js.org/",
+          "excerpt": "魔曰 (Abracadabra) 是一款开源的文言文风格文本加密与混淆工具。将数据转化为古典风雅的文言诗篇，对文字施以神秘魔法。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "魔的意思,魔的解释,魔的拼音,魔的部首,魔的笔顺-汉语国学",
+          "url": "https://www.hanyuguoxue.com/zidian/zi-39764",
+          "excerpt": "魔的拼音是mó，魔字共20画，部首是麻部，本页介绍魔字的意思，魔的详细解释，魔的读音、笔顺，还包括魔的翻译、输入法、异体字、造字法、结构、五行、电码、五笔、仓颉等。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "魔（汉字词汇）_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%AD%94/980797",
+          "excerpt": "魔，为梵语“魔罗”之略称，意为杀者、障碍，在佛教中指一切扰乱身心、破坏善行、妨碍修行的障碍。 佛教常将魔分为四类，即烦恼魔、五阴魔（蕴魔）、死魔与天魔，统称四魔。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "魔（汉语汉字）_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%AD%94/71311",
+          "excerpt": "魔，汉语常用字（一级字），读作mó，最早见于《说文》小篆，是随着南北朝佛经译文开始产生的。 本义为梵语魔罗的简称；引申泛指恶魔，怪物；又引申为邪恶的人或势力；妖魔容易引起人们好奇，所以又引申指神奇的、对某事物爱好入迷等。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "szau-ai",
       "name": "深圳大学人工智能学院",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "shenzhen-bay-checkin",
       "name": "打卡深圳湾",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "大家有没有什么推荐的每日打卡App？ - 知乎",
+          "url": "https://www.zhihu.com/question/376054663",
+          "excerpt": "每天给自己的习惯打卡，小小的每天坚持，才能成就梦想。 小日常不仅可以作为习惯追踪工具，也能作为一天的小日记使用，记录自己每天完成了什么常见的事情，对自己每日完成事项进行打卡。 下载地址： 4、钉钉",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "打卡（文化术语）_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%89%93%E5%8D%A1/10162597",
+          "excerpt": "打卡，原指工作人员上下班时使用考勤机记录时间的考勤行为。 随着社交网络的发展，其词义逐渐泛化，现泛指用特定方式记录到访某地或完成某项任务的行为，如在社交媒体分享参观展览、旅行游览、健身学习等经历。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "打卡（网络行为记录与分享）_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%89%93%E5%8D%A1/53324658",
+          "excerpt": "打卡，网络热词，原指上下班时刷卡或使用打卡机记录工作时间的考勤流程。 现衍生指到了某个地方或拥有某个事物（一般会向他人展示）。 考勤手段随后更新换代，出现了指纹考勤、人脸识别和手机定位打卡等方式。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "最值得尝试的自律打卡软件推荐：5类日常需求，帮你告别无效 ...",
+          "url": "https://blog.csdn.net/Saweet_ie/article/details/155734142",
+          "excerpt": "练完自动打卡，数据和感受都能记下来，形成正反馈循环。 专业提示：专项提升遵循“刻意练习”原则，好的工具能确保你处在“学习区”，而不是在舒适区重复或盲目挑战困难区。 另一个好选择：如果你想培养深度专注的习惯， Forest专注森林 非常有效。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "钉钉考勤",
+          "url": "https://www.dingtalk.com/page/check",
+          "excerpt": "钉钉智能考勤提供打卡记录与数据分析功能，助力企业实现高效的员工考勤管理。适用于员工上下班打卡、工时统计及考勤报表生成等场景，提升管理效率与准确性。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "data-whale",
       "name": "Data WHALE",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "DATA中文 (简体)翻译：剑桥词典 - Cambridge Dictionary",
+          "url": "https://dictionary.cambridge.org/zhs/%E8%AF%8D%E5%85%B8/%E8%8B%B1%E8%AF%AD-%E6%B1%89%E8%AF%AD-%E7%AE%80%E4%BD%93/data",
+          "excerpt": "Scientists hope that data from the space probe will pave the way for a more detailed exploration of Mars. The system will handle phone calls and data messages as well as other signals that need high bandwidth. The data, normally transmitted",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "Data | An Open Access Journal from MDPI",
+          "url": "https://www.mdpi.com/journal/data",
+          "excerpt": "This data descriptor presents a structured dataset of de-identified breast cancer cases that integrates H&E images, immunohistochemical images for ER, PR, HER2/neu and Ki-67, PNG cell segmentation masks and JSON-based clinical and morpholog",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "data是什么意思_data的翻译_音标_读音_用法_例句_爱词霸 ...",
+          "url": "https://www.iciba.com/word?w=data",
+          "excerpt": "Funding agencies note that data paid for with public money should be public information, and the scientific community is recognizing that data can now be shared digitally in ways that were not possible before.",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "data（英文单词）_百度百科",
+          "url": "https://baike.baidu.com/item/data/7096572",
+          "excerpt": "数据作为原始素材被存储下来，进而被加工和应用，对数据进行分类、过滤、清洗以呈现出有价值的信息；信息经过归纳、验证形成知识；灵活运用知识，指导实践展现智慧，这就是美国科学哲学家罗素·艾可夫 (Russell L. Ackoff)总结的DIKW模型，它概括了人类从 ...",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深度解析Lombok @Data注解：从原理到实践 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/1896558791832605570",
+          "excerpt": "Lombok 的 @Data 注解应运而生，它就像是一位贴心的代码助手，能帮我们自动生成这些常用方法，让代码变得简洁优雅。 @Data 注解是 Lombok 提供的一个组合注解，它整合了多个基础注解的功能，包括 @Getter、@Setter、@ToString、@EqualsAndHashCode 和 @RequiredArgsConstructor。",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "datafun-talk",
       "name": "DataFunTalk",
       "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
       "discoveryStatus": "unavailable",
@@ -176,118 +644,514 @@
     {
       "id": "shenzhen-library",
       "name": "深圳图书馆",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "nanshan-library",
       "name": "南山图书馆",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "南山区（中国广东省深圳市下辖区）_百度百科",
+          "url": "https://baike.baidu.com/item/%E5%8D%97%E5%B1%B1%E5%8C%BA/21023",
+          "excerpt": "南山区（Nanshan District），广东省深圳市辖区，位于深圳市中西部，介于北纬22°24′~22°39′、东经113°47′~114°01′之间，辖区土地面积185.22平方千米。 截至2023年6月，南山区辖8个街道，区人民政府驻南头街道桃园路1号。 截至2023年末，南山区常住人口181.86万人。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "南山集团",
+          "url": "https://www.nanshan.com.cn/",
+          "excerpt": "南山始终坚持核心队伍与专业人才的培养与建设，已锻造出一支具有开阔视野、强烈事业心、 优秀专业才能的核心团队，这使南山在历次关键性的变革中，每一举措都更具有前瞻性、高效性。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "南山（汉语词语）_百度百科",
+          "url": "https://baike.baidu.com/item/%E5%8D%97%E5%B1%B1/2609",
+          "excerpt": "在衡山六朝古刹 福严寺，保存一幅“福严为南山第一古刹，般若是老祖不二法门”的唐代石刻楹联。 南宋 学者 胡宏，他在南衡山隐居数十年，潜心研究学问，他的《南山即事》多次将衡山称为南山，其中一诗云：“甘为稼圃南山下，长谢周公与 孔丘 ”。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳市南山区人民政府网站",
+          "url": "https://www.szns.gov.cn/",
+          "excerpt": "深圳市南山区人民政府网站由深圳市南山区人民政府办公室主办，深圳市南山区政务服务和数据管理局技术支持，是深圳市南山区政府在互联网上建立的综合性政府门户网站，内容涵盖个人、企业、政府工作办事的方方面面，方便各类政务信息的查询或在线办事 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首页 - Ai南山企业服务综合平台",
+          "url": "https://www.inanshan.org.cn/index",
+          "excerpt": "Ai南山企业服务综合平台，全国首家“千企千面”一站式服务综合平台，依托区大数据中心，实现全区各单位数据和功能的协同共享，提高企业服务效能，扩大企业服务覆盖面，促进企业服务的精准高效。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "openbuild",
       "name": "OpenBuild",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
-      "newArticleCount": 0,
+      "status": "ok",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
+      "newArticleCount": 5,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "OpenBuild",
+          "url": "https://openbuild.xyz/",
+          "excerpt": "OpenBuild is dedicated to providing developers with high-quality, systematic content and activities, bridging the gap between Web2 and Web3. Our goal is to assist developers in transitioning to decentralized networks by offering the necessa",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "OpenBuild - GitHub",
+          "url": "https://github.com/openbuildxyz",
+          "excerpt": "web3-developer-report Public Vue 4 Apache-2.0 2 0 0 Updated on Jul 10 Aleo-101-Bootcamp Public Aleo 101 Bootcamp 由 Aleo 和 OpenBuild 共同发起。 从 0 写出你的第一个 ZK 应用，系统学习零知识证明与隐私计算，帮助开发者进入 Web3 隐私赛道。",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "OpenBuild 生态",
+          "url": "https://openbuildxyz.github.io/eco/zh/",
+          "excerpt": "与 OpenBuild 相关的社区生态项目 一个能帮助您拥有属于自己的硬件钱包的开源项目，我们正在构建连接区块链和物理设备的 ...",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "OpenBuild是什么？ 如何参与 OpenBuild 开源社区贡献 ？",
+          "url": "https://juejin.cn/post/7430021823913426994",
+          "excerpt": "如何加入 OpenBuild？ 官网注册成员身份： 在官网 openbuild.xyz 点击个人资料，完成信息录入等操作，领取专属你的 OpenBuild NFT。 在社区自我介绍： 在 OpenBuild 社群里自我介绍，将有助于您更快的融入我们的社区。",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "简介 | OpenBuild Ecosystem",
+          "url": "https://openbuildxyz.github.io/eco/zh/guides/",
+          "excerpt": "👋 如果你是第一次来这里，且对 OpenBuild 不是十分了解的话，相信会好奇——「OpenBuild 生态」是什么？ 跟 OpenBuild 官网有啥关系？ 与 OpenBuild 本身又有啥关联？ 那你来对地方了！ 本文档的作用就是帮你弄明白它们分别是啥，以及相互之间的联系。 理解「OpenBuild」",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "osc",
       "name": "OSC开源魔力",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "OSCHINA - 中文开源技术交流社区",
+          "url": "https://www.oschina.net/",
+          "excerpt": "2026年7月国产数据库大事记：可信数据库大会召开，央采数据库框架结果出炉，OceanBase拟融资20亿~30亿元，金仓622万信创大单…… 同一份 OpenTelemetry 数据，两家后端差距有多大？",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "OSC晶振的工作原理及作用 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/1919719260458025488",
+          "excerpt": "OSC晶振，即晶体振荡器（OscillatorCrystal），其核心工作原理基于石英晶体的压电效应和 逆压电效应。 石英晶体是一种具有特殊 物理性质 的材料，当在石英晶体的两个电极上加一电场时，晶体就会产生机械变形；反之，若在晶体的两侧施加机械压力，则在晶体相应的方向上会产生电场，这种物理现象被称为压电效应和逆压电效应。 在实际的OSC晶振中，首先将石英晶体切割成特定的形状和尺寸，不同的切割方式会影响晶体的振荡频率等特性。 然后在晶体的两个表面镀上金属电极，将其封装在一个外",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "晶振OSC概述、分类、工作原理及作用 - CSDN博客",
+          "url": "https://blog.csdn.net/u014074954/article/details/47170453",
+          "excerpt": "本文详细介绍了晶体振荡器（晶振）的工作原理及其在不同领域的应用，包括石英晶体振荡器的基本结构、温度补偿晶体振荡器（TCXO）、电压控制晶体振荡器（VCXO）和恒温控制晶体振荡器（OCXO）的特点与发展趋势。 晶体振荡器，简称晶振，其作用在于产生原始的时钟频率，这个频率经过频率发生器的倍频或分频后就成了电脑中各种不同的总线频率。 以声卡为例，要实现对模拟信号44.1kHz或48kHz的采样，频率发生器就必须提供一个44.1kHz或48kHz的时钟频率。 如果需要对这两种音频同时",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "模拟IC设计原理图7：振荡器 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/668133724",
+          "excerpt": "在这篇文章中，我们将介绍振荡器（OSC）的工作原理。 在介绍 锁相环 中的压控振荡器之前，我们需要先对振荡器进行学习和理解。 振荡器是什么？ 顾名思义，就是通电后能自发发出 周期性振荡信号 的装置，我们不需要对这样的装置进行信号输入，只需要给装置接入电源就行。 从理论上来讲，振荡器的逻辑就是，系统中存在一个噪声（在 物理专业 里这样的信号叫做“涨落”），然后我们对其进行操作。 所以在Cadence中模拟振荡器时我需要设立初值： 一般的振荡器都是如下两个原理： 系统选择某个特定",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "配置OBS与OSC客户端指南-CSDN博客",
+          "url": "https://blog.csdn.net/qq_53635889/article/details/119110909",
+          "excerpt": "1、打开网址： Sign Up - Open Build Service (openeuler.org)，填写相关信息后，选择sign up 2、进入obs页面 3、osc安装配置 osc是obs的客户端，提供用于跟obs交互的API命令行，可以很方便的在本地跟OBS Server进行交互，几乎所有页面上操作都有对应的osc命令行。 可以从openEuler发布地址获取该软件包： https://repo ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "segmentfault",
       "name": "Segment Fault思否",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "SEGMENT中文 (简体)翻译：剑桥词典 - Cambridge Dictionary",
+          "url": "https://dictionary.cambridge.org/zhs/%E8%AF%8D%E5%85%B8/%E8%8B%B1%E8%AF%AD-%E6%B1%89%E8%AF%AD-%E7%AE%80%E4%BD%93/segment",
+          "excerpt": "People over the age of 85 make up the fastest-growing segment of the population. 85岁以上者成为人口中增长最快的部分。 Each of these products is aimed at a specific market segment. 每一种产品针对的都是市场的不同部分。",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "Segment - 搜索 词典",
+          "url": "https://global.bing.com/dict/search?q=Segment&FORM=BDVSP6&cc=cn",
+          "excerpt": "必应词典为您提供Segment的释义，美 [ˈseɡmənt]，英 ['seɡmənt]，n. 段；部分；片；弓形； v. 分割；划分； 网络释义： 线段；节；区段；",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "Segment — 所见即所得的 Markdown 写作应用",
+          "url": "https://segment-io.com/",
+          "excerpt": "Segment —— 所见即所得的 Markdown 写作应用。 所见即所得 撰写过程中，所有格式即时生效：错落分级的标题梳理文章脉络，有序、无序列表规整罗列要点，引用区块单独区分感悟与摘录，插图直接原位展示，代码块自带清晰分行与高亮版式。",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "segment是什么意思_segment的翻译_音标_读音_用法_例句 ...",
+          "url": "https://www.iciba.com/word?w=segment",
+          "excerpt": "爱词霸权威在线词典,为您提供segment的中文意思,segment的用法讲解,segment的读音,segment的同义词,segment的反义词,segment的例句等英语服务。",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "segment（英语单词）_百度百科",
+          "url": "https://baike.baidu.com/item/segment/62931885",
+          "excerpt": "A small segment of the urban society started to specialize in nonagricultural tasks as a result of the city's role as a regional center. 由于该城市是区域的中心，城市社会中的一小部分人开始专门从事非农业工作。",
+          "score": 1,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "shenzhen-pro",
       "name": "深圈Pro",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "《深》的拼音,深字的意思、组词、部首、笔画、笔顺 - 汉语查",
+          "url": "https://www.hgcha.com/zidian/2a72278d.html",
+          "excerpt": "深字的读音是shēn，左边一个氵右边一个罙是什么字，深的部首是氵，深的笔画一共11画，其中部外笔画8画，深的五行属水，深的基本解释为从表面到底或从外面到里面距离大，与“浅”相对。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深 shēn - 汉典",
+          "url": "http://zdic.net/hans/%E6%B7%B1",
+          "excerpt": "深（shēn）：从表面到底或从外面到里面距离大，与“ 浅 ”相对：～水。 ～山。 ～邃。 ～渊。 ～壑。 ～海。 ～耕。 ～呼吸。 ～藏若虚（把珍贵的东西深藏起来，好像没有一样，喻人有知识才能但不在人前表现）。 ～居简出。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "深圳市（Shenzhen City），简称“深”，别称鹏城，广东省辖地级市、副省级市、国家计划单列市，超大城市，深圳都市圈核心城市，地处广东省南部，珠江口东岸，东临大亚湾和大鹏湾，西濒珠江口和伶仃洋，南与香港特别行政区相连，北部与东莞市、惠州市接壤 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深的意思,深的解释,深的拼音,深的部首,深的笔顺-汉语国学",
+          "url": "https://www.hanyuguoxue.com/zidian/zi-28145",
+          "excerpt": "深的拼音是shēn，深字共11画，部首是氵部，本页介绍深字的意思，深的详细解释，深的读音、笔顺，还包括深的翻译、输入法、异体字、造字法、结构、五行、电码、五笔、仓颉等。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深（汉语文字）_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1/34434",
+          "excerpt": "《说文解字》认为此字本义为水名。 即今湘水支流的潇水。 其上源至江华瑶族自治县一段仍称深水。 此字常用为从表面到底或从外面到里面距离大，与“浅”相对。 无论是从上到下的深，还是从里到外的深，都表明了一种程度，程度大就是深。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "shenzhen-hackathon",
       "name": "深客松",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "《深》的拼音,深字的意思、组词、部首、笔画、笔顺 - 汉语查",
+          "url": "https://www.hgcha.com/zidian/2a72278d.html",
+          "excerpt": "深字的读音是shēn，左边一个氵右边一个罙是什么字，深的部首是氵，深的笔画一共11画，其中部外笔画8画，深的五行属水，深的基本解释为从表面到底或从外面到里面距离大，与“浅”相对。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深 shēn - 汉典",
+          "url": "http://zdic.net/hans/%E6%B7%B1",
+          "excerpt": "深（shēn）：从表面到底或从外面到里面距离大，与“ 浅 ”相对：～水。 ～山。 ～邃。 ～渊。 ～壑。 ～海。 ～耕。 ～呼吸。 ～藏若虚（把珍贵的东西深藏起来，好像没有一样，喻人有知识才能但不在人前表现）。 ～居简出。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "深圳市（Shenzhen City），简称“深”，别称鹏城，广东省辖地级市、副省级市、国家计划单列市，超大城市，深圳都市圈核心城市，地处广东省南部，珠江口东岸，东临大亚湾和大鹏湾，西濒珠江口和伶仃洋，南与香港特别行政区相连，北部与东莞市、惠州市接壤 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深的意思,深的解释,深的拼音,深的部首,深的笔顺-汉语国学",
+          "url": "https://www.hanyuguoxue.com/zidian/zi-28145",
+          "excerpt": "深的拼音是shēn，深字共11画，部首是氵部，本页介绍深字的意思，深的详细解释，深的读音、笔顺，还包括深的翻译、输入法、异体字、造字法、结构、五行、电码、五笔、仓颉等。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深（汉语文字）_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1/34434",
+          "excerpt": "《说文解字》认为此字本义为水名。 即今湘水支流的潇水。 其上源至江华瑶族自治县一段仍称深水。 此字常用为从表面到底或从外面到里面距离大，与“浅”相对。 无论是从上到下的深，还是从里到外的深，都表明了一种程度，程度大就是深。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "hetau-academy",
       "name": "深圳河套学院",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "shenzhen-software-window",
       "name": "深圳软件之窗",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "shenzhen-big-data-institute",
       "name": "深圳大数据研究院",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "nanshan-culture-center",
       "name": "深圳市南山区文化馆",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "shenzhen-ai-robotics-institute",
       "name": "深圳市人工智能与机器人研究院",
       "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
       "discoveryStatus": "unavailable",
@@ -296,92 +1160,380 @@
     {
       "id": "shenzhen-data-economy-institute",
       "name": "深圳数据经济研究院",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "深圳市_百度百科",
+          "url": "https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E5%B8%82/11044365",
+          "excerpt": "2025年末，深圳市辖9个区。 深圳市以普通话为主要交流语言，兼有粤语与英语。 截至2025年末，深圳市常住人口1824.85万人。 深圳市有7000年人类活动史，1700年建城史，是广东省重点侨乡之一，中国革命老根据地之一，抗日战争时期东江纵队的发源地之一。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳必去的10个景点：深圳不止有高楼大厦，还有这10个必 ...",
+          "url": "https://zhuanlan.zhihu.com/p/1663453087",
+          "excerpt": "深圳，这座年轻而充满活力的都市，不仅是中国的经济特区，更是一个融合了现代与传统、科技与自然的魅力之城。 对于旅行者来说，深圳拥有无数值得探索的角落。 今天，就让我带你走进深圳的十大必去景点，一起感受这座…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "https://www.sz.gov.cn/",
+          "excerpt": "2026-09-02 从这个视角看深圳，成了外籍游客“新时尚” 深圳发布 深圳以“小切口”立法规范外文公示语 八类公共场所须配套外文标识 深圳特区报 2026-09-01 深圳口岸多措并举让旅客便捷通关",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.gov.cn/",
+          "excerpt": "Third Senior Officials' Meeting of APEC China 2026 held in Dalian 深圳口岸锚定APEC新机遇 打造大湾区开放核心枢纽 政银企律联动共探拉美市场新路径 Dalian meeting further boosts APEC cooperation 湾区企业出海交流暨人才政策宣讲活动在南山举行 抢抓APEC合作机遇拓展海外市场",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "深圳政府在线_深圳市人民政府门户网站",
+          "url": "http://www.shenzhen.com.cn/?dw=zjsz",
+          "excerpt": "【政府公报】 深圳市住房和建设局 深圳市人力资源和社会保障局关于印发《深圳市青年人才住房支持实施办法》的通知 【政府公报】 深圳市第七届人民代表大会常务委员会公告（第二〇五号）",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "trae-ai",
       "name": "Trae AI",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
-      "newArticleCount": 0,
+      "status": "ok",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
+      "newArticleCount": 1,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "Trae - 字节旗下Al编程工具。让开发更智能，办公更高效",
+          "url": "https://trae.aigc.cn/",
+          "excerpt": "TRAE AI IDE | 国内首款 AI 原生集成开发环境，深度集成 Doubao-1.5-pro 与 DeepSeek 模型，支持中文自然语言一键生成完整代码框架，实时预览前端效果并智能修复 BUG。 首创 Builder 模式实现需求到代码的自动化开发，兼容 Windows/macOS 系统，官网下载即用。",
+          "score": 7,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "TRAE - Collaborate with Intelligence",
+          "url": "https://www.trae.ai/?_enter_from=new_home_page",
+          "excerpt": "Ship Faster with TRAE TraeCode: Your 10x AI Coding Engineer TraeWork: Your Professional AI Work Assistant Download TraeCode",
+          "score": 2,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "TRAE - The Real AI Engineer ｜ TraeCode - 你的 AI 开发工程师",
+          "url": "https://www.trae.cn/",
+          "excerpt": "TRAE 不仅将 AI 集成进 IDE，也让 AI 使用更多开发工具。 TRAE 目前拥有双重开发模式，IDE 模式保留原有流程，控制感更强；SOLO 模式让 AI 主导任务，自动推进开发任务。 你可根据任务需求自由切换，始终游刃有余。 可自动拆分复杂任务，带来流畅交付体验。",
+          "score": 2,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "TRAE 教程 | 菜鸟教程",
+          "url": "https://www.runoob.com/vibe-coding/trae-quick-star.html",
+          "excerpt": "TRAE 教程 Trae（读作 /treɪ/）是字节跳动推出的一款 AI 原生集成开发环境（IDE），深度集成 Claude 和 GPT-4o 等大模型，提供智能问答、代码补全和 AI 自动编程能力。 Trae 基于 VS Code 内核开发，界面友好使用与 VS Code 差不多。",
+          "score": 2,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "立即下载 | TRAE - The Real AI Engineer",
+          "url": "https://www.trae.cn/ide/download",
+          "excerpt": "Trae 国内版官方下载，全面适配主流操作系统：Mac 版、Windows 版、Linux 版",
+          "score": 2,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "user-group",
       "name": "User Group",
-      "status": "failed",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
-      "newArticleCount": 0,
-      "error": "source unavailable",
+      "status": "ok",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
+      "newArticleCount": 1,
+      "error": "",
       "discoveryStatus": "confirmed",
       "discoveryCandidates": []
     },
     {
       "id": "cuhk-ai",
       "name": "香港中文大学人工智能学院",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "去过香港不下30次，总结一份超全的玩法攻略 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/697719377",
+          "excerpt": "很多人第一次出境旅行就是香港 拔地而起的摩天大楼，复古红的出租车 高低交错的街道，港风的霓虹招牌 组成一个赛博朋克的世界 这里有TVB港剧、粤语歌、港式美食 每个转角都有种王家卫电影的纸醉金迷 香港处处给你…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首頁 | 香港旅遊發展局 - Hong Kong Tourism Board",
+          "url": "https://www.discoverhongkong.com/tc/index.html",
+          "excerpt": "從道地攻略到主流玩法，尋找適合自己風格的旅行體驗。 人氣精選 初訪必遊 親子樂 文化深度遊 美食愛好者 藝術愛好者 咫尺自然 探索舊城中環：發掘地道新體驗 《米其林指南2026》香港最新星級餐廳 香港中秋節10大親子賞月地點 探索香港海島旅遊 啟德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首页 | 香港旅游发展局",
+          "url": "https://www.discoverhongkong.cn/index.html",
+          "excerpt": "从地道攻略到主流玩法，寻找适合自己风格的旅行体验。 人气精选 初访必游 亲子乐 文化深度游 美食爱好者 艺术爱好者 咫尺自然 探索旧城中环：发掘地道新体验 《米其林指南2026》香港最新星级餐厅 香港中秋节10大亲子赏月地点 探索香港海岛旅游 启德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港十八区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E5%8D%81%E5%85%AB%E5%8C%BA/7265721",
+          "excerpt": "香港十八区是中国香港的基层行政区划体系，由香港岛的4个区（中西区、东区、南区、湾仔区）、九龙半岛的5个区（九龙城区、观塘区、深水埗区、黄大仙区、油尖旺区）及新界的9个区（离岛区、葵青区、北区、西贡区、沙田区、大埔区、荃湾区、屯门区 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港特别行政区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E7%89%B9%E5%88%AB%E8%A1%8C%E6%94%BF%E5%8C%BA/24510970",
+          "excerpt": "香港自古以来就是中国的领土，1842~1997年曾受英国殖民统治。 二战以后，香港经济和社会迅速发展，不仅跻身“亚洲四小龙”行列，更成为全球最富裕、经济最发达和生活水准最高的地区之一。 1997年7月1日，中国政府对香港恢复行使主权，香港特别行政区成立。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "hkbu",
       "name": "香港浸会大学",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "去过香港不下30次，总结一份超全的玩法攻略 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/697719377",
+          "excerpt": "很多人第一次出境旅行就是香港 拔地而起的摩天大楼，复古红的出租车 高低交错的街道，港风的霓虹招牌 组成一个赛博朋克的世界 这里有TVB港剧、粤语歌、港式美食 每个转角都有种王家卫电影的纸醉金迷 香港处处给你…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首頁 | 香港旅遊發展局 - Hong Kong Tourism Board",
+          "url": "https://www.discoverhongkong.com/tc/index.html",
+          "excerpt": "從道地攻略到主流玩法，尋找適合自己風格的旅行體驗。 人氣精選 初訪必遊 親子樂 文化深度遊 美食愛好者 藝術愛好者 咫尺自然 探索舊城中環：發掘地道新體驗 《米其林指南2026》香港最新星級餐廳 香港中秋節10大親子賞月地點 探索香港海島旅遊 啟德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首页 | 香港旅游发展局",
+          "url": "https://www.discoverhongkong.cn/index.html",
+          "excerpt": "从地道攻略到主流玩法，寻找适合自己风格的旅行体验。 人气精选 初访必游 亲子乐 文化深度游 美食爱好者 艺术爱好者 咫尺自然 探索旧城中环：发掘地道新体验 《米其林指南2026》香港最新星级餐厅 香港中秋节10大亲子赏月地点 探索香港海岛旅游 启德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港十八区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E5%8D%81%E5%85%AB%E5%8C%BA/7265721",
+          "excerpt": "香港十八区是中国香港的基层行政区划体系，由香港岛的4个区（中西区、东区、南区、湾仔区）、九龙半岛的5个区（九龙城区、观塘区、深水埗区、黄大仙区、油尖旺区）及新界的9个区（离岛区、葵青区、北区、西贡区、沙田区、大埔区、荃湾区、屯门区 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港特别行政区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E7%89%B9%E5%88%AB%E8%A1%8C%E6%94%BF%E5%8C%BA/24510970",
+          "excerpt": "香港自古以来就是中国的领土，1842~1997年曾受英国殖民统治。 二战以后，香港经济和社会迅速发展，不仅跻身“亚洲四小龙”行列，更成为全球最富裕、经济最发达和生活水准最高的地区之一。 1997年7月1日，中国政府对香港恢复行使主权，香港特别行政区成立。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "hku",
       "name": "香港大学",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "去过香港不下30次，总结一份超全的玩法攻略 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/697719377",
+          "excerpt": "很多人第一次出境旅行就是香港 拔地而起的摩天大楼，复古红的出租车 高低交错的街道，港风的霓虹招牌 组成一个赛博朋克的世界 这里有TVB港剧、粤语歌、港式美食 每个转角都有种王家卫电影的纸醉金迷 香港处处给你…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首頁 | 香港旅遊發展局 - Hong Kong Tourism Board",
+          "url": "https://www.discoverhongkong.com/tc/index.html",
+          "excerpt": "從道地攻略到主流玩法，尋找適合自己風格的旅行體驗。 人氣精選 初訪必遊 親子樂 文化深度遊 美食愛好者 藝術愛好者 咫尺自然 探索舊城中環：發掘地道新體驗 《米其林指南2026》香港最新星級餐廳 香港中秋節10大親子賞月地點 探索香港海島旅遊 啟德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首页 | 香港旅游发展局",
+          "url": "https://www.discoverhongkong.cn/index.html",
+          "excerpt": "从地道攻略到主流玩法，寻找适合自己风格的旅行体验。 人气精选 初访必游 亲子乐 文化深度游 美食爱好者 艺术爱好者 咫尺自然 探索旧城中环：发掘地道新体验 《米其林指南2026》香港最新星级餐厅 香港中秋节10大亲子赏月地点 探索香港海岛旅游 启德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港十八区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E5%8D%81%E5%85%AB%E5%8C%BA/7265721",
+          "excerpt": "香港十八区是中国香港的基层行政区划体系，由香港岛的4个区（中西区、东区、南区、湾仔区）、九龙半岛的5个区（九龙城区、观塘区、深水埗区、黄大仙区、油尖旺区）及新界的9个区（离岛区、葵青区、北区、西贡区、沙田区、大埔区、荃湾区、屯门区 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港特别行政区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E7%89%B9%E5%88%AB%E8%A1%8C%E6%94%BF%E5%8C%BA/24510970",
+          "excerpt": "香港自古以来就是中国的领土，1842~1997年曾受英国殖民统治。 二战以后，香港经济和社会迅速发展，不仅跻身“亚洲四小龙”行列，更成为全球最富裕、经济最发达和生活水准最高的地区之一。 1997年7月1日，中国政府对香港恢复行使主权，香港特别行政区成立。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "cuhksz-sse-postgraduate",
       "name": "香港中文大学深圳SSE硕博项目",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "去过香港不下30次，总结一份超全的玩法攻略 - 知乎",
+          "url": "https://zhuanlan.zhihu.com/p/697719377",
+          "excerpt": "很多人第一次出境旅行就是香港 拔地而起的摩天大楼，复古红的出租车 高低交错的街道，港风的霓虹招牌 组成一个赛博朋克的世界 这里有TVB港剧、粤语歌、港式美食 每个转角都有种王家卫电影的纸醉金迷 香港处处给你…",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首頁 | 香港旅遊發展局 - Hong Kong Tourism Board",
+          "url": "https://www.discoverhongkong.com/tc/index.html",
+          "excerpt": "從道地攻略到主流玩法，尋找適合自己風格的旅行體驗。 人氣精選 初訪必遊 親子樂 文化深度遊 美食愛好者 藝術愛好者 咫尺自然 探索舊城中環：發掘地道新體驗 《米其林指南2026》香港最新星級餐廳 香港中秋節10大親子賞月地點 探索香港海島旅遊 啟德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "首页 | 香港旅游发展局",
+          "url": "https://www.discoverhongkong.cn/index.html",
+          "excerpt": "从地道攻略到主流玩法，寻找适合自己风格的旅行体验。 人气精选 初访必游 亲子乐 文化深度游 美食爱好者 艺术爱好者 咫尺自然 探索旧城中环：发掘地道新体验 《米其林指南2026》香港最新星级餐厅 香港中秋节10大亲子赏月地点 探索香港海岛旅游 启德特色 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港十八区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E5%8D%81%E5%85%AB%E5%8C%BA/7265721",
+          "excerpt": "香港十八区是中国香港的基层行政区划体系，由香港岛的4个区（中西区、东区、南区、湾仔区）、九龙半岛的5个区（九龙城区、观塘区、深水埗区、黄大仙区、油尖旺区）及新界的9个区（离岛区、葵青区、北区、西贡区、沙田区、大埔区、荃湾区、屯门区 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "香港特别行政区_百度百科",
+          "url": "https://baike.baidu.com/item/%E9%A6%99%E6%B8%AF%E7%89%B9%E5%88%AB%E8%A1%8C%E6%94%BF%E5%8C%BA/24510970",
+          "excerpt": "香港自古以来就是中国的领土，1842~1997年曾受英国殖民统治。 二战以后，香港经济和社会迅速发展，不仅跻身“亚洲四小龙”行列，更成为全球最富裕、经济最发达和生活水准最高的地区之一。 1997年7月1日，中国政府对香港恢复行使主权，香港特别行政区成立。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "36kr",
       "name": "36氪",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
-      "newArticleCount": 0,
+      "status": "ok",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
+      "newArticleCount": 2,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "36氪_让一部分人先看到未来",
+          "url": "https://www.36kr.com/",
+          "excerpt": "36氪通过全面，独家的视角为用户深度剖析最前沿的资讯，致力于让一部分人先看到未来，内容涵盖快讯，科技，金融，投资，房产，汽车，互联网，股市，教育，生活，职场等，秉承着新商业媒体人的使命砥砺前行",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "36氪_让一部分人先看到未来",
+          "url": "https://m.36kr.com/",
+          "excerpt": "36氪通过全面，独家的视角为用户深度剖析最前沿的资讯，致力于让一部分人先看到未来，内容涵盖快讯，科技，金融，投资，房产，汽车，互联网，股市，教育，生活，职场等，秉承着新商业媒体人的使命砥砺前行",
+          "score": 6,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "360安全卫士官网-电脑清理加速_软件管理_安全防护_AI办公",
+          "url": "https://weishi.360.cn/?src=browser_ent",
+          "excerpt": "大模型平台集体关停自建智能体，360发布首份企业智能体安全运营指南 APT-C-36使用新加载器开展攻击活动 360“仪天阵”入选IDC报告领导者象限 推动安全运营迈向“自动驾驶”",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "360官网-360安全中心-360安全软件-360AI防护-360安全防护 ...",
+          "url": "https://www.360.com/",
+          "excerpt": "360集团是全球领先的网络安全与数字化服务提供商，公司以“守护数字世界”为使命，构建了从个人安全（360安全卫士、杀毒软件等，服务超10亿用户）、企业安全（服务90%以上中央部委及大型国企）到国家级网络防御（主导破解多起APT攻击）的全场景安全生态。依托“免费+增值服务”及政企定制化 ...",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "360导航_一个主页，整个世界",
+          "url": "https://hao.360.com/",
+          "excerpt": "360导航--一个主页，整个世界，为用户提供门户、新闻、视频、游戏、小说、彩票等各种分类的优秀内容和网站入口，提供简单便捷的上网导航服务。安全上网，从360导航开始。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     },
     {
       "id": "tencent-cloud",
       "name": "腾讯云",
-      "status": "unavailable",
-      "checkedAt": "2026-08-20T20:48:31+08:00",
+      "status": "needs-confirmation",
+      "checkedAt": "2026-09-04T15:29:20+08:00",
       "newArticleCount": 0,
       "error": "",
-      "discoveryStatus": "unavailable",
-      "discoveryCandidates": []
+      "discoveryStatus": "needs-confirmation",
+      "discoveryCandidates": [
+        {
+          "title": "Tencent 腾讯",
+          "url": "https://www.tencent.com/index.php/zh-cn/index.html",
+          "excerpt": "腾讯于1998年11月成立，是一家互联网公司，通过技术丰富互联网用户的生活，助力企业数字化升级。 我们的使命是“用户为本 科技向善”。 Founded in 1998, Tencent is an Internet-based platform company using technology to enrich the lives of Internet users and assist the digital upgrade of enterprises.",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "主页 - Tencent",
+          "url": "https://www.tencent.com/zh-cn/",
+          "excerpt": "腾讯发布并开源Hy4 preview 2026年08月28日 腾讯通过创新的科技、产品和服务提升全球各地人们的生活品质。 面向消费者 连接用户与生活。 腾讯游戏",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "精选频道 - 热门视频在线观看 - 腾讯视频",
+          "url": "https://m.v.qq.com/index.html",
+          "excerpt": "腾讯视频频道页提供最新热门电影、电视剧、综艺、动漫、纪录片、体育等高清正版视频内容在线观看，海量资源持续更新，当前热播《特立独行》《心动的信号9》《藏锋》，支持高清在线观看。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "腾讯网",
+          "url": "https://www.qq.com/",
+          "excerpt": "腾讯网从2003年创立至今，已经成为集新闻信息，区域垂直生活服务、社会化媒体资讯和产品为一体的互联网媒体平台。 腾讯网下设新闻、科技、财经、娱乐、体育、汽车、时尚等多个频道，充分满足用户对不同类型资讯的需求。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        },
+        {
+          "title": "腾讯视频频道 - 热门电影电视剧综艺动漫在线观看 - 腾讯视频",
+          "url": "https://v.qq.com/",
+          "excerpt": "腾讯视频频道页提供最新热门电影、电视剧、综艺、动漫、纪录片、体育等高清正版视频内容在线观看，海量资源持续更新，当前热播《囧徒之预演告别》《一饭封神2》《灵境行者》，支持高清在线观看。",
+          "score": 0,
+          "discoveryStatus": "needs-confirmation"
+        }
+      ]
     }
   ],
   "events": [
@@ -409,7 +1561,7 @@
         "工程化",
         "深圳"
       ],
-      "status": "published",
+      "status": "expired",
       "confidence": 0.98,
       "discoveredAt": "2026-08-20T07:00:00+08:00",
       "verifiedAt": "2026-08-20T07:00:00+08:00",
@@ -438,7 +1590,7 @@
         "研讨会",
         "深圳"
       ],
-      "status": "published",
+      "status": "expired",
       "confidence": 0.95,
       "discoveredAt": "2026-08-20T07:00:00+08:00",
       "verifiedAt": "2026-08-20T07:00:00+08:00",
@@ -468,7 +1620,7 @@
         "企业应用",
         "香港"
       ],
-      "status": "published",
+      "status": "expired",
       "confidence": 0.98,
       "discoveredAt": "2026-08-20T07:00:00+08:00",
       "verifiedAt": "2026-08-20T07:00:00+08:00",
