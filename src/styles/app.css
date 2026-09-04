@@ -2201,9 +2201,23 @@ body {
   color: var(--accent-deep);
 }
 
-.hero-thread-row span {
+.hero-thread-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  max-width: 62rem;
+}
+
+.hero-thread-lead {
+  color: rgba(28, 29, 25, 0.78);
+  font-size: clamp(0.82rem, 1.1vw, 0.98rem);
+  line-height: 1.48;
+}
+
+.hero-thread-row small {
   color: rgba(28, 29, 25, 0.58);
-  font-size: clamp(0.74rem, 1vw, 0.9rem);
+  font-family: var(--mono);
+  font-size: 0.62rem;
   line-height: 1.5;
 }
 
@@ -2336,6 +2350,8 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 18px;
+  width: min(100%, 88rem);
+  margin-inline: auto;
 }
 
 .proof-deck-kicker {
@@ -2366,6 +2382,8 @@ body {
 
 .proof-deck-headline {
   max-width: 72rem;
+  width: min(100%, 88rem);
+  margin-inline: auto;
 }
 
 .proof-deck-headline h2 {
@@ -2389,6 +2407,8 @@ body {
   display: block;
   min-width: 0;
   margin: clamp(2px, 0.6vw, 8px) 0 0;
+  width: min(100%, 88rem);
+  margin-inline: auto;
 }
 
 .proof-deck-intro-copy {
@@ -2401,6 +2421,8 @@ body {
 
 .proof-project-list {
   gap: 4px;
+  width: min(100%, 94rem);
+  margin-inline: auto;
 }
 
 .proof-project-row {
@@ -2504,13 +2526,13 @@ body {
 }
 
 .proof-ai-note {
-  grid-template-columns: minmax(126px, 0.38fr) minmax(0, 0.62fr);
-  gap: clamp(14px, 2vw, 24px);
-  margin: 2px 0 0 clamp(0px, 5vw, 72px);
-  width: calc(100% - clamp(0px, 5vw, 72px));
-  padding: 14px 0 0;
-  border-radius: 0;
-  background: transparent;
+  grid-template-columns: minmax(170px, 0.3fr) minmax(0, 0.7fr);
+  gap: clamp(16px, 2.4vw, 32px);
+  width: min(calc(100% - clamp(24px, 4vw, 56px)), 88rem);
+  margin: -4px auto 0;
+  padding: 14px clamp(8px, 1.6vw, 22px) 10px 0;
+  border-radius: 0 16px 0 16px;
+  background: linear-gradient(90deg, rgba(255, 90, 61, 0.08), rgba(255, 90, 61, 0.018) 68%, transparent);
 }
 
 .proof-ai-heading > span {
@@ -2525,10 +2547,10 @@ body {
 .proof-ai-note ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 30px;
+  gap: 6px 24px;
   color: rgba(28, 33, 29, 0.64);
-  font-size: 0.7rem;
-  line-height: 1.5;
+  font-size: 0.68rem;
+  line-height: 1.42;
 }
 
 .proof-ai-note li + li {
@@ -3104,7 +3126,7 @@ body {
 }
 
 .footer-callout {
-  padding: clamp(24px, 5vw, 64px);
+  padding: clamp(18px, 2.8vw, 38px) clamp(22px, 4vw, 54px) clamp(20px, 3vw, 30px);
   background: var(--accent);
   color: var(--ink);
 }
@@ -3125,24 +3147,26 @@ body {
 }
 
 .footer-callout h2 {
-  max-width: 62rem;
-  margin: clamp(26px, 4vw, 48px) 0 18px;
+  width: min(100%, 88rem);
+  max-width: 88rem;
+  margin: clamp(10px, 1.6vw, 18px) auto 10px;
   color: var(--ink);
-  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
-  line-height: 0.96;
-  letter-spacing: -0.08em;
+  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.05em;
 }
 
 .footer-callout p {
-  max-width: 48rem;
-  margin: 0;
+  width: min(100%, 88rem);
+  max-width: 46rem;
+  margin: 0 auto;
   color: rgba(28, 29, 25, 0.82);
-  font-size: clamp(0.92rem, 1.3vw, 1.15rem);
-  line-height: 1.55;
+  font-size: clamp(0.78rem, 1vw, 0.92rem);
+  line-height: 1.48;
 }
 
 .footer-marquee-band {
-  padding: 20px 0;
+  padding: 12px 0;
   background: var(--paper);
 }
 
@@ -3218,14 +3242,14 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   gap: 24px;
-  padding: clamp(22px, 4vw, 44px) clamp(24px, 5vw, 64px);
+  padding: clamp(18px, 3vw, 32px) clamp(22px, 4vw, 54px);
   background: var(--accent);
   color: var(--ink);
 }
 
 .footer-signature > div {
   display: grid;
-  gap: 16px;
+  gap: 10px;
 }
 
 .footer-signature span {
@@ -3354,6 +3378,8 @@ body {
     gap: 14px;
     margin-left: 0;
     width: 100%;
+    margin-right: 0;
+    padding-right: 0;
   }
 
   .proof-ai-note ul {
@@ -3361,7 +3387,7 @@ body {
   }
 
   .footer-callout {
-    padding: 28px 18px;
+    padding: 18px 18px 20px;
   }
 
   .footer-callout-head,
@@ -3371,8 +3397,8 @@ body {
   }
 
   .footer-callout h2 {
-    margin-top: 30px;
-    font-size: clamp(1.6rem, 8.5vw, 2.8rem);
+    margin-top: 12px;
+    font-size: clamp(1.2rem, 5vw, 1.55rem);
   }
 
   .footer-marquee-band {

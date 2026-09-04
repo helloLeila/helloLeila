@@ -304,6 +304,14 @@ test("hero keeps a personal introduction and adds compact working lanes without 
   assert.match(appSource, /<HeroStage lang=\{lang\} setLang=\{setLang\} \/>[\s\S]*<ProofDeck lang=\{lang\} \/>/);
 });
 
+test("working lanes explain the delivered outcome before the technical vocabulary", () => {
+  assert.match(heroSource, /lane\.leadEn/);
+  assert.match(heroSource, /lane\.leadZh/);
+  assert.match(heroSource, /hero-thread-lead/);
+  assert.match(appStyleSource, /\.hero-thread-lead\s*\{/);
+  assert.match(appStyleSource, /\.hero-thread-row small\s*\{/);
+});
+
 test("hero uses the reserved second column for the existing personal summary", () => {
   assert.match(heroSource, /hero-top-side/);
   assert.match(heroSource, /hero-profile-column/);
@@ -431,8 +439,9 @@ test("layout css protects mobile content from clipping", () => {
 });
 
 test("footer callout keeps the continuous interaction without oversized section typography", () => {
-  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(1\.6rem,\s*3\.2vw,\s*2\.8rem\)/);
-  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(1\.6rem,\s*8\.5vw,\s*2\.8rem\)/);
+  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(1\.2rem,\s*1\.8vw,\s*1\.8rem\)/);
+  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*margin:\s*clamp\(10px,\s*1\.6vw,\s*18px\) auto 10px/);
+  assert.match(appStyleSource, /\.footer-callout\s*\{[\s\S]*padding:\s*clamp\(18px,\s*2\.8vw,\s*38px\)/);
 });
 
 test("work links use a continuous accessible marquee", () => {

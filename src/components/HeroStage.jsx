@@ -72,7 +72,10 @@ export function HeroStage({ lang, setLang }) {
         {siteContent.hero.workingLanes.map((lane, index) => (
           <article className={`hero-thread-row is-${index + 1}`} key={lane.titleEn}>
             <strong>{textByLang(lang, lane.titleEn, lane.titleZh)}</strong>
-            <span>{textByLang(lang, lane.detailEn, lane.detailZh)}</span>
+            <div className="hero-thread-copy">
+              <span className="hero-thread-lead">{textByLang(lang, lane.leadEn, lane.leadZh)}</span>
+              <small>{textByLang(lang, lane.detailEn, lane.detailZh)}</small>
+            </div>
           </article>
         ))}
       </div>
