@@ -3,12 +3,23 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createSourceConfigMiddleware } from "./scripts/source-config-store.mjs";
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
 // 返回当前环境对应的构建配置。
 export default defineConfig(({ command }) => ({
-  plugins: [react()],
+  plugins: [
+    react(),
+    command === "serve" ? {
+      name: "local-source-config-api",
+      configureServer(server) {
+        server.middlewares.use(createSourceConfigMiddleware({
+          filePath: path.resolve(rootDir, "data/wechat-event-sources.json"),
+        }));
+      },
+    } : null,
+  ].filter(Boolean),
   base: command === "build" ? "/helloLeila/" : "/",
   build: {
     rollupOptions: {

@@ -33,6 +33,9 @@ test("vite config exposes a root and events HTML entry", () => {
   const viteSource = fs.readFileSync(path.resolve(root, "vite.config.js"), "utf8");
   assert.match(viteSource, /rollupOptions/);
   assert.match(viteSource, /events\/index\.html/);
+  assert.match(viteSource, /createSourceConfigMiddleware/);
+  assert.match(viteSource, /command === "serve"/);
+  assert.match(viteSource, /data[\\/]wechat-event-sources\.json/);
 });
 
 test("events page includes accessible filters and explicit source links", () => {
@@ -41,6 +44,12 @@ test("events page includes accessible filters and explicit source links", () => 
   assert.match(source, /sourceArticleUrl/);
   assert.match(source, /registrationUrl/);
   assert.match(source, /needs-review/);
+  assert.match(source, /来源配置/);
+  assert.match(source, /aria-haspopup="dialog"/);
+  const drawerSource = fs.readFileSync(path.resolve(root, "src/events/SourceConfigDrawer.jsx"), "utf8");
+  assert.match(drawerSource, /保存到项目 JSON/);
+  assert.match(drawerSource, /添加名称/);
+  assert.doesNotMatch(drawerSource, /文章地址|RSS|公众号 ID/);
 });
 
 test("Pages workflow refreshes event data before tests and build", () => {
