@@ -222,7 +222,40 @@ test("hero keeps a personal introduction and adds compact working lanes without 
   assert.match(heroSource, /<StatsRow lang=\{lang\} \/>/);
   assert.match(heroSource, /siteContent\.summary/);
   assert.match(heroSource, /siteContent\.domainLinks\.map/);
-  assert.match(heroSource, /<ProofDeck lang=\{lang\} \/>/);
+  assert.doesNotMatch(heroSource, /ProofDeck/);
+  assert.match(appSource, /<HeroStage lang=\{lang\} setLang=\{setLang\} \/>[\s\S]*<ProofDeck lang=\{lang\} \/>/);
+});
+
+test("selected work restores the historical editorial intro and keeps the full project rows", () => {
+  assert.match(proofDeckSource, /proof-deck-intro/);
+  assert.match(proofDeckSource, /proof-deck-number/);
+  assert.match(proofDeckSource, /四段真实项目经历/);
+  assert.match(proofDeckSource, /siteContent\.problemsSolved\.map/);
+  assert.match(proofDeckSource, /siteContent\.aiKnowledge\.map/);
+});
+
+test("selected work keeps the historical reading order instead of repeating a template heading", () => {
+  assert.match(proofDeckSource, /proof-deck-context/);
+  assert.match(proofDeckSource, /proof-deck-headline/);
+  assert.match(proofDeckSource, /下面四个项目分别对应企业门户/);
+  assert.match(appStyleSource, /\.proof-deck-headline\s*\{/);
+  assert.match(appStyleSource, /\.proof-deck-context\s*\{/);
+});
+
+test("footer restores the historical three-band rhythm without replacing the continuous links", () => {
+  const workLinksSource = fs.readFileSync(
+    path.resolve(root, "src/components/WorkLinks.jsx"),
+    "utf8"
+  );
+
+  assert.match(workLinksSource, /footer-callout/);
+  assert.match(workLinksSource, /footer-signature/);
+  assert.match(workLinksSource, /textByLang/);
+  assert.match(workLinksSource, /link-marquee/);
+  assert.match(workLinksSource, /siteContent\.workLinks\.map/);
+  assert.match(appStyleSource, /\.footer-callout\s*\{/);
+  assert.match(appStyleSource, /\.footer-signature\s*\{/);
+  assert.match(appStyleSource, /\.footer-links\s*\{[\s\S]*overflow:\s*hidden/);
 });
 
 test("editorial links do not use underlines or decorative bottom rules", () => {

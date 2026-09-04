@@ -1,6 +1,7 @@
 // 页面总装配组件，负责串联首屏、图表区、地图区和实时面板。
 import { useEffect, useState } from "react";
 import { HeroStage } from "./components/HeroStage.jsx";
+import { ProofDeck } from "./components/ProofDeck.jsx";
 import { WorkflowCanvas } from "./components/WorkflowCanvas.jsx";
 import { SignalCloud } from "./components/SignalCloud.jsx";
 import { AnnualMilestones } from "./components/AnnualMilestones.jsx";
@@ -26,6 +27,7 @@ export default function App() {
 
       <main className="shell">
         <HeroStage lang={lang} setLang={setLang} />
+        <ProofDeck lang={lang} />
 
         <section className="insight-section">
           <SignalCloud lang={lang} />
@@ -37,7 +39,7 @@ export default function App() {
 
           <CoverageField lang={lang} weather={weather} />
           <UtilitiesPanel lang={lang} news={news} codexNews={codexNews} weather={weather} />
-          <WorkLinks />
+          <WorkLinks lang={lang} />
         </section>
       </main>
     </div>

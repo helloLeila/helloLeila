@@ -2,7 +2,6 @@
 import { siteContent } from "../data/siteContent.js";
 import { textByLang } from "../utils/i18n.js";
 import { StatsRow } from "./StatsRow.jsx";
-import { ProofDeck } from "./ProofDeck.jsx";
 
 // 根据当前语言渲染个人站首屏，并提供语言切换入口。
 export function HeroStage({ lang, setLang }) {
@@ -73,8 +72,6 @@ export function HeroStage({ lang, setLang }) {
             </div>
           </article>
         </div>
-
-        <ProofDeck lang={lang} />
       </div>
     </section>
   );
