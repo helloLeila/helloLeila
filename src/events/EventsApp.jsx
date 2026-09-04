@@ -186,7 +186,7 @@ export default function EventsApp() {
         {!error && !visibleEvents.length ? (
           <div className="events-state">
             {payload?.status === "empty"
-              ? "本次刷新没有拿到可验证的微信公众号文章。搜索候选、官网页面和百科结果不会冒充活动。"
+              ? `本次刷新没有拿到可验证的微信公众号文章。${payload.sourceStats?.discoveryUnavailable ? `有 ${payload.sourceStats.discoveryUnavailable} 个来源搜索不可用${payload.sourceStats.failed ? `，${payload.sourceStats.failed} 个已确认地址读取失败` : ""}。` : ""}搜索候选、官网页面和百科结果不会冒充活动。`
               : "没有符合当前筛选条件的活动。"}
           </div>
         ) : null}
