@@ -1,4 +1,5 @@
 // 证明性内容组件，用于集中展示解决过的问题和智能体相关经验。
+import { useState } from "react";
 import { siteContent } from "../data/siteContent.js";
 import { textByLang } from "../utils/i18n.js";
 
@@ -36,6 +37,8 @@ const projectDetails = [
 
 // 用不等高的项目行呈现原始证据，同时把 AI 经验放在较轻的后续旁注中。
 export function ProofDeck({ lang }) {
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+
   return (
     <section className="proof-deck" id="section-breakdown">
       <header className="proof-deck-header">
@@ -77,9 +80,16 @@ export function ProofDeck({ lang }) {
       <div className="proof-project-list">
         {siteContent.problemsSolved.map((item, index) => {
           const project = projectDetails[index] || projectDetails[0];
+          const isActive = activeProjectIndex === index;
 
           return (
-            <article className="proof-project-row" key={item.en}>
+            <button
+              className={`proof-project-row ${isActive ? "is-active" : ""}`}
+              type="button"
+              aria-pressed={isActive}
+              onClick={() => setActiveProjectIndex(index)}
+              key={item.en}
+            >
               <div className="proof-project-label">
                 <span className="proof-project-index">{String(index + 1).padStart(2, "0")}</span>
                 <h3>{textByLang(lang, project.titleEn, project.titleZh)}</h3>
@@ -94,7 +104,7 @@ export function ProofDeck({ lang }) {
                   ))}
                 </div>
               </div>
-            </article>
+            </button>
           );
         })}
       </div>

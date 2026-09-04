@@ -34,8 +34,9 @@ export default function App() {
 
           <div className="insight-grid">
             <WorkflowCanvas lang={lang} />
-            <AnnualMilestones lang={lang} />
           </div>
+
+          <AnnualMilestones lang={lang} />
 
           <CoverageField lang={lang} weather={weather} />
           <UtilitiesPanel lang={lang} news={news} codexNews={codexNews} weather={weather} />

@@ -37,29 +37,17 @@ export function HeroStage({ lang, setLang }) {
           <p className="subline">{textByLang(lang, siteContent.hero.sublineEn, siteContent.hero.sublineZh)}</p>
         </div>
 
-        <div className="top-meta">
-          <div className="chip-row">
-            {siteContent.hero.topChips.map((chip) => (
-              <span className="meta-pill" key={chip}>
-                {chip}
-              </span>
-            ))}
+        <div className="hero-profile-column hero-top-side">
+          <div className="top-meta">
+            <div className="chip-row">
+              {siteContent.hero.topChips.map((chip) => (
+                <span className="meta-pill" key={chip}>
+                  {chip}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div className="hero-thread" aria-label={textByLang(lang, "What I work on", "我主要做什么")}>
-        {siteContent.hero.workingLanes.map((lane, index) => (
-          <article className={`hero-thread-row is-${index + 1}`} key={lane.titleEn}>
-            <strong>{textByLang(lang, lane.titleEn, lane.titleZh)}</strong>
-            <span>{textByLang(lang, lane.detailEn, lane.detailZh)}</span>
-          </article>
-        ))}
-      </div>
-
-      <div className="hero-middle">
-        <div className="left-column">
-          <StatsRow lang={lang} />
           <article className="summary-card">
             <p>{textByLang(lang, siteContent.summary.en, siteContent.summary.zh)}</p>
             <div className="domain-grid">
@@ -72,6 +60,21 @@ export function HeroStage({ lang, setLang }) {
             </div>
           </article>
         </div>
+      </div>
+
+      <div className="hero-middle">
+        <div className="left-column">
+          <StatsRow lang={lang} />
+        </div>
+      </div>
+
+      <div className="hero-thread" aria-label={textByLang(lang, "What I work on", "我主要做什么")}>
+        {siteContent.hero.workingLanes.map((lane, index) => (
+          <article className={`hero-thread-row is-${index + 1}`} key={lane.titleEn}>
+            <strong>{textByLang(lang, lane.titleEn, lane.titleZh)}</strong>
+            <span>{textByLang(lang, lane.detailEn, lane.detailZh)}</span>
+          </article>
+        ))}
       </div>
     </section>
   );

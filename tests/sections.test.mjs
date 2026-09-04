@@ -215,6 +215,16 @@ test("proof deck presents full project evidence as editorial rows instead of car
   assert.doesNotMatch(proofDeckSource, /proof-card/);
 });
 
+test("selected project rows expose an accessible active state and color change", () => {
+  assert.match(proofDeckSource, /import \{ useState \} from "react"/);
+  assert.match(proofDeckSource, /const \[activeProjectIndex, setActiveProjectIndex\] = useState\(0\)/);
+  assert.match(proofDeckSource, /aria-pressed=\{isActive\}/);
+  assert.match(proofDeckSource, /onClick=\{\(\) => setActiveProjectIndex\(index\)\}/);
+  assert.match(proofDeckSource, /isActive/);
+  assert.match(appStyleSource, /\.proof-project-row\.is-active \.proof-project-label h3/);
+  assert.match(appStyleSource, /\.proof-project-row\s*\{[^}]*background:\s*transparent/);
+});
+
 test("hero keeps a personal introduction and adds compact working lanes without dropping evidence", () => {
   assert.match(heroSource, /hero-name/);
   assert.match(heroSource, /hero-thread/);
@@ -224,6 +234,25 @@ test("hero keeps a personal introduction and adds compact working lanes without 
   assert.match(heroSource, /siteContent\.domainLinks\.map/);
   assert.doesNotMatch(heroSource, /ProofDeck/);
   assert.match(appSource, /<HeroStage lang=\{lang\} setLang=\{setLang\} \/>[\s\S]*<ProofDeck lang=\{lang\} \/>/);
+});
+
+test("hero uses the reserved second column for the existing personal summary", () => {
+  assert.match(heroSource, /hero-top-side/);
+  assert.match(heroSource, /hero-profile-column/);
+  assert.match(heroSource, /<StatsRow lang=\{lang\} \/>/);
+  assert.match(heroSource, /className="summary-card"/);
+  assert.match(heroSource, /siteContent\.domainLinks\.map/);
+  assert.match(appStyleSource, /\.hero-top\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1\.15fr\)\s*minmax\(300px,\s*0\.85fr\)/);
+  assert.match(appStyleSource, /\.hero-profile-column\s*\{/);
+});
+
+test("annual milestones get a full-width reading lane instead of a narrow side column", () => {
+  assert.match(appSource, /<div className="insight-grid">[\s\S]*<WorkflowCanvas lang=\{lang\} \/>\s*<\/div>\s*<AnnualMilestones lang=\{lang\} \/>/);
+  assert.match(appStyleSource, /\.insight-grid\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+  assert.match(appStyleSource, /\.roadmap-card\s*\{[\s\S]*width:\s*100%/);
+  assert.match(appStyleSource, /\.roadmap-focus-row\s*\{[\s\S]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/);
+  const finalMobileStyle = appStyleSource.slice(appStyleSource.lastIndexOf("@media (max-width: 840px)"));
+  assert.match(finalMobileStyle, /\.roadmap-focus-row\s*\{[\s\S]*grid-template-columns:\s*1fr/);
 });
 
 test("selected work restores the historical editorial intro and keeps the full project rows", () => {
@@ -309,7 +338,7 @@ test("utilities panel renders codex and public news panes", () => {
 });
 
 test("layout css protects mobile content from clipping", () => {
-  assert.match(appStyleSource, /--page-gutter:\s*clamp\(28px,\s*4\.6vw,\s*86px\)/);
+  assert.match(appStyleSource, /--page-gutter:\s*clamp\(18px,\s*2vw,\s*34px\)/);
   assert.match(appStyleSource, /\.shell\s*\{[\s\S]*width:\s*min\(100%,\s*1540px\)/);
   assert.match(appStyleSource, /\.shell\s*\{[\s\S]*padding:\s*24px var\(--page-gutter\) 44px/);
   assert.match(appStyleSource, /\.insight-section\s*\{[\s\S]*gap:\s*24px/);
@@ -331,6 +360,11 @@ test("layout css protects mobile content from clipping", () => {
   assert.match(appStyleSource, /\.section-kicker\s*\{[^}]*white-space:\s*normal/);
   assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.toolbar-note\s*\{[\s\S]*white-space:\s*normal/);
   assert.match(appStyleSource, /@media \(max-width:\s*840px\)\s*\{[\s\S]*\.shell\s*\{[\s\S]*padding:\s*12px 16px 24px/);
+});
+
+test("footer callout keeps the continuous interaction without oversized section typography", () => {
+  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(1\.6rem,\s*3\.2vw,\s*2\.8rem\)/);
+  assert.match(appStyleSource, /\.footer-callout h2\s*\{[\s\S]*font-size:\s*clamp\(1\.6rem,\s*8\.5vw,\s*2\.8rem\)/);
 });
 
 test("work links use a continuous accessible marquee", () => {
