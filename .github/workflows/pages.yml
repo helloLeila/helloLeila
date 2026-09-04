@@ -44,7 +44,8 @@ jobs:
         run: npm run refresh:live-panel
 
       - name: Refresh WeChat event radar
-        run: npm run refresh:wechat-events
+        run: |
+          timeout 90s npm run refresh:wechat-events || echo "Optional WeChat refresh did not finish; continue with the existing public data."
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
