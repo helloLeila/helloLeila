@@ -13,7 +13,27 @@ export const siteContent = {
     titleZh: "以严谨的科研素养深耕真实场景，让智能技术落地为切实可行的成果",
     sublineEn:
       "Focused on process portals, approval flows, agent-facing interfaces, and delivery systems that are built to be reused and shipped.",
-    // sublineZh: "聚焦流程门户、审批界面、智能体体验与真正可复用、可发布的交付系统。",
+    sublineZh: "聚焦流程门户、审批界面、智能体体验与真正可复用、可发布的交付系统。",
+    workingLanes: [
+      {
+        titleEn: "Enterprise portals & platforms",
+        titleZh: "企业门户与平台",
+        detailEn: "processes · permissions · dynamic routing · micro-frontends",
+        detailZh: "流程、权限、动态路由、微前端",
+      },
+      {
+        titleEn: "AI workflows",
+        titleZh: "AI 工作流",
+        detailEn: "agents · tool use · dynamic forms · RAG",
+        detailZh: "Agent、工具调用、动态表单、RAG",
+      },
+      {
+        titleEn: "0→1 delivery",
+        titleZh: "从 0 到 1 交付",
+        detailEn: "data expression · foundations · release & operations",
+        detailZh: "数据表达、工程底座、发布与运行",
+      },
+    ],
     topChips: ["Function Calling","智能体编排", "大模型微调", "harness Engineering", "多模态交互"],
   },
   stats: [

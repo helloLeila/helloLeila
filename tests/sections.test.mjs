@@ -35,6 +35,10 @@ const proofDeckSource = fs.readFileSync(
   path.resolve(root, "src/components/ProofDeck.jsx"),
   "utf8"
 );
+const heroSource = fs.readFileSync(
+  path.resolve(root, "src/components/HeroStage.jsx"),
+  "utf8"
+);
 const skillGroupsSource = fs.readFileSync(
   path.resolve(root, "src/components/SkillGroups.jsx"),
   "utf8"
@@ -209,6 +213,16 @@ test("proof deck presents full project evidence as editorial rows instead of car
   assert.match(proofDeckSource, /proof-ai-note/);
   assert.match(proofDeckSource, /siteContent\.aiKnowledge/);
   assert.doesNotMatch(proofDeckSource, /proof-card/);
+});
+
+test("hero keeps a personal introduction and adds compact working lanes without dropping evidence", () => {
+  assert.match(heroSource, /hero-name/);
+  assert.match(heroSource, /hero-thread/);
+  assert.match(heroSource, /siteContent\.hero\.workingLanes\.map/);
+  assert.match(heroSource, /<StatsRow lang=\{lang\} \/>/);
+  assert.match(heroSource, /siteContent\.summary/);
+  assert.match(heroSource, /siteContent\.domainLinks\.map/);
+  assert.match(heroSource, /<ProofDeck lang=\{lang\} \/>/);
 });
 
 test("editorial links do not use underlines or decorative bottom rules", () => {

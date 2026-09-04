@@ -47,6 +47,19 @@ test("coverage section uses personal base wording", () => {
   assert.equal(siteContent.coverage.titleZh, "主要阵地：深圳");
 });
 
+// 保证中文首屏的补充说明仍然存在，避免语言切换后出现整段空白。
+test("hero keeps the original Chinese supporting copy and compact working lanes", () => {
+  assert.equal(
+    siteContent.hero.sublineZh,
+    "聚焦流程门户、审批界面、智能体体验与真正可复用、可发布的交付系统。"
+  );
+  assert.equal(siteContent.hero.workingLanes.length, 3);
+  assert.deepEqual(
+    siteContent.hero.workingLanes.map((lane) => lane.titleZh),
+    ["企业门户与平台", "AI 工作流", "从 0 到 1 交付"]
+  );
+});
+
 // 验证词云只保留真实技术栈关键词，并避免人造概念词。
 test("signal cloud vocabulary stays focused on real stack terms", () => {
   const words = siteContent.signalCloud.map((item) => item.word);

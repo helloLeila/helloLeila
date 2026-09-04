@@ -26,9 +26,14 @@ export function HeroStage({ lang, setLang }) {
       <div className="hero-top">
         <div className="headline-wrap">
           <div className="eyebrow">{siteContent.hero.eyebrow}</div>
+          <p className="hero-name">{textByLang(lang, "Hello, I'm Leila.", "你好，我是 Leila。")}</p>
           <h1 className="headline">
-            <span className="headline-main">{siteContent.hero.titleEn}</span>
-            <span className="headline-alt">{siteContent.hero.titleZh}</span>
+            <span className="headline-main">
+              {textByLang(lang, siteContent.hero.titleEn, siteContent.hero.titleZh)}
+            </span>
+            <span className="headline-alt">
+              {textByLang(lang, siteContent.hero.titleZh, siteContent.hero.titleEn)}
+            </span>
           </h1>
           <p className="subline">{textByLang(lang, siteContent.hero.sublineEn, siteContent.hero.sublineZh)}</p>
         </div>
@@ -42,6 +47,15 @@ export function HeroStage({ lang, setLang }) {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="hero-thread" aria-label={textByLang(lang, "What I work on", "我主要做什么")}>
+        {siteContent.hero.workingLanes.map((lane, index) => (
+          <article className={`hero-thread-row is-${index + 1}`} key={lane.titleEn}>
+            <strong>{textByLang(lang, lane.titleEn, lane.titleZh)}</strong>
+            <span>{textByLang(lang, lane.detailEn, lane.detailZh)}</span>
+          </article>
+        ))}
       </div>
 
       <div className="hero-middle">
