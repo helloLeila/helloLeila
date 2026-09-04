@@ -16,12 +16,13 @@ from html import unescape
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, unquote
 
 # Make direct `python scripts/fetch_wechat_events.py` and unittest loading share the same import path.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from wechat_event_radar import (
+    MAX_SUMMARY_LENGTH,
     TIMEZONE,
     build_ai_request,
     is_public_http_url,
@@ -47,6 +48,10 @@ MAX_ARTICLES_PER_SOURCE = 10
 DISCOVERY_RESULT_LIMIT = 5
 DISCOVERY_SCORE_THRESHOLD = 6
 DISCOVERY_SEARCH_ENDPOINT = "https://www.bing.com/search?format=rss&q="
+DISCOVERY_HTML_ENDPOINTS = (
+    "https://www.baidu.com/s?wd=",
+    "https://weixin.sogou.com/weixin?type=2&query=",
+)
 
 
 def load_config(path: Path = CONFIG_PATH) -> dict:
@@ -137,6 +142,12 @@ def build_discovery_url(source_name: str) -> str:
     return f"{DISCOVERY_SEARCH_ENDPOINT}{quote_plus(query)}"
 
 
+def build_html_discovery_urls(source_name: str) -> list[str]:
+    query = f'"{source_name}" 微信公众号 活动'
+    encoded = quote_plus(query)
+    return [f"{endpoint}{encoded}" for endpoint in DISCOVERY_HTML_ENDPOINTS]
+
+
 def _source_name_tokens(value: str) -> list[str]:
     return [token for token in re.split(r"[\s·，、（）()/_-]+", value.lower()) if len(token) > 1]
 
@@ -173,20 +184,53 @@ def parse_discovery_results(xml_text: str, source_id: str, source_name: str, lim
     return sorted(candidates, key=lambda item: (-item["score"], item.get("title", "")))
 
 
+def parse_html_discovery_results(html_text: str, source_id: str, source_name: str, limit: int = DISCOVERY_RESULT_LIMIT) -> list[dict]:
+    """Extract only direct mp.weixin.qq.com article URLs from search HTML."""
+    candidates = []
+    seen = set()
+    decoded = unescape(unquote(html_text))
+    pattern = re.compile(r"https?://mp\.weixin\.qq\.com/s/[A-Za-z0-9_-]+", re.IGNORECASE)
+    for match in pattern.finditer(decoded):
+        url = normalize_url(match.group(0))
+        if not is_wechat_article_url(url) or url in seen:
+            continue
+        seen.add(url)
+        window = _strip_html(decoded[max(0, match.start() - 420):match.end() + 420])
+        title = window[:240] or "微信公众号文章候选"
+        candidate = {
+            "sourceId": source_id,
+            "sourceName": source_name,
+            "title": title,
+            "url": url,
+            "publishedAt": "",
+            "excerpt": window[:MAX_SUMMARY_LENGTH],
+            "contentHash": "",
+            "score": 0,
+            "discoveryStatus": "needs-confirmation",
+        }
+        candidate["score"] = score_source_candidate(candidate, source_name)
+        candidates.append(candidate)
+        if len(candidates) >= limit:
+            break
+    return sorted(candidates, key=lambda item: (-item["score"], item.get("title", "")))
+
+
 def discover_source_candidates(source: dict) -> tuple[list[dict], str]:
     if source.get("discoveryStatus") == "confirmed":
         return [], "confirmed"
-    try:
-        result = parse_discovery_results(
-            fetch_text(build_discovery_url(source["name"])),
-            source["id"],
-            source["name"],
-        )
-    except (OSError, ValueError, HTTPError, URLError):
-        return [], "unavailable"
-    if not result:
-        return [], "not-found"
-    return result, "needs-confirmation"
+    attempted = False
+    for url in [build_discovery_url(source["name"]), *build_html_discovery_urls(source["name"])]:
+        try:
+            attempted = True
+            response = fetch_text(url)
+            result = parse_discovery_results(response, source["id"], source["name"])
+            if not result:
+                result = parse_html_discovery_results(response, source["id"], source["name"])
+            if result:
+                return result, "needs-confirmation"
+        except (OSError, ValueError, HTTPError, URLError):
+            continue
+    return [], "unavailable" if attempted else "not-found"
 
 
 def load_verified_events(path: Path = ROOT / "data" / "verified-public-events.json") -> list[dict]:

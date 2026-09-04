@@ -149,6 +149,12 @@ class WechatEventRadarTests(unittest.TestCase):
         self.assertEqual(len(candidates), 1)
         self.assertEqual(candidates[0]["discoveryStatus"], "needs-confirmation")
 
+    def test_html_discovery_extracts_only_direct_wechat_articles(self):
+        fetcher = load_fetch_module()
+        html = '<a href="https://www.baidu.com/link?url=x">普通网页</a> https://mp.weixin.qq.com/s/real-event'
+        candidates = fetcher.parse_html_discovery_results(html, "source", "示例公众号")
+        self.assertEqual([item["url"] for item in candidates], ["https://mp.weixin.qq.com/s/real-event"])
+
     def test_fetch_text_falls_back_to_curl_when_python_tls_fails(self):
         fetcher = load_fetch_module()
         completed = SimpleNamespace(stdout=b"<rss><channel /></rss>", stderr=b"")
