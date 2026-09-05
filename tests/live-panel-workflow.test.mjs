@@ -29,6 +29,12 @@ test("pages workflow refreshes at 7am Asia Shanghai time", () => {
   assert.match(workflowSource, /cron:\s*"0 23 \* \* \*"/);
 });
 
+// 定时任务必须从当前主页分支构建，避免 schedule 默认 checkout 到旧默认分支。
+test("scheduled pages runs checkout the current homepage branch", () => {
+  assert.match(workflowSource, /ref:\s*\$\{\{\s*github\.event_name\s*==\s*'schedule'/);
+  assert.match(workflowSource, /'codex\/wechat-source-config'/);
+});
+
 // 验证抓取脚本使用中文公开新闻源，并把结果收敛到五条。
 test("live panel crawler targets chinese public news sources with five final items", () => {
   assert.match(fetchScriptSource, /36kr\.com\/feed/);

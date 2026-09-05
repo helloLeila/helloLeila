@@ -4,7 +4,10 @@ name: Deploy Pages
 on:
   push:
     branches:
+      - main
+      - codex/react-antv-homepage
       - codex/3d-feat
+      - codex/wechat-source-config
   schedule:
     - cron: "0 23 * * *"
   workflow_dispatch:
@@ -25,6 +28,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Scheduled runs start from the repository default branch; deploy the
+          # current homepage branch so the daily data refresh uses live code.
+          ref: ${{ github.event_name == 'schedule' && 'codex/wechat-source-config' || github.ref }}
 
       - name: Setup Node
         uses: actions/setup-node@v4

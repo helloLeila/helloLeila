@@ -90,7 +90,12 @@ export function SignalCloud({ lang }) {
             {selectedGroup ? <div className="signal-project-note"><span>{textByLang(lang, "Connected work", "关联项目")}</span><b>{selectedGroup.projectsZh}</b></div> : null}
             {activeWord ? <em className="signal-word-note">{activeWord}</em> : null}
           </div>
-          <SkillGroups lang={lang} variant="index" />
+          <SkillGroups
+            lang={lang}
+            variant="index"
+            activeGroup={activeGroup}
+            onGroupEnter={(key) => focusGroup(key)}
+          />
         </aside>
       </div>
     </section>

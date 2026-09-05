@@ -6,6 +6,7 @@ const indexItems = [
   { id: "top", en: "About me", zh: "关于我" },
   { id: "section-breakdown", en: "Projects", zh: "项目" },
   { id: "section-signal-cloud", en: "Capabilities", zh: "能力" },
+  { id: "section-workflow", en: "Workflow", zh: "工作流" },
   { id: "section-coverage", en: "Now", zh: "现在" },
   { id: "section-roadmap", en: "Experience", zh: "经历" },
   { id: "live-news", en: "Daily", zh: "日报" },
@@ -58,7 +59,7 @@ export function EdgeIndex({ lang }) {
   return (
     <nav className="edge-index" aria-label={textByLang(lang, "Page index", "页面索引")}>
       <div className="edge-index-list">
-        {indexItems.map((item) => (
+        {indexItems.map((item, index) => (
           <a
             className={`edge-index-link ${activeId === item.id ? "is-active" : ""}`}
             href={`#${item.id}`}
@@ -66,6 +67,7 @@ export function EdgeIndex({ lang }) {
             key={item.id}
             onClick={(event) => handleNavigate(event, item.id)}
           >
+            <span className="edge-index-number">{String(index + 1).padStart(2, "0")}</span>
             <span>{textByLang(lang, item.en, item.zh)}</span>
           </a>
         ))}

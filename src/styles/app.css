@@ -24,7 +24,7 @@
 .edge-index {
   position: fixed;
   top: 50%;
-  right: max(12px, calc((100vw - 1680px) / 2 - 56px));
+  right: clamp(14px, 2vw, 30px);
   z-index: 20;
   transform: translateY(-50%);
   pointer-events: none;
@@ -37,9 +37,9 @@
 
 .edge-index-link {
   display: grid;
-  grid-template-columns: 18px auto;
+  grid-template-columns: 24px auto;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   min-height: 24px;
   color: rgba(28, 33, 29, 0.44);
   font-family: var(--mono);
@@ -53,11 +53,25 @@
 }
 
 .edge-index-link::before {
-  width: 10px;
-  height: 1px;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
   background: currentColor;
   content: "";
-  transition: width 180ms ease;
+  transition: width 180ms ease, height 180ms ease, transform 180ms ease;
+}
+
+.edge-index-number {
+  grid-column: 1;
+  grid-row: 1;
+  color: currentColor;
+  font-size: 0.58rem;
+  opacity: 0;
+  transform: translateX(-2px);
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 .edge-index-link:hover,
@@ -78,7 +92,16 @@
 .edge-index-link.is-active::before,
 .edge-index-link:hover::before,
 .edge-index-link:focus-visible::before {
-  width: 18px;
+  width: 8px;
+  height: 8px;
+  transform: translateX(1px);
+}
+
+.edge-index-link:hover .edge-index-number,
+.edge-index-link:focus-visible .edge-index-number,
+.edge-index-link.is-active .edge-index-number {
+  opacity: 0.7;
+  transform: translateX(0);
 }
 
 .edge-index-link:focus-visible {
@@ -86,21 +109,9 @@
   outline-offset: 5px;
 }
 
-@media (max-width: 1120px) {
-  .edge-index {
-    right: 12px;
-  }
-}
-
-/* 页面没有足够的外边距时，章节索引会压到正文，宁可隐藏也不遮挡内容。 */
-@media (max-width: 1600px) {
-  .edge-index {
-    display: none;
-  }
-}
-
 @media (max-width: 840px) {
   .edge-index {
+    display: none;
     top: auto;
     right: 10px;
     bottom: 10px;
@@ -134,6 +145,10 @@
 
   .edge-index-link::before {
     width: 7px;
+  }
+
+  .edge-index-number {
+    display: none;
   }
 
   .edge-index-link.is-active::before,
@@ -3118,6 +3133,7 @@ body {
 .skill-index .skill-group {
   min-height: 0;
   padding: 13px 0 15px;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .skill-index .skill-group h3 {
@@ -3125,6 +3141,16 @@ body {
   padding-left: 0 !important;
   color: var(--text);
   font-size: 0.84rem;
+  transition: color 180ms ease;
+}
+
+.skill-index .skill-group.is-linked {
+  transform: translateX(4px);
+}
+
+.skill-index .skill-group.is-linked h3,
+.skill-index .skill-group.is-linked .tag-link {
+  color: var(--group-color);
 }
 
 .skill-index .tag-row {
@@ -4305,7 +4331,19 @@ body {
 
 /* Desktop contrast pass: make the authored direction visible without touching mobile. */
 @media (min-width: 841px) {
+  .shell {
+    padding-top: 0;
+  }
+
+  .hero-stage > .toolbar {
+    margin-bottom: 0;
+  }
+
   .hero-stage {
+    padding-top: 4px;
+    align-content: start;
+    row-gap: 6px;
+    grid-template-rows: max-content max-content max-content max-content;
     overflow: hidden;
     background:
       linear-gradient(112deg, #fffaf2 0%, #fffaf2 56%, #f5d7c9 56%, #f0c6b6 100%);
@@ -4509,6 +4547,29 @@ body {
       radial-gradient(circle at 72% 28%, rgba(241, 214, 83, 0.46), transparent 25%),
       radial-gradient(circle at 18% 74%, rgba(255, 90, 61, 0.28), transparent 24%),
       #dbe7dc;
+  }
+}
+
+/* Keep the index a desktop edge cue rather than a full-height panel. */
+@media (max-width: 1220px) {
+  .edge-index {
+    display: none;
+  }
+}
+
+@media (min-width: 1221px) {
+  .edge-index {
+    display: block;
+    right: clamp(14px, 1.6vw, 26px);
+  }
+
+  .edge-index-list {
+    gap: 10px;
+  }
+
+  .edge-index-link {
+    min-height: 20px;
+    font-size: 0.6rem;
   }
 }
 

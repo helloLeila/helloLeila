@@ -213,7 +213,7 @@ test("edge index follows real page sections instead of becoming a second top nav
 test("signal cloud is the primary capability surface and keeps the four real skill groups", () => {
   assert.match(appSource, /<SignalCloud lang=\{lang\}\s*\/>[\s\S]*<div className="insight-grid">/);
   assert.match(signalCloudSource, /import \{ SkillGroups \} from "\.\/SkillGroups\.jsx"/);
-  assert.match(signalCloudSource, /<SkillGroups lang=\{lang\} variant="index"\s*\/>/);
+  assert.match(signalCloudSource, /<SkillGroups\s+lang=\{lang\}\s+variant="index"[\s\S]*activeGroup=\{activeGroup\}[\s\S]*onGroupEnter=/);
   assert.match(skillGroupsSource, /variant\s*=\s*"default"/);
   assert.match(skillGroupsSource, /skill-index/);
   for (const key of ["frontend", "backend", "engineering", "ai-research"]) {
@@ -328,8 +328,8 @@ test("narrow layouts keep hero text inside the viewport and remove the blocking 
   assert.match(appStyleSource, /@media \(max-width:\s*1220px\)\s*\{\s*\.edge-index\s*\{\s*display:\s*none/);
 });
 
-test("wide layouts hide the edge index before it can overlap hero content", () => {
-  assert.match(appStyleSource, /@media \(max-width:\s*1600px\)\s*\{\s*\.edge-index\s*\{\s*display:\s*none/);
+test("wide layouts show the edge index as a quiet desktop reading cue", () => {
+  assert.match(appStyleSource, /@media \(min-width:\s*1221px\)\s*\{[\s\S]*\.edge-index\s*\{\s*display:\s*block/);
 });
 
 test("hero makes the existing identity and work focus scannable", () => {
@@ -564,7 +564,11 @@ test("desktop-only closing layer protects hierarchy and avoids mobile changes", 
 
 test("desktop contrast pass makes the visual direction unmistakable without touching mobile", () => {
   const contrastPassStart = appStyleSource.lastIndexOf("/* Desktop contrast pass:");
-  const contrastPass = appStyleSource.slice(contrastPassStart);
+  const contrastPassEnd = appStyleSource.indexOf("/* Keep the index", contrastPassStart);
+  const contrastPass = appStyleSource.slice(
+    contrastPassStart,
+    contrastPassEnd === -1 ? undefined : contrastPassEnd
+  );
 
   assert.match(contrastPass, /@media \(min-width:\s*841px\)/);
   assert.match(contrastPass, /\.hero-stage::before\s*\{[\s\S]*clip-path:/);
