@@ -60,6 +60,18 @@ Optional edits before publishing:
   <a href="https://nginx.org/"><kbd>🛡️ linux</kbd></a>
 </p>
 
+### Agent 与检索
+
+<p>
+  <a href="https://docs.langchain.com/oss/python/langchain/overview"><kbd>🦜 LangChain</kbd></a>
+  <a href="https://docs.langchain.com/oss/python/langgraph/overview"><kbd>🔀 LangGraph</kbd></a>
+  <a href="https://milvus.io/"><kbd>🗄️ Milvus</kbd></a>
+  <a href="https://docs.langchain.com/oss/python/deepagents/retrieval"><kbd>📚 RAG</kbd></a>
+  <a href="https://milvus.io/docs/multi-vector-search.md"><kbd>🔎 混合检索</kbd></a>
+  <a href="https://docs.langchain.com/oss/python/langchain/tools"><kbd>🛠️ Tool Calling</kbd></a>
+  <a href="https://developers.openai.com/api/docs/guides/function-calling"><kbd>⚙️ Function Calling</kbd></a>
+</p>
+
 ### Engineering
 
 <p>
