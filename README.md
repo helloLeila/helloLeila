@@ -53,6 +53,8 @@ Optional edits before publishing:
 
 <p>
   <a href="https://www.java.com/"><kbd>☕ Java</kbd></a>
+  <a href="https://www.python.org/"><kbd>🐍 Python</kbd></a>
+  <a href="https://fastapi.tiangolo.com/"><kbd>⚡ FastAPI</kbd></a>
   <a href="https://www.mysql.com/"><kbd>🗄️ MySQL</kbd></a>
   <a href="https://www.tencentcloud.com/products/cos"><kbd>☁️ Tencent COS</kbd></a>
   <a href="https://www.docker.com/"><kbd>🐳 Docker</kbd></a>
