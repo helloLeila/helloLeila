@@ -12,9 +12,9 @@ Optional edits before publishing:
 
 ## Who am I ？
 <p align="left">
-  Frontend and backend systems, AI workflow interaction, and reliable engineering foundations.
+  Focused on enterprise frontend applications, backend development, technical solution design, and AI agent and RAG system development, with in-depth exploration of their underlying mechanisms.
   <br />
-  一名coding 爱好者从业者，主要涉及前端企业解决方案开发、后端开发与技术方案设计，目前正在关注并实践 AI Agent 及 RAG 相关技术
+  主要从事企业级前端应用、后端开发、技术方案设计及 AI Agent 与 RAG 系统开发，并深入探索其底层机制。
   <br />
 </p>
 
