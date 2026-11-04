@@ -12,9 +12,11 @@ Optional edits before publishing:
 
 ## Who am I ？
 <p align="left">
-  Focused on enterprise frontend applications, backend development, technical solution design, and AI agent and RAG system development, with in-depth exploration of their underlying mechanisms.
+
+**AI Applied Engineer | Agent Workflow · VLA Embodied AI · Production RAG & LLM Serving**
+Focus on enterprise agent engineering, real-machine deployment, and end-to-end backend & service development with in-depth exploration of their underlying mechanisms.
   <br />
-  主要从事企业级前端应用、后端开发、技术方案设计及 AI Agent 与 RAG 系统开发，并深入探索其底层机制。
+  聚焦智能体工作流、VLA具身智能真机落地、生产级检索增强、大模型推理服务，配套前后端系统工程实现，并深入探索其底层机制。
   <br />
 </p>
 
