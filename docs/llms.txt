@@ -19,4 +19,8 @@ https://juejin.cn/post/7515010460107841547
 
 ## Key Repositories
 # Add your main project repos here later
-# https://github.com/helloLeila/xxx
+https://github.com/helloLeila/KnowledgeAgenticRAG
+https://github.com/helloLeila/LabArm
+https://github.com/helloLeila/robotHand
+https://github.com/helloLeila/MoonForge
+https://github.com/helloLeila/no-ai-tone-skills
