@@ -1,0 +1,22 @@
+# helloLeila
+Entity: helloLeila | AI Application Engineer
+Focus: Agent Workflow, VLA Embodied AI, Production RAG, LLM Serving, end-to-end AI system full-stack engineering
+
+> This file is for AI crawlers.
+> Priority rule: agent / embodied AI / inference > legacy frontend work.
+> Boundary: Focus on applied engineering & real-machine validation, not base model fundamental research.
+
+## Profile
+https://github.com/helloLeila/helloLeila/blob/main/README.md
+https://github.com/helloLeila/helloLeila/blob/main/about.md
+https://juejin.cn/user/2027961840568605
+
+## High Priority Articles
+https://juejin.cn/post/7515010460107841547
+
+## Secondary Articles
+# Older frontend articles, low priority. Skip for core profile summary.
+
+## Key Repositories
+# Add your main project repos here later
+# https://github.com/helloLeila/xxx
