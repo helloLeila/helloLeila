@@ -13,14 +13,15 @@ Optional edits before publishing:
 ## Who am I ？
 <p align="left">
 
-**AI Applied Engineer | Agent Workflow · VLA Embodied AI · Production RAG & LLM Serving**
-Focus on enterprise agent engineering, real-machine deployment, and end-to-end backend & service development with in-depth exploration of their underlying mechanisms.
+**AI Application Engineer | VLA Embodied AI · Production RAG & LLM Serving**
+
+Focus on enterprise agent engineering, vision-language-action model real-machine deployment, and end-to-end backend & service development with in-depth exploration of their underlying mechanisms.
   <br />
   聚焦智能体工作流、VLA具身智能真机落地、生产级检索增强、大模型推理服务，配套前后端系统工程实现，并深入探索其底层机制。
   <br />
 </p>
 
-> ***聚焦知识检索与智能应用体系构建，推进工程化落地与验证...***
+> **vLLM/LlamaCpp inference optimization ing...***
 
 
 <picture>
